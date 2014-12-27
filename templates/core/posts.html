@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+	<div class="toprow">
+		<h2>Recently Added</h2>
+		<input class="large" name="postsearch" type="text" placeholder="search" />		
+	</div>
+
+	<div class="posts">
+		{% for link in links %}
+		<div class="post">
+			<div class="votes-contain">
+				<i class="fa fa-chevron-up"></i>
+				<span class="count">{{ link.vote_count }}</span>
+				<i class="fa fa-chevron-down"></i>
+			</div>
+
+			<div class="title-contain">
+				<h2><a href="{% url 'posts:view' slug=link.slug %}">{{ link.title }}</a></h2>
+				<p class="super-light-font">{{ link.description }}</p>
+				<span class="timestamp super-light-font">Posted {{ link.created }}</span>
+			</div>
+
+			<div class="owner-contain">
+				<img class="owner" src="{{ link.owner.profile_pic.url }}" />
+			</div>			
+
+			<div class="post-info-contain super-light-font">
+				<i class="fa fa-comments"></i><span class="comment-count">8</span>
+			</div>
+		</div>
+		{% endfor %}
+					
+	</div>
+</div>
+{% endblock content %}
