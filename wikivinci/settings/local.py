@@ -7,6 +7,10 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+INSTALLED_APPS += (
+	'debug_toolbar',
+)
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
