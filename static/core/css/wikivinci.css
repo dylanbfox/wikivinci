@@ -36,6 +36,7 @@ body {
 }
 
 #master-holder {   /*All content sits in this so footer remains at bottom*/
+	overflow-x:hidden;	
 	height:100%;
 	position:absolute;
 	left:0;
@@ -255,6 +256,14 @@ h5 {
 	color:#FFF;
 	font-weight:400;
 	font-size:16px;
+}
+
+#page-content .votes-contain i.fa {
+	cursor:pointer;
+}
+
+#page-content .votes-contain.voted {
+	color:#FFCD47 !important;
 }
 
 #page-content > .container .toprow {
