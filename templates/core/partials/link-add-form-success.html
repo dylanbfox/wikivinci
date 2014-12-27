@@ -1,0 +1,7 @@
+{% load staticfiles %}
+
+<div id="success">
+	<i class="fa fa-check-circle"></i>	
+	<p class="super-light-font">Thanks! Your link has just been added.</p>
+	<a href="{% url 'posts:view' slug=link.slug %}">click to view!</a>
+</div>

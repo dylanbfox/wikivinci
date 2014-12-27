@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>Wikivinci.com | Learn Stuff</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'core/css/wikivinci.css' %}" rel="stylesheet">
+		{% block extra_styles %}
+		{% endblock extra_styles %}		
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+
+		<!-- Add in conditional classes for IE -->
+		<!--[if IE 8]><html class="ie8"><![endif]-->	
+	</head>
+
+	<div id="master-holder">
+	<body>
+
+	{% include 'core/partials/add-post-popup.html' %}
+
+	<!-- Header -->
+		{% block header %}
+		<div id="header">
+			<div class="container">
+				<img id="logo" src="{% static 'core/images/wikivincilogo-horiz.png' %}" />
+				<a id="add-post" href="#"><span class="btn">post</span></a>
+				<a href="#">Contributors</a>
+				<a href="#">Collections</a>					
+				<a href="#">Login</a>
+				<a href="#">About</a>
+			</div>
+		</div>
+		{% endblock %}
+	<!-- Page content -->
+		<div id="page-content">
+			{% block content %}
+			{% endblock content %}
+		</div>
+	<!-- Footer -->	
+		{% block footer %}
+		<div id="footer">
+		</div>
+		{% endblock %}
+
+	    <script src="{% static 'core/js/jquery.js' %}"></script>
+	    <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+	    <script src="{% static 'core/js/csrf.js' %}"></script>
+	    <script src="{% static 'core/js/wikivinci.js' %}"></script>	    
+	    {% block extra_scripts %}
+	    {% endblock extra_scripts %}
+	</body>
+	</div>
+
+</html>
