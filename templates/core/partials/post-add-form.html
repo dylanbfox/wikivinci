@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<form method="POST" action="{% url 'posts:add' %}">
+	{% csrf_token %}
+	{% for field in form %}
+
+	{% if field.errors %}
+	<div class="form-group error">	
+		{{ field.errors }}
+	{% else %}
+	<div class="form-group">
+	{% endif %}
+		{{ field.label_tag }}
+		{% if field.label != "Are you the author of this resource?" %}
+		<br />		
+		{% endif %}
+
+		{{ field }}
+	</div>
+	{% endfor %}
+
+	<input type="submit" class="btn btn-success" value="add link!" />
+</form>

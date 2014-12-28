@@ -1,11 +1,11 @@
 from django import forms
 
-from posts.models import Link
+from posts.models import Post
 
-class LinkAddForm(forms.ModelForm):
+class PostAddForm(forms.ModelForm):
 
 	class Meta:
-			model = Link
+			model = Post
 			fields = (
 				'title',
 				'url',
@@ -15,7 +15,7 @@ class LinkAddForm(forms.ModelForm):
 			)
 
 	def __init__(self, *args, **kwargs):
-		super(LinkAddForm, self).__init__(*args, **kwargs)
+		super(PostAddForm, self).__init__(*args, **kwargs)
 		self.fields['owner_authored'].label = "Are you the author of this resource?"
 
 	def clean_slug(self):

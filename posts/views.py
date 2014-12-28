@@ -3,42 +3,42 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from posts.models import Link
-from posts.forms import LinkAddForm
+from posts.models import Post
+from posts.forms import PostAddForm
 from posts.utils import set_permissions
 
-def add_link(request):
+def add(request):
 	context_dict = {}
-	form = LinkAddForm()
+	form = PostAddForm()
 
 	if request.method == "POST":
-		form = LinkAddForm(request.POST)
+		form = PostAddForm(request.POST)
 		if form.is_valid():
-			link = form.save(commit=False)
-			link.owner = request.user.account
-			link.save()
-			context_dict['link'] = link
-			return render(request, 'core/partials/link-add-form-success.html', context_dict)
+			post = form.save(commit=False)
+			post.owner = request.user.account
+			post.save()
+			context_dict['post'] = post
+			return render(request, 'core/partials/post-add-form-success.html', context_dict)
 
 	context_dict['form'] = form
-	return render(request, 'core/partials/link-add-form.html', context_dict)
+	return render(request, 'core/partials/post-add-form.html', context_dict)
 
 def view(request, slug):
 	try:
-		link = Link.objects.get(slug__iexact=slug)
-	except Link.DoesNotExist:
+		post = Post.objects.select_related().prefetch_related('upvoters').get(slug__iexact=slug)
+	except Post.DoesNotExist:
 		raise Http404
 
 	context_dict = {}
-	context_dict['link'] = link
-	set_permissions(request, post=link)
+	context_dict['post'] = post
+	set_permissions(request, post=post)
 	return render(request, 'core/single-post.html', context_dict)
 
 def view_all(request):
 	context_dict = {}
-	links = Link.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:30]
-	context_dict['links'] = links
-	set_permissions(request, posts=links)	
+	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:30]
+	context_dict['posts'] = posts
+	set_permissions(request, posts=posts)	
 	return render(request, 'core/posts.html', context_dict)
 
 @login_required
@@ -48,20 +48,20 @@ def vote(request):
 	Need to allow for deleting vote.
 	"""
 	try:
-		link = Link.objects.get(pk=request.POST.get('object_id'))
-	except Link.DoesNotExist:
+		post = Post.objects.get(pk=request.POST.get('object_id'))
+	except Post.DoesNotExist:
 		raise Http404
 
 	direction = request.POST.get('vote_direction')
 	if direction == 'up':
-		link.increment_vote()
-		link.upvoters.add(request.user.account)
+		post.increment_vote()
+		post.upvoters.add(request.user.account)
 	elif direction == 'down':
-		link.decrement_vote()
-		link.downvoters.add(request.user.account)
-	link.save()
+		post.decrement_vote()
+		post.downvoters.add(request.user.account)
+	post.save()
 
-	return HttpResponse(link.vote_count)
+	return HttpResponse(post.vote_count)
 
 
 
