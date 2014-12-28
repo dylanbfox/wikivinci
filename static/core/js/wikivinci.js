@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: 'GET',
-			url: '/posts/add-link/',
+			url: '/posts/add/',
 			data: {},
 			success: function(response) {
 				popup_node.append(response);
@@ -67,7 +67,7 @@ $(document).ready(function(){
 		var form = $(this);
 		$.ajax({
 			type: 'POST',
-			url: '/posts/add-link/',
+			url: '/posts/add/',
 			data: form.serializeArray(),
 			success: function(response){
 				popup_node.find("form").remove();

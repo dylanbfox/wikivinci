@@ -10,26 +10,26 @@
 	</div>
 
 	<div class="posts">
-		{% for link in links %}
+		{% for post in posts %}
 		<div class="post">
-			{% if link.can_vote %}
-			<div class="votes-contain" data-object-id="{{ link.pk }}">						
+			{% if post.can_vote %}
+			<div class="votes-contain" data-object-id="{{ post.pk }}">						
 			{% else %}
-			<div class="votes-contain voted" data-voted="true" data-object-id="{{ link.pk }}">			
+			<div class="votes-contain voted" data-voted="true" data-object-id="{{ post.pk }}">			
 			{% endif %}
 				<i data-vote-direction="up" class="fa fa-chevron-up"></i>
-				<span class="count">{{ link.vote_count }}</span>
+				<span class="count">{{ post.vote_count }}</span>
 				<i data-vote-direction="down" class="fa fa-chevron-down"></i>
 			</div>
 
 			<div class="title-contain">
-				<h2><a href="{% url 'posts:view' slug=link.slug %}">{{ link.title }}</a></h2>
-				<p class="super-light-font">{{ link.description }}</p>
-				<span class="timestamp super-light-font">Posted {{ link.created }}</span>
+				<h2><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></h2>
+				<p class="super-light-font">{{ post.description }}</p>
+				<span class="timestamp super-light-font">Posted {{ post.created }}</span>
 			</div>
 
 			<div class="owner-contain">
-				<img class="owner" src="{{ link.owner.profile_pic.url }}" />
+				<img class="owner" src="{{ post.owner.profile_pic.url }}" />
 			</div>			
 
 			<div class="post-info-contain super-light-font">

@@ -8,7 +8,19 @@ from accounts.models import Account
 class Post(models.Model):
 
 	class Meta:
-		abstract = True
+		ordering = ['created']
+
+	def save(self, *args, **kwargs):
+		if not self.slug:
+			self.slug = self.create_slug()
+		super(Post, self).save(*args, **kwargs)
+
+	def create_slug(self):
+		tokens = self.title.lower().strip().split(' ')
+		normalized_tokens = [re.sub(r'[^a-zA-Z0-9]', '', s) for s in tokens]
+		cleaned_tokens = [s for s in normalized_tokens if s]
+		slug = '-'.join(cleaned_tokens)
+		return slug
 
 	def increment_vote(self):
 		self.upvotes += 1
@@ -19,6 +31,14 @@ class Post(models.Model):
 		self.downvotes -= 1
 		self.vote_count -=1
 		self.save()
+
+	def full_url(self):
+		return reverse('posts:view', kwargs={'slug': self.slug})	
+
+	link_types = (
+		('LINK', 'link'),
+		('ARTICLE', 'article'),
+	)		
 
 	owner = models.ForeignKey(Account, related_name='posts')
 	owner_authored = models.BooleanField(default=False)
@@ -34,21 +54,8 @@ class Post(models.Model):
 	vote_count = models.IntegerField(default=0)
 	clicks = models.IntegerField(default=0)
 	tags = models.CharField(max_length=500)
-
-class Link(Post):
-
-	def save(self, *args, **kwargs):
-		self.slug = '-'.join([re.sub('\W+', '', s) for s in self.title.lower().split(' ')])
-		super(Link, self).save(*args, **kwargs)	
-
-	def full_url(self):
-		return reverse('posts:view', kwargs={'slug': self.slug})	
-
-	link_types = (
-		('READ', 'Read'),
-		('TUTORIAL', 'Tutorial'),
-	)
-
-	url = models.URLField(max_length=500, unique=True)
-	link_type = models.CharField(max_length=20, choices=link_types)
+	url = models.URLField(max_length=500, unique=True, null=True)
+	post_type = models.CharField(max_length=20, choices=link_types)
 	description = models.TextField()
+
+

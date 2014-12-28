@@ -275,6 +275,7 @@ h5 {
 	padding-bottom:2px;
 	font-size:22px;
 	font-weight:400;
+	max-width:85%;
 }
 
 #page-content > .container .toprow span.link-type {
