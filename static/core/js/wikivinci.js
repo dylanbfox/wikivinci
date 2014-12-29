@@ -20,18 +20,42 @@ $(document).ready(function(){
 			type: "GET",
 			success: function(response){
 				popup_modal.find("form").hide();
+				popup_modal.find(".modal-footer").hide();
+				popup_modal.find(".modal-title").text("Sign up for Wikivinci!");
 				popup_modal.find(".modal-body").append(response);
 			}
 		});
 	});
 
+	// submit ajax register form
+	$("#authenticateModal").on("submit", "form#register", function(e){
+		e.preventDefault();
+		var modal_node = $("#authenticateModal");
+		var form = $(this);
+		var data = form.serializeArray()
+		$.ajax({
+			type: form.attr("method"),
+			url: form.attr("action"),
+			data: data,
+			success: function(response){
+				if (response != "success"){
+					form.remove();
+					modal_node.find(".modal-body").append(response);
+					return;
+				} else {
+					location.reload();
+				}
+			}
+		});		
+	});
+
 	// login via ajax
-	$("#authenticateModal form").on("submit", function(e){
+	$("#authenticateModal form#login").on("submit", function(e){
 		e.preventDefault();
 		var form = $(this);
 		$.ajax({
+			type: form.attr("method"),			
 			url: form.attr("action"),
-			type: form.attr("method"),
 			data: {
 				username: form.find("input[name='username']").val(),
 				password: form.find("input[name='password']").val(),
@@ -58,8 +82,8 @@ $(document).ready(function(){
 
 		var url = window.location.pathname + 'flag/';
 		$.ajax({
+			type: "POST",			
 			url: url,
-			type: "POST",
 			data: {edit: edit},
 			success: function(){
 				modal_node.modal('toggle');
@@ -165,8 +189,8 @@ $(document).ready(function(){
 
 		form.find("textarea").removeClass("error");
 		$.ajax({
+			type: "POST",			
 			url: form.attr("action"),
-			type: "POST",
 			data: {
 				post_id: post_id,
 				text: text,
@@ -193,8 +217,8 @@ $(document).ready(function(){
 		var url = $(this).attr("href");
 		var object_id = $(this).data("object-id");
 		$.ajax({
+			type: "POST",			
 			url: url,
-			type: "POST",
 			data: {object_id: object_id},
 			success: function(response){
 				comment_node.fadeOut();
