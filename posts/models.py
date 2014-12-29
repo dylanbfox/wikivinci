@@ -28,11 +28,15 @@ class Post(models.Model):
 		self.upvotes += 1
 		self.vote_count += 1
 		self.save()
+		self.owner.points += 1
+		self.owner.save()
 
 	def decrement_vote(self):
 		self.downvotes -= 1
 		self.vote_count -=1
 		self.save()
+		self.owner.points -= 1
+		self.owner.save()
 
 	def full_url(self):
 		return reverse('posts:view', kwargs={'slug': self.slug})	

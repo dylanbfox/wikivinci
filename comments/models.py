@@ -18,11 +18,15 @@ class Comment(models.Model):
 		self.upvotes += 1
 		self.vote_count += 1
 		self.save()
+		self.owner.points += 1
+		self.owner.save()
 
 	def decrement_vote(self):
 		self.downvotes -= 1
 		self.vote_count -=1
-		self.save()	
+		self.save()
+		self.owner.points -= 1
+		self.owner.save()		
 
 	owner = models.ForeignKey(Account, related_name='comments')
 	post = models.ForeignKey(Post, related_name='comments')

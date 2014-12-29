@@ -17,7 +17,7 @@
 
 		{% if user.is_authenticated %}
 		<div id="post-ops">
-			<a class="super-light-font" data-toggle="modal" data-target="#flagPostModal" href="#"><i class="fa fa-flag-o"></i></a>
+			<a class="red-font" data-toggle="modal" data-target="#flagPostModal" href="#"><i class="fa fa-flag-o"></i></a>
 		</div>
 		{% endif %}
 
@@ -64,7 +64,7 @@
 			</div>
 			{% endfor %}
 
-			{% if user.account.points > 200 %}
+			{% if user.account.points >= 200 %}
 			<form id="add-comment" method="POST" action="{% url 'comments:add' %}" data-post-id="{{ post.id }}">
 				<p class="super-light-font">Have something to say about this resource? Add a comment!</p>
 				<textarea name="text"></textarea>
