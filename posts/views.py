@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 
 from posts.models import Post
 from posts.forms import PostAddForm
-from posts.utils import set_permissions
+from posts.utils import set_post_permissions
+
+from comments.utils import set_comment_permissions
 
 def add(request):
 	context_dict = {}
@@ -31,14 +33,17 @@ def view(request, slug):
 
 	context_dict = {}
 	context_dict['post'] = post
-	set_permissions(request, post=post)
+	comments = post.comments.prefetch_related('upvoters', 'downvoters').all().select_related()
+	context_dict['comments'] = comments
+	set_comment_permissions(request, comments=comments)
+	set_post_permissions(request, post=post)
 	return render(request, 'core/single-post.html', context_dict)
 
 def view_all(request):
 	context_dict = {}
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:30]
 	context_dict['posts'] = posts
-	set_permissions(request, posts=posts)	
+	set_post_permissions(request, posts=posts)	
 	return render(request, 'core/posts.html', context_dict)
 
 @login_required
