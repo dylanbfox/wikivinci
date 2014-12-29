@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -11,6 +11,9 @@ from comments.models import Comment
 def add(request):
 	if request.method != 'POST':
 		return HttpResponseForbidden()
+
+	if request.user.account.points < 200:
+		return HttpResponse("more points")
 
 	post = Post.objects.get(pk=request.POST['post_id'])
 	comment = Comment(
@@ -41,9 +44,15 @@ def vote(request):
 		comment.downvoters.add(request.user.account)
 	comment.save()
 
-	print comment.vote_count
 	return HttpResponse(comment.vote_count)
 
+@ajax_login_required
+def delete(request):
+	try:
+		comment = Comment.objects.get(pk=request.POST.get('object_id'))
+	except Comment.DoesNotExist:
+		raise Http404
 
-
+	comment.delete()
+	return HttpResponse(status=200)
 

@@ -8,6 +8,12 @@ class Comment(models.Model):
 	class Meta:
 		ordering = ['-vote_count']
 
+	def save(self, *args, **kwargs):
+		if not self.created:
+			self.owner.points += 5
+			self.owner.save()
+		super(Comment, self).save(*args, **kwargs)		
+
 	def increment_vote(self):
 		self.upvotes += 1
 		self.vote_count += 1
