@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import (Http404, HttpResponseRedirect, 
+						HttpResponse, HttpResponseForbidden)
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+
+from wikivinci.utils.decorators import ajax_login_required
 
 from posts.models import Post
 from posts.forms import PostAddForm
@@ -9,6 +12,7 @@ from posts.utils import set_post_permissions
 
 from comments.utils import set_comment_permissions
 
+@ajax_login_required
 def add(request):
 	context_dict = {}
 	form = PostAddForm()
@@ -46,7 +50,7 @@ def view_all(request):
 	set_post_permissions(request, posts=posts)	
 	return render(request, 'core/posts.html', context_dict)
 
-@login_required
+@ajax_login_required
 def vote(request):
 	"""
 	Need to throw an error if the user already voted.
@@ -55,6 +59,7 @@ def vote(request):
 	try:
 		post = Post.objects.get(pk=request.POST.get('object_id'))
 	except Post.DoesNotExist:
+		print "except"
 		raise Http404
 
 	direction = request.POST.get('vote_direction')

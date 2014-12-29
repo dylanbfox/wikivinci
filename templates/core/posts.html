@@ -13,9 +13,9 @@
 		{% for post in posts %}
 		<div class="post">
 			{% if post.disallow_vote %}
-			<div class="votes-contain voted" data-voted="true" data-object-id="{{ post.pk }}">			
+			<div class="votes-contain voted" data-url="{% url 'posts:vote' %}" data-voted="true" data-object-id="{{ post.pk }}">			
 			{% else %}
-			<div class="votes-contain" data-object-id="{{ post.pk }}">			
+			<div class="votes-contain" data-url="{% url 'posts:vote' %}" data-object-id="{{ post.pk }}">			
 			{% endif %}
 				<i data-vote-direction="up" class="fa fa-chevron-up"></i>
 				<span class="count">{{ post.vote_count }}</span>
@@ -33,7 +33,7 @@
 			</div>			
 
 			<div class="post-info-contain super-light-font">
-				<i class="fa fa-comments"></i><span class="comment-count">8</span>
+				<i class="fa fa-comments"></i><span class="comment-count">{{ post.comments.all.count }}</span>
 			</div>
 		</div>
 		{% endfor %}
