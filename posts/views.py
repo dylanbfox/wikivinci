@@ -53,8 +53,10 @@ def view_all(request):
 @ajax_login_required
 def vote(request):
 	"""
-	Need to throw an error if the user already voted.
-	Need to allow for deleting vote.
+	* Need to throw an error if the user already voted. Front-end
+	disallows voting, but back-end should also throw an error.
+
+	* Need to allow for deleting vote.
 	"""
 	try:
 		post = Post.objects.get(pk=request.POST.get('object_id'))

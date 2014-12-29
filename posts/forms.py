@@ -17,6 +17,7 @@ class PostAddForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(PostAddForm, self).__init__(*args, **kwargs)
 		self.fields['owner_authored'].label = "Are you the author of this resource?"
+		self.fields['tags'].label = "Tags (separate by commas):"
 
 	def clean_slug(self):
 		slug = self.cleaned_data.get('slug').strip().lower()

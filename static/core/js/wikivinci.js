@@ -2,8 +2,51 @@ function getPageHeight(){
 	return $("#page-content").height();
 }
 
+function triggerAuthenticatePopup(){
+	var modal = $("#authenticateModal");
+	modal.find("p#alert").show();
+	modal.modal('toggle');
+}
+
 $(document).ready(function(){
 
+	// get register form
+	$("#authenticateModal a#register").on("click", function(e){
+		e.preventDefault();
+		var popup_modal = $("#authenticateModal");
+		var url = $(this).attr("href");
+		$.ajax({
+			url: url,
+			type: "GET",
+			success: function(response){
+				popup_modal.find("form").hide();
+				popup_modal.find(".modal-body").append(response);
+			}
+		});
+	});
+
+	// login via ajax
+	$("#authenticateModal form").on("submit", function(e){
+		e.preventDefault();
+		var form = $(this);
+		$.ajax({
+			url: form.attr("action"),
+			type: form.attr("method"),
+			data: {
+				username: form.find("input[name='username']").val(),
+				password: form.find("input[name='password']").val(),
+			},
+			success: function(response){
+				if (response == "success") {
+					location.reload();
+				} else {
+					form.find(".form-group input").addClass("error");
+				}
+			}
+		});
+	});
+
+	// flag a post
 	$("#flagPostModal #submit").on("click", function(){
 		var modal_node = $("#flagPostModal");
 		var edit = $.trim(modal_node.find("textarea").val())
@@ -50,7 +93,7 @@ $(document).ready(function(){
 			},
 			error: function(xhr, textStatus, errorThrown){
 				if (xhr.status == 403){
-					alert("login required!");
+					triggerAuthenticatePopup();
 				}
 			}
 		});
@@ -58,10 +101,7 @@ $(document).ready(function(){
 	
 	// get the form
 	$("#header a#add-post").on("click", function(){
-		var popup_node = $("#add-post-popup");
-		popup_node.height(getPageHeight() + 100);
-		popup_node.show();
-		popup_node.animate({'right': '0px'});
+		var popup_node = $("#post-add-popup");
 
 		if (window.addPostFormHTML) {
 			popup_node.find("form, #success").remove();
@@ -72,30 +112,33 @@ $(document).ready(function(){
 			url: '/posts/add/',
 			data: {},
 			success: function(response, textStatus, xhr){
+				popup_node.height(getPageHeight() + 100);
+				popup_node.show();
+				popup_node.animate({'right': '0px'});				
 				popup_node.append(response);
 				window.addPostFormHTML = true;
 			},
 			error: function(xhr, textStatus, errorThrown){
 				if (xhr.status == 403) {
-					alert("You need to login!");
+					triggerAuthenticatePopup();
 				}
 			}
 		});		
 	});
 
 	// hide the form
-	$("#add-post-popup .x").on("click", function(){
-		var popup_node = $("#add-post-popup");
+	$("#post-add-popup .x").on("click", function(){
+		var popup_node = $("#post-add-popup");
 		popup_node.animate({'right': '-3000px'}, function(){
 			popup_node.hide();
 		});
 	});
 
 	// submit the form
-	$("#add-post-popup").on("submit", "form", function(e){
+	$("#post-add-popup").on("submit", "form", function(e){
 		e.preventDefault();
 
-		var popup_node = $("#add-post-popup");
+		var popup_node = $("#post-add-popup");
 		var form = $(this);
 		$.ajax({
 			type: 'POST',
@@ -137,7 +180,7 @@ $(document).ready(function(){
 			},
 			error: function(xhr, textStatus, errorThrown){
 				if (xhr.status == 403) {
-					alert("You need to login first!");
+					triggerAuthenticatePopup();
 				}
 			}
 		});

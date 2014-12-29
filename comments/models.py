@@ -10,23 +10,20 @@ class Comment(models.Model):
 
 	def save(self, *args, **kwargs):
 		if not self.created:
-			self.owner.points += 5
-			self.owner.save()
+			self.owner.award_points(5)
 		super(Comment, self).save(*args, **kwargs)		
 
 	def increment_vote(self):
 		self.upvotes += 1
 		self.vote_count += 1
 		self.save()
-		self.owner.points += 1
-		self.owner.save()
+		self.owner.award_points(1)
 
 	def decrement_vote(self):
 		self.downvotes -= 1
 		self.vote_count -=1
 		self.save()
-		self.owner.points -= 1
-		self.owner.save()		
+		self.owner.award_points(-1)			
 
 	owner = models.ForeignKey(Account, related_name='comments')
 	post = models.ForeignKey(Post, related_name='comments')
