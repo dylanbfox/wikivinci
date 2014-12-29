@@ -19,12 +19,14 @@ $(document).ready(function(){
 			url: url,
 			data: {vote_direction: vote_direction, object_id: object_id},
 			success: function(response, textStatus, xhr){
-				if (xhr.status == 200) {
-					count_node.text(response);
-					count_node.closest(".votes-contain").addClass("voted");
-					count_node.closest(".votes-contain").attr("data-voted", "true");
-				} else {
-					alert("login!")
+				console.log(response);
+				count_node.text(response);
+				count_node.closest(".votes-contain").addClass("voted");
+				count_node.closest(".votes-contain").attr("data-voted", "true");
+			},
+			error: function(xhr, textStatus, errorThrown){
+				if (xhr.status == 403){
+					alert("login required!");
 				}
 			}
 		});
@@ -45,9 +47,14 @@ $(document).ready(function(){
 			type: 'GET',
 			url: '/posts/add/',
 			data: {},
-			success: function(response) {
+			success: function(response, textStatus, xhr){
 				popup_node.append(response);
 				window.addPostFormHTML = true;
+			},
+			error: function(xhr, textStatus, errorThrown){
+				if (xhr.status == 403) {
+					alert("You need to login!");
+				}
 			}
 		});		
 	});
@@ -91,12 +98,13 @@ $(document).ready(function(){
 				post_id: post_id,
 				text: text,
 			},
-			success: function(response, textStatus, xhr) {
-				if (xhr.status != 200){
-					return;
-					// handle excpetions
-				}
+			success: function(response, textStatus, xhr){
 				location.reload();
+			},
+			error: function(xhr, textStatus, errorThrown){
+				if (xhr.status == 403) {
+					alert("You need to login first!");
+				}
 			}
 		});
 	});

@@ -2,10 +2,12 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+from wikivinci.utils.decorators import ajax_login_required
+
 from posts.models import Post
 from comments.models import Comment
 
-@login_required
+@ajax_login_required
 def add(request):
 	if request.method != 'POST':
 		return HttpResponseForbidden()
@@ -19,7 +21,7 @@ def add(request):
 	comment.save()
 	return HttpResponse(status=200)
 
-@login_required
+@ajax_login_required
 def vote(request):
 	"""
 	Need to throw an error if the user already voted.
