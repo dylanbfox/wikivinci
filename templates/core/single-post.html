@@ -3,8 +3,24 @@
 {% load staticfiles %}
 
 {% block content %}
+
+{% include 'core/partials/flag-post-popup.html' %}
 <div id="single-post" class="container">
 	<div id="left-column">
+
+		{% if post.flagged %}
+		<div class="alert alert-danger" role="alert">
+		  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		  <b>WARNING:</b> This resource has been flagged by the community! It is pending removal.
+		</div>
+		{% endif %}
+
+		{% if user.is_authenticated %}
+		<div id="post-ops">
+			<a class="super-light-font" data-toggle="modal" data-target="#flagPostModal" href="#"><i class="fa fa-flag-o"></i></a>
+		</div>
+		{% endif %}
+
 		<div class="toprow">
 			{% if post.disallow_vote %}
 			<div class="votes-contain voted" data-voted="true" data-object-id="{{ post.pk }}" data-url="{% url 'comments:vote' %}">				
@@ -16,13 +32,11 @@
 				<i data-vote-direction="down" class="fa fa-chevron-down"></i>
 			</div>			
 			
-			<h2><a target="_blank" href="{{ post.url }}">{{ post.title }}</a></h2>
+			<h2><a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }}</a></h2>
 		</div>
 
-		<p class="super-light-font post-descr">{{ post.description }}</p>
-
+		<p class="lighter-font post-descr">{{ post.description }}</p>
 		<div id="comments">
-
 			{% for comment in comments %}
 			<div class="comment">
 				<div class="comment-owner">
@@ -41,20 +55,24 @@
 				
 				<div class="content">
 					<p>{{ comment.text }}</p>
-					{% if comment.created < comment.updated %}
-					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by {{ comment.owner.owner.username }}. Last updated {{ comment.updated }} by {{ comment.last_updated_by.owner.username }}.</span>
-					{% else %}
-					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by {{ comment.owner.owner.username }}.</span>					
-					{% endif %}					
+					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by {{ comment.owner.owner.username }}.</span>
+
+					{% if user.account == comment.owner %}
+					<a id="delete" class="red-font" href="{% url 'comments:delete' %}" data-object-id="{{ comment.id }}">delete comment</a>
+					{% endif %}		
 				</div>
 			</div>
 			{% endfor %}
 
+			{% if user.account.points > 200 %}
 			<form id="add-comment" method="POST" action="{% url 'comments:add' %}" data-post-id="{{ post.id }}">
-				<p>Have something to say about this resource? Add a comment!</p>
+				<p class="super-light-font">Have something to say about this resource? Add a comment!</p>
 				<textarea name="text"></textarea>
 				<input type="submit" class="btn btn-success" value="Submit comment" />
-			</form>					
+			</form>
+			{% else %}
+			<p id="comment-points-disclaimer">Commenting on resources is currently limited to community members with over 200 points. Earn 5 points every time you post a resource.</p>
+			{% endif %}			
 		</div>		
 	</div>
 

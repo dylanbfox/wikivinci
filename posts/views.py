@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from wikivinci.utils.decorators import ajax_login_required
 
-from posts.models import Post
+from posts.models import Post, PostRevision
 from posts.forms import PostAddForm
 from posts.utils import set_post_permissions
 
@@ -59,7 +59,6 @@ def vote(request):
 	try:
 		post = Post.objects.get(pk=request.POST.get('object_id'))
 	except Post.DoesNotExist:
-		print "except"
 		raise Http404
 
 	direction = request.POST.get('vote_direction')
@@ -73,5 +72,28 @@ def vote(request):
 
 	return HttpResponse(post.vote_count)
 
+@ajax_login_required
+def flag(request, slug):
+	try:
+		post = Post.objects.get(slug__iexact=slug)
+	except Post.DoesNotExist:
+		raise Http404	
+	
+	post_revision = PostRevision(
+		revision_type = 'FLAG',
+		edit = request.POST['edit'],
+		post = post,
+		owner = request.user.account,
+	)
+	post_revision.save()
+	return HttpResponse(status=200)
 
+def go(request, slug):
+	try:
+		post = Post.objects.get(slug__iexact=slug)
+	except Post.DoesNotExist:
+		raise Http404
 
+	post.clicks +=1 
+	post.save()
+	return HttpResponseRedirect(post.url)

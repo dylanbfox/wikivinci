@@ -13,6 +13,8 @@ class Post(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			self.slug = self.create_slug()
+			self.owner.points += 5
+			self.owner.save()
 		super(Post, self).save(*args, **kwargs)
 
 	def create_slug(self):
@@ -45,6 +47,7 @@ class Post(models.Model):
 	title = models.CharField(max_length=200, unique=True)
 	slug = models.CharField(max_length=99, unique=True)
 	outdated = models.BooleanField(default=False)
+	flagged = models.BooleanField(default=False)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	upvotes = models.IntegerField(default=0)
@@ -58,4 +61,27 @@ class Post(models.Model):
 	post_type = models.CharField(max_length=20, choices=link_types)
 	description = models.TextField()
 
+class PostRevision(models.Model):
 
+	def approve(self):
+		if self.revision_type == 'FLAG':
+			self.post.flagged = True
+			self.post.save()
+
+		self.owner.points += 5
+		self.owner.save()
+		self.needs_approval = False
+		self.save()		
+
+	revision_types = (
+		('FLAG', 'flag'),
+	)
+
+	revision_type = models.CharField(max_length=99, choices=revision_types)
+	edit = models.TextField()
+	post = models.ForeignKey(Post, related_name='revisions')
+	owner = models.ForeignKey(Account, related_name='post_revisions')
+	approver = models.ForeignKey(Account, related_name='approved_post_revisions', blank=True, null=True)
+	needs_approval = models.BooleanField(default=True)
+	created = models.DateTimeField(auto_now_add=True)
+	# approved_datetime = models.DateTimeField(blank=True, null=True)

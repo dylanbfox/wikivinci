@@ -4,6 +4,30 @@ function getPageHeight(){
 
 $(document).ready(function(){
 
+	$("#flagPostModal #submit").on("click", function(){
+		var modal_node = $("#flagPostModal");
+		var edit = $.trim(modal_node.find("textarea").val())
+
+		if (!(edit)) {
+			modal_node.find("textarea").addClass("error");
+			return;
+		}
+
+		var url = window.location.pathname + 'flag/';
+		$.ajax({
+			url: url,
+			type: "POST",
+			data: {edit: edit},
+			success: function(){
+				modal_node.modal('toggle');
+				modal_node.find('.modal-footer').remove();
+				modal_node.find("p#explain").text("Your request has been submitted!")
+				modal_node.find('textarea').prop('disabled', true);
+			}
+		});
+	});
+
+	// vote for comments and posts
 	$(".votes-contain i.fa").on("click", function(){
 		if ($(this).closest(".votes-contain").data("voted") == true){
 			return;
@@ -40,7 +64,7 @@ $(document).ready(function(){
 		popup_node.animate({'right': '0px'});
 
 		if (window.addPostFormHTML) {
-			return;
+			popup_node.find("form, #success").remove();
 		}		
 
 		$.ajax({
@@ -89,8 +113,14 @@ $(document).ready(function(){
 		e.preventDefault();
 		var form = $(this);
 		var post_id = form.data("post-id");
-		var text = form.find("textarea").val();
+		var text = $.trim(form.find("textarea").val());
 
+		if (!(text)) {
+			form.find("textarea").addClass("error");
+			return;
+		}
+
+		form.find("textarea").removeClass("error");
 		$.ajax({
 			url: form.attr("action"),
 			type: "POST",
@@ -99,12 +129,32 @@ $(document).ready(function(){
 				text: text,
 			},
 			success: function(response, textStatus, xhr){
+				if (response == "more points") {
+					alert("You need more points before you can submit comments!");
+					return;
+				}
 				location.reload();
 			},
 			error: function(xhr, textStatus, errorThrown){
 				if (xhr.status == 403) {
 					alert("You need to login first!");
 				}
+			}
+		});
+	});
+
+	// delete comment
+	$("#comments .comment a#delete").on("click", function(e){
+		e.preventDefault();
+		var comment_node = $(this).closest(".comment");
+		var url = $(this).attr("href");
+		var object_id = $(this).data("object-id");
+		$.ajax({
+			url: url,
+			type: "POST",
+			data: {object_id: object_id},
+			success: function(response){
+				comment_node.fadeOut();
 			}
 		});
 	});
