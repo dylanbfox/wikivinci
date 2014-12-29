@@ -5,17 +5,18 @@ function getPageHeight(){
 $(document).ready(function(){
 
 	$(".votes-contain i.fa").on("click", function(){
-		if ($(this).closest(".votes-contain").data("voted") == true) {
+		if ($(this).closest(".votes-contain").data("voted") == true){
 			return;
 		}
 
 		var vote_direction = $(this).data("vote-direction");
 		var object_id = $(this).closest(".votes-contain").data("object-id");
 		var count_node = $(this).closest(".votes-contain").find(".count");
+		var url = $(this).closest(".votes-contain").data("url");
 
 		$.ajax({
 			type: "POST",
-			url: "/posts/vote/",
+			url: url,
 			data: {vote_direction: vote_direction, object_id: object_id},
 			success: function(response, textStatus, xhr){
 				if (xhr.status == 200) {
@@ -72,6 +73,30 @@ $(document).ready(function(){
 			success: function(response){
 				popup_node.find("form").remove();
 				popup_node.append(response);
+			}
+		});
+	});
+
+	// submit comment
+	$("form#add-comment").on("submit", function(e){
+		e.preventDefault();
+		var form = $(this);
+		var post_id = form.data("post-id");
+		var text = form.find("textarea").val();
+
+		$.ajax({
+			url: form.attr("action"),
+			type: "POST",
+			data: {
+				post_id: post_id,
+				text: text,
+			},
+			success: function(response, textStatus, xhr) {
+				if (xhr.status != 200){
+					return;
+					// handle excpetions
+				}
+				location.reload();
 			}
 		});
 	});

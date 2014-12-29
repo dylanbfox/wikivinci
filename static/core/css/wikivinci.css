@@ -403,7 +403,7 @@ h5 {
 #page-content .posts .post .owner-contain img.owner {
 	width:50px;
 	height:50px;
-	border:2px solid #EAD4BA;
+	border:1px solid #A6A6A6;
 	border-radius:25px;
 	-webkit-border-radius:25px;
 	-moz-border-radius:25px;	
@@ -412,11 +412,11 @@ h5 {
 #page-content #single-post #left-column {
 	float:left;
 	width:65%;
+	padding-bottom:100px;
 }
 
 #page-content #single-post #left-column .toprow h2 {
 	vertical-align:top;
-	margin-top:21px;
 }
 
 #page-content #single-post #right-column {
@@ -494,7 +494,7 @@ h5 {
 #page-content #single-post #comments .comment:first-child .comment-owner > img {
 	width:75px;
 	height:75px;
-	border:2px solid #EAD4BA;
+	border:1px solid #A6A6A6;
 	border-radius:37.5px;
 	-webkit-border-radius:37.5px;
 	-moz-border-radius:37.5px;	
@@ -503,11 +503,30 @@ h5 {
 #page-content #single-post #comments .comment .comment-owner > img {
 	width:50px;
 	height:50px;
-	border:2px solid #EAD4BA;
+	border:1px solid #A6A6A6;
 	border-radius:25px;
 	-webkit-border-radius:25px;
 	-moz-border-radius:25px;	
-} 
+}
+
+#page-content #single-post #comments form#add-comment {
+	margin-top:50px;
+}
+
+#page-content #single-post #comments form#add-comment > p {
+	font-size:18px;	
+}
+
+#page-content #single-post #comments form#add-comment textarea {
+	margin-top:20px;
+	height:175px;
+}
+
+#page-content #single-post #comments form#add-comment input[type='submit'] {
+	padding:10px;
+	width:50%;
+	margin-top:15px;
+}
 
 #page-content #single-post #right-column #post-info {
 	text-align:center;
@@ -526,7 +545,7 @@ h5 {
 	margin-bottom:10px;
 	width:75px;
 	height:75px;
-	border:2px solid #EAD4BA;
+	border:1px solid #A6A6A6;
 	border-radius:37.5px;
 	-webkit-border-radius:37.5px;
 	-moz-border-radius:37.5px;	
@@ -544,7 +563,7 @@ h5 {
 #page-content #single-post #right-column #post-info #upvoters > img {
 	width:40px;
 	height:40px;
-	border:2px solid #EAD4BA;
+	border:1px solid #A6A6A6;
 	border-radius:20px;
 	-webkit-border-radius:20px;
 	-moz-border-radius:20px;

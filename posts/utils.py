@@ -1,11 +1,12 @@
-def set_permissions(request, post=None, posts=None):
+def set_post_permissions(request, post=None, posts=None):
+	if not request.user.is_authenticated():
+		return
+
 	if post:
 		upvoter = post.upvoters.filter(owner=request.user).exists()
 		downvoter = post.downvoters.filter(owner=request.user).exists()
 		if upvoter or downvoter:
-			post.can_vote = False
-		else:
-			post.can_vote = True
+			post.disallow_vote = True
 			
 	if posts:
 		account = request.user.account		
@@ -13,6 +14,4 @@ def set_permissions(request, post=None, posts=None):
 			upvoter = account in p.upvoters.all()
 			downvoter = account in p.downvoters.all()
 			if upvoter or downvoter:
-				p.can_vote = False
-			else:
-				p.can_vote = True
+				p.disallow_vote = True

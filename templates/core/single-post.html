@@ -6,10 +6,10 @@
 <div id="single-post" class="container">
 	<div id="left-column">
 		<div class="toprow">
-			{% if post.can_vote %}
-			<div class="votes-contain" data-object-id="{{ post.pk }}">			
+			{% if post.disallow_vote %}
+			<div class="votes-contain voted" data-voted="true" data-object-id="{{ post.pk }}" data-url="{% url 'comments:vote' %}">				
 			{% else %}
-			<div class="votes-contain voted" data-voted="true" data-object-id="{{ post.pk }}">			
+			<div class="votes-contain" data-object-id="{{ post.pk }}" data-url="{% url 'posts:vote' %}">				
 			{% endif %}
 				<i data-vote-direction="up" class="fa fa-chevron-up"></i>
 				<span class="count">{{ post.vote_count }}</span>
@@ -22,77 +22,45 @@
 		<p class="super-light-font post-descr">{{ post.description }}</p>
 
 		<div id="comments">
+
+			{% for comment in comments %}
 			<div class="comment">
 				<div class="comment-owner">
-					<img src="{{ post.owner.profile_pic.url }}" />
+					<img src="{{ comment.owner.profile_pic.url }}" />
 				</div>
 
-				<div class="votes-contain">
-					<i class="fa fa-chevron-up"></i>
-					<span class="count">{{ post.vote_count }}</span>
-					<i class="fa fa-chevron-down"></i>
+				{% if comment.disallow_vote %}
+				<div class="votes-contain voted" data-voted="true" data-object-id="{{ comment.pk }}" data-url="{% url 'comments:vote' %}">				
+				{% else %}
+				<div class="votes-contain" data-object-id="{{ comment.pk }}" data-url="{% url 'comments:vote' %}">
+				{% endif %}
+					<i data-vote-direction="up" class="fa fa-chevron-up"></i>
+					<span class="count">{{ comment.vote_count }}</span>
+					<i data-vote-direction="down" class="fa fa-chevron-down"></i>
 				</div>
 				
 				<div class="content">
-					<p>This tutorial is for Django 1.5 but
-					for those newere to Django, or those that
-					haven't ever used middleware before, it's
-					still very useful. Not much has changed between
-					1.5 and 1.7 as it relates to middleware.</p>
-
-					<span class="super-light-font timestamp">Comment originally posted January 8th, 2014 at 3:40PM - <a href="#">Submit Edits</a> (last edited by Dylan on January 10th, 2014 at 3:00PM) </span>
+					<p>{{ comment.text }}</p>
+					{% if comment.created < comment.updated %}
+					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by {{ comment.owner.owner.username }}. Last updated {{ comment.updated }} by {{ comment.last_updated_by.owner.username }}.</span>
+					{% else %}
+					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by {{ comment.owner.owner.username }}.</span>					
+					{% endif %}					
 				</div>
 			</div>
+			{% endfor %}
 
-			<div class="comment">
-				<div class="comment-owner">
-					<img src="{{ post.owner.profile_pic.url }}" />
-				</div>
-
-				<div class="votes-contain">
-					<i class="fa fa-chevron-up"></i>
-					<span class="count">{{ post.vote_count }}</span>
-					<i class="fa fa-chevron-down"></i>
-				</div>
-				
-				<div class="content">
-					<p>This tutorial is for Django 1.5 but
-					for those newere to Django, or those that
-					haven't ever used middleware before, it's
-					still very useful. Not much has changed between
-					1.5 and 1.7 as it relates to middleware.</p>
-
-					<span class="super-light-font timestamp">Comment posted January 8th, 2014 at 3:40PM - <a href="#">Submit Edits</a></span>
-				</div>
-			</div>
-
-			<div class="comment">
-				<div class="comment-owner">
-					<img src="{{ post.owner.profile_pic.url }}" />
-				</div>
-
-				<div class="votes-contain">
-					<i class="fa fa-chevron-up"></i>
-					<span class="count">{{ post.vote_count }}</span>
-					<i class="fa fa-chevron-down"></i>
-				</div>
-				
-				<div class="content">
-					<p>This tutorial is for Django 1.5 but
-					for those newere to Django, or those that
-					haven't ever used middleware before, it's
-					still very useful. Not much has changed between
-					1.5 and 1.7 as it relates to middleware.</p>
-
-					<span class="super-light-font timestamp">Comment posted January 8th, 2014 at 3:40PM</span>
-				</div>
-			</div>						
+			<form id="add-comment" method="POST" action="{% url 'comments:add' %}" data-post-id="{{ post.id }}">
+				<p>Have something to say about this resource? Add a comment!</p>
+				<textarea name="text"></textarea>
+				<input type="submit" class="btn btn-success" value="Submit comment" />
+			</form>					
 		</div>		
 	</div>
 
 	<div id="right-column">
 		<div id="post-info">
-			<b>Good tutorial? Upvote it!</b>
+			<b>Good resource? Upvote it so others can find it!</b>
 			<img id="owner" src="{{ post.owner.profile_pic.url }}" />
 			<p id="timestamp" class="super-light-font">posted by {{ post.owner.owner.username }} on {{ post.created }}</p>
 
