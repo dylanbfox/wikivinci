@@ -8,13 +8,12 @@ from accounts.models import Account
 class Post(models.Model):
 
 	class Meta:
-		ordering = ['created']
+		ordering = ['-created']
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			self.slug = self.create_slug()
-			self.owner.points += 5
-			self.owner.save()
+			self.owner.award_points(5)
 		super(Post, self).save(*args, **kwargs)
 
 	def create_slug(self):
@@ -28,18 +27,19 @@ class Post(models.Model):
 		self.upvotes += 1
 		self.vote_count += 1
 		self.save()
-		self.owner.points += 1
-		self.owner.save()
+		self.owner.award_points(1)		
 
 	def decrement_vote(self):
 		self.downvotes -= 1
 		self.vote_count -=1
 		self.save()
-		self.owner.points -= 1
-		self.owner.save()
+		self.owner.award_points(-1)		
 
 	def full_url(self):
-		return reverse('posts:view', kwargs={'slug': self.slug})	
+		return reverse('posts:view', kwargs={'slug': self.slug})
+
+	def tags_to_list(self):
+		return [t for t in self.tags.split(',') if t]
 
 	link_types = (
 		('LINK', 'link'),
@@ -72,10 +72,9 @@ class PostRevision(models.Model):
 			self.post.flagged = True
 			self.post.save()
 
-		self.owner.points += 5
-		self.owner.save()
 		self.needs_approval = False
-		self.save()		
+		self.save()
+		self.owner.award_points(10)		
 
 	revision_types = (
 		('FLAG', 'flag'),

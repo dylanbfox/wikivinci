@@ -64,7 +64,9 @@
 			</div>
 			{% endfor %}
 
-			{% if user.account.points >= 200 %}
+			{% if not user.is_authenticated %}
+			<p id="comment-points-disclaimer">Sign in to add a comment to this resource!</p>			
+			{% elif user.account.points >= 200 %}
 			<form id="add-comment" method="POST" action="{% url 'comments:add' %}" data-post-id="{{ post.id }}">
 				<p class="super-light-font">Have something to say about this resource? Add a comment!</p>
 				<textarea name="text"></textarea>
@@ -81,6 +83,14 @@
 			<b>Good resource? Upvote it so others can find it!</b>
 			<img id="owner" src="{{ post.owner.profile_pic.url }}" />
 			<p id="timestamp" class="super-light-font">posted by {{ post.owner.owner.username }} on {{ post.created }}</p>
+
+			{% if post.tags %}
+			<div id="tags">
+				{% for tag in post.tags_to_list %}
+				<span>{{ tag }}</span>
+				{% endfor %}
+			</div>
+			{% endif %}
 
 			{% if post.upvotes > 0 %}
 			<div id="upvoters">

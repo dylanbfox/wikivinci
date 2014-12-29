@@ -26,21 +26,22 @@
 	<div id="master-holder">
 	<body>
 
-	{% include 'core/partials/add-post-popup.html' %}
+	{% include 'core/partials/authenticate-popup.html' %}
+	{% include 'core/partials/post-add-popup.html' %}
 
 	<!-- Header -->
 		{% block header %}
 		<div id="header">
 			<div class="container">
 				<img id="logo" src="{% static 'core/images/wikivincilogo-horiz.png' %}" />
-				<a id="add-post" href="#"><span class="btn btn-primary">post</span></a>
+				<a id="add-post" href="#"><span class="btn btn-success">add resource</span></a>
 				{% if user.is_authenticated %}
 				<a href="#">
 					<img id="profile-pic" src="{{ user.account.profile_pic.url }}" />
 					<span id="points"><i class="fa fa-star"></i> {{ user.account.points }}</span>
 				</a>
 				{% else %}
-				<a href="#">Login</a>				
+				<a data-toggle="modal" data-target="#authenticateModal" href="#">Login</a>				
 				{% endif %}
 				<a href="#">Contributors</a>
 				<a href="#">Collections</a>					

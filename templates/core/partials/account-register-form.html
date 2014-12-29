@@ -1,0 +1,9 @@
+<form>
+	{% csrf_token %}
+
+	{% for field in form %}
+		{{ field }}
+	{% endfor %}
+
+	<input type="submit" class="btn btn-success" value="Register and immediately earn 50 points!" />		
+</form>
