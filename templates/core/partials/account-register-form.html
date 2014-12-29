@@ -1,8 +1,17 @@
-<form>
+<form id="register" method="POST" action="{% url 'accounts:register' %}" enctype="multipart/form-data">
 	{% csrf_token %}
-
 	{% for field in form %}
+
+	{% if field.errors %}
+	<div class="form-group error">	
+		{{ field.errors }}
+	{% else %}
+	<div class="form-group">
+	{% endif %}
+		{{ field.label_tag }}
+		<br />
 		{{ field }}
+	</div>
 	{% endfor %}
 
 	<input type="submit" class="btn btn-success" value="Register and immediately earn 50 points!" />		
