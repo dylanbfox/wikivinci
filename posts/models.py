@@ -42,6 +42,7 @@ class Post(models.Model):
 		return [t.strip() for t in self.tags.split(',') if t]
 
 	def tags_contain(self, contains=None):
+		# checks for non-case-sensitive matches
 		return contains.lower() in [t.lower() for t in self.tags_to_list()]
 
 	link_types = (
