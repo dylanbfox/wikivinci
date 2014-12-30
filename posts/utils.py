@@ -1,3 +1,8 @@
+import itertools
+
+from operator import itemgetter
+from collections import defaultdict, OrderedDict
+
 def set_post_permissions(request, post=None, posts=None):
 	if not request.user.is_authenticated():
 		return
@@ -15,3 +20,14 @@ def set_post_permissions(request, post=None, posts=None):
 			downvoter = account in p.downvoters.all()
 			if upvoter or downvoter:
 				p.disallow_vote = True
+
+def unique_topic_counts(posts):
+	topic_lists = [p.tags_to_list() for p in posts]
+	topics = list(itertools.chain(*topic_lists))
+	uo_unique_topics = defaultdict(lambda: {'count': 0})
+	for topic in topics:
+		uo_unique_topics[topic.lower()]['count'] += 1
+
+	unique_topics = OrderedDict(sorted(uo_unique_topics.items(),
+		key=itemgetter(1), reverse=True))
+	return unique_topics

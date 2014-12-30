@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import (Http404, HttpResponseRedirect, 
 						HttpResponse, HttpResponseForbidden)
+
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -8,7 +9,7 @@ from wikivinci.utils.decorators import ajax_login_required
 
 from posts.models import Post, PostRevision
 from posts.forms import PostAddForm
-from posts.utils import set_post_permissions
+from posts.utils import set_post_permissions, unique_topic_counts
 
 from comments.utils import set_comment_permissions
 
@@ -46,6 +47,11 @@ def view(request, slug):
 def view_all(request):
 	context_dict = {}
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:30]
+
+	if request.GET.get('topic'):
+		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
+		context_dict['topic'] = request.GET['topic']
+
 	context_dict['posts'] = posts
 	set_post_permissions(request, posts=posts)	
 	return render(request, 'core/posts.html', context_dict)
@@ -99,3 +105,10 @@ def go(request, slug):
 	post.clicks +=1 
 	post.save()
 	return HttpResponseRedirect(post.url)
+
+def view_topics(request):
+	context_dict = {}
+	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
+	topics = unique_topic_counts(posts)
+	context_dict['topics'] = topics
+	return render(request, 'core/topics.html', context_dict)

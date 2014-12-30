@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
 	<div class="toprow">
-		<h2>Recently Added Resources</h2>
+		<h2>Recently Added {% if topic %}'{{ topic }}'{% endif %} Resources</h2>
 		<input class="large" name="postsearch" type="text" placeholder="search" />		
 	</div>
 
@@ -37,7 +37,10 @@
 			</div>
 		</div>
 		{% endfor %}
-					
+
+		{% if posts.length < 5 %}
+		<p id="sorry" class="super-light-font">Looks like there haven't been many resources added for this topic. You can help! Click "add resource" in the top right corner to add a good resource you know of. Help build Wikivinci!</p>
+		{% endif %}
 	</div>
 </div>
 {% endblock content %}

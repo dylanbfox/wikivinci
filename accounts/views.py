@@ -28,6 +28,9 @@ def account_register(request):
 	account = form.save(commit=False)
 	account.owner = user
 	account.save()
+	user = authenticate(username=form.cleaned_data['username'],
+		password=form.cleaned_data['password'])
+	login(request, user)
 	return HttpResponse("success")
 
 def account_login(request):
