@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div id="profile" class="container">
+	<div id="profile-top">
+		<img id="profile-pic" src="{{ account.profile_pic.url }}" />
+		<div id="account-info">
+			<p id="username">{{ account.owner.username }}</p>
+			{% if account.title %}
+			<p id="title" class="super-light-font"> {{ account.title }}</p>
+			{% endif %}			
+			<p id="points"><i class="fa fa-star"></i>{{ account.points }}</p>
+			<p id="user-number" class="super-light-font">Ranked #{{ rank }} on Wikivinci</p>
+		</div>
+	</div>
+
+	<div id="activity">
+		<div id="ops">
+			<a data-target="#posts" class="active" href="javascript:">Resources Added ({{ posts.count }})</a>
+			<a data-target="#authored" href="javascript:">Self-Authored Resources ({{ authored.count }})</a>
+			<a data-target="#upvoted" href="javascript:">Upvoted ({{ upvoted.count }})</a>
+			<a data-target="#comments" href="javascript:">Comments ({{ comments.count }})</a>
+		</div>
+
+		<div id="posts" class="feed" style="display:block">
+			{% for post in posts %}
+			<div>
+				<p class="votes">{{ post.vote_count }}<span>score</span></p>
+				<p class="title">
+					<a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a>
+					<span class="tags">
+						{% for tag in post.tags_to_list %}
+							<span>{{ tag }}</span>
+						{% endfor %}
+					</span>
+				</p>
+				<p class="timestamp">Posted {{ post.created }}</p>
+			</div>
+			{% endfor %}
+		</div>
+
+		<div id="authored" class="feed">
+			{% for post in authored %}
+			<div>
+				<p class="votes">{{ post.vote_count }}<span>score</span></p>
+				<p class="title">
+					<a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a>
+					<span class="tags">
+						{% for tag in post.tags_to_list %}
+							<span>{{ tag }}</span>
+						{% endfor %}
+					</span>
+				</p>
+				<p class="timestamp">Posted {{ post.created }}</p>
+			</div>
+			{% endfor %}			
+		</div>
+
+		<div id="upvoted" class="feed">
+			{% for post in upvoted %}
+			<div>
+				<p class="votes">{{ post.vote_count }}<span>score</span></p>
+				<p class="title">
+					<a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a>
+					<span class="tags">
+						{% for tag in post.tags_to_list %}
+							<span>{{ tag }}</span>
+						{% endfor %}
+					</span>
+				</p>
+				<img class="owner-profile-pic" src="{{ post.owner.profile_pic.url }}" />
+			</div>
+			{% endfor %}			
+		</div>
+
+		<div id="comments" class="feed">
+			{% for comment in comments %}
+			<div>
+				<p class="votes">{{ comment.vote_count }}<span>score</span></p>
+				<p class="title">
+					{{ comment.text|truncatechars:250 }}
+					<span class="tags">
+						<a href="{% url 'posts:view' slug=comment.post.slug %}">Comment on: {{ comment.post.title }}</a>
+					</span>
+				</p>
+			</div>
+			{% endfor %}		
+		</div>
+	</div>
+</div>
+{% endblock content %}

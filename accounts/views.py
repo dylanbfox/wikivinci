@@ -6,6 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from accounts.models import Account
 from accounts.forms import AccountRegisterForm
 
+from posts.models import Post
+from comments.models import Comment
+
 def account_register(request):
 	context_dict = {}
 	if request.method == "GET":
@@ -51,3 +54,15 @@ def account_login(request):
 		return HttpResponse("success")
 	else:
 		return HttpResponse("fail")
+
+def profile(request, username):
+	context_dict = {}
+	user = User.objects.get(username__iexact=username)
+	account = user.account
+	context_dict['account'] = account
+	context_dict['posts'] = Post.objects.select_related().filter(owner=account).order_by('-vote_count')
+	context_dict['authored'] = Post.objects.select_related().filter(owner=account, owner_authored=True).order_by('-vote_count')
+	context_dict['upvoted'] = Post.objects.select_related().filter(upvoters=account).order_by('-vote_count')
+	context_dict['comments'] = Comment.objects.select_related().filter(owner=account).order_by('-vote_count')
+	context_dict['rank'] = account.rank()
+	return render(request, 'core/profile.html', context_dict)

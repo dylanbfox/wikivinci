@@ -56,7 +56,12 @@ def view_all(request):
 
 	if request.GET.get('topic'):
 		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
-		context_dict['topic'] = request.GET['topic']		
+		context_dict['topic'] = request.GET['topic']
+
+	if request.GET.get('contains'):
+		contains = request.GET.get('contains')
+		context_dict['contains'] = contains		
+		posts = [p for p in posts if p.content_contains(contains=contains)]
 
 	context_dict['posts'] = posts
 	set_post_permissions(request, posts=posts)	

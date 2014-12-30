@@ -4,7 +4,7 @@
 
 <html>
 	<head>
-		<title>Wikivinci.com | Learn Stuff</title>
+		<title>Wikivinci.com | Learn Faster. Top resources and tutorials, curated by the self-learning community.</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'core/css/wikivinci.css' %}" rel="stylesheet">
@@ -33,7 +33,7 @@
 		{% block header %}
 		<div id="header">
 			<div class="container">
-				<img id="logo" src="{% static 'core/images/wikivincilogo-horiz-v3.png' %}" />
+				<a id="logo" href="{% url 'pages:home' %}"><img src="{% static 'core/images/wikivincilogo-horiz-v3.png' %}" /></a>
 				<a id="add-post" href="#"><span class="btn btn-success">add resource</span></a>
 				{% if user.is_authenticated %}
 				<a href="#">
@@ -44,7 +44,8 @@
 				<a data-toggle="modal" data-target="#authenticateModal" href="#">Login</a>				
 				{% endif %}
 				<a href="#">Contributors</a>
-				<a href="{% url 'posts:topics' %}">Topics</a>					
+				<a href="{% url 'posts:topics' %}">Topics</a>
+				<!-- <a href="#">Courses</a>	 -->				
 				<a href="#">About</a>
 			</div>
 		</div>
