@@ -196,6 +196,7 @@ h5 {
 }
 
 #post-add-popup > .x {
+	cursor:pointer;
 	position:absolute;
 	z-index:999;
 	top:15px;
@@ -236,6 +237,35 @@ h5 {
 #post-add-popup p#subheader {
 	font-size:16px;
 	margin-bottom:20px;
+}
+
+#post-add-popup #suggested-topics {
+	display:none;
+	margin-top:4px;
+	background-color:#FFF;
+	box-shadow:0px 1px 2px #A19898;
+	font-size:13px;	
+}
+
+#post-add-popup #suggested-topics h4 {
+	padding:3px;
+	font-size:13px;
+	background-color:#BEBEBE;	
+}
+
+#post-add-popup #suggested-topics h4 > #close {
+	cursor:pointer;
+	float:right;
+	margin-right:5px;
+	font-weight:700;
+}
+
+#post-add-popup #suggested-topics > p {
+	padding:3px;
+}
+
+#post-add-popup #suggested-topics > p:hover {
+	background-color:#F9FF9B;
 }
 
 #authenticateModal {

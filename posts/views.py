@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import (Http404, HttpResponseRedirect, 
-						HttpResponse, HttpResponseForbidden)
+						 HttpResponse, HttpResponseForbidden,
+						 JsonResponse)
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,8 @@ from wikivinci.utils.decorators import ajax_login_required
 
 from posts.models import Post, PostRevision
 from posts.forms import PostAddForm
-from posts.utils import set_post_permissions, unique_topic_counts
+from posts.utils import (set_post_permissions, unique_topic_counts,
+						 topic_suggestions)
 
 from comments.utils import set_comment_permissions
 
@@ -116,3 +118,9 @@ def view_topics(request):
 	topics = unique_topic_counts(posts)
 	context_dict['topics'] = topics
 	return render(request, 'core/topics.html', context_dict)
+
+def ajax_suggest_topics(request):
+	chars = request.POST.get('chars')
+	posts = Post.objects.filter(flagged=False)
+	suggestions = topic_suggestions(posts, chars)
+	return JsonResponse(suggestions, safe=False)

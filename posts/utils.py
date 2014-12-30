@@ -22,6 +22,9 @@ def set_post_permissions(request, post=None, posts=None):
 				p.disallow_vote = True
 
 def unique_topic_counts(posts):
+	"""
+	Forces every topic to lowercase.
+	"""
 	topic_lists = [p.tags_to_list() for p in posts]
 	topics = list(itertools.chain(*topic_lists))
 	uo_unique_topics = defaultdict(lambda: {'count': 0})
@@ -31,3 +34,13 @@ def unique_topic_counts(posts):
 	unique_topics = OrderedDict(sorted(uo_unique_topics.items(),
 		key=itemgetter(1), reverse=True))
 	return unique_topics
+
+def topic_suggestions(posts, chars):
+	"""
+	Forces every topic to lowercase.
+	"""
+	topic_lists = [p.tags_to_list() for p in posts]
+	topics = list(itertools.chain(*topic_lists))
+	matches = [t.lower() for t in topics if chars.lower() in t.lower()]
+	unique_matches = list(set(matches))
+	return unique_matches

@@ -10,19 +10,40 @@ function triggerAuthenticatePopup(){
 
 $(document).ready(function(){
 
+	// authenticate popup - go back to login form
+	$("#authenticateModal a#back-to-login").on("click", function(){
+		var popup_modal = $("#authenticateModal");		
+		popup_modal.find("form#register").hide();		
+		popup_modal.find("form#login").show();
+		popup_modal.find(".modal-footer a#back-to-login").hide();		
+		popup_modal.find(".modal-footer a#register").show();
+		popup_modal.find(".modal-title").text("Sign in to Wikivinci!");				
+	});
+
 	// get register form
 	$("#authenticateModal a#register").on("click", function(e){
 		e.preventDefault();
 		var popup_modal = $("#authenticateModal");
+		if (window.registerFormReceived) {
+			popup_modal.find("form#login").hide();
+			popup_modal.find(".modal-footer a#register").hide();
+			popup_modal.find(".modal-footer a#back-to-login").show();
+			popup_modal.find(".modal-title").text("Sign up for Wikivinci!");			
+			popup_modal.find("form#register").show();
+			return;							
+		}
+
 		var url = $(this).attr("href");
 		$.ajax({
 			url: url,
 			type: "GET",
 			success: function(response){
-				popup_modal.find("form").hide();
-				popup_modal.find(".modal-footer").hide();
+				popup_modal.find("form#login").hide();
+				popup_modal.find(".modal-footer a#register").hide();
+				popup_modal.find(".modal-footer a#back-to-login").show();
 				popup_modal.find(".modal-title").text("Sign up for Wikivinci!");
 				popup_modal.find(".modal-body").append(response);
+				window.registerFormReceived = true;
 			}
 		});
 	});
@@ -123,7 +144,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	// get the form
+	// get the add post form
 	$("#header a#add-post").on("click", function(){
 		var popup_node = $("#post-add-popup");
 
@@ -150,7 +171,7 @@ $(document).ready(function(){
 		});		
 	});
 
-	// hide the form
+	// hide the add post form
 	$("#post-add-popup .x").on("click", function(){
 		var popup_node = $("#post-add-popup");
 		popup_node.animate({'right': '-3000px'}, function(){
@@ -158,7 +179,7 @@ $(document).ready(function(){
 		});
 	});
 
-	// submit the form
+	// submit the add post form
 	$("#post-add-popup").on("submit", "form", function(e){
 		e.preventDefault();
 
@@ -173,6 +194,66 @@ $(document).ready(function(){
 				popup_node.append(response);
 			}
 		});
+	});
+
+	// auto-fill tags in add post form
+	$("#post-add-popup").on("keyup", "form input[name='tags']", function(){
+		var all_chars = $(this).val();
+		var comma_pos = all_chars.lastIndexOf(",");
+		var suggested_topics_node = $("#post-add-popup #suggested-topics");
+
+		suggested_topics_node.hide();
+		suggested_topics_node.find("p").remove();			
+
+		if (comma_pos != -1) {
+			var chars = $.trim(all_chars.slice(comma_pos+1));			
+		} else {
+			var chars = all_chars;
+		}
+
+		if (chars.length < 2){
+			return;
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "/posts/topics/suggest/",
+			data: {chars: chars},
+			success: function(response){
+				if (response.length < 1){
+					return;
+				}
+
+				for (var i in response){
+					console.log(response[i]);
+					suggested_topics_node.append($("<p>"+response[i]+"</p>"));
+				}
+				suggested_topics_node.show();				
+			}
+		});
+	});
+
+	// append suggested tag/topic on click
+	$("#post-add-popup").on("click", "#suggested-topics > p", function(e){
+		e.stopPropagation();
+		console.log("click");
+		var input_node = $("#post-add-popup form input[name='tags']");
+		var current_val = input_node.val();
+		var comma_pos = current_val.lastIndexOf(",");
+
+		if (comma_pos == -1){
+			var new_val = $(this).text();
+		} else {
+			var new_val = current_val.slice(0, comma_pos) + ", " + $(this).text();			
+		}
+
+		input_node.val(new_val);
+		$("#post-add-popup #suggested-topics").hide();
+	});
+
+	// hide suggestions on blur
+	$("#post-add-popup").on("click", "#suggested-topics #close", function(){
+		$("#post-add-popup #suggested-topics").hide();
 	});
 
 	// submit comment
