@@ -5,12 +5,12 @@
 {% block content %}
 <div class="container">
 	<div class="toprow">
-		<h2>{% if top %}Top{% else %}Recently Added{% endif %} {% if topic %}'{{ topic }}'{% endif %} Resources
+		<h2>{% if top %}Top{% else %}Recently Added{% endif %} {% if topic %}'{{ topic }}'{% endif %} Resources {% if contains %}on '{{ contains }}'{% endif %}</h2>
 		
 		{% if top %}
-		<a id="filter-top" href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}{% endif %}">/ show recently added resources</a>
+		<a id="filter-top" href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}&{% else %}?{% endif %}{% if contains %}contains={{ contains }}{% endif %}">/ show recently added resources {% if contains %}on '{{ contains }}'{% endif %}</a>
 		{% else %}
-		<a id="filter-top" href="{% if topic %}?topic={{ topic }}&{% else %}?{% endif %}top=true">/ show top rated resources</a>
+		<a id="filter-top" href="{% if topic %}?topic={{ topic }}&{% else %}?{% endif %}top=true{% if contains %}&contains={{ contains }}{% endif %}">/ show top rated resources {% if contains %}on '{{ contains }}'{% endif %}</a>
 		{% endif %}
 		</h2>
 		<input class="large" name="postsearch" type="text" placeholder="search" />		
@@ -45,7 +45,7 @@
 		</div>
 		{% endfor %}
 
-		{% if posts.count < 5 %}
+		{% if not posts or posts.count < 5 %}
 		<p id="sorry" class="super-light-font">Looks like there haven't been many resources added for this topic. You can help! Click "add resource" in the top right corner to add a good resource you know of. Help build Wikivinci!</p>
 		{% endif %}
 	</div>

@@ -307,4 +307,15 @@ $(document).ready(function(){
 		});
 	});
 
+	// toggle profile activity feeds
+	$("#profile #activity #ops a").on("click", function(){
+		var target_id = $(this).data("target");
+		var feed_node = $(target_id);
+
+		$("#profile #activity #ops a").removeClass("active")
+		$("#profile #activity .feed").hide();
+		$(this).addClass("active");
+		feed_node.show();
+	});	
+
 });

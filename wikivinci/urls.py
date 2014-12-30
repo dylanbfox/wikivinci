@@ -7,7 +7,8 @@ from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^admin/', include(admin.site.urls)),    
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('pages.urls', namespace='pages')),    
     url(r'^posts/', include('posts.urls', namespace='posts')),
     url(r'^comments/', include('comments.urls', namespace='comments')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),

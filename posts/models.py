@@ -42,8 +42,26 @@ class Post(models.Model):
 		return [t.strip() for t in self.tags.split(',') if t]
 
 	def tags_contain(self, contains=None):
-		# checks for non-case-sensitive matches
+		"""
+		Converts to lowercase before comparing.
+		"""
 		return contains.lower() in [t.lower() for t in self.tags_to_list()]
+
+	def content_contains(self, contains=None):
+		"""
+		Converts to lowercase before comparing.
+		"""
+		search_terms = [term.strip() for term in contains.split(',') if term]
+		match = False
+
+		for term in search_terms:
+			print term
+			term_title_match = term.lower() in self.title.lower()
+			term_descr_match = term.lower() in self.description.lower()
+			if term_title_match or term_descr_match:
+				match = True
+
+		return match
 
 	link_types = (
 		('LINK', 'link'),
@@ -59,9 +77,9 @@ class Post(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	upvotes = models.IntegerField(default=0)
-	upvoters = models.ManyToManyField(Account, related_name='upvoted_posts')
+	upvoters = models.ManyToManyField(Account, related_name='upvoted_posts', blank=True)
 	downvotes = models.IntegerField(default=0)
-	downvoters = models.ManyToManyField(Account, related_name='downvoted_posts')
+	downvoters = models.ManyToManyField(Account, related_name='downvoted_posts', blank=True)
 	vote_count = models.IntegerField(default=0)
 	clicks = models.IntegerField(default=0)
 	tags = models.CharField(max_length=500)

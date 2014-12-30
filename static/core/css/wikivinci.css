@@ -296,15 +296,20 @@ h5 {
 	line-height:65px;
 }
 
-#header > .container img#logo {
-	height:65px;
-}
-
 #header > .container > a {
 	float:right;
 	margin-left:36px;
 	font-size:16px;
 	text-decoration:none;
+}
+
+#header > .container > a#logo {
+	margin-left:0px;
+	float:left;
+}
+
+#header	> .container > a#logo img {
+	height:65px;	
 }
 
 #header > .container > a#add-post span.btn {
@@ -342,6 +347,97 @@ h5 {
 
 #header > .container > a span#points > i.fa {
 	margin-right:4px;
+}
+
+#page-content #home {
+	width:70% !important;
+	min-width:300px !important;	
+}
+
+#page-content #home h2 {
+	margin-bottom:35px;
+}
+
+#page-content #home h2 > span {
+	font-size:18px;
+	font-weight:400;
+}
+
+#page-content #home form {
+	overflow:auto;
+}
+
+#page-content #home form input {
+	padding:15px;
+}
+
+#page-content #home form input[name='contains'] {
+	width:83%;
+	float:left;
+}
+
+#page-content #home form input[type='submit'] {
+	float:right;
+	width:15%;
+}
+
+#page-content #home form .form-tooltip {
+	clear:both;
+	color:#D5D5D5;
+	padding-top:5px;
+	margin-top:5px;
+	font-size:14px;
+}
+
+#page-content #home #wikivinci {
+	margin-top:75px;
+	font-size:14px;
+}
+
+#page-content #home #wikivinci h2 {
+	font-size:16px;
+	margin-bottom:10px;
+}
+
+#page-content #home #activity {
+	margin-top:75px;
+}
+
+#page-content #home #activity > div {
+	float:left;
+	width:42.5%;
+	margin-right:15%;
+}
+
+#page-content #home #activity > div:last-child {
+	margin-right:0px;
+}
+
+#page-content #home #activity > div > h2 {
+	margin-bottom:25px;
+	font-size:16px;
+}
+
+#page-content #home #activity > div > div {
+	overflow:auto;
+	padding-bottom:10px;
+	margin-bottom:15px;
+	border-bottom:1px solid #D9D9D9;	
+}
+
+#page-content #home #activity > div > div > p {
+	max-width:80%;
+	float:left;
+}
+
+#page-content #home #activity > div > div > img {
+	width:50px;
+	height:50px;
+	border:1px solid #A6A6A6;
+	border-radius:25px;
+	-webkit-border-radius:25px;
+	-moz-border-radius:25px;
+	float:right;	
 }
 
 #page-content .votes-contain i.fa {
@@ -746,4 +842,138 @@ h5 {
 	text-transform:uppercase;
 	font-size:11px;
 	margin-bottom:15px;
+}
+
+#page-content #profile #profile-top {
+	overflow:auto;
+	background-color:#FAF3CF;
+	padding:28px;
+	border:2px solid #EAE4C3;	
+}
+
+#page-content #profile #profile-top img#profile-pic {
+	float:left;
+	width:200px;
+	height:200px;
+	border:1px solid #A6A6A6;
+	border-radius:100px;
+	-webkit-border-radius:100px;
+	-moz-border-radius:100px;
+	margin-right:25px;
+}
+
+#page-content #profile #profile-top #account-info {
+	float:left;
+}
+
+#page-content #profile #profile-top #account-info p#username {
+	font-size:25px;
+	margin-bottom:10px;
+}
+
+#page-content #profile #profile-top #account-info p#title {
+	font-size:16px;
+	margin-bottom:25px;
+}
+
+#page-content #profile #profile-top #account-info p#points {
+	display:inline-block;
+	padding:4px 10px;
+	font-size:17px;
+	font-weight:700;
+	color:#FFF;
+	background-color:#3F98C8;
+	border-radius:6px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	margin-bottom:6px;
+}
+
+#page-content #profile #profile-top #account-info p#points > i.fa {
+	margin-right:4px;
+}
+
+#page-content #profile #activity {
+	margin-top:50px;
+}
+
+#page-content #profile #activity #ops {
+	border-bottom:1px solid #D9D9D9;
+}
+
+#page-content #profile #activity #ops > a {
+	display:inline-block;	
+	padding:10px;
+}
+
+#page-content #profile #activity #ops > a.active {
+	background-color:#FFAB47;
+	color:#FFF;		
+}
+
+#page-content #profile #activity .feed {
+	display:none;
+	margin-top:25px;
+}
+
+#page-content #profile #activity .feed > div {
+	overflow:auto;	
+	margin-bottom:15px;
+	padding-bottom:15px;
+	border-bottom:1px solid #D9D9D9;	
+}
+
+#page-content #profile #activity .feed > div > p {
+	float:left;	
+}
+
+#page-content #profile #activity .feed > div > p.votes {
+	font-size:20px;
+	text-align:center;
+	margin-right:15px;
+}
+
+#page-content #profile #activity .feed > div > p.votes > span {
+	display:block;
+	font-size:12px;	
+}
+
+#page-content #profile #activity .feed > div > p.title {
+	font-weight:700;
+	font-size:15px;
+	padding-top:4px;
+	max-width:75%;
+}
+
+#page-content #profile #activity .feed > div > p.title > span.tags {
+	display:block;
+	font-weight:400;
+	font-size:12px;
+	margin-top:6px;	
+}
+
+#page-content #profile #activity .feed > div > p.title > span.tags > span {
+	display:inline-block;
+	background-color:#F2B000;
+	color:#FFF;
+	padding:2px;
+	border-radius:6px;	
+}
+
+#page-content #profile #activity .feed > div > p.timestamp {
+	float:right;
+	padding-top:4px;
+	font-size:13px;
+	vertical-align:bottom;
+}
+
+#page-content #profile #activity .feed > div > img.owner-profile-pic {
+	float:right;
+	margin-top:4px;
+	width:50px;
+	height:50px;
+	border:1px solid #A6A6A6;
+	border-radius:25px;
+	-webkit-border-radius:25px;
+	-moz-border-radius:25px;	
 }
