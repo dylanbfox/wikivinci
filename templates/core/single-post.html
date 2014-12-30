@@ -35,7 +35,7 @@
 			<h2><a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }}</a></h2>
 		</div>
 
-		<p class="lighter-font post-descr">{{ post.description }}</p>
+		<p class="lighter-font post-descr">{{ post.description|linebreaksbr }}</p>
 		<div id="comments">
 			{% for comment in comments %}
 			<div class="comment">
@@ -54,11 +54,11 @@
 				</div>
 				
 				<div class="content">
-					<p>{{ comment.text }}</p>
+					<p>{{ comment.text|linebreaksbr }}</p>
 					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by {{ comment.owner.owner.username }}.</span>
 
 					{% if user.account == comment.owner %}
-					<a id="delete" class="red-font" href="{% url 'comments:delete' %}" data-object-id="{{ comment.id }}">delete comment</a>
+					<a id="delete" class="red-font" href="{% url 'comments:delete' %}" data-object-id="{{ comment.id }}">delete your comment</a>
 					{% endif %}		
 				</div>
 			</div>
