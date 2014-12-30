@@ -46,11 +46,14 @@ def view(request, slug):
 
 def view_all(request):
 	context_dict = {}
-	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:30]
+	if request.GET.get('top'):
+		posts = Post.objects.select_related().order_by('-vote_count').prefetch_related('upvoters', 'downvoters')[:50]		
+	else:	
+		posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:50]
 
 	if request.GET.get('topic'):
 		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
-		context_dict['topic'] = request.GET['topic']
+		context_dict['topic'] = request.GET['topic']		
 
 	context_dict['posts'] = posts
 	set_post_permissions(request, posts=posts)	
