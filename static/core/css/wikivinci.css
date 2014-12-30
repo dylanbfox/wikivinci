@@ -349,6 +349,27 @@ h5 {
 	margin-right:4px;
 }
 
+#header #account-dropdown {
+	display:none;
+	position:absolute;
+	top:66px;
+	right:225px;
+	width:125px;	
+	background-color:#F0F0F0;
+	color:#FFF;
+	padding:10px;
+	border-radius:4px;
+	border:1px solid #C0BFBF;
+	box-shadow:0px 1px 1px #EFEFEF;	
+}
+
+#header #account-dropdown > a {
+	display:block;
+	line-height:normal;
+	font-size:14px;
+	margin-bottom:5px;
+}
+
 #page-content #home {
 	width:70% !important;
 	min-width:300px !important;	

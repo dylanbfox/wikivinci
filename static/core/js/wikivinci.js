@@ -10,6 +10,22 @@ function triggerAuthenticatePopup(){
 
 $(document).ready(function(){
 
+	// show account dropdown
+	$("#header a#auth").on("mouseenter", function(){
+		$("#header #account-dropdown").show();
+	});
+
+	$("#header .container > a").not("#auth").on("mouseenter", function(){
+		if ($("this").attr("id") == "auth"){
+			return;
+		}
+		$("#header #account-dropdown").hide();
+	});
+
+	$("#account-dropdown").on("mouseleave", function(){
+		$("#header #account-dropdown").hide();
+	});
+
 	// authenticate popup - go back to login form
 	$("#authenticateModal a#back-to-login").on("click", function(){
 		var popup_modal = $("#authenticateModal");		
