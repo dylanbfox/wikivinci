@@ -36,10 +36,15 @@
 				<a id="logo" href="{% url 'pages:home' %}"><img src="{% static 'core/images/wikivincilogo-horiz-v3.png' %}" /></a>
 				<a id="add-post" href="#"><span class="btn btn-success">add resource</span></a>
 				{% if user.is_authenticated %}
-				<a href="#">
+				<a id="auth" href="#">
 					<img id="profile-pic" src="{{ user.account.profile_pic.url }}" />
-					<span id="points"><i class="fa fa-star"></i> {{ user.account.points }}</span>
+					<span id="points"><i class="fa fa-star"></i> {{ user.account.points }}</span>				
 				</a>
+				<div id="account-dropdown">
+					<a href="{% url 'accounts:profile' username=user.username %}">profile</a>
+					<a href="#">settings</a>
+					<a href="#">logout</a>
+				</div>				
 				{% else %}
 				<a data-toggle="modal" data-target="#authenticateModal" href="#">Login</a>				
 				{% endif %}
