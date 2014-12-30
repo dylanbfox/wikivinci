@@ -334,6 +334,11 @@ h5 {
 	max-width:85%;
 }
 
+#page-content > .container .toprow h2 a#filter-top {
+	font-size:13px;
+	margin-left:4px;	
+}
+
 #page-content > .container .toprow p.sub-title {
 	margin-top:20px;
 	font-size:17px;	

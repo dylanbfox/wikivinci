@@ -48,6 +48,7 @@ def view_all(request):
 	context_dict = {}
 	if request.GET.get('top'):
 		posts = Post.objects.select_related().order_by('-vote_count').prefetch_related('upvoters', 'downvoters')[:50]		
+		context_dict['top'] = True
 	else:	
 		posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:50]
 
