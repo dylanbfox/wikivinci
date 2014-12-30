@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+	<div class="toprow">
+		<h2>Topics</h2>
+		<p class="sub-title super-light-font">Topics are tags that other community have assigned to the posts and resources they've added to Wikivinci.</p>
+		<!-- <input class="large" name="postsearch" type="text" placeholder="search" /> -->		
+	</div>
+
+	<div id="topics">
+	{% for k, v in topics.items %}
+		<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }} <span class="count">x{{ v.count }}</span></a>
+	{% endfor %}
+	</div>
+
+</div>
+{% endblock content %}

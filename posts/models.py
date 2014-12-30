@@ -39,7 +39,10 @@ class Post(models.Model):
 		return reverse('posts:view', kwargs={'slug': self.slug})
 
 	def tags_to_list(self):
-		return [t for t in self.tags.split(',') if t]
+		return [t.strip() for t in self.tags.split(',') if t]
+
+	def tags_contain(self, contains=None):
+		return contains.lower() in [t.lower() for t in self.tags_to_list()]
 
 	link_types = (
 		('LINK', 'link'),
