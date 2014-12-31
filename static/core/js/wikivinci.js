@@ -10,6 +10,11 @@ function triggerAuthenticatePopup(){
 
 $(document).ready(function(){
 
+	// account settings page controls
+	$("form#account-edit a#new-profile-pic").on("click", function(){
+		$("form#account-edit #new-profile-pic-field").slideToggle();
+	});
+
 	// show account dropdown
 	$("#header a#auth").on("mouseenter", function(){
 		$("#header #account-dropdown").show();

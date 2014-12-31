@@ -1048,3 +1048,31 @@ h5 {
 	-webkit-border-radius:25px;
 	-moz-border-radius:25px;	
 }
+
+#page-content form#account-edit {
+	min-width:300px;
+	max-width:500px;
+} 
+
+#page-content form#account-edit #profile-pic-form-group {
+	margin-bottom:25px;
+	overflow:auto;
+}
+
+#page-content form#account-edit #profile-pic-form-group img#profile-pic {
+	float:left;
+	margin-right:10px;
+	width:100px;
+	height:100px;
+	border:1px solid #A6A6A6;
+	border-radius:50px;
+	-webkit-border-radius:50px;
+	-moz-border-radius:50px;	
+}
+
+#page-content form#account-edit #profile-pic-form-group #new-profile-pic-field {
+	display:none;
+	float:left;
+	width:60%;
+	margin-top:15px;	
+}
