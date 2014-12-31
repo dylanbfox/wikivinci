@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+	<div class="toprow">
+		<h2>Contributors</h2>
+		<p class="sub-title super-light-font">The following contributors are helping to create, and improve, Wikivinci. Join them by posting, voting, or commenting.</p>
+	</div>
+
+	<div id="contributors">
+	{% for account in accounts %}
+		<span>{{ account.owner.username }}</span>
+	{% endfor %}
+	</div>
+
+</div>
+{% endblock content %}
