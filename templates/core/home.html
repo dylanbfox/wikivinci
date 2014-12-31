@@ -43,7 +43,7 @@
 			<h2>Recent comments</h2>
 			{% for comment in comments %}
 			<div>
-				<p><a href="{% url 'posts:view' slug=comment.post.slug %}">{{ comment.text }}</a></p>
+				<p><a href="{% url 'posts:view' slug=comment.post.slug %}">{{ comment.text|truncatechars:250 }}</a></p>
 				<img src="{{ comment.owner.profile_pic.url }}">
 			</div>
 			{% endfor %}

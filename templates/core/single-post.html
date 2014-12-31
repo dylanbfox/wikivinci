@@ -55,7 +55,7 @@
 				
 				<div class="content">
 					<p>{{ comment.text|linebreaksbr }}</p>
-					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by {{ comment.owner.owner.username }}.</span>
+					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by <a href="{% url 'accounts:profile' username=comment.owner.owner.username %}">{{ comment.owner.owner.username }}</a>.</span>
 
 					{% if user.account == comment.owner %}
 					<a id="delete" class="red-font" href="{% url 'comments:delete' %}" data-object-id="{{ comment.id }}">delete your comment</a>
@@ -80,9 +80,10 @@
 
 	<div id="right-column">
 		<div id="post-info">
+
 			<b>Good resource? Upvote it so others can find it!</b>
 			<img id="owner" src="{{ post.owner.profile_pic.url }}" />
-			<p id="timestamp" class="super-light-font">posted by {{ post.owner.owner.username }} on {{ post.created }}</p>
+			<p id="timestamp" class="super-light-font">posted by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.owner.owner.username }}</a> on {{ post.created }}</p>
 
 			{% if post.tags %}
 			<div id="tags">
@@ -96,7 +97,7 @@
 			<div id="upvoters">
 				<p id="title" class="super-light-font">upvoted by</p>
 				{% for upvoter in post.upvoters.all %}
-				<img id="owner" src="{{ upvoter.profile_pic.url }}" />
+				<a href="{% url 'accounts:profile' username=upvoter.owner.username %}"><img id="owner" class="profile-pic" src="{{ upvoter.profile_pic.url }}" /></a>
 				{% endfor %}
 			</div>
 			{% endif %}

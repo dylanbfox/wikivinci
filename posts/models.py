@@ -55,7 +55,6 @@ class Post(models.Model):
 		match = False
 
 		for term in search_terms:
-			print term
 			term_title_match = term.lower() in self.title.lower()
 			term_descr_match = term.lower() in self.description.lower()
 			if term_title_match or term_descr_match:

@@ -31,12 +31,23 @@
 
 			<div class="title-contain">
 				<h2><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></h2>
-				<p class="super-light-font">{{ post.description|slice:":99" }}</p>
+				<p class="super-light-font">{{ post.description|truncatechars:99 }}</p>
 				<span class="timestamp super-light-font">Posted {{ post.created }}</span>
 			</div>
 
-			<div class="owner-contain">
+			<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
 				<img class="owner" src="{{ post.owner.profile_pic.url }}" />
+				<p class="username">{{ post.owner.owner.username }}</p>
+				<p class="points"><i class="fa fa-star"></i>{{ post.owner.points }}</p>
+				<br />
+				{% if post.owner.title %}			
+				<p class="title super-light-font">{{ post.owner.title }}</p>
+				{% endif %}
+				<a class="btn btn-clear" href="{% url 'accounts:profile' username=post.owner.owner.username %}">view profile</a>
+			</div>			
+
+			<div class="owner-contain">
+				<img data-target="#profilePopup{{ post.id }}" class="owner profile-hover-toggle" src="{{ post.owner.profile_pic.url }}" />
 			</div>			
 
 			<div class="post-info-contain super-light-font">

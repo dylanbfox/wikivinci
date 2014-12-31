@@ -70,7 +70,19 @@
 						{% endfor %}
 					</span>
 				</p>
-				<img class="owner-profile-pic" src="{{ post.owner.profile_pic.url }}" />
+
+				<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
+					<img class="owner" src="{{ post.owner.profile_pic.url }}" />
+					<p class="username">{{ post.owner.owner.username }}</p>
+					<p class="points"><i class="fa fa-star"></i>{{ post.owner.points }}</p>
+					<br />
+					{% if post.owner.title %}			
+					<p class="title super-light-font">{{ post.owner.title }}</p>
+					{% endif %}
+					<a class="btn btn-clear" href="{% url 'accounts:profile' username=post.owner.owner.username %}">view profile</a>
+				</div>	
+
+				<img class="owner-profile-pic profile-hover-toggle" data-target="#profilePopup{{ post.id }}" src="{{ post.owner.profile_pic.url }}" />
 			</div>
 			{% endfor %}			
 		</div>
