@@ -15,6 +15,19 @@ $(document).ready(function(){
 		$("#header #account-dropdown").show();
 	});
 
+	// show profile tooltip
+	$(".profile-hover-toggle").on("mouseenter", function(){
+		var target_id = $(this).data("target");
+		var target_tooltip_node = $(target_id);
+		var left_offset = $(this).position().left-305;
+		target_tooltip_node.css('left', left_offset);
+		target_tooltip_node.show();
+
+		target_tooltip_node.on("mouseleave", function(){
+			$(this).hide();
+		});
+	});
+
 	$("#header .container > a").not("#auth").on("mouseenter", function(){
 		if ($("this").attr("id") == "auth"){
 			return;
