@@ -5,6 +5,19 @@ from image_cropping import ImageCropWidget
 
 from accounts.models import Account
 
+class ProfilePicEditForm(forms.ModelForm):
+
+	class Meta:
+		model = Account
+		fields = (
+			'profile_pic',
+			'cropping',
+		)
+
+		widgets = {
+			'profile_pic': ImageCropWidget,
+		}
+
 class AccountRegisterForm(forms.ModelForm):
 
 	class Meta:
@@ -15,7 +28,7 @@ class AccountRegisterForm(forms.ModelForm):
 
 	username = forms.CharField()
 	password = forms.CharField(widget=forms.PasswordInput())
-	email = forms.CharField(widget=forms.EmailInput())	
+	email = forms.CharField(widget=forms.EmailInput())
 
 	def __init__(self, *args, **kwargs):
 		super(AccountRegisterForm, self).__init__(*args, **kwargs)
