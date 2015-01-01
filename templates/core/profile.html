@@ -1,11 +1,12 @@
 {% extends 'core/base.html' %}
 
 {% load staticfiles %}
+{% load cropping %}
 
 {% block content %}
 <div id="profile" class="container">
 	<div id="profile-top">
-		<img id="profile-pic" src="{{ account.profile_pic.url }}" />
+		<img id="profile-pic" src="{% cropped_thumbnail account 'cropping' %}" />
 		<div id="account-info">
 			<p id="username">{{ account.owner.username }}</p>
 			{% if account.title %}
@@ -72,7 +73,7 @@
 				</p>
 
 				<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
-					<img class="owner" src="{{ post.owner.profile_pic.url }}" />
+					<img class="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 					<p class="username">{{ post.owner.owner.username }}</p>
 					<p class="points"><i class="fa fa-star"></i>{{ post.owner.points }}</p>
 					<br />
@@ -82,7 +83,7 @@
 					<a class="btn btn-clear" href="{% url 'accounts:profile' username=post.owner.owner.username %}">view profile</a>
 				</div>	
 
-				<img class="owner-profile-pic profile-hover-toggle" data-target="#profilePopup{{ post.id }}" src="{{ post.owner.profile_pic.url }}" />
+				<img class="owner-profile-pic profile-hover-toggle" data-target="#profilePopup{{ post.id }}" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 			</div>
 			{% endfor %}			
 		</div>

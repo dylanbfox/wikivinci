@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% load staticfiles %}
+{% load cropping %}
 
 {% block content %}
 <div id="home" class="container">
@@ -34,7 +35,7 @@
 			{% for post in posts %}
 			<div>
 				<p><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></p>
-				<img src="{{ post.owner.profile_pic.url }}">
+				<img src="{% cropped_thumbnail post.owner 'cropping' %}">
 			</div>
 			{% endfor %}
 		</div>
@@ -44,7 +45,7 @@
 			{% for comment in comments %}
 			<div>
 				<p><a href="{% url 'posts:view' slug=comment.post.slug %}">{{ comment.text|truncatechars:250 }}</a></p>
-				<img src="{{ comment.owner.profile_pic.url }}">
+				<img src="{% cropped_thumbnail comment.owner 'cropping' %}">
 			</div>
 			{% endfor %}
 		</div>

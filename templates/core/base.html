@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% load staticfiles %}
+{% load cropping %}
 
 <html>
 	<head>
@@ -39,12 +40,12 @@
 				<a id="add-post" href="#"><span class="btn btn-success">add resource</span></a>
 				{% if user.is_authenticated %}
 				<a id="auth" href="#">
-					<img id="profile-pic" src="{{ user.account.profile_pic.url }}" />
+					<img id="profile-pic" src="{% cropped_thumbnail user.account 'cropping' %}" />
 					<span id="points"><i class="fa fa-star"></i> {{ user.account.points }}</span>				
 				</a>
 				<div id="account-dropdown">
 					<a href="{% url 'accounts:profile' username=user.username %}">profile</a>
-					<a href="#">settings</a>
+					<a href="{% url 'accounts:settings' username=user.username %}">settings</a>
 					<a href="#">logout</a>
 				</div>				
 				{% else %}
