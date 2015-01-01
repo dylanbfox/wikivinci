@@ -1070,7 +1070,7 @@ h5 {
 	-moz-border-radius:50px;	
 }
 
-#page-content form#account-edit #profile-pic-form-group #new-profile-pic-field {
+#page-content form#account-edit #profile-pic-form-group input#new-profile-pic {
 	display:none;
 	float:left;
 	width:60%;

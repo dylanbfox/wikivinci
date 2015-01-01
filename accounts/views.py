@@ -75,19 +75,20 @@ def settings(request, username):
 
 	context_dict = {}
 	account = request.user.account
+	profile_pic_form = ProfilePicEditForm(instance=account)	
 
 	if request.method == "POST":
-		if request.POST.get('cropping') != account.cropping:
-			profile_pic_form = ProfilePicEditForm(request.POST, instance=account)
-			if profile_pic_form.is_valid():
-				profile_pic_form.save()
-
 		account.title = request.POST.get('title')
 		if request.FILES.get('profile-pic'):
 			account.profile_pic = request.FILES['profile-pic']
 		account.save()
 
-	profile_pic_form = ProfilePicEditForm(instance=account)
+		# need the updated account image (potentially)
+		profile_pic_form = ProfilePicEditForm(request.POST, instance=account)
+		if request.POST.get('cropping') != account.cropping:
+			if profile_pic_form.is_valid():
+				profile_pic_form.save()		
+
 	context_dict['account'] = account
 	context_dict['profile_pic_form'] = profile_pic_form
 	return render(request, 'core/account-edit.html', context_dict)
