@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% load staticfiles %}
+{% load cropping %}
 
 {% block content %}
 
@@ -40,7 +41,7 @@
 			{% for comment in comments %}
 			<div class="comment">
 				<div class="comment-owner">
-					<img src="{{ comment.owner.profile_pic.url }}" />
+					<img src="{% cropped_thumbnail comment.owner 'cropping' %}" />
 				</div>
 
 				{% if comment.disallow_vote %}
@@ -82,7 +83,7 @@
 		<div id="post-info">
 
 			<b>Good resource? Upvote it so others can find it!</b>
-			<img id="owner" src="{{ post.owner.profile_pic.url }}" />
+			<img id="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 			<p id="timestamp" class="super-light-font">posted by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.owner.owner.username }}</a> on {{ post.created }}</p>
 
 			{% if post.tags %}
@@ -97,7 +98,7 @@
 			<div id="upvoters">
 				<p id="title" class="super-light-font">upvoted by</p>
 				{% for upvoter in post.upvoters.all %}
-				<a href="{% url 'accounts:profile' username=upvoter.owner.username %}"><img id="owner" class="profile-pic" src="{{ upvoter.profile_pic.url }}" /></a>
+				<a href="{% url 'accounts:profile' username=upvoter.owner.username %}"><img id="owner" class="profile-pic" src="{% cropped_thumbnail upvoter 'cropping' %}" /></a>
 				{% endfor %}
 			</div>
 			{% endif %}

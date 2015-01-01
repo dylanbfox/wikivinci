@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% load staticfiles %}
+{% load cropping %}
 
 {% block content %}
 <div class="container">
@@ -36,7 +37,7 @@
 			</div>
 
 			<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
-				<img class="owner" src="{{ post.owner.profile_pic.url }}" />
+				<img class="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 				<p class="username">{{ post.owner.owner.username }}</p>
 				<p class="points"><i class="fa fa-star"></i>{{ post.owner.points }}</p>
 				<br />
@@ -47,7 +48,7 @@
 			</div>			
 
 			<div class="owner-contain">
-				<img data-target="#profilePopup{{ post.id }}" class="owner profile-hover-toggle" src="{{ post.owner.profile_pic.url }}" />
+				<img data-target="#profilePopup{{ post.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 			</div>			
 
 			<div class="post-info-contain super-light-font">

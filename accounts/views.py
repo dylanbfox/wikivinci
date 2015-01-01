@@ -78,7 +78,7 @@ def settings(request, username):
 	profile_pic_form = ProfilePicEditForm(instance=account)	
 
 	if request.method == "POST":
-		account.title = request.POST.get('title')
+		account.title = request.POST.get('title') or account.title
 		if request.FILES.get('profile-pic'):
 			account.profile_pic = request.FILES['profile-pic']
 		account.save()
