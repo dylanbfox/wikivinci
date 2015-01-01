@@ -11,8 +11,8 @@ function triggerAuthenticatePopup(){
 $(document).ready(function(){
 
 	// account settings page controls
-	$("form#account-edit a#new-profile-pic").on("click", function(){
-		$("form#account-edit #new-profile-pic-field").slideToggle();
+	$("form#account-edit a#change-profile-pic").on("click", function(){
+		$("form#account-edit input#new-profile-pic").slideToggle();
 	});
 
 	// show account dropdown
