@@ -46,7 +46,7 @@
 				<div id="account-dropdown">
 					<a href="{% url 'accounts:profile' username=user.username %}">profile</a>
 					<a href="{% url 'accounts:settings' username=user.username %}">settings</a>
-					<a href="#">logout</a>
+					<a href="{% url 'accounts:logout' %}">logout</a>
 				</div>				
 				{% else %}
 				<a data-toggle="modal" data-target="#authenticateModal" href="#">Login</a>				

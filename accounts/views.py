@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 
@@ -54,6 +54,10 @@ def account_login(request):
 		return HttpResponse("success")
 	else:
 		return HttpResponse("fail")
+
+def account_logout(request):
+	logout(request)
+	return HttpResponseRedirect('/')
 
 def profile(request, username):
 	context_dict = {}
