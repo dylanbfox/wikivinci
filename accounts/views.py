@@ -19,7 +19,6 @@ def account_register(request):
 
 	form = AccountRegisterForm(request.POST, request.FILES)
 	if not form.is_valid():
-		print "errors"
 		context_dict['form'] = form		
 		return render(request, 'core/partials/account-register-form.html', context_dict)
 
@@ -81,13 +80,15 @@ def settings(request, username):
 		account.title = request.POST.get('title') or account.title
 		if request.FILES.get('profile-pic'):
 			account.profile_pic = request.FILES['profile-pic']
+			account.cropping = None
 		account.save()
 
 		# need the updated account image (potentially)
 		profile_pic_form = ProfilePicEditForm(request.POST, instance=account)
-		if request.POST.get('cropping') != account.cropping:
+		cropping = request.POST.get('cropping')
+		if cropping is not None and cropping != account.cropping:
 			if profile_pic_form.is_valid():
-				profile_pic_form.save()		
+				profile_pic_form.save()
 
 	context_dict['account'] = account
 	context_dict['profile_pic_form'] = profile_pic_form
