@@ -3,8 +3,12 @@
 {% load staticfiles %}
 {% load cropping %}
 
-{% block content %}
+{% block meta %}
+<title>{{ post.title }} on Wikivinci</title>
+<meta content="{{ post.title }} on Wikivinci" property="og:title">
+{% endblock %}
 
+{% block content %}
 {% include 'core/partials/flag-post-popup.html' %}
 <div id="single-post" class="container">
 	<div id="left-column">
@@ -16,11 +20,11 @@
 		</div>
 		{% endif %}
 
-		{% if user.is_authenticated %}
 		<div id="post-ops">
+			{% if user.is_authenticated %}			
 			<a class="red-font" data-toggle="modal" data-target="#flagPostModal" href="#"><i class="fa fa-flag-o"></i></a>
+			{% endif %}			
 		</div>
-		{% endif %}
 
 		<div class="toprow">
 			{% if post.disallow_vote %}
@@ -37,10 +41,17 @@
 		</div>
 
 		<p class="lighter-font post-descr">{{ post.description|linebreaksbr }}</p>
+
+		<div class="addthis_toolbox addthis_default_style">
+			<a class="addthis_button_linkedin_counter" li:counter="none"></a>
+			<a class="addthis_button_tweet" tw:text="{{ post.title }} on @Wikivinci{% if post.owner.twitter_handle %} via {{ post.owner.twitter_handle }}{% endif %}"></a>
+			<a class="addthis_button_facebook_share" fb:share:layout="button"></a>
+		</div>
+			
 		<div id="comments">
 			{% for comment in comments %}
 			<div class="comment">
-				<div class="comment-owner">
+				<div class="comment-owner hidden-xs">
 					<img src="{% cropped_thumbnail comment.owner 'cropping' %}" />
 				</div>
 

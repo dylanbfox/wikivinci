@@ -22,6 +22,7 @@ class Account(models.Model):
 	profile_pic = models.ImageField(upload_to='profile_pics', default="static/core/images/default_profile_pic.jpg")
 	cropping = ImageRatioField('profile_pic', '250x250')
 	points = models.IntegerField(default=50)
-	title = models.CharField(max_length=200, blank=True, null=True)
+	title = models.CharField(max_length=59, blank=True, null=True)
+	twitter_handle = models.CharField(max_length=200, blank=True, null=True)
 
 

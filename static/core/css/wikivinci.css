@@ -81,6 +81,7 @@ html.ie8 .overlay {
 }
 
 input,
+select,
 textarea {
 	border:1px solid #d9d9d9;
 	font-weight:400;
@@ -103,12 +104,14 @@ input[type='radio'] {
 	width:initial;
 }
 
-input.small {
+input.small,
+select.small {
 	padding:4px;
 	font-size:12px;
 }
 
-input.large {
+input.large,
+select.large {
 	width:100%;
 	padding:10px 4px;
 	font-size:16px;
@@ -296,13 +299,6 @@ h5 {
 	line-height:65px;
 }
 
-#header > .container > a {
-	float:right;
-	margin-left:36px;
-	font-size:16px;
-	text-decoration:none;
-}
-
 #header > .container > a#logo {
 	margin-left:0px;
 	float:left;
@@ -312,13 +308,20 @@ h5 {
 	height:65px;	
 }
 
-#header > .container > a#add-post span.btn {
+#header > .container #links > a {
+	float:right;
+	margin-left:36px;
+	font-size:16px;
+	text-decoration:none;
+}
+
+#header > .container #links > a#add-post span.btn {
 	padding:5px 10px;
 	color:#FFF;
 	font-size:13px;
 }
 
-#header > .container > a img#profile-pic {
+#header > .container #links > a img#profile-pic {
 	margin-right:5px;
 	width:40px;
 	height:40px;
@@ -328,13 +331,13 @@ h5 {
 	-moz-border-radius:20px;		
 }
 
-#header > .container > a span#username {
+#header > .container #links > a span#username {
 	margin-right:10px;
 	font-size:13px;
 	font-weight:700;
 }
 
-#header > .container > a span#points {
+#header > .container #links > a span#points {
 	padding:4px 10px;
 	font-size:13px;
 	font-weight:700;
@@ -345,7 +348,7 @@ h5 {
 	-moz-border-radius:6px;
 }
 
-#header > .container > a span#points > i.fa {
+#header > .container #links > a span#points > i.fa {
 	margin-right:4px;
 }
 
@@ -555,9 +558,14 @@ h5 {
 	color:#FFF;
 }
 
-#page-content > .container .toprow input {
+#page-content > .container .toprow input,
+#page-content > .container .toprow select {
 	float:right;
 	width:200px;
+}
+
+#page-content > .container .toprow select.filter-on {
+	border:2px solid #F2B000;
 }
 
 #page-content > .container .toprow .votes-contain {
@@ -607,7 +615,7 @@ h5 {
 }
 
 #page-content .posts {
-	padding-top:25px;
+	padding-top:40px;
 }
 
 #page-content .posts #sorry {
@@ -641,10 +649,39 @@ h5 {
 }
 
 #page-content .posts .post > div.title-contain span.timestamp {
-	display:block;
-	font-size:13px;
+	display:inline-block;
+	font-size:12px;
 	margin-top:12px;
 }
+
+#page-content .posts .post > div.title-contain span.skill-level {
+	display:inline-block;
+	font-size:12px;
+	margin-right:8px;
+}
+
+#page-content .posts .post > div.title-contain span.skill-level > span {
+/*	padding:3px;
+	font-weight:700;
+	color:#FFF !important;
+	margin-left:4px;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;*/
+	text-transform:lowercase;
+}
+
+/*#page-content .posts .post > div.title-contain span.skill-level > span.BEGINNER {
+	background-color:#303EC3;
+}
+
+#page-content .posts .post > div.title-contain span.skill-level > span.INTERMEDIATE {
+	background-color:#076699;	
+}
+
+#page-content .posts .post > div.title-contain span.skill-level > span.ADVANCED {
+	background-color:#4E5BD1;	
+}*/
 
 #page-content .posts .post > div.votes-contain {
 	width:55px;
@@ -717,7 +754,7 @@ h5 {
 }
 
 #page-content #single-post #left-column #post-ops {
-	margin-bottom:10px;
+	margin-bottom:20px;
 }
 
 #page-content #single-post #left-column #post-ops > a {
@@ -725,8 +762,19 @@ h5 {
 	font-size:16px;
 }
 
+#page-content #single-post #left-column .addthis_toolbox {
+	margin-top:15px;	
+}
+
+#page-content #single-post #left-column .addthis_toolbox > a {
+	display:inline-block;
+	width:60px;
+	overflow:hidden;
+	margin-right:8px;	
+}
+
 #page-content #single-post #comments {
-	margin-top:75px;
+	margin-top:65px;
 }
 
 #page-content #single-post #comments .comment {
@@ -745,6 +793,7 @@ h5 {
 
 #page-content #single-post #comments .comment:last-child {
 	margin-bottom:0px;
+	border-bottom:none;
 }
 
 #page-content #single-post #comments .comment .votes-contain {
@@ -1076,3 +1125,42 @@ h5 {
 	width:60%;
 	margin-top:15px;	
 }
+
+#page-content #contributors {
+	margin-top:40px;
+	overflow:auto;
+}
+
+#page-content #contributors .contributor {
+	float:left;	
+	height:105px;
+	overflow:auto;
+	width:22%;
+	margin-right:4%;
+	margin-bottom:50px;
+}
+
+#page-content #contributors .contributor:nth-child(4n) {
+	margin-right:0%;
+}
+
+#page-content #contributors .contributor img.profile-pic {
+	float:left;
+	margin-right:15px;
+	width:60px;
+	height:60px;
+	border:1px solid #A6A6A6;
+	border-radius:30px;
+	-webkit-border-radius:30px;
+	-moz-border-radius:30px;	
+}
+
+#page-content #contributors .contributor .info {
+	float:left;
+	max-width:65%;
+}
+
+#page-content #contributors .contributor .info p.title {
+	font-size:13px;
+}
+

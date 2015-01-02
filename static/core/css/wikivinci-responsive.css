@@ -1,0 +1,112 @@
+@media (min-width:100px) and (max-width:767px) {
+	#page-content {
+		padding-top:15px;
+	}
+
+	#page-content .user-profile-tooltip {
+		display:none !important;
+	}
+
+	#page-content #home h2 {
+		font-size:26px;
+	}
+
+	#page-content #home h2 > span {
+		display:block;
+		margin-top:5px;
+		font-size:16px;		
+	}
+
+	#page-content #home form input {
+		width:100% !important;
+		float:none !important;
+		padding:9px !important;
+		font-size:14px !important;		
+	}
+
+	#page-content form input[type='submit'] {
+		margin-top:5px;
+	}
+
+	#page-content #home #activity > div {
+		width:100%;
+		float:none;
+		margin-bottom:30px;
+		margin-right:0;		
+	}
+
+	#page-content > .container .toprow h2 {
+		display:block;
+	}
+
+	#page-content > .container .toprow h2 a#filter-top {
+		display:block;
+		font-size:13px;
+		margin-top:5px;
+		margin-bottom:15px;		
+	}
+
+	#page-content > .container .toprow input,
+	#page-content > .container .toprow select {
+		float:none;
+		padding:3px 1px;
+		font-size:13px;		
+	}
+
+	#page-content .posts .post > div.title-contain h2 {
+		font-size:18px;
+	}	
+
+	#page-content .posts .post > div.title-contain p {
+		font-size:14px;
+	}
+
+	#page-content .posts .post > div.votes-contain {
+		width:38px;
+	}	
+
+	#page-content .posts .post .votes-contain span.count {
+		font-size:13px;
+	}
+
+	#page-content .posts .post > div.title-contain {
+		margin-left:10px;
+	}
+
+	#page-content .posts .post .post-info-contain {
+		margin-left:0px;
+		font-size:13px;
+		line-height:initial;
+	}
+
+	#page-content #single-post #left-column {
+		width:100%;
+		padding-bottom:50px;
+	}
+
+	#page-content #single-post #left-column .toprow h2 {
+		max-width:none;
+	}	
+
+	#page-content #single-post #right-column {
+		width:100%;
+	}
+
+	#page-content > .container .toprow .votes-contain {
+		margin-bottom:10px;
+	}
+
+	#page-content #single-post #comments .comment {
+		padding:10px;
+	}	
+
+	#page-content #single-post #comments .comment .votes-contain {
+		margin-right:12px;
+	}	
+
+	#page-content #single-post #comments .comment .content {
+		float:none;
+		margin-left:0px;
+		width:initial;
+	}		
+}

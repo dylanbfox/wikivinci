@@ -3,23 +3,35 @@
 {% load staticfiles %}
 {% load cropping %}
 
+{% block meta %}
+<title>{% if topic %}{{ topic }} {% endif %}Tutorials and Resources on Wikivinci</title>
+<meta content="{% if topic %}{{ topic }} {% endif %}Tutorials and Resources on Wikivinci" property="og:title">
+{% endblock %}
+
 {% block content %}
 <div class="container">
 	<div class="toprow">
-		<h2>{% if top %}Top{% else %}Recently Added{% endif %} {% if topic %}'{{ topic }}'{% endif %} Resources {% if contains %}on '{{ contains }}'{% endif %}</h2>
-		
+		<h2>{% if top %}Top{% else %}Recently Added{% endif %} {% if topic %}'{{ topic }}'{% endif %} Resources {% if contains %}on '{{ contains }}'{% endif %}
+
 		{% if top %}
 		<a id="filter-top" href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}&{% else %}?{% endif %}{% if contains %}contains={{ contains }}{% endif %}">/ show recently added resources {% if contains %}on '{{ contains }}'{% endif %}</a>
 		{% else %}
 		<a id="filter-top" href="{% if topic %}?topic={{ topic }}&{% else %}?{% endif %}top=true{% if contains %}&contains={{ contains }}{% endif %}">/ show top rated resources {% if contains %}on '{{ contains }}'{% endif %}</a>
 		{% endif %}
 		</h2>
-		<input class="large" name="postsearch" type="text" placeholder="search" />		
+
+		<select id="skill-level-filter" class="large super-light-font">
+			<option value="" class="super-light-font" disabled selected>Filter by Skill Level</option>			
+			<option value="ALL">All</option>
+			<option value="BEGINNER">Beginner</option>
+			<option value="INTERMEDIATE">Intermediate</option>
+			<option value="ADVANCED">Advanced</option>			
+		</select>
 	</div>
 
 	<div class="posts">
 		{% for post in posts %}
-		<div class="post">
+		<div class="post" data-skill-level="{{ post.skill_level }}">
 			{% if post.disallow_vote %}
 			<div class="votes-contain voted" data-url="{% url 'posts:vote' %}" data-voted="true" data-object-id="{{ post.pk }}">			
 			{% else %}
@@ -33,7 +45,8 @@
 			<div class="title-contain">
 				<h2><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></h2>
 				<p class="super-light-font">{{ post.description|truncatechars:99 }}</p>
-				<span class="timestamp super-light-font">Posted {{ post.created }}</span>
+				<span class="timestamp super-light-font">posted <b>{{ post.created }}</b> / </span>
+				<span class="skill-level super-light-font">skill level: <span class="{{ post.skill_level }}"><b>{{ post.skill_level }}</b></span></span>				
 			</div>
 
 			<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
@@ -47,7 +60,7 @@
 				<a class="btn btn-clear" href="{% url 'accounts:profile' username=post.owner.owner.username %}">view profile</a>
 			</div>			
 
-			<div class="owner-contain">
+			<div class="owner-contain hidden-xs">
 				<img data-target="#profilePopup{{ post.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 			</div>			
 

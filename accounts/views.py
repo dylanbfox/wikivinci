@@ -5,7 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidde
 from django.contrib.auth.decorators import login_required
 
 from accounts.models import Account
-from accounts.forms import AccountRegisterForm, ProfilePicEditForm
+from accounts.forms import (AccountRegisterForm, ProfilePicEditForm,
+							AccountEditForm)
 
 from posts.models import Post
 from comments.models import Comment
@@ -78,22 +79,25 @@ def settings(request, username):
 
 	context_dict = {}
 	account = request.user.account
-	profile_pic_form = ProfilePicEditForm(instance=account)	
-
+	account_edit_form = AccountEditForm(instance=account)
 	if request.method == "POST":
-		account.title = request.POST.get('title') or account.title
-		if request.FILES.get('profile-pic'):
-			account.profile_pic = request.FILES['profile-pic']
-			account.cropping = None
-		account.save()
-
-		# need the updated account image (potentially)
-		profile_pic_form = ProfilePicEditForm(request.POST, instance=account)
 		cropping = request.POST.get('cropping')
 		if cropping is not None and cropping != account.cropping:
+			profile_pic_form = ProfilePicEditForm(request.POST, instance=account)			
 			if profile_pic_form.is_valid():
 				profile_pic_form.save()
 
+		else:
+			account_edit_form = AccountEditForm(request.POST, instance=account)
+			if account_edit_form.is_valid():
+				account = account_edit_form.save()
+
+			if request.FILES.get('profile-pic'):
+				account.profile_pic = request.FILES['profile-pic']
+				account.cropping = None
+				account.save()
+
 	context_dict['account'] = account
-	context_dict['profile_pic_form'] = profile_pic_form
+	context_dict['account_edit_form'] = account_edit_form
+	context_dict['profile_pic_form'] = ProfilePicEditForm(instance=account)
 	return render(request, 'core/account-edit.html', context_dict)
