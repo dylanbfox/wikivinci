@@ -10,6 +10,23 @@ function triggerAuthenticatePopup(){
 
 $(document).ready(function(){
 
+	// filter posts by skill level
+	$(".toprow select#skill-level-filter").on("change", function(){
+		var posts = $(".posts .post");
+		var skill_level = $(this).val();
+
+		$(this).removeClass("filter-on");
+		$(".toprow span#skill-level").text(skill_level);
+		if (skill_level == "ALL"){
+			posts.show();
+			return;
+		}
+
+		posts.hide();
+		$(".posts .post[data-skill-level="+skill_level+"]").show();
+		$(this).addClass("filter-on");
+	});
+
 	// account settings page controls
 	$("form#account-edit a#change-profile-pic").on("click", function(){
 		$("form#account-edit input#new-profile-pic").slideToggle();

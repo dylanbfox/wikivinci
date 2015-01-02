@@ -7,10 +7,18 @@
 	<head>
 		{% block extra_head %}
 		{% endblock extra_head %}
+
+		{% block meta %}
 		<title>Wikivinci.com | Learn Faster. Top resources and tutorials, curated by the self-learning community.</title>
+		<meta content="Wikivinci.com | Learn Faster. Top resources and tutorials, curated by the self-learning community." property="og:title">
+		{% endblock %}
+		<meta content="Wikivinci helps you learn faster. Find top resources and tutorials, posted and ranked by community members, for anything you need to learn." name="description">
+		<meta content="Wikivinci helps you learn faster. Find top resources and tutorials, posted and ranked by community members, for anything you need to learn." property="og:description">
+		<meta content="" property="og:image">		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'core/css/wikivinci.css' %}" rel="stylesheet">
+		<link href="{% static 'core/css/wikivinci-responsive.css' %}" rel="stylesheet">		
 		{% block extra_styles %}
 		{% endblock extra_styles %}		
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -37,6 +45,8 @@
 		<div id="header">
 			<div class="container">
 				<a id="logo" href="{% url 'pages:home' %}"><img src="{% static 'core/images/wikivincilogo-horiz-v3.png' %}" /></a>
+
+				<div id="links">
 				<a id="add-post" href="#"><span class="btn btn-success">add resource</span></a>
 				{% if user.is_authenticated %}
 				<a id="auth" href="#">
@@ -51,10 +61,11 @@
 				{% else %}
 				<a data-toggle="modal" data-target="#authenticateModal" href="#">Login</a>				
 				{% endif %}
-				<a href="#">Contributors</a>
+				<a href="{% url 'pages:contributors' %}">Contributors</a>
 				<a href="{% url 'posts:topics' %}">Topics</a>
 				<!-- <a href="#">Courses</a>	 -->				
 				<a href="#">About</a>
+				</div>
 			</div>
 		</div>
 		{% endblock %}
@@ -75,6 +86,7 @@
 	    <script src="{% static 'core/js/wikivinci.js' %}"></script>	    
 	    {% block extra_scripts %}
 	    {% endblock extra_scripts %}
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-54a6298f272a4991" async="async"></script>		   
 	</body>
 	</div>
 

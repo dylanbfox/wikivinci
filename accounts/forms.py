@@ -18,17 +18,37 @@ class ProfilePicEditForm(forms.ModelForm):
 			'profile_pic': ImageCropWidget,
 		}
 
-class AccountRegisterForm(forms.ModelForm):
+class AccountEditForm(forms.ModelForm):
 
 	class Meta:
 		model = Account
 		fields = (
-			# 'profile_pic',
+			'title',
+			'twitter_handle',
 		)
+
+	def __init__(self, *args, **kwargs):
+		super(AccountEditForm, self).__init__(*args, **kwargs)
+		self.fields['title'].label = "Title (eg: 'Senior Developer at Google')"
+
+	def clean_twitter_handle(self):
+		twitter_handle = self.cleaned_data.get('twitter_handle')
+		if twitter_handle and twitter_handle[0] != "@":
+			raise forms.ValidationError('@ symbol is required!')
+		return twitter_handle
+
+class AccountRegisterForm(forms.ModelForm):
 
 	username = forms.CharField()
 	password = forms.CharField(widget=forms.PasswordInput())
-	email = forms.CharField(widget=forms.EmailInput())
+	email = forms.CharField(widget=forms.EmailInput())	
+
+	class Meta:
+		model = Account
+		fields = (
+			# 'title',
+			# 'twitter_handle',
+		)
 
 	def __init__(self, *args, **kwargs):
 		super(AccountRegisterForm, self).__init__(*args, **kwargs)

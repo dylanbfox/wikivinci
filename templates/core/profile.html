@@ -3,6 +3,11 @@
 {% load staticfiles %}
 {% load cropping %}
 
+{% block meta %}
+<title>{{ account.owner.username }} on Wikivinci</title>
+<meta content="{{ account.owner.username }} on Wikivinci" property="og:title">
+{% endblock %}
+
 {% block content %}
 <div id="profile" class="container">
 	<div id="profile-top">
