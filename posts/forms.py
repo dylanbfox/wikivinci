@@ -11,6 +11,7 @@ class PostAddForm(forms.ModelForm):
 				'url',
 				'description',
 				'tags',
+				'skill_level',
 				'owner_authored',				
 			)
 

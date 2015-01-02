@@ -62,10 +62,16 @@ class Post(models.Model):
 
 		return match
 
-	link_types = (
+	post_types = (
 		('LINK', 'link'),
 		('ARTICLE', 'article'),
-	)		
+	)
+
+	skill_levels = (
+		('BEGINNER', 'Beginner'),
+		('INTERMEDIATE', 'Intermediate'),
+		('ADVANCED', 'Advanced'),
+	)
 
 	owner = models.ForeignKey(Account, related_name='posts')
 	owner_authored = models.BooleanField(default=False)
@@ -83,7 +89,8 @@ class Post(models.Model):
 	clicks = models.IntegerField(default=0)
 	tags = models.CharField(max_length=500)
 	url = models.URLField(max_length=500, unique=True, null=True)
-	post_type = models.CharField(max_length=20, choices=link_types)
+	post_type = models.CharField(max_length=20, choices=post_types)
+	skill_level = models.CharField(max_length=12, choices=skill_levels)
 	description = models.TextField()
 
 class PostRevision(models.Model):
