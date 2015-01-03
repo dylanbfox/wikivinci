@@ -31,3 +31,4 @@ AWS_QUERYSTRING_AUTH = False
 AWS_PRELOAD_METADATA = True
 S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = S3_URL
+THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
