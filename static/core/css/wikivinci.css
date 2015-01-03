@@ -468,6 +468,16 @@ h5 {
 	float:right;	
 }
 
+#page-content #about #wikivinci {
+	margin-top:50px;
+	font-size:16px;
+}
+
+#page-content #about #wikivinci h2 {
+	font-size:18px;
+	margin-bottom:10px;
+}
+
 /*global page styles*/
 
 #page-content .votes-contain i.fa {

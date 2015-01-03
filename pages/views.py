@@ -14,3 +14,6 @@ def contributors(request):
 	context_dict = {}
 	context_dict['accounts'] = Account.objects.order_by('-points').select_related()
 	return render(request, 'core/contributors.html', context_dict)
+
+def about(request):
+	return render(request, 'core/about.html', {})
