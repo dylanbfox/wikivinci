@@ -16,7 +16,7 @@
 			<img class="profile-pic" src="{% cropped_thumbnail account 'cropping' %}"/>
 			<div class="info">
 				<a href="{% url 'accounts:profile' username=account.owner.username %}">{{ account.owner.username }}</a>
-				<p class="title super-light-font">{{ account.title }}</p>
+				{% if account.title %}<p class="title super-light-font">{{ account.title }}</p>{% endif %}
 				<p class="points"><b>{{ account.points }}</b></p>
 			</div>
 		</div>

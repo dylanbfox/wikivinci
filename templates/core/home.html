@@ -11,6 +11,12 @@
 		<input type="hidden" name="top" value="true" />
 		<input type="submit" value="search" class="btn btn-success" />
 		<p class="form-tooltip"><b>tip:</b> separate terms by commas</p>
+<!-- 		<span id="popular-topics">
+			view popular topics
+			{% for k, v in topics.items|slice:":7" %}
+			<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }}</span></a>
+			{% endfor %}
+		</span> -->
 	</form>
 
 	<div id="wikivinci" class="super-light-font hidden-xs">

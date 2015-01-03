@@ -58,7 +58,11 @@
 		float:none;
 		margin-left:0px;
 		width:initial;
-	}	
+	}
+
+	#page-content #profile #profile-top #account-info {
+		float:none;
+	}
 }
 
 /*phones only*/
