@@ -56,8 +56,8 @@ class Post(models.Model):
 
 		for term in search_terms:
 			term_title_match = term.lower() in self.title.lower()
-			term_descr_match = term.lower() in self.description.lower()
-			if term_title_match or term_descr_match:
+			term_tags_match = self.tags_contain(contains=term)
+			if term_title_match or term_tags_match:
 				match = True
 
 		return match

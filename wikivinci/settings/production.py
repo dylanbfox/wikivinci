@@ -1,9 +1,9 @@
 from base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 # we only need the engine name, as heroku takes care of the rest
 DATABASES = {
@@ -13,7 +13,7 @@ DATABASES = {
 }
 
 # # Allow all host hosts/domain names for this site
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['limitless-temple-7879.herokuapp.com', 'www.wikivinci.com']
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
@@ -31,4 +31,5 @@ AWS_QUERYSTRING_AUTH = False
 AWS_PRELOAD_METADATA = True
 S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = S3_URL
+# necessary for thumbnails to be stored on S3 and not in local memory!
 THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
