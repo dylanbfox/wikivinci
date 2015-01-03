@@ -28,6 +28,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'boto',
+    'storages',
     'image_cropping',
     'easy_thumbnails',
     'posts',
