@@ -113,8 +113,8 @@ select.small {
 input.large,
 select.large {
 	width:100%;
-	padding:10px 4px;
-	font-size:16px;
+	padding:4px;
+	font-size:15px;
 }
 
 .form-group.error input,
@@ -308,6 +308,10 @@ h5 {
 	height:65px;	
 }
 
+#header > .container #links {
+	position:relative;
+}
+
 #header > .container #links > a {
 	float:right;
 	margin-left:36px;
@@ -356,7 +360,7 @@ h5 {
 	display:none;
 	position:absolute;
 	top:66px;
-	right:225px;
+	right:107px;
 	width:125px;	
 	background-color:#F0F0F0;
 	color:#FFF;
@@ -1099,7 +1103,6 @@ h5 {
 }
 
 #page-content form#account-edit {
-	min-width:300px;
 	max-width:500px;
 } 
 

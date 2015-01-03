@@ -10,6 +10,18 @@ function triggerAuthenticatePopup(){
 
 $(document).ready(function(){
 
+	// show mobile menu
+	$("#header #mobile-menu-toggle").on("click", function(){
+		$("#header #links").show();
+		$("#header #links").animate({'margin-right': '0px'});
+
+		$("#page-content").one("click", function(){
+			$("#header #links").animate({'margin-right': '-3000px'}, function(){
+				$("#header #links").hide();
+			});
+		});
+	});
+
 	// filter posts by skill level
 	$(".toprow select#skill-level-filter").on("change", function(){
 		var posts = $(".posts .post");
@@ -50,7 +62,7 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#header .container > a").not("#auth").on("mouseenter", function(){
+	$("#header .container #links > a").not("#auth").on("mouseenter", function(){
 		if ($("this").attr("id") == "auth"){
 			return;
 		}

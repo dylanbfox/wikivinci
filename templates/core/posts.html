@@ -60,7 +60,7 @@
 				<a class="btn btn-clear" href="{% url 'accounts:profile' username=post.owner.owner.username %}">view profile</a>
 			</div>			
 
-			<div class="owner-contain hidden-xs">
+			<div class="owner-contain hidden-xs hidden-sm">
 				<img data-target="#profilePopup{{ post.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 			</div>			
 

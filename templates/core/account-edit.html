@@ -19,7 +19,7 @@
 
 	<form id="account-edit" method="POST" action="{% url 'accounts:settings' username=user.username %}" enctype="multipart/form-data">
 		{% csrf_token %}
-		<div id="profile-pic-form-group" class="form-group">
+		<div id="profile-pic-form-group" class="form-group hidden-xs hidden-sm">
 			<img id="profile-pic" src="{% cropped_thumbnail account 'cropping' %}" />
 			<a id="change-profile-pic" href="#">change profile picture</a> / 
 			<a href="#" class="green-font" data-toggle="modal" data-target="#profilePicCropModal">re-crop photo</a>
