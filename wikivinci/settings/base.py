@@ -60,6 +60,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+# needed for whitenoise
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 

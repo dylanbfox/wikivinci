@@ -1,0 +1,1 @@
+web: gunicorn wikivinci.wsgi --log-file -
