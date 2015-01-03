@@ -14,7 +14,7 @@
 		{% endblock %}
 		<meta content="Wikivinci helps you learn faster. Find top resources and tutorials, posted and ranked by community members, for anything you need to learn." name="description">
 		<meta content="Wikivinci helps you learn faster. Find top resources and tutorials, posted and ranked by community members, for anything you need to learn." property="og:description">
-		<meta content="" property="og:image">		
+		<meta content="{% static 'core/images/fb-meta-img.jpg' %}" property="og:image">		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'core/css/wikivinci.css' %}" rel="stylesheet">
@@ -46,6 +46,7 @@
 			<div class="container">
 				<a id="logo" href="{% url 'pages:home' %}"><img src="{% static 'core/images/wikivincilogo-horiz-v3.png' %}" /></a>
 
+				<a id="mobile-menu-toggle" class="visible-xs visible-sm super-light-font"><i class="fa fa-bars"></i></a>
 				<div id="links">
 				<a id="add-post" href="#"><span class="btn btn-success">add resource</span></a>
 				{% if user.is_authenticated %}
@@ -53,11 +54,16 @@
 					<img id="profile-pic" src="{% cropped_thumbnail user.account 'cropping' %}" />
 					<span id="points"><i class="fa fa-star"></i> {{ user.account.points }}</span>				
 				</a>
-				<div id="account-dropdown">
+				<!-- desktop only -->				
+				<div id="account-dropdown" class="hidden-xs hidden-sm">
 					<a href="{% url 'accounts:profile' username=user.username %}">profile</a>
 					<a href="{% url 'accounts:settings' username=user.username %}">settings</a>
 					<a href="{% url 'accounts:logout' %}">logout</a>
-				</div>				
+				</div>
+				<!-- mobile only -->
+				<a class="visible-xs visible-sm" href="{% url 'accounts:profile' username=user.username %}">Profile</a>
+				<a class="visible-xs visible-sm" href="{% url 'accounts:settings' username=user.username %}">Settings</a>
+				<a class="visible-xs visible-sm" href="{% url 'accounts:logout' %}">Logout</a>							
 				{% else %}
 				<a data-toggle="modal" data-target="#authenticateModal" href="#">Login</a>				
 				{% endif %}
