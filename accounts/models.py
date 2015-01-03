@@ -19,7 +19,7 @@ class Account(models.Model):
 		return Account.objects.filter(points__gt=self.points).count() + 1
 	
 	owner = models.OneToOneField(settings.AUTH_USER_MODEL)
-	profile_pic = models.ImageField(upload_to='profile_pics', default="static/core/images/default_profile_pic.jpg")
+	profile_pic = models.ImageField(upload_to='profile_pics', default="profile_pics/default_profile_pic.jpg")
 	cropping = ImageRatioField('profile_pic', '250x250')
 	points = models.IntegerField(default=50)
 	title = models.CharField(max_length=59, blank=True, null=True)
