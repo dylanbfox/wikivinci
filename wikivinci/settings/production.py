@@ -1,9 +1,9 @@
 from base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
 # we only need the engine name, as heroku takes care of the rest
 DATABASES = {
