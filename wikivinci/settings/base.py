@@ -55,13 +55,14 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+# Static files (CSS, JavaScript, Images)
 # establish a project level static directory
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
 # needed for whitenoise
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
