@@ -37,6 +37,24 @@
 
 	#page-content .user-profile-tooltip {
 		display:none !important;
+	}
+
+	#page-content > .container .toprow h2 {
+		display:block;
+	}
+
+	#page-content > .container .toprow h2 a#filter-top {
+		display:block;
+		font-size:13px;
+		margin-top:5px;
+		margin-bottom:15px;		
+	}
+
+	#page-content > .container .toprow input,
+	#page-content > .container .toprow select {
+		float:none;
+		padding:3px 1px;
+		font-size:13px;		
 	}	
 
 	#page-content #home #activity > div {
@@ -88,24 +106,6 @@
 		margin-top:5px;
 	}
 
-	#page-content > .container .toprow h2 {
-		display:block;
-	}
-
-	#page-content > .container .toprow h2 a#filter-top {
-		display:block;
-		font-size:13px;
-		margin-top:5px;
-		margin-bottom:15px;		
-	}
-
-	#page-content > .container .toprow input,
-	#page-content > .container .toprow select {
-		float:none;
-		padding:3px 1px;
-		font-size:13px;		
-	}
-
 	#page-content .posts .post > div.title-contain h2 {
 		font-size:18px;
 	}	
@@ -138,7 +138,8 @@
 	}
 
 	#page-content #single-post #left-column .toprow h2 {
-		max-width:none;
+		display:inline-block;
+		max-width:73%;
 	}	
 
 	#page-content #single-post #right-column {
@@ -220,6 +221,7 @@
 	}
 
 	#page-content #single-post #left-column .toprow h2 {
+		display:inline-block;
 		max-width:83%;
 	}
 
