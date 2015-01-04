@@ -37,7 +37,7 @@
 				<i data-vote-direction="down" class="fa fa-chevron-down"></i>
 			</div>			
 			
-			<h2><a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }}</a></h2>
+			<h2><a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }} <i class="fa fa-external-link"></i></a></h2>
 		</div>
 
 		<p class="lighter-font post-descr">{{ post.description|linebreaksbr }}</p>
