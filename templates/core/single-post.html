@@ -40,7 +40,7 @@
 			<h2><a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }} <i class="fa fa-external-link"></i></a></h2>
 		</div>
 
-		<p class="lighter-font post-descr">{{ post.description|linebreaksbr }}</p>
+		<p class="lighter-font post-descr">{{ post.description|urlize|linebreaksbr }}</p>
 
 		<div class="addthis_toolbox addthis_default_style hidden-xs hidden-sm">
 			<a class="addthis_button_linkedin_counter" li:counter="none"></a>
@@ -66,7 +66,7 @@
 				</div>
 				
 				<div class="content">
-					<p>{{ comment.text|linebreaksbr }}</p>
+					<p>{{ comment.text|urlize|linebreaksbr }}</p>
 					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by <a href="{% url 'accounts:profile' username=comment.owner.owner.username %}">{{ comment.owner.owner.username }}</a>.</span>
 
 					{% if user.account == comment.owner %}
