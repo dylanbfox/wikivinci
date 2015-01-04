@@ -47,7 +47,8 @@ body {
 #page-content {
 	overflow:auto;
 	min-height:100%;
-	padding-top:65px;	
+	padding-top:65px;
+	padding-bottom:50px;	
 	padding-left:0px;
 	padding-right:0px;
 	width:100%;
@@ -411,10 +412,9 @@ h5 {
 
 #page-content #home form .form-tooltip {
 	clear:both;
-	color:#D5D5D5;
 	padding-top:5px;
 	margin-top:5px;
-	font-size:14px;
+	font-size:13px;
 }
 
 #page-content #home #wikivinci {

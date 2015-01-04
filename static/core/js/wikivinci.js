@@ -220,7 +220,7 @@ $(document).ready(function(){
 			url: '/posts/add/',
 			data: {},
 			success: function(response, textStatus, xhr){
-				popup_node.height(getPageHeight() + 100);
+				popup_node.height(getPageHeight() + 165);
 				popup_node.show();
 				popup_node.animate({'right': '0px'});				
 				popup_node.append(response);
