@@ -758,6 +758,11 @@ h5 {
 	vertical-align:top;
 }
 
+#page-content #single-post #left-column .toprow h2 i.fa {
+	font-size:0.7em;
+	margin-left:6px;
+}
+
 #page-content #single-post #right-column {
 	float:right;
 	width:30%;
