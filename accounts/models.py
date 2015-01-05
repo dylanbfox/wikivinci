@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.db import models
 from django.conf import settings
 
@@ -18,10 +20,19 @@ class Account(models.Model):
 	def rank(self):
 		return Account.objects.filter(points__gt=self.points).count() + 1
 
-	def personalize_post_feed(self, posts):
+	def personalize_feed(self, posts, comments):
+		
+		def obj_with_type(obj, obj_type):
+			obj.obj_type = obj_type
+			return obj
+
 		if self.fav_topics:
-			posts = [p for p in posts if any(p.tags_contain(topic) for topic in self.fav_topics_to_list())]
-		return posts
+			topics_list = self.fav_topics_to_list()
+			posts = [obj_with_type(p, 'POST') for p in posts if any(p.tags_contain(topic) for topic in topics_list)]
+			comments = [obj_with_type(c, 'COMMENT') for c in comments if any(c.post.tags_contain(topic) for topic in topics_list)]
+			feed_objs = list(chain(posts, comments))
+			feed_objs.sort(key=lambda x: x.created, reverse=True)
+		return feed_objs
 
 	def fav_topics_to_list(self):
 		return [t.strip() for t in self.fav_topics.split(',') if t]
