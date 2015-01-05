@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 from accounts.models import Account
 from comments.models import Comment
@@ -6,6 +8,9 @@ from posts.models import Post
 from posts.utils import unique_topic_counts
 
 def home(request):
+	if request.user.is_authenticated():
+		return HttpResponseRedirect(reverse('accounts:feed', kwargs={'username': request.user.username}))
+
 	context_dict = {}
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	topics = unique_topic_counts(posts)
