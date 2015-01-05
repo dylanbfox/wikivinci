@@ -10,6 +10,23 @@ function triggerAuthenticatePopup(){
 
 $(document).ready(function(){
 
+	// feed filter options
+	$("#feed-filter select#skill-level-filter").on("change", function(){
+		var skill_level = $(this).val();
+		var url = $(this).closest("#feed-filter").data("feed-url");
+
+		$("#feed .posts").css('opacity', '0.3');
+		$.ajax({
+			type: 'GET',
+			url: url,
+			data: {skill_level: skill_level},
+			success: function(response){
+				$("#feed .posts").remove();
+				$("#feed").append(response);
+			}
+		});
+	});
+
 	// show mobile menu
 	$("#header #mobile-menu-toggle").on("click", function(){
 		$("#header #links").show();
@@ -23,12 +40,12 @@ $(document).ready(function(){
 	});
 
 	// filter posts by skill level
-	$(".toprow select#skill-level-filter").on("change", function(){
+	$("select#skill-level-filter").on("change", function(){
 		var posts = $(".posts .post");
 		var skill_level = $(this).val();
 
 		$(this).removeClass("filter-on");
-		$(".toprow span#skill-level").text(skill_level);
+		$("span#skill-level").text(skill_level);
 		if (skill_level == "ALL"){
 			posts.show();
 			return;

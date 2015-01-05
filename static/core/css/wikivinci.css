@@ -418,7 +418,8 @@ h5 {
 }
 
 #page-content #home #wikivinci {
-	margin-top:75px;
+	clear:both;
+	padding-top:50px;
 	font-size:14px;
 }
 
@@ -1182,3 +1183,55 @@ h5 {
 	font-size:13px;
 }
 
+#page-content #feed .toprow p.sub-title {
+	display:inline-block;
+}
+
+#page-content #feed .posts {
+	float:right;
+	width:76%;
+	padding-left:30px;
+	border-left:1px solid #D9D9D9;
+}
+
+#page-content #feed #feed-filter {
+	float:left;
+	width:15%;
+}
+
+#page-content #feed #feed-filter p#personalize {
+	font-weight:700;
+	font-size:15px;
+	margin-bottom:15px;	
+}
+
+#page-content #feed #feed-filter #topic-list {
+	margin-top:10px;
+}
+
+#page-content #feed #feed-filter #topic-list p#title {
+	font-size:13px;
+	text-transform:uppercase;
+	margin-bottom:5px;
+}
+
+#page-content #feed #feed-filter #topic-list ul {
+	padding-left:0px;
+	list-style-type:none;
+}
+
+#page-content #feed #feed-filter #topic-list ul li {
+	padding:3px;
+	background-color:#F2B000;
+	display:inline-block;
+	color:#FFF;
+	font-size:13px;
+	font-weight:700;
+	margin-right:5px;
+	border-radius:5px;	
+}
+
+#page-content #feed #feed-filter #topic-list ul li span.remove {
+	padding:0px 3px 0px 7px;
+
+}
