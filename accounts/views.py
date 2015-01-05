@@ -112,17 +112,19 @@ def feed(request, username):
 	context_dict = {}
 	account = request.user.account
 	_posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
-	posts = account.personalize_post_feed(_posts)
-	topics = unique_topic_counts(posts)
+	_comments = Comment.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
+	feed_objs = account.personalize_feed(_posts, _comments)
+	context_dict['feed_objs'] = feed_objs[:17]
 
-	skill_level = request.GET.get('skill_level')
-	if skill_level:
-		posts = [p for p in posts if p.skill_level == skill_level or skill_level == "ALL"]	
-		context_dict['posts'] = posts[:15]
-		return render(request, 'core/partials/feed-stream.html', context_dict)
+	# skill_level = request.GET.get('skill_level')
+	# if skill_level:
+	# 	posts = [p for p in posts if p.skill_level == skill_level or skill_level == "ALL"]	
+	# 	context_dict['posts'] = posts[:15]
+	# 	return render(request, 'core/partials/feed-stream.html', context_dict)
 
-	context_dict['posts'] = posts[:15]
 	context_dict['account'] = account
+
+	topics = unique_topic_counts(_posts)	
 	context_dict['topics'] = topics	
 	return render(request, 'core/feed.html', context_dict)
 
