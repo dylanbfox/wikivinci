@@ -9,27 +9,6 @@
 		<h2>Your feed.</h2>
 		<p class="sub-title super-light-font">Learn from the newest and most interesting resources and tutorials added to Wikivinci.</p>
 	</div>
-
-<!-- 	<div id="feed-filter">
-		<p id="personalize" class="lighter-font">personalize your feed</p>
-		<select id="skill-level-filter" class="large super-light-font">
-			<option value="" class="super-light-font" disabled selected>Skill Level</option>			
-			<option value="ALL">All</option>
-			<option value="BEGINNER">Beginner</option>
-			<option value="INTERMEDIATE">Intermediate</option>
-			<option value="ADVANCED">Advanced</option>			
-		</select>
-
-		<div id="topic-list">
-			<p id="title" class="super-light-font">topics:</p>			
-			<ul>
-			{% for topic in account.fav_topics_to_list %}
-				<li>{{ topic }}<span class="remove red-font">x</span></li>
-			{% endfor %}
-			</ul>
-		</div>
-	</div> -->
-
 	{% include 'core/partials/feed-stream.html' %}
 </div>
 {% endblock content %}
