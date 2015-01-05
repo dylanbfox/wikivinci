@@ -1220,7 +1220,6 @@ h5 {
 }
 
 #page-content #feed .posts .post.comment .comment-icon {
-	line-height:70px;
 	font-size:34px;
 	width:46px;
 	text-align:center;
@@ -1241,6 +1240,10 @@ h5 {
 	font-size:13px;
 	font-weight:700;
 	margin-top:10px;
+}
+
+#page-content #feed .posts .post.comment .owner-contain {
+	line-height:normal;
 }
 
 #page-content #feed #feed-filter {
