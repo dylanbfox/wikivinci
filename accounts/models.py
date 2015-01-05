@@ -30,8 +30,12 @@ class Account(models.Model):
 			topics_list = self.fav_topics_to_list()
 			posts = [obj_with_type(p, 'POST') for p in posts if any(p.tags_contain(topic) for topic in topics_list)]
 			comments = [obj_with_type(c, 'COMMENT') for c in comments if any(c.post.tags_contain(topic) for topic in topics_list)]
-			feed_objs = list(chain(posts, comments))
-			feed_objs.sort(key=lambda x: x.created, reverse=True)
+		else:
+			posts = [obj_with_type(p, 'POST') for p in posts]
+			comments = [obj_with_type(c, 'COMMENT') for c in comments]
+			
+		feed_objs = list(chain(posts, comments))
+		feed_objs.sort(key=lambda x: x.created, reverse=True)				
 		return feed_objs
 
 	def fav_topics_to_list(self):
