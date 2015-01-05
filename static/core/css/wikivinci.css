@@ -1187,6 +1187,10 @@ h5 {
 	display:inline-block;
 }
 
+#page-content #feed {
+	max-width:970px;
+}
+
 #page-content #feed .posts {
 	padding-top:15px;
 }
@@ -1208,10 +1212,11 @@ h5 {
 }
 
 #page-content #feed .posts .post.comment {
-	padding-top:25px;
-	padding-bottom:25px;
-	border-top:1px solid #EFEAEA;
-	border-bottom:1px solid #EFEAEA;
+	padding:25px;
+	background-color:#FFE49A;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
 }
 
 #page-content #feed .posts .post.comment .comment-icon {
@@ -1220,7 +1225,7 @@ h5 {
 	width:46px;
 	text-align:center;
 	margin-right:30px;
-	color:#C3C3C3;
+	color:#FFF;
 }
 
 #page-content #feed .posts .post.comment .comment-contain {
