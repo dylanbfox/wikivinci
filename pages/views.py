@@ -8,7 +8,7 @@ from posts.models import Post
 from posts.utils import unique_topic_counts
 
 def home(request):
-	if request.user.is_authenticated():
+	if request.user.is_authenticated() and not request.GET.get('true_home'):
 		return HttpResponseRedirect(reverse('accounts:feed', kwargs={'username': request.user.username}))
 
 	context_dict = {}

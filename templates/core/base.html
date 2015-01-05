@@ -44,7 +44,7 @@
 		{% block header %}
 		<div id="header">
 			<div class="container">
-				<a id="logo" href="{% url 'pages:home' %}"><img src="{% static 'core/images/wikivincilogo-horiz-v3.png' %}" /></a>
+				<a id="logo" href="{% url 'pages:home' %}?true_home=true"><img src="{% static 'core/images/wikivincilogo-horiz-v3.png' %}" /></a>
 
 				<a id="mobile-menu-toggle" class="visible-xs visible-sm super-light-font"><i class="fa fa-bars"></i></a>
 				<div id="links">
@@ -56,11 +56,13 @@
 				</a>
 				<!-- desktop only -->				
 				<div id="account-dropdown" class="hidden-xs hidden-sm">
+					<a href="{% url 'accounts:feed' username=user.username %}">my feed</a>
 					<a href="{% url 'accounts:profile' username=user.username %}">profile</a>
 					<a href="{% url 'accounts:settings' username=user.username %}">settings</a>
 					<a href="{% url 'accounts:logout' %}">logout</a>
 				</div>
 				<!-- mobile only -->
+				<a class="visible-xs visible-sm" href="{% url 'accounts:feed' username=user.username %}">My Feed</a>
 				<a class="visible-xs visible-sm" href="{% url 'accounts:profile' username=user.username %}">Profile</a>
 				<a class="visible-xs visible-sm" href="{% url 'accounts:settings' username=user.username %}">Settings</a>
 				<a class="visible-xs visible-sm" href="{% url 'accounts:logout' %}">Logout</a>							
