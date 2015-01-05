@@ -80,7 +80,7 @@
 
 	#page-content #profile #profile-top #account-info {
 		float:none;
-	}
+	}	
 }
 
 /*phones only*/
@@ -207,6 +207,15 @@
 	#page-content form#account-edit {
 		width:100%;
 	}
+
+	#page-content #feed .posts .post.comment .comment-icon {
+		line-height:70px;
+		font-size:28px;
+		width:38px;
+		text-align:center;
+		margin-right:10px;
+		color:#C3C3C3;
+	}	
 }
 
 @media (min-width:768px) and (max-width:991px) {
