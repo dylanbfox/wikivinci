@@ -19,6 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
+ADMINS = (('Dylan', 'dylanbfox@gmail.com'),)
+
 # Application definition
 
 INSTALLED_APPS = (
