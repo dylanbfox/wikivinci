@@ -1188,10 +1188,23 @@ h5 {
 }
 
 #page-content #feed .posts {
-	float:right;
-	width:76%;
-	padding-left:30px;
-	border-left:1px solid #D9D9D9;
+	padding-top:0px;
+}
+
+#page-content #feed .posts .post > div.title-contain h2 {
+	font-size:19px;
+}
+
+#page-content #feed .posts .post > div.title-contain p {
+	font-size:14px;
+}
+
+#page-content #feed .posts .post .owner-contain img.owner {
+	width:40px;
+	height:40px;
+	border-radius:20px;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;	
 }
 
 #page-content #feed .posts .post.comment {

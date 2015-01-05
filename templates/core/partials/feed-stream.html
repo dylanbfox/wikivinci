@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load humanize %}
 {% load cropping %}
 
 <div class="posts">
@@ -19,7 +20,7 @@
 			<div class="title-contain">
 				<h2><a href="{% url 'posts:view' slug=obj.slug %}">{{ obj.title }}</a></h2>
 				<p class="super-light-font">{{ obj.description|truncatechars:99 }}</p>
-				<span class="timestamp super-light-font">submitted <b>{{ obj.created }}</b> / </span>
+				<span class="timestamp super-light-font">submitted <b>{{ obj.created|naturaltime }}</b> / </span>
 				<span class="skill-level super-light-font">skill level: <span class="{{ obj.skill_level }}"><b>{{ obj.skill_level }}</b></span></span>				
 			</div>
 
@@ -51,7 +52,7 @@
 
 			<div class="comment-contain">
 				<p class="text">{{ obj.text|linebreaksbr|truncatechars:300 }}</p>
-				<p class="comment-on">comment on: <a href="{% url 'posts:view' slug=obj.post.slug %}">{{ obj.post.title }}</a></p>
+				<p class="comment-on super-light-font">comment posted {{ obj.created|naturaltime }} on <a href="{% url 'posts:view' slug=obj.post.slug %}">{{ obj.post.title }}</a></p>
 			</div>
 
 			<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">
