@@ -7,7 +7,7 @@
 
 		{% if obj.obj_type == "POST" %}
 		<div class="post" data-skill-level="{{ obj.skill_level }}">
-			{% if obj.disallow_vote %}
+			{% if user.account in obj.upvoters.all or user.account in obj.downvoters.all %}
 			<div class="votes-contain voted" data-url="{% url 'posts:vote' %}" data-voted="true" data-object-id="{{ obj.pk }}">			
 			{% else %}
 			<div class="votes-contain" data-url="{% url 'posts:vote' %}" data-object-id="{{ obj.pk }}">			
