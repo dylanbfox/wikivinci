@@ -5,9 +5,9 @@
 
 {% block content %}
 <div id="home" class="container">
-	<h2>Learn faster. <span class="super-light-font">Top resources and tutorials, curated by the self-learning community.</span></h2>
+	<h2>Learn more, faster. <span class="super-light-font">Top resources and tutorials, curated by the self-learning community.</span></h2>
 	<form method="GET" action="{% url 'posts:view_all' %}">
-		<input type="text" name="contains" placeholder="What do you need to learn about?" / />
+		<input type="text" name="contains" placeholder="What do you want to learn about?" / />
 		<input type="hidden" name="top" value="true" />
 		<input type="submit" value="search" class="btn btn-success" />
 		<p class="form-tooltip super-light-font"><b>view popular topics:</b>
