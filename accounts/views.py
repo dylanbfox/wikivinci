@@ -9,6 +9,8 @@ from accounts.forms import (AccountRegisterForm, ProfilePicEditForm,
 							AccountEditForm)
 
 from posts.models import Post
+from posts.utils import unique_topic_counts
+
 from comments.models import Comment
 
 def account_register(request):
@@ -101,3 +103,26 @@ def settings(request, username):
 	context_dict['account_edit_form'] = account_edit_form
 	context_dict['profile_pic_form'] = ProfilePicEditForm(instance=account)
 	return render(request, 'core/account-edit.html', context_dict)
+
+@login_required
+def feed(request, username):
+	if request.user.username != username:
+		return HttpResponseForbidden()
+
+	context_dict = {}
+	account = request.user.account
+	_posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
+	posts = account.personalize_post_feed(_posts)
+	topics = unique_topic_counts(posts)
+
+	skill_level = request.GET.get('skill_level')
+	if skill_level:
+		posts = [p for p in posts if p.skill_level == skill_level or skill_level == "ALL"]	
+		context_dict['posts'] = posts[:15]
+		return render(request, 'core/partials/feed-stream.html', context_dict)
+
+	context_dict['posts'] = posts[:15]
+	context_dict['account'] = account
+	context_dict['topics'] = topics	
+	return render(request, 'core/feed.html', context_dict)
+

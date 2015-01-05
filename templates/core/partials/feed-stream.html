@@ -1,0 +1,48 @@
+{% load staticfiles %}
+{% load cropping %}
+
+<div class="posts">
+	{% for post in posts %}
+	<div class="post" data-skill-level="{{ post.skill_level }}">
+		{% if post.disallow_vote %}
+		<div class="votes-contain voted" data-url="{% url 'posts:vote' %}" data-voted="true" data-object-id="{{ post.pk }}">			
+		{% else %}
+		<div class="votes-contain" data-url="{% url 'posts:vote' %}" data-object-id="{{ post.pk }}">			
+		{% endif %}
+			<i data-vote-direction="up" class="fa fa-chevron-up"></i>
+			<span class="count">{{ post.vote_count }}</span>
+			<i data-vote-direction="down" class="fa fa-chevron-down"></i>
+		</div>
+
+		<div class="title-contain">
+			<h2><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></h2>
+			<p class="super-light-font">{{ post.description|truncatechars:99 }}</p>
+			<span class="timestamp super-light-font">submitted <b>{{ post.created }}</b> / </span>
+			<span class="skill-level super-light-font">skill level: <span class="{{ post.skill_level }}"><b>{{ post.skill_level }}</b></span></span>				
+		</div>
+
+		<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
+			<img class="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
+			<p class="username">{{ post.owner.owner.username }}</p>
+			<p class="points"><i class="fa fa-star"></i>{{ post.owner.points }}</p>
+			<br />
+			{% if post.owner.title %}			
+			<p class="title super-light-font">{{ post.owner.title }}</p>
+			{% endif %}
+			<a class="btn btn-clear" href="{% url 'accounts:profile' username=post.owner.owner.username %}">view profile</a>
+		</div>			
+
+		<div class="owner-contain hidden-xs hidden-sm">
+			<img data-target="#profilePopup{{ post.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail post.owner 'cropping' %}" />
+		</div>			
+
+		<div class="post-info-contain super-light-font">
+			<i class="fa fa-comments"></i><span class="comment-count">{{ post.comments.all.count }}</span>
+		</div>
+	</div>
+	{% endfor %}
+
+	{% if not posts or posts.count < 5 %}
+	<p id="sorry" class="super-light-font">Looks like there haven't been many resources added that fit your personalizations. You can help though! Click "add resource" in the top right corner to add a good resource you know of. Help build Wikivinci! Or, try adjusting your personalization filters for more content. </p>
+	{% endif %}
+</div>
