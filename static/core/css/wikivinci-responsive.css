@@ -66,6 +66,7 @@
 
 	#page-content #single-post #comments .comment {
 		padding:10px;
+		border-bottom:1px solid #D9D9D9;
 	}	
 
 	#page-content #single-post #comments .comment .votes-contain {
@@ -77,6 +78,11 @@
 		margin-left:0px;
 		width:initial;
 	}
+
+	#page-content #single-post #comments .comment .content p.text {
+		margin-top:0px;
+		font-size:14px;
+	}	
 
 	#page-content #profile #profile-top #account-info {
 		float:none;
