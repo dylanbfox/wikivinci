@@ -357,7 +357,7 @@ $(document).ready(function(){
 				text: text,
 			},
 			success: function(response, textStatus, xhr){
-				if (response == "more points") {
+				if (response == "denied") {
 					alert("You need more points before you can submit comments!");
 					return;
 				}
