@@ -28,3 +28,6 @@ DATABASES = {
 # Media settings
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Celery
+BROKER_URL = 'amqp://myuser:password@localhost:5672/myvhost'
