@@ -31,3 +31,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Celery
 BROKER_URL = 'amqp://myuser:password@localhost:5672/myvhost'
+
+# Email settings
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Leonardo da Wikivinci <leo@wikivinci.com>"
+SERVER_EMAIL = '[LOCAL] error@wikivinci.com <error@wikivinci.com>'
