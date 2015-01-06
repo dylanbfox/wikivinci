@@ -43,6 +43,7 @@ def vote(request):
 	if direction == 'up':
 		comment.increment_vote()
 		comment.upvoters.add(request.user.account)
+		send_alert_email.apply_async([comment.owner.id, comment.pk, "COMMENT-UPVOTE"])		
 	elif direction == 'down':
 		comment.decrement_vote()
 		comment.downvoters.add(request.user.account)

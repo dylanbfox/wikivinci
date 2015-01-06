@@ -15,6 +15,8 @@ from posts.utils import (set_post_permissions, unique_topic_counts,
 
 from comments.utils import set_comment_permissions
 
+from accounts.tasks import send_alert_email
+
 @ajax_login_required
 def add(request):
 	context_dict = {}
@@ -84,6 +86,7 @@ def vote(request):
 	if direction == 'up':
 		post.increment_vote()
 		post.upvoters.add(request.user.account)
+		send_alert_email.apply_async([post.owner.id, post.pk, "POST-UPVOTE"])		
 	elif direction == 'down':
 		post.decrement_vote()
 		post.downvoters.add(request.user.account)
