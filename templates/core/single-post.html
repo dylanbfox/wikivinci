@@ -49,12 +49,9 @@
 		</div>
 			
 		<div id="comments">
+			<h2 id="comments-title" class="super-light-font">{{ comments.count }} comments</h2>
 			{% for comment in comments %}
 			<div class="comment">
-				<div class="comment-owner hidden-xs hidden-sm">
-					<img src="{% cropped_thumbnail comment.owner 'cropping' %}" />
-				</div>
-
 				{% if comment.disallow_vote %}
 				<div class="votes-contain voted" data-voted="true" data-object-id="{{ comment.pk }}" data-url="{% url 'comments:vote' %}">				
 				{% else %}
@@ -66,8 +63,12 @@
 				</div>
 				
 				<div class="content">
-					<p>{{ comment.text|urlize|linebreaksbr }}</p>
-					<span class="super-light-font timestamp">Comment posted {{ comment.created }} by <a href="{% url 'accounts:profile' username=comment.owner.owner.username %}">{{ comment.owner.owner.username }}</a>.</span>
+					<div class="comment-owner hidden-xs hidden-sm">
+						<img src="{% cropped_thumbnail comment.owner 'cropping' %}" />
+						<p class="owner"><span class="username">{{ comment.owner.owner.username }}</span> <span class="title super-super-light-font">{{ comment.owner.title }}</span></p>
+					</div>					
+					<p class="text">{{ comment.text|urlize|linebreaksbr }}</p>
+					<span class="super-super-light-font timestamp">{{ comment.created }} by <a href="{% url 'accounts:profile' username=comment.owner.owner.username %}">{{ comment.owner.owner.username }}</a>.</span>
 
 					{% if user.account == comment.owner %}
 					<a id="delete" class="red-font" href="{% url 'comments:delete' %}" data-object-id="{{ comment.id }}">delete your comment</a>
