@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load cropping %}
+{% load humanize %}
 
 {% block meta %}
 <title>{% if topic %}{{ topic }} {% endif %}Tutorials and Resources on Wikivinci</title>
@@ -45,8 +46,8 @@
 			<div class="title-contain">
 				<h2><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></h2>
 				<p class="super-light-font">{{ post.description|truncatechars:99 }}</p>
-				<span class="timestamp super-light-font">submitted <b>{{ post.created }}</b> / </span>
-				<span class="skill-level super-light-font">skill level: <span class="{{ post.skill_level }}"><b>{{ post.skill_level }}</b></span></span>				
+				<span class="timestamp super-super-light-font">submitted <b>{{ post.created|naturaltime }}</b> / </span>
+				<span class="skill-level super-super-light-font">skill level: <span class="{{ post.skill_level }}"><b>{{ post.skill_level }}</b></span></span>				
 			</div>
 
 			<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
@@ -64,8 +65,8 @@
 				<img data-target="#profilePopup{{ post.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 			</div>			
 
-			<div class="post-info-contain super-light-font">
-				<i class="fa fa-comments"></i><span class="comment-count">{{ post.comments.all.count }}</span>
+			<div class="post-info-contain">
+				<i class="fa fa-comments super-super-light-font"></i><span class="comment-count super-super-light-font">{{ post.comments.all.count }}</span>
 			</div>
 		</div>
 		{% endfor %}

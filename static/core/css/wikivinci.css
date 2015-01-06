@@ -12,15 +12,19 @@ body {
 }
 
 .main-font {
-	color: #3c3e43 !important;
+	color:#3c3e43 !important;
 }
 
 .lighter-font {
-	color: #6a6a6a !important;
+	color:#6a6a6a !important;
 }
 
 .super-light-font {
-	color: #909090 !important;	
+	color:#909090 !important;	
+}
+
+.super-super-light-font {
+	color:#C2C2C2 !important;
 }
 
 .red-font {
@@ -659,7 +663,7 @@ h5 {
 }
 
 #page-content .posts .post > div.title-contain p {
-	font-size:16px;
+	font-size:14px;
 }
 
 #page-content .posts .post > div.title-contain span.timestamp {
@@ -723,7 +727,6 @@ h5 {
 #page-content .posts .post .post-info-contain {
 	float:right; /*overwrite*/
 	margin-left:30px;
-	font-weight:700;
 	font-size:20px;
 	line-height:70px;
 }
@@ -739,12 +742,12 @@ h5 {
 }
 
 #page-content .posts .post .owner-contain img.owner {
-	width:50px;
-	height:50px;
+	width:40px;
+	height:40px;
 	border:1px solid #A6A6A6;
-	border-radius:25px;
-	-webkit-border-radius:25px;
-	-moz-border-radius:25px;	
+	border-radius:20px;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;	
 }
 
 #page-content #single-post #left-column {
