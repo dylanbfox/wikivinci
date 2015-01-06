@@ -33,3 +33,15 @@ S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = S3_URL
 # necessary for thumbnails to be stored on S3 and not in local memory!
 THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+# Email settings
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Leonardo da Wikivinci <leo@wikivinci.com>"
+SERVER_EMAIL = '[PROD] error@wikivinci.com <error@wikivinci.com>'
+
+# Misc. settings
+HOST_NAME = 'www.wikivinci.com'

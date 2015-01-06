@@ -6,6 +6,7 @@ from wikivinci.utils.decorators import ajax_login_required
 
 from posts.models import Post
 from comments.models import Comment
+from accounts.tasks import send_alert_email
 
 @ajax_login_required
 def add(request):
@@ -22,6 +23,7 @@ def add(request):
 		text = request.POST['text'],
 	)
 	comment.save()
+	send_alert_email.apply_async([post.owner.id, post.pk, "POST-COMMENT"])
 	return HttpResponse(status=200)
 
 @ajax_login_required
