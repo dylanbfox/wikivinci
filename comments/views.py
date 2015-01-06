@@ -12,8 +12,8 @@ def add(request):
 	if request.method != 'POST':
 		return HttpResponseForbidden()
 
-	if request.user.account.points < 200:
-		return HttpResponse("more points")
+	if not request.user.account.can_comment:
+		return HttpResponse("denied")
 
 	post = Post.objects.get(pk=request.POST['post_id'])
 	comment = Comment(

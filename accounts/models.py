@@ -48,5 +48,6 @@ class Account(models.Model):
 	title = models.CharField(max_length=59, blank=True, null=True)
 	twitter_handle = models.CharField(max_length=200, blank=True, null=True)
 	fav_topics = models.CharField(max_length=999, blank=True, null=True)
+	can_comment = models.BooleanField(default=False)
 
 

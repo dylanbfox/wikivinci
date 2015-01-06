@@ -78,14 +78,14 @@
 
 			{% if not user.is_authenticated %}
 			<p id="comment-points-disclaimer">Sign in to add a comment to this resource!</p>			
-			{% elif user.account.points >= 200 %}
+			{% elif user.account.can_comment %}
 			<form id="add-comment" method="POST" action="{% url 'comments:add' %}" data-post-id="{{ post.id }}">
-				<p class="super-light-font">Have something to say about this resource? Add a comment!</p>
+				<p class="super-light-font">You can help by commenting on this resource:</p>
 				<textarea name="text"></textarea>
 				<input type="submit" class="btn btn-success" value="Submit comment" />
 			</form>
 			{% else %}
-			<p id="comment-points-disclaimer">Commenting on resources is currently limited to community members with over 200 points. Earn 5 points every time you post a resource.</p>
+			<p id="comment-points-disclaimer">Commenting on resources is currently limited to certain community members. Posting and voting on resources can help earn you the ability to comment.</p>
 			{% endif %}			
 		</div>		
 	</div>
