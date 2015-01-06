@@ -882,15 +882,16 @@ h5 {
 #page-content #single-post #comments .comment .comment-owner > img {
 	float:left;
 	margin-right:10px;
-	width:35px;
-	height:35px;
+	width:32px;
+	height:32px;
 	border:1px solid #A6A6A6;
-	border-radius:17.5px;
-	-webkit-border-radius:17.5px;
-	-moz-border-radius:17.5px;	
+	border-radius:16px;
+	-webkit-border-radius:16px;
+	-moz-border-radius:16px;	
 }
 
 #page-content #single-post #comments .comment .comment-owner p.owner {
+	padding-top:1px;
 	display:inline-block;
 }
 
