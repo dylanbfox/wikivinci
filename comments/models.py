@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from posts.models import Post
 from accounts.models import Account
@@ -23,7 +24,10 @@ class Comment(models.Model):
 		self.downvotes -= 1
 		self.vote_count -=1
 		self.save()
-		self.owner.award_points(-1)			
+		self.owner.award_points(-1)
+
+	def url(self):
+		return reverse('posts:view', kwargs={'slug': self.post.slug})			
 
 	owner = models.ForeignKey(Account, related_name='comments')
 	post = models.ForeignKey(Post, related_name='comments')

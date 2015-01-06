@@ -674,7 +674,7 @@ ol a,.wrapper ul a{border-bottom:1px dotted #428bca}.wrapper blockquote{border-l
                 <tbody><tr>
                   <td class="preheader" style="padding: 0;vertical-align: top;letter-spacing: 0.01em;font-style: normal;line-height: 17px;font-weight: 400;font-size: 11px;color: #909090;font-family: sans-serif;padding-bottom: 40px;padding-top: 40px;text-align: right;width: 280px">
                     <div class="spacer" style="font-size: 1px;line-height: 2px;width: 100%">&nbsp;</div>
-                    <div class="title">Wikivinci Daily Learning Digest</div>
+                    <div class="title">Wikivinci Notification</div>
                     <div class="webversion">No Images? <webversion>Click here</webversion></div>
                   </td>
                 </tr>
@@ -706,7 +706,7 @@ ol a,.wrapper ul a{border-bottom:1px dotted #428bca}.wrapper blockquote{border-l
                             <tbody><tr>
                               <td class="padded" style="padding: 0;vertical-align: top;padding-left: 50px;padding-right: 50px">
                                 
-              <h2 style="Margin-top: 0;color: #3c3e43;font-weight: 700;font-size: 24px;Margin-bottom: 16px;font-family: Tahoma,sans-serif;line-height: 32px">What's new on Wikivinci</h2><p style="Margin-top: 0;color: #3c3e43;font-size: 15px;font-family: Tahoma,sans-serif;line-height: 23px;Margin-bottom: 24px;font-weight:400">{{ custom_message }}</p>
+              <h2 style="Margin-top: 0;color: #3c3e43;font-weight: 700;font-size: 24px;Margin-bottom: 16px;font-family: Tahoma,sans-serif;line-height: 32px">{{ alert_title }}</h2><p style="Margin-top: 0;color: #3c3e43;font-size: 15px;font-family: Tahoma,sans-serif;line-height: 23px;Margin-bottom: 24px;font-weight:400">{{ alert_message|urlize }}</p>
             
                               </td>
                             </tr>
@@ -720,57 +720,6 @@ ol a,.wrapper ul a{border-bottom:1px dotted #428bca}.wrapper blockquote{border-l
                 <td class="border" style="padding: 0;vertical-align: top;font-size: 1px;line-height: 1px;background-color: #d4dddb;width: 1px">&#8203;</td>
               </tr>
             </tbody></table>
-          
-            {% for obj in objects %}
-            <!-- new post start -->            
-            <table class="border" style="border-collapse: collapse;border-spacing: 0;font-size: 1px;line-height: 1px;background-color: #d4dddb;Margin-left: auto;Margin-right: auto" width="602">
-              <tbody><tr class="border" style="font-size: 1px;line-height: 1px;background-color: #e3e3e3;height: 1px">
-                <td class="border" style="padding: 0;vertical-align: top;font-size: 1px;line-height: 1px;background-color: #d4dddb;width: 1px">&#8203;</td>
-                <td style="padding: 0;vertical-align: top;line-height: 1px">&#8203;</td>
-                <td class="border" style="padding: 0;vertical-align: top;font-size: 1px;line-height: 1px;background-color: #d4dddb;width: 1px">&#8203;</td>
-              </tr>
-            </tbody></table>
-          
-            <table class="centered" style="border-collapse: collapse;border-spacing: 0;Margin-left: auto;Margin-right: auto">
-              <tbody><tr>
-                <td class="border" style="padding: 0;vertical-align: top;font-size: 1px;line-height: 1px;background-color: #d4dddb;width: 1px">&#8203;</td>
-                <td style="padding: 0;vertical-align: top">
-                  <table class="one-col" style="border-collapse: collapse;border-spacing: 0;Margin-left: auto;Margin-right: auto;width: 600px;background-color: #ffffff">
-                    <tbody><tr>
-                      <td class="column" style="padding: 0;vertical-align: top;text-align: left">
-                        <div><div class="column-top" style="font-size: 50px;line-height: 50px">&nbsp;</div></div>
-                          <table class="contents" style="border-collapse: collapse;border-spacing: 0;width: 100%">
-                            <tbody><tr>
-                              <td class="padded" style="padding: 0;vertical-align: top;padding-left: 50px;padding-right: 50px">
-                                
-              <h3 style="Margin-top: 0;color: #3c3e43;font-weight: 400;font-size: 18px;Margin-bottom: 12px;font-family: Tahoma,sans-serif;line-height: 26px"><a style="text-decoration: none;color: #428bca;border: none" data-emb-href-display="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}" href="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}"><strong style="font-weight: bold">{% if obj.obj_type == 'COMMENT' %}New comment on {{ obj.post.title }}{% else %}{{ obj.title }}{% endif %}</strong></a></h3><p style="Margin-top: 0;color: #3c3e43;font-size: 15px;font-family: Tahoma,sans-serif;line-height: 23px;Margin-bottom: 23px">{% if obj.obj_type == 'COMMENT' %}{{ obj.text|truncatechars:150 }}{% else %}{{ obj.description|truncatechars:150 }}{% endif %}</p>
-            
-                              </td>
-                            </tr>
-                          </tbody></table>
-                        
-                          <table class="contents" style="border-collapse: collapse;border-spacing: 0;width: 100%">
-                            <tbody><tr>
-                              <td class="padded" style="padding: 0;vertical-align: top;padding-left: 50px;padding-right: 50px">
-                                
-              <div class="btn" style="Margin-bottom: 27px;text-align: left">
-                <![if !mso]><a style="border: 0;border-radius: 4px;display: inline-block;font-size: 14px;font-weight: 700;line-height: 21px;padding: 9px 22px 8px 22px;text-align: center;text-decoration: none;color: #fff;background-color: #ffab47;box-shadow: 0 3px 0 #cc8939;font-family: Tahoma,sans-serif" href="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}">click to view, vote, or comment</a><![endif]>
-              <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}" style="width:239px" arcsize="11%" fillcolor="#FFAB47" stroke="f"><v:shadow on="t" color="#CC8939" offset="0,3px"></v:shadow><v:textbox style="mso-fit-shape-to-text:t" inset="0px,8px,0px,7px"><center style="font-size:14px;line-height:21px;color:#FFFFFF;font-family:Tahoma,sans-serif;font-weight:700;mso-line-height-rule:exactly;mso-text-raise:2px">click to view, vote, or comment</center></v:textbox></v:roundrect><![endif]--></div>
-            
-                              </td>
-                            </tr>
-                          </tbody></table>
-                        
-                        <div class="column-bottom" style="font-size: 26px;line-height: 26px">&nbsp;</div>
-                      </td>
-                    </tr>
-                  </tbody></table>
-                </td>
-                <td class="border" style="padding: 0;vertical-align: top;font-size: 1px;line-height: 1px;background-color: #d4dddb;width: 1px">&#8203;</td>
-              </tr>
-            </tbody></table>
-            <!-- new post end -->            
-            {% endfor %}
           
             <table class="border" style="border-collapse: collapse;border-spacing: 0;font-size: 1px;line-height: 1px;background-color: #d4dddb;Margin-left: auto;Margin-right: auto" width="602">
               <tbody><tr><td style="padding: 0;vertical-align: top">&nbsp;</td></tr>
@@ -780,18 +729,6 @@ ol a,.wrapper ul a{border-bottom:1px dotted #428bca}.wrapper blockquote{border-l
           <tbody><tr>
             <td class="footer" style="padding: 0;vertical-align: top;letter-spacing: 0.01em;font-style: normal;line-height: 17px;font-weight: 400;font-size: 11px;Margin-right: auto;Margin-left: auto;padding-top: 50px;padding-bottom: 40px;width: 602px;color: #909090;font-family: sans-serif">
               <center>
-                <table class="social" style="border-collapse: collapse;border-spacing: 0;Margin-left: auto;Margin-right: auto;text-transform: uppercase">
-                  <tbody><tr>
-                    <td style="padding: 0;vertical-align: top;padding-bottom: 30px;padding-left: 20px;padding-right: 20px">
-                      <tweet><img style="border: 0;-ms-interpolation-mode: bicubic" src="https://i4.createsend1.com/static/eb/master/03-fresh/images/twitter-dark.png" width="21" height="16" align="top" /><span style="mso-text-raise: 4px">Tweet</span></tweet>
-                    </td>
-                    
-                    <td style="padding: 0;vertical-align: top;padding-bottom: 30px;padding-left: 20px;padding-right: 20px">
-                      <forwardtoafriend><img style="border: 0;-ms-interpolation-mode: bicubic" src="https://i6.createsend1.com/static/eb/master/03-fresh/images/forward-dark.png" width="13" height="16" align="top" /><span style="mso-text-raise: 4px">Forward</span></forwardtoafriend>
-                    </td>
-                  </tr>
-                </tbody></table>
-                
                 <div class="permission" style="Margin-bottom: 10px">You're receiving this email because you're a contributor on Wikivinci!</div>
                 <div>
                   <span class="block">

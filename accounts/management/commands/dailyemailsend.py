@@ -17,12 +17,13 @@ class Command(BaseCommand):
 		_posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 		_comments = Comment.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 		for account in Account.objects.all():
-			to = account.owner.email			
+			to = account.owner.email
+			host_name = settings.HOST_NAME
 			try:
 				objects = account.personalize_feed(_posts, _comments)[:5]
 				custom_message = ('These daily emails are brand new '
 					'and can be personalized.')
-				d = Context({'objects': objects, 'custom_message': custom_message})
+				d = Context({'objects': objects, 'custom_message': custom_message, 'HOST_NAME': host_name})
 				html_content = html.render(d)
 				msg = EmailMultiAlternatives(subject, '<need to edit>', from_email, [to])
 				msg.attach_alternative(html_content, 'text/html')
