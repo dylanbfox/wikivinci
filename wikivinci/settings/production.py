@@ -34,6 +34,10 @@ MEDIA_URL = S3_URL
 # necessary for thumbnails to be stored on S3 and not in local memory!
 THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
+# Celery settings
+BROKER_POOL_LIMIT = None
+BROKER_URL = os.environ["CLOUDAMQP_URL"]
+
 # Email settings
 EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
