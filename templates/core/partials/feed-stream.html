@@ -52,7 +52,7 @@
 
 			<div class="comment-contain">
 				<p class="text">{{ obj.text|linebreaksbr|truncatechars:300 }}</p>
-				<p class="comment-on super-light-font">comment posted {{ obj.created|naturaltime }} by <a href="{% url 'accounts:profile' username=obj.owner.owner.username %}">{{ obj.owner.owner.username }}</a> on <a href="{% url 'posts:view' slug=obj.post.slug %}">{{ obj.post.title }}</a></p>
+				<p class="comment-on super-light-font">comment posted {{ obj.created|naturaltime }} by <a href="{% url 'accounts:profile' username=obj.owner.owner.username %}">{{ obj.owner.owner.username }}</a> on <a href="{{ obj.url }}">{{ obj.post.title }}</a></p>
 			</div>
 
 			<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">

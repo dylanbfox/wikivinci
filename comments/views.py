@@ -6,7 +6,7 @@ from wikivinci.utils.decorators import ajax_login_required
 
 from posts.models import Post
 from comments.models import Comment
-from accounts.tasks import send_alert_email
+from accounts.tasks import send_account_alert_email
 
 @ajax_login_required
 def add(request):
@@ -23,7 +23,7 @@ def add(request):
 		text = request.POST['text'],
 	)
 	comment.save()
-	send_alert_email.apply_async([post.owner.id, post.pk, "POST-COMMENT"])
+	send_account_alert_email.apply_async([post.owner.id, comment.pk, "POST-COMMENT"])
 	return HttpResponse(status=200)
 
 @ajax_login_required
@@ -43,7 +43,7 @@ def vote(request):
 	if direction == 'up':
 		comment.increment_vote()
 		comment.upvoters.add(request.user.account)
-		send_alert_email.apply_async([comment.owner.id, comment.pk, "COMMENT-UPVOTE"])		
+		send_account_alert_email.apply_async([comment.owner.id, comment.pk, "COMMENT-UPVOTE"])		
 	elif direction == 'down':
 		comment.decrement_vote()
 		comment.downvoters.add(request.user.account)

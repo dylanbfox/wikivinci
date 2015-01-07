@@ -27,7 +27,10 @@ class Comment(models.Model):
 		self.owner.award_points(-1)
 
 	def url(self):
-		return reverse('posts:view', kwargs={'slug': self.post.slug})			
+		url = reverse('posts:view', kwargs={'slug': self.post.slug})
+		# shave off trailing slash to add anchor
+		url_anchor = url + "#comment" + str(self.pk)
+		return url_anchor	
 
 	owner = models.ForeignKey(Account, related_name='comments')
 	post = models.ForeignKey(Post, related_name='comments')

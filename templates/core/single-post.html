@@ -51,7 +51,7 @@
 		<div id="comments">
 			<h2 id="comments-title" class="super-light-font">{{ comments.count }} comments</h2>
 			{% for comment in comments %}
-			<div class="comment">
+			<div class="comment" id="comment{{ comment.pk }}">
 				{% if comment.disallow_vote %}
 				<div class="votes-contain voted" data-voted="true" data-object-id="{{ comment.pk }}" data-url="{% url 'comments:vote' %}">				
 				{% else %}
