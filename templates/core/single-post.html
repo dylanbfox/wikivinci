@@ -65,8 +65,11 @@
 				
 				<div class="content">
 					<div class="comment-owner hidden-xs hidden-sm">
+						{% if comment.owner == post.author %}
+						<span class="author-mark">A</span>
+						{% endif %}
 						<img src="{% cropped_thumbnail comment.owner 'cropping' %}" />
-						<p class="owner"><span class="username">{{ comment.owner.owner.username }}</span> <span class="title super-super-light-font">{{ comment.owner.title }}</span></p>
+						<p class="owner"><span class="username">{{ comment.owner.owner.username }}</span>{% if comment.owner.title %}<span class="title super-super-light-font">{{ comment.owner.title }}</span>{% endif %}</p>
 					</div>					
 					<div class="text markdown-formatting">{{ comment.text|markdownify|safe|linebreaks }}</div>
 					<span class="super-super-light-font timestamp">{{ comment.created }} by <a href="{% url 'accounts:profile' username=comment.owner.owner.username %}">{{ comment.owner.owner.username }}</a>.</span>
@@ -97,8 +100,24 @@
 		<div id="post-info">
 
 			<b>Good resource? Upvote it so others can find it!</b>
-			<img id="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
-			<p id="timestamp" class="super-light-font">submitted by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.owner.owner.username }}</a> on {{ post.created }}</p>
+
+			{% if post.author %}
+			<div id="author-img-contain">
+				<span class="author-mark">A</span>
+				<img class="owner" src="{% cropped_thumbnail post.author 'cropping' %}" />
+			</div>
+
+				{% if post.author == post.owner %}
+				<p id="timestamp" class="super-light-font">submitted by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.owner.owner.username }}</a> on {{ post.created }} {{ post.owner.owner.username }} authored this resource!</p>
+				{% else %}
+				<p id="timestamp" class="super-light-font">authored by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.author.owner.username }}</a></p>
+				{% endif %}
+
+			{% else %}
+			<img class="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
+			<p id="timestamp" class="super-light-font">submitted by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.owner.owner.username }}</a> on {{ post.created }}</p>			
+			{% endif %}
+
 
 			{% if post.tags %}
 			<div id="tags">
@@ -108,11 +127,18 @@
 			</div>
 			{% endif %}
 
+			{% if post.author and post.author != post.owner %}
+			<div id="submitted-by">
+				<img class="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
+				<p id="timestamp" class="super-light-font">submitted by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.owner.owner.username }}</a> on {{ post.created }}</p>
+			</div>			
+			{% endif %}
+
 			{% if post.upvotes > 0 %}
 			<div id="upvoters">
 				<p id="title" class="super-light-font">upvoted by</p>
 				{% for upvoter in post.upvoters.all %}
-				<a href="{% url 'accounts:profile' username=upvoter.owner.username %}"><img id="owner" class="profile-pic" src="{% cropped_thumbnail upvoter 'cropping' %}" /></a>
+				<a href="{% url 'accounts:profile' username=upvoter.owner.username %}"><img class="profile-pic" src="{% cropped_thumbnail upvoter 'cropping' %}" /></a>
 				{% endfor %}
 			</div>
 			{% endif %}
