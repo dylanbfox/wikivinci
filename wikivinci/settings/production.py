@@ -48,4 +48,4 @@ DEFAULT_FROM_EMAIL = "Leonardo da Wikivinci <leo@wikivinci.com>"
 SERVER_EMAIL = '[PROD] error@wikivinci.com <error@wikivinci.com>'
 
 # Misc. settings
-HOST_NAME = 'www.wikivinci.com'
+HOST_NAME = 'http://www.wikivinci.com'
