@@ -45,7 +45,7 @@ class Command(BaseCommand):
 		if args:
 			accounts = Account.objects.filter(owner__email='dylanbfox@gmail.com')
 		else:
-			accounts = Account.ojects.all()
+			accounts = Account.objects.all()
 
 		for account in accounts:
 			to = account.owner.email
