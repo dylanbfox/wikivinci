@@ -79,7 +79,7 @@
 		width:initial;
 	}
 
-	#page-content #single-post #comments .comment .content p.text {
+	#page-content #single-post #comments .comment .content .text {
 		margin-top:0px;
 		font-size:14px;
 	}	
