@@ -10,6 +10,9 @@ class Post(models.Model):
 	class Meta:
 		ordering = ['-created']
 
+	def __unicode__(self):
+		return self.title
+
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			self.slug = self.create_slug()
@@ -21,7 +24,7 @@ class Post(models.Model):
 		normalized_tokens = [re.sub(r'[^a-zA-Z0-9]', '', s) for s in tokens]
 		cleaned_tokens = [s for s in normalized_tokens if s]
 		slug = '-'.join(cleaned_tokens)
-		return slug
+		return slug[:99]
 
 	def increment_vote(self):
 		self.upvotes += 1
