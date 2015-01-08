@@ -68,7 +68,7 @@ def profile(request, username):
 	account = user.account
 	context_dict['account'] = account
 	context_dict['posts'] = Post.objects.select_related().filter(owner=account).order_by('-vote_count')
-	context_dict['authored'] = Post.objects.select_related().filter(owner=account, owner_authored=True).order_by('-vote_count')
+	context_dict['authored'] = account.authored_posts.select_related().all().order_by('-vote_count')
 	context_dict['upvoted'] = Post.objects.select_related().filter(upvoters=account).order_by('-vote_count')
 	context_dict['comments'] = Comment.objects.select_related().filter(owner=account).order_by('-vote_count')
 	context_dict['rank'] = account.rank()

@@ -64,6 +64,11 @@
 		margin-right:0;		
 	}
 
+	#page-content #single-post #right-column #post-info span.author-mark {
+		top:67px;
+		left:37.5%;
+	}	
+
 	#page-content #single-post #comments .comment {
 		padding:10px;
 		border-bottom:1px solid #D9D9D9;

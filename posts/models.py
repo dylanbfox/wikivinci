@@ -75,6 +75,7 @@ class Post(models.Model):
 
 	owner = models.ForeignKey(Account, related_name='posts')
 	owner_authored = models.BooleanField(default=False)
+	author = models.ForeignKey(Account, related_name='authored_posts', blank=True, null=True)
 	title = models.CharField(max_length=200, unique=True)
 	slug = models.CharField(max_length=99, unique=True)
 	outdated = models.BooleanField(default=False)

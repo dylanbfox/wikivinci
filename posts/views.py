@@ -27,6 +27,8 @@ def add(request):
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.owner = request.user.account
+			if post.owner_authored:
+				post.author = request.user.account
 			post.save()
 			context_dict['post'] = post
 			return render(request, 'core/partials/post-add-form-success.html', context_dict)
