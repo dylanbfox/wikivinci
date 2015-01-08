@@ -110,7 +110,7 @@
 				{% if post.author == post.owner %}
 				<p id="timestamp" class="super-light-font">submitted by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.owner.owner.username }}</a> on {{ post.created }} {{ post.owner.owner.username }} authored this resource!</p>
 				{% else %}
-				<p id="timestamp" class="super-light-font">authored by <a href="{% url 'accounts:profile' username=post.owner.owner.username %}">{{ post.author.owner.username }}</a></p>
+				<p id="timestamp" class="super-light-font">authored by <a href="{% url 'accounts:profile' username=post.author.owner.username %}">{{ post.author.owner.username }}</a></p>
 				{% endif %}
 
 			{% else %}
