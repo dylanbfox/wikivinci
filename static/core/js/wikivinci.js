@@ -8,6 +8,28 @@ function triggerAuthenticatePopup(){
 	modal.modal('toggle');
 }
 
+function disableForm(form, fake){
+	var inputs = form.find(":input");
+	var submit = form.find("input[type='submit']");
+	var orig_submit_text = submit.val();
+	
+	submit.val("processing...");
+	if (fake == true) {
+		form.css({"opacity": "0.4", "pointer-events": "none"});
+	} else {
+		inputs.prop("disabled", true);
+	}
+
+	return function(){
+		if (fake == true) {
+			form.css({"opacity": "1.0", "pointer-events": "initial"});
+		} else {
+			inputs.prop("disabled", false);
+		}
+		submit.val(orig_submit_text);
+	}
+}
+
 $(document).ready(function(){
 
 	// feed filter options
@@ -134,12 +156,15 @@ $(document).ready(function(){
 		var modal_node = $("#authenticateModal");
 		var form = $(this);
 		var data = form.serializeArray()
+
+		disableForm(form);
 		$.ajax({
 			type: form.attr("method"),
 			url: form.attr("action"),
 			data: data,
 			success: function(response){
 				if (response != "success"){
+					// append new form with errors
 					form.remove();
 					modal_node.find(".modal-body").append(response);
 					return;
@@ -154,6 +179,8 @@ $(document).ready(function(){
 	$("#authenticateModal form#login").on("submit", function(e){
 		e.preventDefault();
 		var form = $(this);
+
+		enableForm = disableForm(form);
 		$.ajax({
 			type: form.attr("method"),			
 			url: form.attr("action"),
@@ -165,6 +192,7 @@ $(document).ready(function(){
 				if (response == "success") {
 					location.reload();
 				} else {
+					enableForm();
 					form.find(".form-group input").addClass("error");
 				}
 			}
@@ -206,18 +234,21 @@ $(document).ready(function(){
 		var count_node = $(this).closest(".votes-contain").find(".count");
 		var url = $(this).closest(".votes-contain").data("url");
 
+		// prevent >1 vote from going through before ajax call completes
+		count_node.closest(".votes-contain").attr("data-voted", "true");
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: {vote_direction: vote_direction, object_id: object_id},
 			success: function(response, textStatus, xhr){
-				console.log(response);
-				count_node.text(response);
+				// update voting container
 				count_node.closest(".votes-contain").addClass("voted");
-				count_node.closest(".votes-contain").attr("data-voted", "true");
+				count_node.text(response);
 			},
 			error: function(xhr, textStatus, errorThrown){
 				if (xhr.status == 403){
+					// allow additional clicks, to trigger popup
+					count_node.closest(".votes-contain").attr("data-voted", "false");					
 					triggerAuthenticatePopup();
 				}
 			}
@@ -229,6 +260,7 @@ $(document).ready(function(){
 		var popup_node = $("#post-add-popup");
 
 		if (window.addPostFormHTML) {
+			// remove everything and start from scratch
 			popup_node.find("form, #success").remove();
 		}		
 
@@ -265,11 +297,14 @@ $(document).ready(function(){
 
 		var popup_node = $("#post-add-popup");
 		var form = $(this);
+
+		disableForm(form, fake=true);
 		$.ajax({
 			type: 'POST',
 			url: '/posts/add/',
 			data: form.serializeArray(),
 			success: function(response){
+				// append new form w errors or success msg
 				popup_node.find("form").remove();
 				popup_node.append(response);
 			}
@@ -305,7 +340,6 @@ $(document).ready(function(){
 				}
 
 				for (var i in response){
-					console.log(response[i]);
 					suggested_topics_node.append($("<p>"+response[i]+"</p>"));
 				}
 				suggested_topics_node.show();				
@@ -316,7 +350,6 @@ $(document).ready(function(){
 	// append suggested tag/topic on click
 	$("#post-add-popup").on("click", "#suggested-topics > p", function(e){
 		e.stopPropagation();
-		console.log("click");
 		var input_node = $("#post-add-popup form input[name='tags']");
 		var current_val = input_node.val();
 		var comma_pos = current_val.lastIndexOf(",");
