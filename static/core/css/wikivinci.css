@@ -138,6 +138,12 @@ textarea.error {
 	color:#b94a48;
 }
 
+p.form-help-text {
+	font-size:13px !important;
+	margin-top:4px;
+	margin-bottom:10px;
+}
+
 /****OVERRIDE BOOTSTRAP****/
 
 a,
@@ -147,7 +153,8 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
 	margin:0px 0px 0px 0px;
 	font-family: 'Roboto', sans-serif;
 }
@@ -174,6 +181,52 @@ h5 {
 	background-color:transparent;
 	color:#3c3e43;
 	border:1px solid #3c3e43;
+}
+
+/*****MARKDOWN STYLING*****/
+
+.markdown-formatting {
+	
+}
+
+.markdown-formatting h1 {
+	font-size:21px;
+}
+
+.markdown-formatting h2 {
+	font-size:19px;
+}
+
+.markdown-formatting h3,
+.markdown-formatting h4,
+.markdown-formatting h5,
+.markdown-formatting h6 {
+	font-size:17px;
+}
+
+.markdown-formatting ul, 
+.markdown-formatting ol {
+	margin-bottom:0px;
+}
+
+.markdown-formatting ul br,
+.markdown-formatting ol br {
+	display:none;
+} 
+
+.markdown-formatting code {
+	padding:4px 7px;
+	color:#3c3e43;
+	background-color:#EAEAEA;
+}
+
+.markdown-formatting pre {
+	border:none;
+	font-size:14px;
+	background-color:#EAEAEA;
+	border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;	
 }
 
 /****POPUPS****/
@@ -860,7 +913,7 @@ h5 {
 	font-size:15px;
 }
 
-#page-content #single-post #comments .comment .content p.text {
+#page-content #single-post #comments .comment .content .text {
 	margin-top:18px;
 	font-size:15px;
 }

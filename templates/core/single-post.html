@@ -68,7 +68,7 @@
 						<img src="{% cropped_thumbnail comment.owner 'cropping' %}" />
 						<p class="owner"><span class="username">{{ comment.owner.owner.username }}</span> <span class="title super-super-light-font">{{ comment.owner.title }}</span></p>
 					</div>					
-					<p class="text">{{ comment.text|markdownify|safe|linebreaks }}</p>
+					<div class="text markdown-formatting">{{ comment.text|markdownify|safe|linebreaks }}</div>
 					<span class="super-super-light-font timestamp">{{ comment.created }} by <a href="{% url 'accounts:profile' username=comment.owner.owner.username %}">{{ comment.owner.owner.username }}</a>.</span>
 
 					{% if user.account == comment.owner %}
@@ -84,6 +84,7 @@
 			<form id="add-comment" method="POST" action="{% url 'comments:add' %}" data-post-id="{{ post.id }}">
 				<p class="super-light-font">You can help by commenting on this resource:</p>
 				<textarea name="text"></textarea>
+				<p class="form-help-text super-light-font">Format your comment with <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">markdown</a></p>
 				<input type="submit" class="btn btn-success" value="Submit comment" />
 			</form>
 			{% else %}
