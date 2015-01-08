@@ -1,4 +1,5 @@
 Django==1.7.1
+Markdown==2.5.2
 Pillow==2.6.1
 amqp==1.4.6
 anyjson==0.3.3
