@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load cropping %}
+{% load markdown_filter %}
 
 {% block meta %}
 <title>{{ account.owner.username }} on Wikivinci</title>
@@ -98,7 +99,7 @@
 			<div>
 				<p class="votes">{{ comment.vote_count }}<span>score</span></p>
 				<p class="title">
-					{{ comment.text|truncatechars:250 }}
+					{{ comment.text|markdownify|safe|striptags|truncatechars:250 }}
 					<span class="tags">
 						<a href="{% url 'posts:view' slug=comment.post.slug %}">Comment on: {{ comment.post.title }}</a>
 					</span>

@@ -29,11 +29,11 @@ class Command(BaseCommand):
 		custom_message = ("I'm excited to launch this email feature! "
 			"It'll keep you up to date with interesting new content being "
 			"added to Wikivinci. By tomorrow you'll be able to unsubscribe if you "
-			"want ;). You'll also now be notified when someone upvotes one of your "
+			"want ;).\n\nYou'll also now be notified when someone upvotes one of your "
 			"posts or comments, and when someone comments on something you posted. "
 			"By the end of this week, you'll be able to personalize this email (and your feed) "
 			"so you can tailor it towards topics you care about. Hopefully this "
-			"helps you learn something new every day. Thanks everyone for all the feedback, "
+			"helps you learn something new every day.\n\nThanks everyone for all the feedback, "
 			"and the great content you've added so far! Keep it coming! "
 			" - Dylan"
 			)
