@@ -1078,12 +1078,13 @@ h6 {
 
 #page-content #single-post #right-column #post-info #submitted-by {
 	padding:8px 0px;
-	border-top:1px solid #F9C68A;
-	border-bottom:1px solid #F9C68A;
+	border-left:1px solid #F9DAB6;
+	border-right:1px solid #F9DAB6;
 	margin-left:-16px;
 	margin-right:-16px;
 	margin-top:10px;
-	background-color:#FFD19A;	
+	background-color:#FDF9E1;
+	box-shadow:inset 0px 0px 6px #E0DFD4;	
 }
 
 #page-content #single-post #right-column #post-info #submitted-by img.owner {
