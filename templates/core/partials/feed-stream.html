@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load humanize %}
 {% load cropping %}
+{% load markdown_filter %}
 
 <div class="posts">
 	{% for obj in feed_objs %}
@@ -51,7 +52,7 @@
 			</div>
 
 			<div class="comment-contain">
-				<p class="text">{{ obj.text|linebreaksbr|truncatechars:300 }}</p>
+				<p class="text">{{ obj.text|markdownify|safe|striptags|truncatechars:250 }}</p>
 				<p class="comment-on super-light-font">comment posted {{ obj.created|naturaltime }} by <a href="{% url 'accounts:profile' username=obj.owner.owner.username %}">{{ obj.owner.owner.username }}</a> on <a href="{{ obj.url }}">{{ obj.post.title }}</a></p>
 			</div>
 

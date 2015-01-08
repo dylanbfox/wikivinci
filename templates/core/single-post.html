@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load cropping %}
+{% load markdown_filter %}
 
 {% block meta %}
 <title>{{ post.title }}. Posted on Wikivinci.</title>
@@ -67,7 +68,7 @@
 						<img src="{% cropped_thumbnail comment.owner 'cropping' %}" />
 						<p class="owner"><span class="username">{{ comment.owner.owner.username }}</span> <span class="title super-super-light-font">{{ comment.owner.title }}</span></p>
 					</div>					
-					<p class="text">{{ comment.text|urlize|linebreaksbr }}</p>
+					<p class="text">{{ comment.text|markdownify|safe|linebreaks }}</p>
 					<span class="super-super-light-font timestamp">{{ comment.created }} by <a href="{% url 'accounts:profile' username=comment.owner.owner.username %}">{{ comment.owner.owner.username }}</a>.</span>
 
 					{% if user.account == comment.owner %}

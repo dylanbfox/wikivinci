@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load markdown_filter %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head>
     <title></title>
@@ -706,7 +707,7 @@ ol a,.wrapper ul a{border-bottom:1px dotted #428bca}.wrapper blockquote{border-l
                             <tbody><tr>
                               <td class="padded" style="padding: 0;vertical-align: top;padding-left: 50px;padding-right: 50px">
                                 
-              <h2 style="Margin-top: 0;color: #3c3e43;font-weight: 700;font-size: 24px;Margin-bottom: 16px;font-family: Tahoma,sans-serif;line-height: 32px">What's new on Wikivinci</h2><p style="Margin-top: 0;color: #3c3e43;font-size: 15px;font-family: Tahoma,sans-serif;line-height: 23px;Margin-bottom: 24px;font-weight:400">{{ custom_message }}</p>
+              <h2 style="Margin-top: 0;color: #3c3e43;font-weight: 700;font-size: 24px;Margin-bottom: 16px;font-family: Tahoma,sans-serif;line-height: 32px">What's new on Wikivinci</h2><p style="Margin-top: 0;color: #3c3e43;font-size: 15px;font-family: Tahoma,sans-serif;line-height: 23px;Margin-bottom: 24px;font-weight:400">{{ custom_message|linebreaksbr }}</p>
             
                               </td>
                             </tr>
@@ -743,7 +744,7 @@ ol a,.wrapper ul a{border-bottom:1px dotted #428bca}.wrapper blockquote{border-l
                             <tbody><tr>
                               <td class="padded" style="padding: 0;vertical-align: top;padding-left: 50px;padding-right: 50px">
                                 
-              <h3 style="Margin-top: 0;color: #3c3e43;font-weight: 400;font-size: 18px;Margin-bottom: 12px;font-family: Tahoma,sans-serif;line-height: 26px"><a style="text-decoration: none;color: #428bca;border: none" data-emb-href-display="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}" href="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}"><strong style="font-weight: bold">{% if obj.obj_type == 'COMMENT' %}New comment on {{ obj.post.title }}{% else %}{{ obj.title }}{% endif %}</strong></a></h3><p style="Margin-top: 0;color: #3c3e43;font-size: 15px;font-family: Tahoma,sans-serif;line-height: 23px;Margin-bottom: 23px">{% if obj.obj_type == 'COMMENT' %}{{ obj.text|truncatechars:150 }}{% else %}{{ obj.description|truncatechars:150 }}{% endif %}</p>
+              <h3 style="Margin-top: 0;color: #3c3e43;font-weight: 400;font-size: 18px;Margin-bottom: 12px;font-family: Tahoma,sans-serif;line-height: 26px"><a style="text-decoration: none;color: #428bca;border: none" data-emb-href-display="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}" href="{{ HOST_NAME }}{% if obj.obj_type == 'COMMENT' %}{% url 'posts:view' slug=obj.post.slug %}{% else %}{% url 'posts:view' slug=obj.slug %}{% endif %}"><strong style="font-weight: bold">{% if obj.obj_type == 'COMMENT' %}New comment on {{ obj.post.title }}{% else %}{{ obj.title }}{% endif %}</strong></a></h3><p style="Margin-top: 0;color: #3c3e43;font-size: 15px;font-family: Tahoma,sans-serif;line-height: 23px;Margin-bottom: 23px">{% if obj.obj_type == 'COMMENT' %}{{ obj.text|markdownify|safe|striptags|truncatechars:150 }}{% else %}{{ obj.description|truncatechars:150 }}{% endif %}</p>
             
                               </td>
                             </tr>
