@@ -41,6 +41,12 @@ class Account(models.Model):
 	def fav_topics_to_list(self):
 		return [t.strip() for t in self.fav_topics.split(',') if t]
 
+	newsletter_settings = (
+		('DAILY', 'daily'),
+		('WEEKLY', 'weekly'),
+		('NONE', 'none')
+	)
+
 	owner = models.OneToOneField(settings.AUTH_USER_MODEL)
 	profile_pic = models.ImageField(upload_to='profile_pics', default="profile_pics/default_profile_pic.jpg")
 	cropping = ImageRatioField('profile_pic', '250x250')
@@ -49,5 +55,6 @@ class Account(models.Model):
 	twitter_handle = models.CharField(max_length=200, blank=True, null=True)
 	fav_topics = models.CharField(max_length=999, blank=True, null=True)
 	can_comment = models.BooleanField(default=False)
+	newsletter_setting = models.CharField(max_length=50, default='DAILY', choices=newsletter_settings)
 
 
