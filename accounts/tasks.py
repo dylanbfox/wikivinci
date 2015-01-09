@@ -15,7 +15,7 @@ def send_account_alert_email(account_pk, alert_obj_pk, alert_type):
 
 	if alert_type == "COMMENT-UPVOTE":
 		comment = Comment.objects.get(pk=alert_obj_pk)
-		url = settings.HOST_NAME + comment.url()
+		url = settings.HOST_NAME + comment.absolute_url()
 		alert_subject = "One of your comments has been upvoted!"		
 		alert_title = "You've just earned 1 point. Huzzah!"
 		alert_message = ("Your comment on \"{0}\" just "
@@ -24,7 +24,7 @@ def send_account_alert_email(account_pk, alert_obj_pk, alert_type):
 
 	elif alert_type == "POST-UPVOTE":
 		post = Post.objects.get(pk=alert_obj_pk)		
-		url = settings.HOST_NAME + post.full_url()
+		url = settings.HOST_NAME + post.absolute_url()
 		alert_subject = "One of your posts has been upvoted!"		
 		alert_title = "You've just earned 1 point. Huzzah!"
 		alert_message = ("Your post \"{0}\" just "
@@ -33,7 +33,7 @@ def send_account_alert_email(account_pk, alert_obj_pk, alert_type):
 
 	elif alert_type == "POST-COMMENT":
 		comment = Comment.objects.get(pk=alert_obj_pk)		
-		url = settings.HOST_NAME + comment.url()
+		url = settings.HOST_NAME + comment.absolute_url()
 		alert_subject = "Someone commented on one of your posts!"
 		alert_title = "Your post has just received a new comment. Huzzah!"
 		alert_message = ("Your post: \"{0}\" just "

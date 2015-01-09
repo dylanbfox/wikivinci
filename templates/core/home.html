@@ -33,7 +33,7 @@
 			<h2>Recent comments</h2>
 			{% for comment in comments %}
 			<div>
-				<p><a href="{{ comment.url }}">{{ comment.text|markdownify|safe|striptags|truncatechars:250 }}</a></p>
+				<p><a href="{{ comment.absolute_url }}">{{ comment.text|markdownify|safe|striptags|truncatechars:250 }}</a></p>
 				<img src="{% cropped_thumbnail comment.owner 'cropping' %}">
 			</div>
 			{% endfor %}

@@ -38,7 +38,7 @@ class Post(models.Model):
 		self.save()
 		self.owner.award_points(-1)		
 
-	def full_url(self):
+	def absolute_url(self):
 		return reverse('posts:view', kwargs={'slug': self.slug})
 
 	def tags_to_list(self):
@@ -64,6 +64,11 @@ class Post(models.Model):
 				match = True
 
 		return match
+
+	def get_related_posts(self):
+		posts = Post.objects.exclude(pk=self.pk).filter(skill_level=self.skill_level)
+		related_posts = [p for p in posts if any(p.tags_contain(tag) for tag in self.tags_to_list())]
+		return related_posts
 
 	post_types = (
 		('LINK', 'link'),

@@ -48,6 +48,7 @@ def view(request, slug):
 	context_dict['comments'] = comments
 	set_comment_permissions(request, comments=comments)
 	set_post_permissions(request, post=post)
+	context_dict['related_posts'] = post.get_related_posts()
 	return render(request, 'core/single-post.html', context_dict)
 
 def view_all(request):

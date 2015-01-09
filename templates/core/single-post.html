@@ -143,6 +143,18 @@
 			</div>
 			{% endif %}
 		</div>
+
+		{% if related_posts %}
+		<div id="related-posts">
+			<h2 class="super-super-light-font">RELATED RESOURCES</h2>
+			{% for post in related_posts %}
+			<div class="related-post">
+				<a href="{{ post.absolute_url }}">{{ post.title }}</a>
+				<p class="descr super-super-light-font">{{ post.description|truncatechars:50 }}</p>
+			</div>
+			{% endfor %}
+		</div>		
+		{% endif %}
 	</div>
 </div>
 {% endblock content %}
