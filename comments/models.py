@@ -26,7 +26,7 @@ class Comment(models.Model):
 		self.save()
 		self.owner.award_points(-1)
 
-	def url(self):
+	def absolute_url(self):
 		url = reverse('posts:view', kwargs={'slug': self.post.slug})
 		# shave off trailing slash to add anchor
 		url_anchor = url + "#comment" + str(self.pk)
