@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import widgets
 from django.contrib.auth.models import User
 
 from image_cropping import ImageCropWidget
@@ -28,11 +27,13 @@ class AccountEditForm(forms.ModelForm):
 			'twitter_handle',
 			'newsletter_setting',
 		)
+		widgets = {
+			'newsletter_setting': forms.RadioSelect()
+		}
 
 	def __init__(self, *args, **kwargs):
 		super(AccountEditForm, self).__init__(*args, **kwargs)
 		self.fields['title'].label = "Title (eg: 'Senior Developer at Google')"
-		self.fields['newsletter_setting'].widget = widgets.RadioSelect()
 
 	def clean_twitter_handle(self):
 		twitter_handle = self.cleaned_data.get('twitter_handle')

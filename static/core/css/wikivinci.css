@@ -1259,7 +1259,18 @@ h6 {
 
 #page-content form#account-edit {
 	max-width:500px;
-} 
+}
+
+#page-content form#account-edit ul,
+#page-content form#account-edit li {
+	list-style-type:none;
+	padding-left:0px;
+}
+
+#page-content form#account-edit ul label,
+#page-content form#account-edit li label {
+	font-weight:400;
+}
 
 #page-content form#account-edit #profile-pic-form-group {
 	margin-bottom:25px;
