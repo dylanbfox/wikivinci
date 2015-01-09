@@ -26,17 +26,17 @@ class Command(BaseCommand):
 		subject, from_email = 'Learn something new today', settings.DEFAULT_FROM_EMAIL
 		host_name = settings.HOST_NAME		
 		html = get_template('accounts/emails/daily-email.html')
-		custom_message = ("I'm excited to launch this email feature! "
-			"It'll keep you up to date with interesting new content being "
-			"added to Wikivinci. By tomorrow you'll be able to unsubscribe if you "
-			"want ;).\n\nYou'll also now be notified when someone upvotes one of your "
-			"posts or comments, and when someone comments on something you posted. "
-			"By the end of this week, you'll be able to personalize this email (and your feed) "
-			"so you can tailor it towards topics you care about. Hopefully this "
-			"helps you learn something new every day.\n\nThanks everyone for all the feedback, "
-			"and the great content you've added so far! Keep it coming! "
-			" - Dylan"
-			)
+		custom_message = (""
+		"You can now format/style your comments with Markdown!\n\n"
+		"You can also now be flagged as the \"Author\" of a resource, even if "
+		"it was submitted by another user. A link to your account, and your "
+		"profile picture with a badge on it, will be displayed on the resource's page and "
+		"in any comments you post. All of your authored resources will "
+		"be displayed in your profile under the \"Authored\" tab.\n\nEmail me if you want "
+		"to claim authorship of a resource submitted by another user!\n\n"
+		"- Dylan\n\n"
+		"PS - You can now unsubscribe from your account settings page."
+		)
 
 		_posts = Post.objects.filter(created__gte=yest_datetime).select_related()
 		_comments = Comment.objects.filter(created__gte=yest_datetime).select_related()
