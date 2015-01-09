@@ -42,9 +42,9 @@ class Account(models.Model):
 		return [t.strip() for t in self.fav_topics.split(',') if t]
 
 	newsletter_settings = (
-		('DAILY', 'daily'),
-		('WEEKLY', 'weekly'),
-		('NONE', 'none')
+		('DAILY', 'Daily'),
+		('WEEKLY', 'Weekly'),
+		('NONE', 'None. I\'m too smart already.'),
 	)
 
 	owner = models.OneToOneField(settings.AUTH_USER_MODEL)
