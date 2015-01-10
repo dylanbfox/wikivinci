@@ -49,11 +49,11 @@
 				{% include 'core/partials/posts-view-single-post.html' %}
 			{% endfor %}
 
-		{% endif %}
+			{% if not posts or posts.count < 5 %}
+			<p id="sorry" class="super-light-font">Looks like there haven't been many resources added for this topic. You can help! Click "add resource" in the top right corner to add a good resource you know of. Help build Wikivinci!</p>
+			{% endif %}			
 
-<!-- 		{% if not posts or posts.count < 5 %}
-		<p id="sorry" class="super-light-font">Looks like there haven't been many resources added for this topic. You can help! Click "add resource" in the top right corner to add a good resource you know of. Help build Wikivinci!</p>
-		{% endif %} -->
+		{% endif %}
 	</div>
 </div>
 {% endblock content %}
