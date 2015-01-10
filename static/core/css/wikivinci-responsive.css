@@ -91,7 +91,15 @@
 
 	#page-content #profile #profile-top #account-info {
 		float:none;
-	}	
+	}
+
+	#page-content #home #top-cta #left,
+	#page-content #home #top-cta #right {
+		width:100%;
+		float:none;
+		border:none;
+		padding:5% 5%;
+	}
 }
 
 /*phones only*/
