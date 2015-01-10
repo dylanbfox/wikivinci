@@ -438,12 +438,40 @@ h6 {
 }
 
 #page-content #home {
-	width:70% !important;
-	min-width:300px !important;	
+}
+
+#page-content #home #top-cta {
+	text-align:center;
+	overflow:auto;	
+}
+
+#page-content #home #top-cta > #left {
+	float:left;
+	width:50%;
+	padding-right:10%;
+	padding-bottom:100px;
+}
+
+#page-content #home #top-cta > #right {
+	float:right;
+	width:50%;
+	padding-left:10%;
+	padding-bottom:100px;
+	border-left:1px solid #E8E8E8;
+}
+
+#page-content #home #top-cta > #right a#add-post {
+	padding:11px;
+	width:54%;
+}
+
+#page-content #home #top-cta > #right a#add-post i.fa {
+	margin-right:6px;
 }
 
 #page-content #home h2 {
-	margin-bottom:35px;
+	font-size:24px;
+	margin-bottom:60px;
 }
 
 #page-content #home h2 > span {
@@ -456,17 +484,17 @@ h6 {
 }
 
 #page-content #home form input {
-	padding:15px;
+	padding:10px;
 }
 
 #page-content #home form input[name='contains'] {
-	width:83%;
+	width:80%;
 	float:left;
 }
 
 #page-content #home form input[type='submit'] {
+	width:18%;
 	float:right;
-	width:15%;
 }
 
 #page-content #home form .form-tooltip {
@@ -474,6 +502,7 @@ h6 {
 	padding-top:5px;
 	margin-top:5px;
 	font-size:13px;
+	text-align:left;
 }
 
 #page-content #home #wikivinci {

@@ -256,7 +256,7 @@ $(document).ready(function(){
 	});
 	
 	// get the add post form
-	$("#header a#add-post").on("click", function(){
+	$("a#add-post").on("click", function(){
 		var popup_node = $("#post-add-popup");
 
 		if (window.addPostFormHTML) {
