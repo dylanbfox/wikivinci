@@ -6,29 +6,41 @@
 
 {% block content %}
 <div id="home" class="container">
-	<h2>Learn more, faster. <span class="super-light-font">Top resources and tutorials, curated by the self-learning community.</span></h2>
-	<form method="GET" action="{% url 'posts:view_all' %}">
-		<input type="text" name="contains" placeholder="What do you want to learn about?" / />
-		<input type="hidden" name="top" value="true" />
-		<input type="submit" value="search" class="btn btn-success" />
-		<p class="form-tooltip super-light-font"><b>view popular topics:</b>
-			{% for k, v in topics.items|slice:":7" %}
-			<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }}{% if not forloop.last%}, {% endif %}</span></a>
-			{% endfor %}
-		</p>
-	</form>
 
-	<div id="activity">
-		<div id="recent-posts">
-			<h2>Recently added resources</h2>
-			{% for post in posts %}
-			<div>
-				<p><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></p>
-				<img src="{% cropped_thumbnail post.owner 'cropping' %}">
-			</div>
-			{% endfor %}
+	<div id="top-cta">
+		<div id="left">
+			<h2>Learn new things. <span class="super-light-font">Browse recently added tutorials and interesting resources posted by the community.</h2>
+			<form method="GET" action="{% url 'posts:view_all' %}">
+				<input type="text" name="contains" placeholder="Eg: Django, Python, Startups, Javascript" / />
+				<input type="submit" value="search" class="btn btn-primary" />
+				<p class="form-tooltip super-super-light-font"><b>popular searches:</b>
+					{% for k, v in topics.items|slice:":7" %}
+					<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }}{% if not forloop.last%}<span>, {% endif %}</span></a>
+					{% endfor %}
+				</p>
+			</form>
 		</div>
 
+		<div id="right">
+			<h2>Help others learn. <span class="super-light-font">Post helpful tutorials and interesting resources for others to learn from too.</span></h2>
+			<a href="#" id="add-post" class="btn btn-success"><i class="fa fa-book"></i> add a resource</a>
+		</div>
+	</div>
+
+<!-- 	<div id="explicit-search">
+		<h2>looking for something specific? <span>Wikivinci is brand new, but there might be a highly rated tutorial on what you're looking for.</span></h2>
+		<form method="GET" action="{% url 'posts:view_all' %}">
+			<input type="text" name="contains" placeholder="Eg: Django, Python, Startups, Javascript" / />
+			<input type="submit" value="search" class="btn btn-primary" />
+			<p class="form-tooltip super-super-light-font"><b>popular searches:</b>
+				{% for k, v in topics.items|slice:":7" %}
+				<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }}{% if not forloop.last%}<span>, {% endif %}</span></a>
+				{% endfor %}
+			</p>
+		</form> 
+	</div> -->
+
+	<div id="activity">
 		<div id="recent-comments">
 			<h2>Recent comments</h2>
 			{% for comment in comments %}
@@ -38,6 +50,16 @@
 			</div>
 			{% endfor %}
 		</div>
+
+		<div id="recent-posts">
+			<h2>Recently added resources</h2>
+			{% for post in posts %}
+			<div>
+				<p><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></p>
+				<img src="{% cropped_thumbnail post.owner 'cropping' %}">
+			</div>
+			{% endfor %}
+		</div>		
 	</div>
 
 	<div id="wikivinci" class="super-light-font hidden-xs">
