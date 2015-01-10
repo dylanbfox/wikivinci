@@ -1,5 +1,7 @@
 import re
 
+from itertools import groupby
+
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -69,6 +71,11 @@ class Post(models.Model):
 		posts = Post.objects.exclude(pk=self.pk).filter(skill_level=self.skill_level).order_by('-vote_count')
 		related_posts = [p for p in posts if any(p.tags_contain(tag) for tag in self.tags_to_list())]
 		return related_posts[:12]
+
+	@staticmethod
+	def group_by_date(posts):
+		groups = [{'date': t, 'posts': list(g)} for t, g in groupby(posts, key=lambda p: p.created.date())]
+		return groups		
 
 	post_types = (
 		('LINK', 'link'),
