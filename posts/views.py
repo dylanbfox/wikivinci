@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.shortcuts import render
 from django.http import (Http404, HttpResponseRedirect, 
 						 HttpResponse, HttpResponseForbidden,
@@ -53,11 +55,7 @@ def view(request, slug):
 
 def view_all(request):
 	context_dict = {}
-	if request.GET.get('top'):
-		posts = Post.objects.select_related().order_by('-vote_count').prefetch_related('upvoters', 'downvoters')[:50]		
-		context_dict['top'] = True
-	else:	
-		posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:50]
+	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:50]
 
 	if request.GET.get('topic'):
 		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
@@ -68,7 +66,15 @@ def view_all(request):
 		context_dict['contains'] = contains		
 		posts = [p for p in posts if p.content_contains(contains=contains)]
 
-	context_dict['posts'] = posts
+	if request.GET.get('top'):
+		sorted_posts = sorted(posts, key=lambda k: k.vote_count, reverse=True)
+		context_dict['posts'] = sorted_posts
+		context_dict['top'] = True
+	else:
+		groups = Post.group_by_date(posts)
+		context_dict['groups'] = groups
+		context_dict['naturalday_limit'] = date.today() - timedelta(days=1)
+
 	set_post_permissions(request, posts=posts)	
 	return render(request, 'core/posts.html', context_dict)
 

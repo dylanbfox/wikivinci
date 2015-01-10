@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -114,17 +116,9 @@ def feed(request, username):
 	_posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	_comments = Comment.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	feed_objs = account.personalize_feed(_posts, _comments)
-	context_dict['feed_objs'] = feed_objs[:17]
 
-	# skill_level = request.GET.get('skill_level')
-	# if skill_level:
-	# 	posts = [p for p in posts if p.skill_level == skill_level or skill_level == "ALL"]	
-	# 	context_dict['posts'] = posts[:15]
-	# 	return render(request, 'core/partials/feed-stream.html', context_dict)
-
+	context_dict['groups'] = Post.group_by_date(feed_objs[:30])
+	context_dict['naturalday_limit'] = date.today() - timedelta(days=1)	
 	context_dict['account'] = account
-
-	topics = unique_topic_counts(_posts)	
-	context_dict['topics'] = topics	
 	return render(request, 'core/feed.html', context_dict)
 

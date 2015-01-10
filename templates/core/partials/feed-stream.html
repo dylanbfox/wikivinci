@@ -4,75 +4,84 @@
 {% load markdown_filter %}
 
 <div class="posts">
-	{% for obj in feed_objs %}
-
-		{% if obj.obj_type == "POST" %}
-		<div class="post" data-skill-level="{{ obj.skill_level }}">
-			{% if user.account in obj.upvoters.all or user.account in obj.downvoters.all %}
-			<div class="votes-contain voted" data-url="{% url 'posts:vote' %}" data-voted="true" data-object-id="{{ obj.pk }}">			
-			{% else %}
-			<div class="votes-contain" data-url="{% url 'posts:vote' %}" data-object-id="{{ obj.pk }}">			
-			{% endif %}
-				<i data-vote-direction="up" class="fa fa-chevron-up"></i>
-				<span class="count">{{ obj.vote_count }}</span>
-				<i data-vote-direction="down" class="fa fa-chevron-down"></i>
-			</div>
-
-			<div class="title-contain">
-				<h2><a href="{% url 'posts:view' slug=obj.slug %}">{{ obj.title }}</a></h2>
-				<p class="super-light-font">{{ obj.description|truncatechars:99 }}</p>
-				<span class="timestamp super-super-light-font">submitted <b>{{ obj.created|naturaltime }}</b> / </span>
-				<span class="skill-level super-super-light-font">skill level: <span class="{{ obj.skill_level }}"><b>{{ obj.skill_level }}</b></span></span>				
-			</div>
-
-			<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">
-				<img class="owner" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
-				<p class="username">{{ obj.owner.owner.username }}</p>
-				<p class="points"><i class="fa fa-star"></i>{{ obj.owner.points }}</p>
-				<br />
-				{% if obj.owner.title %}			
-				<p class="title super-light-font">{{ obj.owner.title }}</p>
-				{% endif %}
-				<a class="btn btn-clear" href="{% url 'accounts:profile' username=obj.owner.owner.username %}">view profile</a>
-			</div>			
-
-			<div class="owner-contain hidden-xs hidden-sm">
-				<img data-target="#profilePopup{{ obj.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
-			</div>			
-
-			<div class="post-info-contain super-light-font">
-				<i class="fa fa-comments super-super-light-font"></i><span class="comment-count super-super-light-font">{{ obj.comments.all.count }}</span>
-			</div>
-		</div>
-
-		{% elif obj.obj_type == "COMMENT" %}
-		<div class="post comment">
-			<div class="comment-icon">
-				<i class="fa fa-comment"></i>
-			</div>
-
-			<div class="comment-contain">
-				<p class="text">{{ obj.text|markdownify|safe|striptags|truncatechars:250 }}</p>
-				<p class="comment-on super-light-font">comment posted {{ obj.created|naturaltime }} by <a href="{% url 'accounts:profile' username=obj.owner.owner.username %}">{{ obj.owner.owner.username }}</a> on <a href="{{ obj.absolute_url }}">{{ obj.post.title }}</a></p>
-			</div>
-
-			<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">
-				<img class="owner" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
-				<p class="username">{{ obj.owner.owner.username }}</p>
-				<p class="points"><i class="fa fa-star"></i>{{ obj.owner.points }}</p>
-				<br />
-				{% if obj.owner.title %}			
-				<p class="title super-light-font">{{ obj.owner.title }}</p>
-				{% endif %}
-				<a class="btn btn-clear" href="{% url 'accounts:profile' username=obj.owner.owner.username %}">view profile</a>
-			</div>			
-
-			<div class="owner-contain hidden-xs hidden-sm">
-				<img data-target="#profilePopup{{ obj.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
-			</div>		
-		</div>
+	{% for group in groups %}
+		{% if group.date >= naturalday_limit %}
+		<h2 id="day-group" class="super-light-font">{{ group.date|naturalday }} <span class="super-super-light-font">({{ group.date|date:"l, F d" }})</span></h2>				
+		{% else %}
+		<h2 id="day-group" class="super-light-font">{{ group.date|date:"l, F d" }}</h2>				
 		{% endif %}
 
+		{% for obj in group.posts %}
+			{% if obj.obj_type == "POST" %}
+			<div class="post" data-skill-level="{{ obj.skill_level }}">
+				{% if user.account in obj.upvoters.all or user.account in obj.downvoters.all %}
+				<div class="votes-contain voted" data-url="{% url 'posts:vote' %}" data-voted="true" data-object-id="{{ obj.pk }}">			
+				{% else %}
+				<div class="votes-contain" data-url="{% url 'posts:vote' %}" data-object-id="{{ obj.pk }}">			
+				{% endif %}
+					<i data-vote-direction="up" class="fa fa-chevron-up"></i>
+					<span class="count">{{ obj.vote_count }}</span>
+					<i data-vote-direction="down" class="fa fa-chevron-down"></i>
+				</div>
+
+				<div class="title-contain">
+					<h2><a href="{% url 'posts:view' slug=obj.slug %}">{{ obj.title }}</a></h2>
+					<p class="super-light-font">{{ obj.description|truncatechars:99 }}</p>
+					<span class="timestamp super-super-light-font">submitted <b>{{ obj.created|naturaltime }}</b> / </span>
+					<span class="skill-level super-super-light-font">skill level: <span class="{{ obj.skill_level }}"><b>{{ obj.skill_level }}</b></span></span>				
+				</div>
+
+				<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">
+					<img class="owner" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
+					<p class="username">{{ obj.owner.owner.username }}</p>
+					<p class="points"><i class="fa fa-star"></i>{{ obj.owner.points }}</p>
+					<br />
+					{% if obj.owner.title %}			
+					<p class="title super-light-font">{{ obj.owner.title }}</p>
+					{% endif %}
+					<a class="btn btn-clear" href="{% url 'accounts:profile' username=obj.owner.owner.username %}">view profile</a>
+				</div>			
+
+				<div class="owner-contain hidden-xs hidden-sm">
+					<img data-target="#profilePopup{{ obj.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
+				</div>			
+
+				<div class="post-info-contain super-light-font">
+					<i class="fa fa-comments super-super-light-font"></i><span class="comment-count super-super-light-font">{{ obj.comments.all.count }}</span>
+				</div>
+			</div>
+
+			{% elif obj.obj_type == "COMMENT" %}
+			<div class="post comment">
+				<div class="comment-icon">
+					<i class="fa fa-comment"></i>
+				</div>
+
+				<div class="comment-contain">
+					<p class="text">{{ obj.text|markdownify|safe|striptags|truncatechars:250 }}</p>
+					<p class="comment-on super-light-font">comment posted {{ obj.created|naturaltime }} by <a href="{% url 'accounts:profile' username=obj.owner.owner.username %}">{{ obj.owner.owner.username }}</a> on <a href="{{ obj.absolute_url }}">{{ obj.post.title }}</a></p>
+				</div>
+
+				<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">
+					<img class="owner" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
+					<p class="username">{{ obj.owner.owner.username }}</p>
+					<p class="points"><i class="fa fa-star"></i>{{ obj.owner.points }}</p>
+					<br />
+					{% if obj.owner.title %}			
+					<p class="title super-light-font">{{ obj.owner.title }}</p>
+					{% endif %}
+					<a class="btn btn-clear" href="{% url 'accounts:profile' username=obj.owner.owner.username %}">view profile</a>
+				</div>			
+
+				<div class="owner-contain hidden-xs hidden-sm">
+					<img data-target="#profilePopup{{ obj.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
+				</div>		
+			</div>
+			{% endif %}						
+		{% endfor %}
+	{% endfor %}
+
+	{% for obj in feed_objs %}
 	{% endfor %}
 
 	{% if not feed_objs or feed_objs.count < 5 %}

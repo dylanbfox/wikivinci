@@ -720,6 +720,18 @@ h6 {
 	padding-top:40px;
 }
 
+#page-content .posts #day-group {
+	text-transform:capitalize;
+	font-size:21px;
+	font-weight:700;
+	margin-bottom:35px;
+}
+
+#page-content .posts #day-group > span {
+	font-size:15px;
+	margin-left:4px;
+}
+
 #page-content .posts #sorry {
 	font-size:17px;
 	max-width:800px;	
