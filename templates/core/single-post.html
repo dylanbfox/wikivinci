@@ -47,6 +47,7 @@
 			<a class="addthis_button_linkedin_counter" li:counter="none"></a>
 			<a class="addthis_button_tweet" tw:text="{{ post.title|truncatechars:100 }}. {% if post.owner.twitter_handle %}Submitted by {{ post.owner.twitter_handle }}{% endif %}"></a>
 			<a class="addthis_button_facebook_share" fb:share:layout="button"></a>
+			<!-- <a class="addthis_button_email"><img src="{% static 'core/images/email-share-icon.png' %}" /></a> -->
 		</div>
 			
 		<div id="comments">
