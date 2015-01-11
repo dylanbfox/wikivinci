@@ -62,13 +62,13 @@ def view_all(request):
 		context_dict['topic'] = request.GET['topic']
 
 	if request.GET.get('contains'):
-		contains = request.GET.get('contains')
+		contains = request.GET['contains']
 		context_dict['contains'] = contains		
 		posts = [p for p in posts if p.content_contains(contains=contains)]
 
 	# widdle down now that we've filtered
 	posts = posts[:50]
-	# determine how to display: by date, or by vote
+	# display by date, or by vote
 	if request.GET.get('top'):
 		sorted_posts = sorted(posts, key=lambda k: k.vote_count, reverse=True)
 		context_dict['posts'] = sorted_posts
