@@ -549,7 +549,7 @@ h6 {
 
 #page-content #home #activity > div > div p.descr {
 	clear:both;
-	margin-top:-8px;
+	max-width:80%;
 	float:left;
 }
 
