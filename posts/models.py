@@ -73,9 +73,12 @@ class Post(models.Model):
 		return related_posts[:12]
 
 	@staticmethod
-	def group_by_date(posts):
+	def group_by_date(posts, order_by_vote=False):
 		groups = [{'date': t, 'posts': list(g)} for t, g in groupby(posts, key=lambda p: p.created.date())]
-		return groups		
+		if order_by_vote:
+			groups = [{'date': group['date'], 'posts': sorted(group['posts'],
+				key=lambda p: p.vote_count, reverse=True)} for group in groups]
+		return groups
 
 	post_types = (
 		('LINK', 'link'),
@@ -108,6 +111,7 @@ class Post(models.Model):
 	post_type = models.CharField(max_length=20, choices=post_types)
 	skill_level = models.CharField(max_length=12, choices=skill_levels)
 	description = models.TextField()
+	# approved = models.BooleanField(default=False)
 
 class PostRevision(models.Model):
 
