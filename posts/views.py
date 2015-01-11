@@ -55,7 +55,7 @@ def view(request, slug):
 
 def view_all(request):
 	context_dict = {}
-	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')[:50]
+	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 
 	if request.GET.get('topic'):
 		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
@@ -66,6 +66,9 @@ def view_all(request):
 		context_dict['contains'] = contains		
 		posts = [p for p in posts if p.content_contains(contains=contains)]
 
+	# widdle down now that we've filtered
+	posts = posts[:50]
+	# determine how to display: by date, or by vote
 	if request.GET.get('top'):
 		sorted_posts = sorted(posts, key=lambda k: k.vote_count, reverse=True)
 		context_dict['posts'] = sorted_posts
