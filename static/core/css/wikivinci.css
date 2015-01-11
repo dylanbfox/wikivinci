@@ -517,7 +517,6 @@ h6 {
 }
 
 #page-content #home #activity {
-	margin-top:75px;
 }
 
 #page-content #home #activity > div {
@@ -532,18 +531,25 @@ h6 {
 
 #page-content #home #activity > div > h2 {
 	margin-bottom:25px;
-	font-size:16px;
+	font-size:20px;
+	text-align:center;
 }
 
 #page-content #home #activity > div > div {
 	overflow:auto;
 	padding-bottom:10px;
-	margin-bottom:15px;
-	border-bottom:1px solid #D9D9D9;	
+	margin-bottom:20px;
+	/*border-bottom:1px solid #E5E5E5;*/
 }
 
-#page-content #home #activity > div > div > p {
+#page-content #home #activity > div > div > p.title {
 	max-width:80%;
+	float:left;
+}
+
+#page-content #home #activity > div > div p.descr {
+	clear:both;
+	margin-top:-8px;
 	float:left;
 }
 
@@ -555,6 +561,23 @@ h6 {
 	-webkit-border-radius:16px;
 	-moz-border-radius:16px;
 	float:right;	
+}
+
+#page-content #home #activity #popular-topics > a {
+	display:block;
+	width:100%;
+	padding:12px;
+	margin-bottom:15px;
+	border-radius:4px;
+	text-align:center;
+	border:1px solid #E5E5E5;
+	font-size:16px;
+	text-decoration:none;
+}
+
+#page-content #home #activity #popular-topics > a > i.fa {
+	margin-left:3px;
+	font-size:0.8em;
 }
 
 #page-content #about #wikivinci {
