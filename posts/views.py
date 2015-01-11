@@ -71,7 +71,7 @@ def view_all(request):
 		context_dict['posts'] = sorted_posts
 		context_dict['top'] = True
 	else:
-		groups = Post.group_by_date(posts)
+		groups = Post.group_by_date(posts, order_by_vote=True)
 		context_dict['groups'] = groups
 		context_dict['naturalday_limit'] = date.today() - timedelta(days=1)
 
