@@ -30,7 +30,7 @@ class Command(BaseCommand):
 			"\n\nPlesae share with friends!"
 		)
 
-		_posts = Post.objects.filter(created__gte=yest_datetime).select_related()
+		_posts = Post.objects.filter().select_related()
 		_comments = []
 
 		# pass any argument to test the email and only send it to self
