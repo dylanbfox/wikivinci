@@ -9,9 +9,9 @@
 
 	<div id="top-cta">
 		<div id="left">
-			<h2>Learn new things. <span class="super-light-font">Browse recently added tutorials and interesting resources posted by the community.</h2>
+			<h2>Keep learning. <span class="super-light-font">Browse recently added tutorials and resources posted by the community.</h2>
 			<form method="GET" action="{% url 'posts:view_all' %}">
-				<input type="text" name="contains" placeholder="Eg: Django, Python, Startups, Javascript" / />
+				<input type="text" name="contains" placeholder="Learn about: (eg: Django, Python, Startups)" / />
 				<input type="submit" value="search" class="btn btn-primary" />
 				<p class="form-tooltip super-super-light-font"><b>popular searches:</b>
 					{% for k, v in topics.items|slice:":7" %}
