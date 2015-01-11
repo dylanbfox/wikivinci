@@ -26,20 +26,12 @@ class Command(BaseCommand):
 		subject, from_email = 'Learn something new today', settings.DEFAULT_FROM_EMAIL
 		host_name = settings.HOST_NAME		
 		html = get_template('accounts/emails/daily-email.html')
-		custom_message = (""
-		"You can now format/style your comments with Markdown!\n\n"
-		"You can also now be flagged as the \"Author\" of a resource, even if "
-		"it was submitted by another user. A link to your account, and your "
-		"profile picture with a badge on it, will be displayed on the resource's page and "
-		"in any comments you post. All of your authored resources will "
-		"be displayed in your profile under the \"Authored\" tab.\n\nEmail me if you want "
-		"to claim authorship of a resource submitted by another user!\n\n"
-		"- Dylan\n\n"
-		"PS - You can now unsubscribe from your account settings page."
+		custom_message = ("Posting is now limited...blah and some other stuff"
+			"\n\nPlesae share with friends!"
 		)
 
 		_posts = Post.objects.filter(created__gte=yest_datetime).select_related()
-		_comments = Comment.objects.filter(created__gte=yest_datetime).select_related()
+		_comments = []
 
 		# pass any argument to test the email and only send it to self
 		if args:
@@ -49,7 +41,7 @@ class Command(BaseCommand):
 
 		for account in accounts:
 			to = account.owner.email
-			objects = account.personalize_feed(_posts, _comments)[:5]
+			objects = account.personalize_feed(_posts, _comments)[:4]
 			d = Context({'objects': objects, 'custom_message': custom_message, 'HOST_NAME': host_name})
 			html_content = html.render(d)
 			msg = EmailMultiAlternatives(subject, '<need to edit>', from_email, [to])
