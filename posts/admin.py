@@ -2,6 +2,17 @@ from django.contrib import admin
 
 from posts.models import Post, PostRevision
 
+class PostAdmin(admin.ModelAdmin):
+
+	def get_queryset(self, request):
+		qs = Post.incl_pending_posts
+		ordering = self.get_ordering(request)
+		if ordering:
+			qs = qs.order_by(*ordering)
+		return qs
+
+	list_display = ['title', 'approved']
+
 class PostRevisionAdmin(admin.ModelAdmin):
 
 	def approve(self, request, queryset):
@@ -11,5 +22,5 @@ class PostRevisionAdmin(admin.ModelAdmin):
 	approve.short_description = "Approve the selected revisions"
 	actions = ['approve']
 
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
 admin.site.register(PostRevision, PostRevisionAdmin)
