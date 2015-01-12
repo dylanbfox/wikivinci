@@ -120,5 +120,10 @@ def feed(request, username):
 	context_dict['groups'] = Post.group_by_date(feed_objs[:30])
 	context_dict['naturalday_limit'] = date.today() - timedelta(days=1)	
 	context_dict['account'] = account
+	
+	topics = unique_topic_counts(_posts)
+	context_dict['topics'] = topics
+	context_dict['account'] = account
+	context_dict['fav_topics'] = account.fav_topics_to_list()
 	return render(request, 'core/feed.html', context_dict)
 
