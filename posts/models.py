@@ -24,11 +24,11 @@ class Post(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
-		# executes on first save
+		# executes on first save only
 		if not self.slug:
 			self.slug = self.create_slug()
 			if self.owner.can_post:
-				self.approved = True
+				self.approve(commit=False)
 		super(Post, self).save(*args, **kwargs)
 
 	def create_slug(self):
@@ -82,10 +82,15 @@ class Post(models.Model):
 		related_posts = [p for p in posts if any(p.tags_contain(tag) for tag in self.tags_to_list())]
 		return related_posts[:12]
 
-	def approve(self):
+	def approve(self, commit=True):
+		from .tasks import send_approved_email
+		
 		self.approved = True
-		self.save()
-		self.owner.award_points(5)		
+		if commit:
+			self.save()
+			send_approved_email.apply_async([self.owner.id, self.id])
+
+		self.owner.award_points(5)	
 
 	@staticmethod
 	def group_by_date(posts, order_by_vote=False):

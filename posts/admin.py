@@ -11,6 +11,13 @@ class PostAdmin(admin.ModelAdmin):
 			qs = qs.order_by(*ordering)
 		return qs
 
+	def approve(self, request, queryset):
+		for post in queryset:
+			if post.approved == False:
+				post.approve()
+	approve.short_description = "Approve the selected posts"
+	actions = ['approve']
+
 	list_display = ['title', 'approved']
 
 class PostRevisionAdmin(admin.ModelAdmin):
