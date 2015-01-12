@@ -7,6 +7,10 @@ from django.core.urlresolvers import reverse
 
 from accounts.models import Account
 
+class ApprovedOnlyPostManager(models.Manager):
+	def get_queryset(self):
+		return super(ApprovedOnlyPostManager, self).get_queryset().filter(approved=True)
+
 class Post(models.Model):
 
 	class Meta:
@@ -72,6 +76,9 @@ class Post(models.Model):
 		related_posts = [p for p in posts if any(p.tags_contain(tag) for tag in self.tags_to_list())]
 		return related_posts[:12]
 
+	def approve(self):
+		self.approved = True
+
 	@staticmethod
 	def group_by_date(posts, order_by_vote=False):
 		groups = [{'date': t, 'posts': list(g)} for t, g in groupby(posts, key=lambda p: p.created.date())]
@@ -111,7 +118,9 @@ class Post(models.Model):
 	post_type = models.CharField(max_length=20, choices=post_types)
 	skill_level = models.CharField(max_length=12, choices=skill_levels)
 	description = models.TextField()
-	# approved = models.BooleanField(default=False)
+	approved = models.BooleanField(default=True)
+
+	objects = ApprovedOnlyPostManager()
 
 class PostRevision(models.Model):
 
