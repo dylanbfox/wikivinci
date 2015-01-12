@@ -11,6 +11,10 @@ class ApprovedOnlyPostManager(models.Manager):
 	def get_queryset(self):
 		return super(ApprovedOnlyPostManager, self).get_queryset().filter(approved=True)
 
+class IncludePendingPostManager(models.Manager):
+	def get_queryset(self):
+		return super(IncludePendingPostManager, self).get_queryset()
+
 class Post(models.Model):
 
 	class Meta:
@@ -125,6 +129,7 @@ class Post(models.Model):
 	approved = models.BooleanField(default=False)
 
 	objects = ApprovedOnlyPostManager()
+	incl_pending_posts = IncludePendingPostManager()	
 
 class PostRevision(models.Model):
 
