@@ -266,14 +266,13 @@ h6 {
 	width:45px;
 	height:58px;
 	line-height:58px;
-	border:1px solid #E5761A;
 	border-top-left-radius:4px;
 	-moz-border-top-left-radius:4px;
 	-webkit-border-top-left-radius:4px;
 	border-bottom-left-radius:4px;
 	-moz-border-bottom-left-radius:4px;
 	-webkit-border-bottom-left-radius:4px;	
-	background-color:#F47F1D;
+	background-color:#F4351D;
 	font-size:30px;
 	font-weight:700;
 	text-align:center;
@@ -287,8 +286,12 @@ h6 {
 }
 
 #post-add-popup #success i.fa {
-	font-size:74px;
+	font-size:60px;
 	color:#076699;
+}
+
+#post-add-popup #success p {
+	margin-top:20px;
 }
 
 #post-add-popup h2 {
