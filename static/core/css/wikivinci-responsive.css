@@ -108,6 +108,23 @@
 
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
+	#personalizeFeed .modal-body {
+		overflow:auto;
+		max-height:none;
+	}
+
+	#personalizeFeed .modal-body > div {
+		width:100%;
+		font-size:13px;
+		font-weight:700;
+		margin-bottom:14px;
+		border:1px solid #E5E5E5;
+		padding:6px;
+		max-height:40px;
+		overflow:auto;
+		border-radius:4px;
+	}
+
 	#page-content #home h2 {
 		font-size:26px;
 	}
@@ -240,6 +257,11 @@
 }
 
 @media (min-width:768px) and (max-width:991px) {
+	#personalizeFeed .modal-body {
+		overflow:auto;
+		max-height:280px;
+	}
+
 	#post-add-popup {
 		width:60%;
 	}

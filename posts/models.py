@@ -80,7 +80,7 @@ class Post(models.Model):
 	def get_related_posts(self):
 		posts = Post.objects.exclude(pk=self.pk).filter(skill_level=self.skill_level).order_by('-vote_count')
 		related_posts = [p for p in posts if any(p.tags_contain(tag) for tag in self.tags_to_list())]
-		return related_posts[:12]
+		return related_posts[:7]
 
 	def approve(self, commit=True):
 		from .tasks import send_approved_email

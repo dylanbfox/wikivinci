@@ -332,6 +332,35 @@ h6 {
 	background-color:#F9FF9B;
 }
 
+/*feed personalization modal*/
+
+#personalizeFeed .modal-body {
+	overflow:auto;
+	max-height:430px;
+}
+
+#personalizeFeed .modal-body > div {
+	float:left;
+	width:30%;
+	font-size:13px;
+	font-weight:700;
+	margin-bottom:14px;
+	border:1px solid #E5E5E5;
+	margin-right:3%;
+	padding:10px;
+	max-height:40px;
+	overflow:auto;
+	border-radius:4px;
+}
+
+#personalizeFeed .modal-body > div.favorite {
+	background-color:#FFAB47;
+	border:1px solid #E5902A;
+}
+
+
+/*authenticate modal*/
+
 #authenticateModal {
 
 }
@@ -670,6 +699,15 @@ h6 {
 #page-content > .container .toprow p.sub-title {
 	margin-top:20px;
 	font-size:17px;	
+}
+
+#page-content > .container .toprow p#personalize {
+	margin-top:11px;
+	text-align:right;
+}
+
+#page-content > .container .toprow p#personalize a > i.fa {
+	margin-right:7px;
 }
 
 #page-content > .container .toprow span.link-type {

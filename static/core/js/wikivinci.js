@@ -429,6 +429,8 @@ $(document).ready(function(){
 		$("#profile #activity .feed").hide();
 		$(this).addClass("active");
 		feed_node.show();
-	});	
+	});
+
+	// build out ajax for feed personalization
 
 });

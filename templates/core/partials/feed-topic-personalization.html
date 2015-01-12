@@ -1,0 +1,22 @@
+<div class="modal fade" id="personalizeFeed" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">What do you want to learn more about?</h4>
+      </div>
+      <div class="modal-body">
+        {% for k, v in topics.items %}
+          {% if k in fav_topics %}
+          <div class="favorite" data-topic="{{ k }}">{{ k }}</div>
+          {% else %}
+          <div data-topic="{{ k }}">{{ k }}</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary"><i class="fa fa-magic"></i> save personalization</a>       
+      </div>
+    </div>
+  </div>
+</div>
