@@ -118,7 +118,7 @@ class Post(models.Model):
 	post_type = models.CharField(max_length=20, choices=post_types)
 	skill_level = models.CharField(max_length=12, choices=skill_levels)
 	description = models.TextField()
-	approved = models.BooleanField(default=True)
+	approved = models.BooleanField(default=False)
 
 	objects = ApprovedOnlyPostManager()
 
