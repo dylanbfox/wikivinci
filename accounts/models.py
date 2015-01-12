@@ -55,6 +55,7 @@ class Account(models.Model):
 	twitter_handle = models.CharField(max_length=200, blank=True, null=True)
 	fav_topics = models.CharField(max_length=999, blank=True, null=True)
 	can_comment = models.BooleanField(default=False)
+	can_post = models.BooleanField(default=True)
 	newsletter_setting = models.CharField(max_length=50, default='DAILY', choices=newsletter_settings)
 
 

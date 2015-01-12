@@ -20,9 +20,11 @@ class Post(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
+		# executes on first save
 		if not self.slug:
 			self.slug = self.create_slug()
-			self.owner.award_points(5)
+			if self.owner.can_post:
+				self.approved = True
 		super(Post, self).save(*args, **kwargs)
 
 	def create_slug(self):
@@ -78,6 +80,8 @@ class Post(models.Model):
 
 	def approve(self):
 		self.approved = True
+		self.save()
+		self.owner.award_points(5)		
 
 	@staticmethod
 	def group_by_date(posts, order_by_vote=False):
