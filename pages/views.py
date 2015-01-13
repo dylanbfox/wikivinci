@@ -15,7 +15,7 @@ def home(request):
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	topics = unique_topic_counts(posts)
 	context_dict['topics'] = topics
-	context_dict['posts'] = posts[:10]
+	context_dict['posts'] = posts[:7]
 	context_dict['comments'] = Comment.objects.select_related().order_by('-created')[:5]
 	return render(request, 'core/home.html', context_dict)
 

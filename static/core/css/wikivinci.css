@@ -476,88 +476,39 @@ h6 {
 	overflow:auto;	
 }
 
-#page-content #home #top-cta > #left {
-	float:left;
-	width:50%;
-	padding-right:6.5%;
-	padding-bottom:100px;
+#page-content #home #top-cta h2 {
+	font-size:42px;
 }
 
-#page-content #home #top-cta > #right {
-	float:right;
-	width:50%;
-	padding-left:6.5%;
-	padding-bottom:100px;
-	border-left:1px solid #E8E8E8;
-}
-
-#page-content #home #top-cta > #right a#add-post {
-	padding:11px;
-	width:54%;
-}
-
-#page-content #home #top-cta > #right a#add-post i.fa {
-	margin-right:6px;
-}
-
-#page-content #home h2 {
-	font-size:24px;
-	margin-bottom:40px;
-}
-
-#page-content #home h2 > span {
+#page-content #home #top-cta h2 > span {
 	font-size:18px;
 	font-weight:400;
 }
 
-#page-content #home form {
-	overflow:auto;
+#page-content #home #top-cta > p {
+	margin-top:10px;
+	margin-bottom:30px;
+	font-size:18px;
 }
 
-#page-content #home form input {
-	padding:10px;
-}
-
-#page-content #home form input[name='contains'] {
-	width:80%;
-	float:left;
-}
-
-#page-content #home form input[type='submit'] {
-	width:18%;
-	float:right;
-}
-
-#page-content #home form .form-tooltip {
-	clear:both;
-	padding-top:5px;
-	margin-top:5px;
-	font-size:13px;
-	text-align:left;
-}
-
-#page-content #home #wikivinci {
-	clear:both;
-	padding-top:50px;
-	font-size:14px;
-}
-
-#page-content #home #wikivinci h2 {
+#page-content #home #top-cta a#add-post {
+	width:100%;
+	max-width:500px;
+	padding:14px;
 	font-size:16px;
-	margin-bottom:10px;
+}
+
+#page-content #home #top-cta a#add-post > i.fa {
+	margin-right:9px;
 }
 
 #page-content #home #activity {
+	margin-top:100px;
 }
 
 #page-content #home #activity > div {
-	float:left;
-	width:42.5%;
-	margin-right:15%;
-}
-
-#page-content #home #activity > div:last-child {
-	margin-right:0px;
+	width:50%;
+	margin:0 auto;
 }
 
 #page-content #home #activity > div > h2 {
@@ -570,7 +521,6 @@ h6 {
 	overflow:auto;
 	padding-bottom:10px;
 	margin-bottom:20px;
-	/*border-bottom:1px solid #E5E5E5;*/
 }
 
 #page-content #home #activity > div > div > p.title {
@@ -594,21 +544,20 @@ h6 {
 	float:right;	
 }
 
-#page-content #home #activity #popular-topics > a {
-	display:block;
-	width:100%;
-	padding:12px;
-	margin-bottom:15px;
-	border-radius:4px;
+#page-content #home #sign-up {
 	text-align:center;
-	border:1px solid #428bca;
-	font-size:16px;
-	text-decoration:none;
+	margin-top:50px;
 }
 
-#page-content #home #activity #popular-topics > a > i.fa {
-	margin-left:3px;
-	font-size:0.8em;
+#page-content #home #sign-up > h2 {
+	font-size:21px;
+}
+
+#page-content #home #sign-up > a {
+	margin-top:35px;
+	width:100%;
+	max-width:340px;
+	padding:12px;
 }
 
 #page-content #about #wikivinci {
@@ -766,17 +715,21 @@ h6 {
 #page-content #topics > a {
 	float:left;
 	padding:10px;
-	background-color:#F2B000;
-	color:#FFF;
-	font-weight:700;
 	font-size:14px;
-	border-radius:6px;
-	margin:0px 20px 20px 0px;	
+	border-radius:4px;
+	color:#3c3e43;
+	font-size:14px;
+	border-radius:4px;
+	margin:0px 20px 20px 0px;
+	border:1px solid #D7D5D5;
+	width:23%;
+	text-decoration:none;	
 }
 
 #page-content #topics > a > span.count {
-	margin-left:6px;
+	margin-left:2px;
 	font-weight:400;
+	font-size:11px;
 }
 
 #page-content .posts {
