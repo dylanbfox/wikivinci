@@ -402,10 +402,25 @@ h6 {
 	position:relative;
 }
 
+#header > .container #links > form#search {
+	float:right;
+	width:204px;
+	font-weight:300;
+}
+
+#header > .container #links > form#search input[name='contains'] {
+	line-height:initial;
+	border-radius:8px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	font-size:13px;
+	padding-left:5px;
+}
+
 #header > .container #links > a {
 	float:right;
 	margin-left:36px;
-	font-size:16px;
+	font-size:15px;
 	text-decoration:none;
 }
 

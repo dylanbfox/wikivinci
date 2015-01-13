@@ -256,7 +256,6 @@
 }
 
 @media (min-width:768px) and (max-width:991px) {
-
 	#page-content #home #top-cta h2 {
 		margin-top:26px;
 	}
@@ -303,6 +302,14 @@
 }
 
 @media (min-width:992px) and (max-width:1199px) {
+	#header > .container #links > form#search {
+		width:130px;
+	}
+	
+	#header > .container #links > a {
+		margin-left:22px;
+	}	
+
 	#page-content #contributors .contributor {
 		width:33%;
 		margin-bottom:0px;
