@@ -1,5 +1,9 @@
 /*phones and tablets*/
 @media (min-width:100px) and (max-width:991px) {
+	#page-content #topics #topics-list > a {
+		width:auto;
+	}
+
 	#header > .container {
 		line-height:initial;
 	}
@@ -55,13 +59,6 @@
 		float:none;
 		padding:3px 1px;
 		font-size:13px;		
-	}	
-
-	#page-content #home #activity > div {
-		width:100%;
-		float:none;
-		margin-bottom:30px;
-		margin-right:0;		
 	}
 
 	#page-content #single-post #right-column #post-info span.author-mark {
@@ -92,22 +89,41 @@
 	#page-content #profile #profile-top #account-info {
 		float:none;
 	}
-
-	#page-content #home #top-cta #left,
-	#page-content #home #top-cta #right {
-		width:100%;
-		float:none;
-		border:none;
-		padding:5% 5%;
-	}
-
-	#page-content #home #top-cta > #right a#add-post {
-		width:100%;
-	}	
 }
 
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
+	#page-content #home #top-cta h2 {
+		font-size:32px;
+		margin-top:26px;
+	}
+
+	#page-content #home #top-cta > p {
+		font-size:14px;
+	}
+
+	#page-content #home #top-cta a#add-post {
+		padding:11px;
+		font-size:14px;
+	}
+
+	#page-content #home #activity {
+		margin-top:50px;
+	}
+
+	#page-content #home #activity > div {
+		width:100%;
+	}
+
+	#page-content #home #sign-up > h2 {
+		font-size:16px;
+	}
+
+	#page-content #home #sign-up > a {
+		margin-top:11px;
+		padding:8px;
+	}
+
 	#personalizeFeed .modal-body {
 		overflow:auto;
 		max-height:none;
@@ -123,23 +139,6 @@
 		max-height:40px;
 		overflow:auto;
 		border-radius:4px;
-	}
-
-	#page-content #home h2 {
-		font-size:26px;
-	}
-
-	#page-content #home h2 > span {
-		display:block;
-		margin-top:5px;
-		font-size:16px;		
-	}
-
-	#page-content #home form input {
-		width:100% !important;
-		float:none !important;
-		padding:9px !important;
-		font-size:14px !important;		
 	}
 
 	#page-content form input[type='submit'] {
@@ -257,6 +256,19 @@
 }
 
 @media (min-width:768px) and (max-width:991px) {
+
+	#page-content #home #top-cta h2 {
+		margin-top:26px;
+	}
+
+	#page-content #home #top-cta > p {
+		padding:0px 90px;
+	}
+
+	#page-content #home #activity > div {
+		width:80%;
+	}
+
 	#personalizeFeed .modal-body {
 		overflow:auto;
 		max-height:280px;

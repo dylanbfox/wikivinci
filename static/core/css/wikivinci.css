@@ -708,11 +708,22 @@ h6 {
 	font-weight:700;
 }
 
-#page-content #topics {
-	padding-top:25px;
+#page-content #topics #topics-list {
+	padding-top:15px;
+	border-top:1px solid #D7D5D5;
+	margin-top:15px;
 }
 
-#page-content #topics > a {
+#page-content #topics input#topic-search {
+	border-radius:13px;
+	width:100%;
+	max-width:300px;
+	font-size:14px;
+	padding-left:14px;
+	margin-top:15px;
+}
+
+#page-content #topics #topics-list > a {
 	float:left;
 	padding:10px;
 	font-size:14px;
@@ -726,7 +737,11 @@ h6 {
 	text-decoration:none;	
 }
 
-#page-content #topics > a > span.count {
+#page-content #topics #topics-list > a:nth-child(4n+4) {
+	margin-right:0px;
+}
+
+#page-content #topics #topics-list > a > span.count {
 	margin-left:2px;
 	font-weight:400;
 	font-size:11px;
