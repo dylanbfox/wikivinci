@@ -12,7 +12,7 @@
 
 	<div id="topics">
 	{% for k, v in topics.items %}
-		<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }} <span class="count">x{{ v.count }}</span></a>
+		<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }} <span class="count super-light-font">x{{ v.count }} resources</span></a>
 	{% endfor %}
 	</div>
 

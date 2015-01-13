@@ -8,33 +8,12 @@
 <div id="home" class="container">
 
 	<div id="top-cta">
-		<div id="left">
-			<h2>Keep learning. <span class="super-light-font">Browse high quality tutorials and resources, submitted by the community.</h2>
-			<form method="GET" action="{% url 'posts:view_all' %}">
-				<input type="text" name="contains" placeholder="Learn about: (eg: Django, Python, Startups)" / />
-				<input type="submit" value="search" class="btn btn-primary" />
-				<p class="form-tooltip super-super-light-font"><b>popular searches:</b>
-					{% for k, v in topics.items|slice:":7" %}
-					<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }}{% if not forloop.last%}<span>, {% endif %}</span></a>
-					{% endfor %}
-				</p>
-			</form>
-		</div>
-
-		<div id="right">
-			<h2>Help others learn. <span class="super-light-font">Submit high quality tutorials and interesting resources for others to learn from.</span></h2>
-			<a href="#" id="add-post" class="btn btn-success"><i class="fa fa-book"></i> submit a resource</a>
-		</div>
+		<h2>Help others learn.</h2>
+		<p class="super-light-font">We're building a database of top tutorials and resources for people to learn from, and we need your help.</p>
+		<a href="#" id="add-post" class="btn btn-success"><i class="fa fa-book"></i> submit a resource</a>		
 	</div>
 
 	<div id="activity">
-		<div id="popular-topics">
-			<h2 class="super-light-font">Popular Topics</h2>
-			{% for k, v in topics.items|slice:":7" %}
-			<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }} <i class="fa fa-chevron-right"></i></a>
-			{% endfor %}
-		</div>
-
 		<div id="recent-posts">
 			<h2 class="super-light-font">Recently added resources</h2>
 			{% for post in posts %}
@@ -47,20 +26,10 @@
 		</div>			
 	</div>
 
-	<div id="wikivinci" class="super-light-font hidden-xs">
-		<h2>What is Wikivinci?</h2>
-		<p>Self-learning is hard. For anything you need/want to learn, there are hundreds of resources and tutorials online, all with their own flavor. As a learner, you need to evaluate all of these resources before deciding which one to utilize.
-		<br />
-		<br />
-		How old is the resource? Is it still relevant? Did other people use it? Is the author available for questions? -- these are just a few of the questions you might ask yourself as you try to find a good resource to learn from.
-		<br />
-		<br />
-		<b>Wikivinci was created to help fix this.</b> Community members, like you, can post good resources and tutorials to Wikivinci. Other community members have the ability to upvote, downvote, and add comments to every 
-		resource on Wikivinci, including the ones you add. The goal is for the community to curate these resources and tutorials over time, so that it's easier for people to find the best resources for learning.
-		<br />
-		<br />
-		<b>Wikivinci is brand new, and needs your help!</b> Sign up for an account and post any good resources/tutorials/etc. you've found in the past. It all helps!  
-		</p>
-	</div>	
+	<div id="sign-up">
+		<h2 class="lighter-font">Be smarter. Sign up to get a personalized feed of high quality tutorials and resources to learn from.</h2>
+		<a href="javascript:" data-toggle="modal" data-target="#authenticateModal" class="btn btn-warning">sign up</a>
+	</div>
+	
 </div>
 {% endblock content %}

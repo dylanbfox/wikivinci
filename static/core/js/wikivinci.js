@@ -32,6 +32,16 @@ function disableForm(form, fake){
 
 $(document).ready(function(){
 
+	// (function(){
+	// 	var recently_added_nodes = $($("#home #activity #recent-posts > div").get().reverse());
+	// 	var fade_recently_added_nodes = recently_added_nodes.slice(-5);
+	// 	fade_recently_added_nodes.hide();
+	// 	// scroll through recently added resources on home page
+	// 	fade_recently_added_nodes.each(function(index){
+	// 		$(this).delay(5000*index).fadeIn(800);
+	// 	});
+	// })();
+
 	// feed filter options
 	$("#feed-filter select#skill-level-filter").on("change", function(){
 		var skill_level = $(this).val();
