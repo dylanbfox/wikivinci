@@ -65,7 +65,8 @@
 				<a class="visible-xs visible-sm" href="{% url 'accounts:feed' username=user.username %}">My Feed</a>
 				<a class="visible-xs visible-sm" href="{% url 'accounts:profile' username=user.username %}">Profile</a>
 				<a class="visible-xs visible-sm" href="{% url 'accounts:settings' username=user.username %}">Settings</a>
-				<a class="visible-xs visible-sm" href="{% url 'accounts:logout' %}">Logout</a>							
+				<a class="visible-xs visible-sm" href="{% url 'accounts:logout' %}">Logout</a>
+
 				{% else %}
 				<a data-toggle="modal" data-target="#authenticateModal" href="#">Login</a>				
 				{% endif %}
@@ -73,6 +74,8 @@
 				<a href="{% url 'posts:topics' %}">Topics</a>
 				<!-- <a href="#">Courses</a>	 -->				
 				<a href="{% url 'pages:about' %}">About</a>
+
+				<form id="search" method="GET" action="{% url 'posts:view_all' %}"><input name="contains" class="super-light-font" type="text" placeholder="Search topics" /></form>				
 				</div>
 			</div>
 		</div>

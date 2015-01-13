@@ -28,7 +28,11 @@
 
 	<div id="sign-up">
 		<h2 class="lighter-font">Be smarter. Sign up to get a personalized feed of high quality tutorials and resources to learn from.</h2>
+		{% if user.is_authenticated %}
+		<a href="{% url 'accounts:feed' username=user.username %}" class="btn btn-warning">view your feed</a>
+		{% else %}
 		<a href="javascript:" data-toggle="modal" data-target="#authenticateModal" class="btn btn-warning">sign up</a>
+		{% endif %}
 	</div>
 	
 </div>
