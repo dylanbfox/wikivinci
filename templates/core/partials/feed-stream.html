@@ -19,9 +19,9 @@
 				{% else %}
 				<div class="votes-contain" data-url="{% url 'posts:vote' %}" data-object-id="{{ obj.pk }}">			
 				{% endif %}
-					<i data-vote-direction="up" class="fa fa-chevron-up"></i>
+					<i data-vote-direction="up" class="fa fa-caret-up"></i>
 					<span class="count">{{ obj.vote_count }}</span>
-					<i data-vote-direction="down" class="fa fa-chevron-down"></i>
+					<i data-vote-direction="down" class="fa fa-caret-down"></i>
 				</div>
 
 				<div class="title-contain">

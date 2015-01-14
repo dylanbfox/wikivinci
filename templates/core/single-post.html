@@ -33,9 +33,9 @@
 			{% else %}
 			<div class="votes-contain" data-object-id="{{ post.pk }}" data-url="{% url 'posts:vote' %}">				
 			{% endif %}
-				<i data-vote-direction="up" class="fa fa-chevron-up"></i>
+				<i data-vote-direction="up" class="fa fa-caret-up"></i>
 				<span class="count">{{ post.vote_count }}</span>
-				<i data-vote-direction="down" class="fa fa-chevron-down"></i>
+				<i data-vote-direction="down" class="fa fa-caret-down"></i>
 			</div>			
 			
 			<h2><a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }} <i class="fa fa-external-link"></i></a></h2>
@@ -59,9 +59,9 @@
 				{% else %}
 				<div class="votes-contain" data-object-id="{{ comment.pk }}" data-url="{% url 'comments:vote' %}">
 				{% endif %}
-					<i data-vote-direction="up" class="fa fa-chevron-up"></i>
+					<i data-vote-direction="up" class="fa fa-caret-up"></i>
 					<span class="count">{{ comment.vote_count }}</span>
-					<i data-vote-direction="down" class="fa fa-chevron-down"></i>
+					<i data-vote-direction="down" class="fa fa-caret-down"></i>
 				</div>
 				
 				<div class="content">

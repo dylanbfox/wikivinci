@@ -334,26 +334,63 @@ h6 {
 
 /*feed personalization modal*/
 
+#personalizeFeed .modal-header {
+	overflow:auto;	
+}
+
+#personalizeFeed .modal-header h4 {
+	float:left;
+}
+
+#personalizeFeed .modal-header input#topic-search {
+	float:right;
+	width:30%;	
+	border-radius:13px;
+	font-size:14px;
+	margin-right:10px;
+}
+
 #personalizeFeed .modal-body {
-	overflow:auto;
 	max-height:430px;
 }
 
-#personalizeFeed .modal-body > div {
+#personalizeFeed .modal-body {
+	overflow:auto;
+}
+
+#personalizeFeed .modal-body .ajax-update {
+	display:none;
+	text-align:center;
+	font-size:18px;
+	font-weight:300;
+	padding:20px 0px;	
+}
+
+#personalizeFeed .modal-body .ajax-update > p {
+	margin-bottom:9px;
+}
+
+#personalizeFeed .modal-body #topic-list {
+	overflow:auto;
+}
+
+#personalizeFeed .modal-body #topic-list > a {
 	float:left;
 	width:30%;
 	font-size:13px;
-	font-weight:700;
+	font-weight:400;
 	margin-bottom:14px;
-	border:1px solid #E5E5E5;
+	border:1px solid #D7D5D5;
 	margin-right:3%;
 	padding:10px;
 	max-height:40px;
 	overflow:auto;
 	border-radius:4px;
+	color:#3c3e43;
+	text-decoration:none;
 }
 
-#personalizeFeed .modal-body > div.favorite {
+#personalizeFeed .modal-body #topic-list > a.favorite {
 	background-color:#FFAB47;
 	border:1px solid #E5902A;
 }

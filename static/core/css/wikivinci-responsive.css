@@ -1,5 +1,10 @@
 /*phones and tablets*/
 @media (min-width:100px) and (max-width:991px) {
+
+	#personalizeFeed .modal-body #topic-list > a {
+		width:auto;
+	}
+
 	#page-content #topics #topics-list > a {
 		width:auto;
 	}
@@ -126,20 +131,14 @@
 
 	#personalizeFeed .modal-body {
 		overflow:auto;
-		max-height:none;
+		max-height:200px;
 	}
 
-	#personalizeFeed .modal-body > div {
+	#personalizeFeed .modal-header input#topic-search {
+		float:left;
 		width:100%;
-		font-size:13px;
-		font-weight:700;
-		margin-bottom:14px;
-		border:1px solid #E5E5E5;
-		padding:6px;
-		max-height:40px;
-		overflow:auto;
-		border-radius:4px;
-	}
+		margin-top:10px;
+	}	
 
 	#page-content form input[type='submit'] {
 		margin-top:5px;
@@ -272,6 +271,11 @@
 		overflow:auto;
 		max-height:280px;
 	}
+
+	#personalizeFeed .modal-header input#topic-search {
+		float:right;
+		width:200px;
+	}	
 
 	#post-add-popup {
 		width:60%;

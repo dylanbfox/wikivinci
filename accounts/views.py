@@ -111,8 +111,12 @@ def feed(request, username):
 	if request.user.username != username:
 		return HttpResponseForbidden()
 
-	context_dict = {}
 	account = request.user.account
+	if request.method == 'POST':
+		account.fav_topics = request.POST['favorite_topics']
+		account.save()
+
+	context_dict = {}
 	_posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	_comments = Comment.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	feed_objs = account.personalize_feed(_posts, _comments)
@@ -126,4 +130,3 @@ def feed(request, username):
 	context_dict['account'] = account
 	context_dict['fav_topics'] = account.fav_topics_to_list()
 	return render(request, 'core/feed.html', context_dict)
-
