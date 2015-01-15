@@ -23,11 +23,16 @@ class Command(BaseCommand):
 			return yest_datetime
 
 		yest_datetime = create_yest_datetime_aware()
-		subject, from_email = 'Learn something new today', settings.DEFAULT_FROM_EMAIL
+		subject, from_email = 'Learn something new tonight (plus personalize your learning goals)', settings.DEFAULT_FROM_EMAIL
 		host_name = settings.HOST_NAME		
 		html = get_template('accounts/emails/daily-email.html')
 		custom_message = (
-			""
+			"You can now add personalization settings to your account! Once you do, "
+			"only the topics you select as being interested in will show up in your feed "
+			"and in these auto-emails.\n\nJust login, go to the \"My Feed\" page, and click "
+			"\"personalize feed\" in the top right.\n\nIf anyone has feedback "
+			"let me know!\n\nLastly, if you know of anyone who might have good resources/tutorials "
+			"to add to Wikivinci, definitely share the site with them!\n\n - Dylan"
 		)
 
 		_posts = Post.objects.filter().select_related()
