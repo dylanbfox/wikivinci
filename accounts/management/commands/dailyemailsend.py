@@ -23,7 +23,7 @@ class Command(BaseCommand):
 			return yest_datetime
 
 		yest_datetime = create_yest_datetime_aware()
-		subject, from_email = 'Learn something new tonight (plus personalize your learning goals)', settings.DEFAULT_FROM_EMAIL
+		subject, from_email = 'Learn something new tonight (plus personalize this email!)', settings.DEFAULT_FROM_EMAIL
 		host_name = settings.HOST_NAME		
 		html = get_template('accounts/emails/daily-email.html')
 		custom_message = (
