@@ -26,8 +26,8 @@ class Command(BaseCommand):
 		subject, from_email = 'Learn something new today', settings.DEFAULT_FROM_EMAIL
 		host_name = settings.HOST_NAME		
 		html = get_template('accounts/emails/daily-email.html')
-		custom_message = ("Posting is now limited...blah and some other stuff"
-			"\n\nPlesae share with friends!"
+		custom_message = (
+			""
 		)
 
 		_posts = Post.objects.filter().select_related()
