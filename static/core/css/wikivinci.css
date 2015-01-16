@@ -628,7 +628,7 @@ h6 {
 	cursor:pointer;
 }
 
-#page-content .votes-contain.voted i.fa {
+#page-content .votes-contain.voted {
 	color:#F28300 !important;
 }
 
@@ -692,9 +692,10 @@ h6 {
 	max-width:85%;
 }
 
-#page-content > .container .toprow h2 a#filter-top {
+#page-content > .container .toprow h2 a#mobile-show-post-filters {
 	font-size:13px;
-	margin-left:4px;	
+	margin-left:4px;
+	text-decoration:none;
 }
 
 #page-content > .container .toprow p.sub-title {
@@ -799,13 +800,49 @@ h6 {
 	font-size:11px;
 }
 
+#page-content #all-posts-filters {
+	padding-top:40px;
+	float:left;
+	width:20%;
+}
+
+#page-content #all-posts-filters input#search {
+	border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;	
+}
+
+#page-content #all-posts-filters .filter {
+	margin-top:30px;
+}
+
+#page-content #all-posts-filters .filter > h3 {
+	font-size:18px;
+	font-weight:700;
+	margin-bottom:15px;
+}
+
+#page-content #all-posts-filters .filter a.active {
+	color:#6a6a6a;
+	text-decoration:none;
+}
+
+#page-content #all-posts-filters .filter input[type='checkbox'] {
+	margin-right:5px;
+}
+
 #page-content .posts {
 	padding-top:40px;
 }
 
+#page-content #all-posts.posts {
+	float:right;
+	width:72%;
+}
+
 #page-content .posts #day-group {
 	text-transform:capitalize;
-	font-size:21px;
+	font-size:18px;
 	font-weight:700;
 	margin-bottom:35px;
 }
@@ -827,6 +864,10 @@ h6 {
 	padding-bottom:10px;	
 }
 
+#page-content #all-posts.posts .post {
+	margin-bottom:25px;
+}
+
 #page-content .posts .post > div {
 	float:left;
 }
@@ -837,12 +878,12 @@ h6 {
 }
 
 #page-content .posts .post > div.title-contain h2 {
-	font-size:20px;
+	font-size:19px;
 	margin-bottom:5px;
 }
 
 #page-content .posts .post > div.title-contain p {
-	font-size:14px;
+	font-size:13px;
 }
 
 #page-content .posts .post > div.title-contain span.timestamp {
@@ -883,12 +924,10 @@ h6 {
 #page-content .posts .post > div.votes-contain {
 	width:46px;
 	padding:3px 8px;
-	border:1px solid #E5902A;
+	border:1px solid #ECE4E4;
 	border-radius:4px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	background-color:#FFAB47;
-	color:#FFF;
 }
 
 #page-content .posts .post .votes-contain > i,
@@ -905,7 +944,6 @@ h6 {
 
 #page-content .posts .post .post-info-contain {
 	float:right; /*overwrite*/
-	margin-left:30px;
 	font-size:20px;
 	line-height:70px;
 }
@@ -1032,7 +1070,6 @@ h6 {
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	font-size:12px;
-	/*color:#FFF;*/
 }
 
 #page-content #single-post #comments .comment .votes-contain > i,

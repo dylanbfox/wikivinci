@@ -14,27 +14,40 @@
 	<div class="toprow">
 		<h2>{% if top %}Top{% else %}Recently Added{% endif %} {% if topic %}'{{ topic }}'{% endif %} Resources {% if contains %}on '{{ contains }}'{% endif %}
 
-		{% if top %}
-		<a id="filter-top" href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}&{% else %}?{% endif %}{% if contains %}contains={{ contains }}{% endif %}">/ show recently added resources {% if contains %}on '{{ contains }}'{% endif %}</a>
-		{% else %}
-		<a id="filter-top" href="{% if topic %}?topic={{ topic }}&{% else %}?{% endif %}top=true{% if contains %}&contains={{ contains }}{% endif %}">/ show top rated resources {% if contains %}on '{{ contains }}'{% endif %}</a>
-		{% endif %}
+		<a id="mobile-show-post-filters" class="visible-xs" href="javascript:"><i class="fa fa-sliders"></i> filter results</a>
 		</h2>
-
-		<select id="skill-level-filter" class="large super-light-font">
-			<option value="" class="super-light-font" disabled selected>Filter by Skill Level</option>			
-			<option value="ALL">All</option>
-			<option value="BEGINNER">Beginner</option>
-			<option value="INTERMEDIATE">Intermediate</option>
-			<option value="ADVANCED">Advanced</option>			
-		</select>
 	</div>
 
-	<div class="posts">
+	<div id="all-posts-filters">
+		<input id="search" name="search" placeholder="search results" type="text" data-toggle="hideseek" data-list="#all-posts">
+		<div class="filter">
+			<h3>Sort by</h3>
+			<a {% if not top %}class="active"{% endif %} href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}{% endif %}">Recently Added</a>
+			<br />
+			<a {% if top %}class="active"{% endif %} href="?top=true{% if topic %}&topic={{ topic }}{% endif %}">Highest Rated</a>
+		</div>
+
+		<div id="all-posts-skill-filter" class="filter">
+			<h3>Filter by</h3>
+			<input type="checkbox" value="ALL" checked>All
+			<br />
+			<input type="checkbox" value="BEGINNER">Beginner
+			<br />			
+			<input type="checkbox" value="INTERMEDIATE">Intermediate
+			<br />			
+			<input type="checkbox" value="ADVANCED">Advanced			
+		</div>
+
+		<div class="filter visible-xs">
+			<a id="hide" href="javascript:"><b class="red-font">close</b></a>
+		</div>	
+	</div>
+
+	<div id="all-posts" class="posts">
 		{% if groups %}
 			{% for group in groups %}
 				{% if group.date >= naturalday_limit %}
-				<h2 id="day-group" class="super-light-font">{{ group.date|naturalday }} <span class="super-super-light-font">({{ group.date|date:"l, F d" }})</span></h2>				
+				<h2 id="day-group" class="super-super-light-font">{{ group.date|naturalday }} <span class="super-super-light-font">({{ group.date|date:"l, F d" }})</span></h2>				
 				{% else %}
 				<h2 id="day-group" class="super-light-font">{{ group.date|date:"l, F d" }}</h2>				
 				{% endif %}
@@ -57,3 +70,7 @@
 	</div>
 </div>
 {% endblock content %}
+
+{% block extra_scripts %}
+<script src="{% static 'core/js/jquery.hideseek.min.js' %}"></script>
+{% endblock extra_scripts %}

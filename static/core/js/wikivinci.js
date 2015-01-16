@@ -101,20 +101,32 @@ $(document).ready(function(){
 	});
 
 	// filter posts by skill level
-	$("select#skill-level-filter").on("change", function(){
+	$("#all-posts-skill-filter input[type='checkbox']").on("change", function(){
+		var checkboxes = $("#all-posts-skill-filter input[type='checkbox']");
 		var posts = $(".posts .post");
-		var skill_level = $(this).val();
 
-		$(this).removeClass("filter-on");
-		$("span#skill-level").text(skill_level);
-		if (skill_level == "ALL"){
-			posts.show();
-			return;
-		}
+		posts.show();
+		checkboxes.each(function(){
+			var skill_level = $(this).val();
 
-		posts.hide();
-		$(".posts .post[data-skill-level="+skill_level+"]").show();
-		$(this).addClass("filter-on");
+			if ($(this).is(':checked') && skill_level == "ALL") {
+				return false;
+			}
+
+			if (!($(this).is(':checked'))) {
+				console.log("hiding " + skill_level)
+				$(".posts .post[data-skill-level="+skill_level+"]").hide();
+			}
+		});
+	});
+
+	// show filters on phones
+	$(".toprow h2 a#mobile-show-post-filters").on("click", function(){
+		$("#all-posts-filters").slideToggle("fast");
+	});
+
+	$("#all-posts-filters a#hide").on("click", function(){
+		$("#all-posts-filters").slideToggle("fast");
 	});
 
 	// account settings page controls
