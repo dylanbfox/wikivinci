@@ -57,5 +57,5 @@ class Account(models.Model):
 	can_comment = models.BooleanField(default=False)
 	can_post = models.BooleanField(default=False)
 	newsletter_setting = models.CharField(max_length=50, default='DAILY', choices=newsletter_settings)
-
+	favorites = models.ManyToManyField('posts.Post', null=True)
 
