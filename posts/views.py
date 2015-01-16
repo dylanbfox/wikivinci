@@ -144,3 +144,18 @@ def ajax_suggest_topics(request):
 	posts = Post.objects.filter(flagged=False)
 	suggestions = topic_suggestions(posts, chars)
 	return JsonResponse(suggestions, safe=False)
+
+def favorite(request, slug):
+	try:
+		post = Post.objects.get(slug__iexact=slug)
+	except Post.DoesNotExist:
+		raise Http404
+
+	account = request.user.account
+	if account.favorites.filter(pk=post.pk).exists():
+		account.favorites.remove(post)
+	else:
+		account.favorites.add(post)
+	
+	account.save()
+	return HttpResponse("success")
