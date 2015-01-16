@@ -49,7 +49,7 @@
 				{% if group.date >= naturalday_limit %}
 				<h2 id="day-group" class="super-super-light-font">{{ group.date|naturalday }} <span class="super-super-light-font">({{ group.date|date:"l, F d" }})</span></h2>				
 				{% else %}
-				<h2 id="day-group" class="super-light-font">{{ group.date|date:"l, F d" }}</h2>				
+				<h2 id="day-group" class="super-super-light-font">{{ group.date|date:"l, F d" }}</h2>				
 				{% endif %}
 
 				{% for post in group.posts %}
