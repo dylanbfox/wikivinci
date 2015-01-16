@@ -1,6 +1,10 @@
 /*phones and tablets*/
 @media (min-width:100px) and (max-width:991px) {
 
+	#page-content .posts .post > div.title-contain h2 {
+		font-size:17px;
+	}
+
 	#personalizeFeed .modal-body #topic-list > a {
 		width:auto;
 	}
@@ -52,11 +56,10 @@
 		display:block;
 	}
 
-	#page-content > .container .toprow h2 a#filter-top {
+	#page-content > .container .toprow h2 a#mobile-show-post-filters {
 		display:block;
 		font-size:13px;
-		margin-top:5px;
-		margin-bottom:15px;		
+		margin-top:15px;		
 	}
 
 	#page-content > .container .toprow input,
@@ -98,6 +101,27 @@
 
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
+	#page-content #all-posts-filters {
+		display:none;
+		float:none;
+		position:absolute;
+		width:100%;
+		background-color:#FFF;
+		padding:10px;
+		border:1px solid #ECE4E4;
+		max-width:85%;
+		left:0;
+		right:0;
+		margin:0 auto;
+		box-shadow:0px 1px 3px #423E3E;
+		border-radius:4px;
+	}
+
+	#page-content #all-posts.posts {
+		float:none;
+		width:100%;
+	}
+
 	#page-content #home #top-cta h2 {
 		font-size:32px;
 		margin-top:26px;
@@ -142,15 +166,7 @@
 
 	#page-content form input[type='submit'] {
 		margin-top:5px;
-	}
-
-	#page-content .posts .post > div.title-contain h2 {
-		font-size:18px;
 	}	
-
-	#page-content .posts .post > div.title-contain p {
-		font-size:14px;
-	}
 
 	#page-content .posts .post > div.votes-contain {
 		width:38px;
@@ -165,7 +181,6 @@
 	}
 
 	#page-content .posts .post .post-info-contain {
-		margin-left:0px;
 		font-size:13px;
 		line-height:initial;
 	}
@@ -255,6 +270,7 @@
 }
 
 @media (min-width:768px) and (max-width:991px) {
+
 	#page-content #home #top-cta h2 {
 		margin-top:26px;
 	}
