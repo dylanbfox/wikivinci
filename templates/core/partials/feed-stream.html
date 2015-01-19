@@ -5,6 +5,23 @@
 
 <div class="posts">
 	{% for group in groups %}
+
+		{% if forloop.counter == 2 %}
+		<div class="feed-alert">
+			<img class="wiki" src="{% static 'core/images/wikivinci-head-logo.png' %}" />
+			<p class="main">Wikivinci is brand new and needs your help! Have you come across a good tutorial or resource recently? <a id="add-post" class="action" href="#">Add it to Wikivinci and earn more reputation.</a></p>
+			<a class="close" href="javascript:"><i class="fa fa-close"></i></a>
+		</div>		
+		{% endif %}
+
+		{% if forloop.revcounter == 2 %}
+		<div class="feed-alert">
+			<img class="wiki" src="{% static 'core/images/wikivinci-head-logo.png' %}" />
+			<p class="main"><b>Huzzah!</b> Me again. I meant it, we need your help! <a id="add-post" class="action" href="#">Add a resource to Wikivinci, and earn more reputation.</a></p>
+			<a class="close" href="javascript:"><i class="fa fa-close"></i></a>
+		</div>		
+		{% endif %}		
+
 		{% if group.date >= naturalday_limit %}
 		<h2 id="day-group" class="super-light-font">{{ group.date|naturalday }} <span class="super-super-light-font">({{ group.date|date:"l, F d" }})</span></h2>				
 		{% else %}
@@ -77,7 +94,7 @@
 					<img data-target="#profilePopup{{ obj.id }}" class="owner profile-hover-toggle" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
 				</div>		
 			</div>
-			{% endif %}						
+			{% endif %}					
 		{% endfor %}
 	{% endfor %}
 

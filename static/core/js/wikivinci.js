@@ -8,6 +8,11 @@ function triggerAuthenticatePopup(){
 	modal.modal('toggle');
 }
 
+function hideAuthenticatePopupAlert(){
+	var modal = $("#authenticateModal");
+	modal.find("p#alert").hide();
+};
+
 function disableForm(form, fake){
 	var inputs = form.find(":input");
 	var submit = form.find("input[type='submit']");
@@ -31,6 +36,11 @@ function disableForm(form, fake){
 }
 
 $(document).ready(function(){
+
+	// hide any feed alert/notification
+	$(".feed-alert a.close").on("click", function(){
+		$(this).closest(".feed-alert").fadeOut("fast");
+	});
 
 	// save personalization settings
 	$("#personalizeFeed #topic-list > a").on("click", function(e){
@@ -176,6 +186,7 @@ $(document).ready(function(){
 	// get register form
 	$("#authenticateModal a#register").on("click", function(e){
 		e.preventDefault();
+		hideAuthenticatePopupAlert();
 		var popup_modal = $("#authenticateModal");
 		if (window.registerFormReceived) {
 			popup_modal.find("form#login").hide();

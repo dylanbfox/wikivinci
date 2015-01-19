@@ -44,6 +44,12 @@
 	</div>
 
 	<div id="all-posts" class="posts">
+		<div class="feed-alert">
+			<img class="wiki" src="{% static 'core/images/wikivinci-head-logo.png' %}" />
+			<p class="main">Wikivinci is new and needs your help! Know of a good tutorial or resource on <b>{% if topic %}{{ topic }}{% elif contains %}{{ contains }}{% endif %}</b>? <a id="add-post" class="action" href="#">Add it to Wikivinci, and earn reputation.</a></p>
+			<a class="close" href="javascript:"><i class="fa fa-close"></i></a>
+		</div>
+
 		{% if groups %}
 			{% for group in groups %}
 				{% if group.date >= naturalday_limit %}
