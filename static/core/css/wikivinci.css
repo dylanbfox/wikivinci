@@ -539,7 +539,7 @@ h6 {
 
 #page-content #home #top-cta > p {
 	margin-top:10px;
-	margin-bottom:30px;
+	margin-bottom:50px;
 	font-size:18px;
 }
 
@@ -552,6 +552,12 @@ h6 {
 
 #page-content #home #top-cta a#add-post > i.fa {
 	margin-right:9px;
+}
+
+#page-content #home #top-cta span#reputation {
+	display:block;
+	margin-top:8px;
+	font-size:13px;
 }
 
 #page-content #home #activity {

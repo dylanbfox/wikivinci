@@ -44,7 +44,7 @@ class Account(models.Model):
 	newsletter_settings = (
 		('DAILY', 'Daily'),
 		('WEEKLY', 'Weekly'),
-		('NONE', 'None. I\'m too smart already.'),
+		('NONE', 'Never. I\'m too smart already.'),
 	)
 
 	owner = models.OneToOneField(settings.AUTH_USER_MODEL)

@@ -34,6 +34,7 @@ class AccountEditForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(AccountEditForm, self).__init__(*args, **kwargs)
 		self.fields['title'].label = "Title (eg: 'Senior Developer at Google')"
+		self.fields['newsletter_setting'].label = "Keep learning. Get a personalized email with top new resources:"
 
 	def clean_twitter_handle(self):
 		twitter_handle = self.cleaned_data.get('twitter_handle')
