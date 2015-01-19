@@ -6,7 +6,7 @@
         <h4 class="modal-title" id="myModalLabel">Sign in to Wikivinci!</h4>
       </div>
       <div class="modal-body">
-        <p id="alert"><b>You'll need to sign in first!</b></p>
+        <p id="alert" class="red-font"><b>You'll need to sign in/register first!</b></p>
         <form id="login" method="POST" action="{% url 'accounts:login' %}">
           {% csrf_token %}
           <div class="form-group">
