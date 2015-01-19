@@ -66,16 +66,13 @@ def view_all(request):
 		context_dict['contains'] = contains		
 		posts = [p for p in posts if p.content_contains(contains=contains)]
 
-	# widdle down now that we've filtered
-	posts = posts[:50]
-	# display by date, or by vote
 	if request.GET.get('top'):
 		sorted_posts = sorted(posts, key=lambda k: k.vote_count, reverse=True)
-		context_dict['posts'] = sorted_posts
+		context_dict['posts'] = sorted_posts[:50] # top 50 posts
 		context_dict['top'] = True
 	else:
 		groups = Post.group_by_date(posts, order_by_vote=True)
-		context_dict['groups'] = groups
+		context_dict['groups'] = groups[:20] # past 20 days posts
 		context_dict['naturalday_limit'] = date.today() - timedelta(days=1)
 
 	set_post_permissions(request, posts=posts)	
