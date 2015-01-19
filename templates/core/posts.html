@@ -22,9 +22,9 @@
 		<input id="search" name="search" placeholder="search results" type="text" data-toggle="hideseek" data-list="#all-posts">
 		<div class="filter">
 			<h3>Sort by</h3>
-			<a {% if not top %}class="active"{% endif %} href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}{% endif %}">Recently Added</a>
+			<a {% if not top %}class="active"{% endif %} href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}{% elif contains %}?contains={{ contains }}{% endif %}">Recently Added</a>
 			<br />
-			<a {% if top %}class="active"{% endif %} href="?top=true{% if topic %}&topic={{ topic }}{% endif %}">Highest Rated</a>
+			<a {% if top %}class="active"{% endif %} href="?top=true{% if topic %}&topic={{ topic }}{% elif contains %}&contains={{ contains }}{% endif %}">Highest Rated</a>
 		</div>
 
 		<div id="all-posts-skill-filter" class="filter">
