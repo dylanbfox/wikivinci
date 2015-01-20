@@ -35,7 +35,7 @@ MEDIA_URL = S3_URL
 THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # Celery settings
-BROKER_POOL_LIMIT = None
+BROKER_POOL_LIMIT = 1
 BROKER_URL = os.environ["CLOUDAMQP_URL"]
 
 # Email settings
