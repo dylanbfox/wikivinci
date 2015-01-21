@@ -77,10 +77,10 @@ class Post(models.Model):
 
 		return match
 
-	def get_related_posts(self):
+	def get_related_posts(self, limit=7):
 		posts = Post.objects.exclude(pk=self.pk).filter(skill_level=self.skill_level).order_by('-vote_count')
 		related_posts = [p for p in posts if any(p.tags_contain(tag) for tag in self.tags_to_list())]
-		return related_posts[:7]
+		return related_posts[:limit]
 
 	def approve(self, commit=True):
 		from .tasks import send_approved_email
@@ -90,7 +90,13 @@ class Post(models.Model):
 			self.save()
 			send_approved_email.apply_async([self.owner.id, self.id])
 
-		self.owner.award_points(5)	
+		self.owner.award_points(5)
+
+	def email(self, sender, recipients):
+		from .tasks import send_share_email
+
+		for recipient in recipients:
+			send_share_email.apply_async([self.pk, sender, recipient])
 
 	@staticmethod
 	def group_by_date(posts, order_by_vote=False):

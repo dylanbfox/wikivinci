@@ -11,5 +11,6 @@ urlpatterns = patterns('',
 	url(r'^(?P<slug>\w+(?:-\w+)*)/$', views.view, name='view'),
 	url(r'^(?P<slug>\w+(?:-\w+)*)/flag/$', views.flag, name='flag'),
 	url(r'^(?P<slug>\w+(?:-\w+)*)/go/$', views.go, name='go'),
+	url(r'^(?P<slug>\w+(?:-\w+)*)/email/$', views.email, name='email'),
 	url(r'^(?P<slug>\w+(?:-\w+)*)/favorite/$', views.favorite, name='favorite'),
 )

@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'core/partials/email-post-popup.html' %}
 {% include 'core/partials/flag-post-popup.html' %}
 <div id="single-post" class="container">
 	<div id="left-column">
@@ -46,7 +47,7 @@
 		<div class="addthis_toolbox addthis_default_style hidden-xs hidden-sm">
 			<!-- <a class="addthis_button_linkedin_counter" li:counter="none"></a> -->
 			<a class="addthis_button_tweet" tw:text="{{ post.title|truncatechars:100 }}. {% if post.owner.twitter_handle %}Submitted by {{ post.owner.twitter_handle }}{% endif %}"></a>
-			<a class="custom-share-btn" href="#"><i class="fa fa-envelope"></i> Email</a>			
+			<a class="custom-share-btn" href="#" data-toggle="modal" data-target="#emailPostModal"><i class="fa fa-envelope"></i> Email</a>			
 			<a class="addthis_button_facebook_share" fb:share:layout="button"></a>
 		</div>
 			

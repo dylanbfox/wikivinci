@@ -37,6 +37,53 @@ function disableForm(form, fake){
 
 $(document).ready(function(){
 
+	// show share post via email form again on modal close
+	$("#emailPostModal").on('hidden.bs.modal', function(){
+		var modal_node = $("#emailPostModal");
+		var form_node = modal_node.find("form#send-email");
+		modal_node.find(".ajax-update").hide();
+		form_node.show();
+		form_node[0].reset();	
+	});
+
+	// submit share post via email ajax
+	$("#emailPostModal #submit").on("click", function(){
+		var modal_node = $("#emailPostModal");
+		var form_node = modal_node.find("form#send-email");
+		var validation_error = false;
+
+		// validate
+		form_node.find("input, textarea").each(function(){
+			var val = $.trim($(this).val());
+			$(this).removeClass("error");
+			if (!(val)){
+				validation_error = true;
+				$(this).addClass("error");				
+				return false
+			}
+		});
+
+		if (validation_error){
+			return;
+		}
+
+		modal_node.find('#processing').show();
+		form_node.hide();
+		$.ajax({
+			type: 'POST',
+			url: form_node.attr("action"),
+			data: form_node.serializeArray(),
+			success: function(){
+				modal_node.find(".ajax-update").hide();
+				modal_node.find("#success.ajax-update").show();
+			},
+			error: function(){
+				modal_node.find(".ajax-update").hide();
+				modal_node.find("#error.ajax-update").show();
+			}
+		});
+	});
+
 	// hide any feed alert/notification
 	$(".feed-alert a.close").on("click", function(){
 		$(this).closest(".feed-alert").fadeOut("fast");

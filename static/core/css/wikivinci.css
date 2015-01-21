@@ -93,7 +93,7 @@ textarea {
 	border-radius:4px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	font-size:16px;
+	font-size:14px;
 	padding:4px;
 	width:100%;
 }
@@ -315,6 +315,20 @@ h6 {
 	border-radius:2px;
 }
 
+.modal .modal-body .ajax-update {
+	display:none;
+	text-align:center;
+	font-size:18px;
+	font-weight:300;
+	padding:20px 0px;	
+}
+
+.modal .modal-body .ajax-update > p {
+	margin-bottom:9px;
+}
+
+/*post add popup*/
+
 #post-add-popup {
 	display:none;
 	position:fixed;
@@ -404,6 +418,12 @@ h6 {
 	background-color:#F9FF9B;
 }
 
+/*email post modal*/
+
+#emailPostModal .modal-body input {
+	
+}
+
 /*feed personalization modal*/
 
 #personalizeFeed .modal-header {
@@ -428,18 +448,6 @@ h6 {
 
 #personalizeFeed .modal-body {
 	overflow:auto;
-}
-
-#personalizeFeed .modal-body .ajax-update {
-	display:none;
-	text-align:center;
-	font-size:18px;
-	font-weight:300;
-	padding:20px 0px;	
-}
-
-#personalizeFeed .modal-body .ajax-update > p {
-	margin-bottom:9px;
 }
 
 #personalizeFeed .modal-body #topic-list {

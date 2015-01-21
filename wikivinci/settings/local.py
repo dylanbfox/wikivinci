@@ -31,7 +31,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Celery
 BROKER_URL = 'amqp://myuser:password@localhost:5672/myvhost'
-CELERY_ALWAYS_EAGER = True
+CELERY_ALWAYS_EAGER = False
 
 if CELERY_ALWAYS_EAGER:
 	print "*************************"

@@ -53,31 +53,6 @@ def view(request, slug):
 	context_dict['related_posts'] = post.get_related_posts()
 	return render(request, 'core/single-post.html', context_dict)
 
-def view_all(request):
-	context_dict = {}
-	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
-
-	if request.GET.get('topic'):
-		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
-		context_dict['topic'] = request.GET['topic']
-
-	if request.GET.get('contains'):
-		contains = request.GET['contains']
-		context_dict['contains'] = contains		
-		posts = [p for p in posts if p.content_contains(contains=contains)]
-
-	if request.GET.get('top'):
-		sorted_posts = sorted(posts, key=lambda k: k.vote_count, reverse=True)
-		context_dict['posts'] = sorted_posts[:50] # top 50 posts
-		context_dict['top'] = True
-	else:
-		groups = Post.group_by_date(posts, order_by_vote=True)
-		context_dict['groups'] = groups[:20] # past 20 days posts
-		context_dict['naturalday_limit'] = date.today() - timedelta(days=1)
-
-	set_post_permissions(request, posts=posts)	
-	return render(request, 'core/posts.html', context_dict)
-
 @ajax_login_required
 def vote(request):
 	"""
@@ -129,18 +104,16 @@ def go(request, slug):
 	post.save()
 	return HttpResponseRedirect(post.url)
 
-def view_topics(request):
-	context_dict = {}
-	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
-	topics = unique_topic_counts(posts)
-	context_dict['topics'] = topics
-	return render(request, 'core/topics.html', context_dict)
+def email(request, slug):
+	try:
+		post = Post.objects.get(slug__iexact=slug)
+	except Post.DoesNotExist:
+		raise Http404
 
-def ajax_suggest_topics(request):
-	chars = request.POST.get('chars')
-	posts = Post.objects.filter(flagged=False)
-	suggestions = topic_suggestions(posts, chars)
-	return JsonResponse(suggestions, safe=False)
+	recipients = request.POST['recipients'].split(',')
+	post.email(sender=request.POST['sender'], recipients=recipients)
+
+	return HttpResponse(status=200)
 
 def favorite(request, slug):
 	try:
@@ -156,3 +129,41 @@ def favorite(request, slug):
 	
 	account.save()
 	return HttpResponse("success")
+
+def view_all(request):
+	context_dict = {}
+	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
+
+	if request.GET.get('topic'):
+		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
+		context_dict['topic'] = request.GET['topic']
+
+	if request.GET.get('contains'):
+		contains = request.GET['contains']
+		context_dict['contains'] = contains		
+		posts = [p for p in posts if p.content_contains(contains=contains)]
+
+	if request.GET.get('top'):
+		sorted_posts = sorted(posts, key=lambda k: k.vote_count, reverse=True)
+		context_dict['posts'] = sorted_posts[:50] # top 50 posts
+		context_dict['top'] = True
+	else:
+		groups = Post.group_by_date(posts, order_by_vote=True)
+		context_dict['groups'] = groups[:20] # past 20 days posts
+		context_dict['naturalday_limit'] = date.today() - timedelta(days=1)
+
+	set_post_permissions(request, posts=posts)	
+	return render(request, 'core/posts.html', context_dict)	
+
+def view_topics(request):
+	context_dict = {}
+	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
+	topics = unique_topic_counts(posts)
+	context_dict['topics'] = topics
+	return render(request, 'core/topics.html', context_dict)
+
+def ajax_suggest_topics(request):
+	chars = request.POST.get('chars')
+	posts = Post.objects.filter(flagged=False)
+	suggestions = topic_suggestions(posts, chars)
+	return JsonResponse(suggestions, safe=False)	
