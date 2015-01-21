@@ -31,6 +31,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Celery
 BROKER_URL = 'amqp://myuser:password@localhost:5672/myvhost'
+CELERY_ALWAYS_EAGER = True
+
+if CELERY_ALWAYS_EAGER:
+	print "*************************"
+	print "[WARNING] CELERY_ALWAYS_EAGER is set to True!"
+	print "*************************"	
 
 # Email settings
 EMAIL_HOST = "smtp.gmail.com" # gmail on local

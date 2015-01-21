@@ -250,8 +250,9 @@ h6 {
 }
 
 .custom-share-btn > i.fa {
-	margin-right:3px;
+	margin-right:2px;
 	color:#CA231C;
+	font-size:1.2em;
 }
 
 /*****MARKDOWN STYLING*****/
