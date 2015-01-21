@@ -23,3 +23,7 @@ def send_approved_email(account_pk, post_pk):
 	msg = EmailMultiAlternatives(subject, '<need to edit>', from_email, [to])
 	msg.attach_alternative(html_content, 'text/html')
 	msg.send()
+
+@task()
+def send_share_email(to, from):
+	pass
