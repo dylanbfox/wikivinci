@@ -1,0 +1,46 @@
+<div class="modal fade" id="emailPostModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Email this post to a friend</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="processing" class="ajax-update green-font">
+          <p>contacting the email carrier pigeons...</p>
+          <i class="fa fa-spin fa-spinner"></i>
+        </div>
+
+        <div id="success" class="ajax-update green-font">
+          <p>success! the carrier pigeons have been sent.</p>
+          <i class="fa fa-check"></i>
+        </div>                
+
+        <div id="error" class="ajax-update red-font">
+          <p><b>that's an error. please reload the page and try again.</b></p>
+          <i class="fa fa-exclamation-triangle"></i>
+        </div>
+
+        <form id="send-email" method="POST" action="{% url 'posts:email' slug=post.slug %}">
+
+          <div class="form-group">
+            <input type="text" name="sender" value="{{ user.email }}" placeholder="from:"/>
+          </div>
+
+          <div class="form-group">
+            <input type="text" name="recipients" placeholder="to: (separate by commas)"/>
+          </div>
+
+<!--           <div class="form-group">
+            <textarea name="message">I thought you'd like to learn about &quot;{{ post.title }}&quot; on Wikivinci.</textarea>
+          </div> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="submit" type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

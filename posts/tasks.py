@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 
@@ -25,5 +25,20 @@ def send_approved_email(account_pk, post_pk):
 	msg.send()
 
 @task()
-def send_share_email(to, from):
-	pass
+def send_share_email(post_pk, sender, recipient):
+	print "emailing " + recipient
+	post = Post.objects.get(pk=post_pk)
+
+	subject = "Check out \"{0}\" on Wikivinci".format(post.title)
+	from_email = sender
+	to = recipient
+	message = ("I thought you might be interested in <a href=\"{0}\">\"{1}\"</a> "
+		"on Wikivinci.<br /><br />This email was sent on http://www.Wikivinci.com. "
+		"Learn faster from high quality, community curated tutorials and resources. "
+	).format(settings.HOST_NAME+post.absolute_url(), post.title)
+
+	send_mail(subject, message, from_email,
+		[recipient], html_message=message,
+		fail_silently=False,
+	)
+
