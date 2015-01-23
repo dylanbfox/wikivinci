@@ -1,6 +1,10 @@
 /*phones and tablets*/
 @media (min-width:100px) and (max-width:991px) {
 
+	#post-add-popup {
+		padding:40px;
+	}	
+
 	#page-content .posts .post > div.title-contain h2 {
 		font-size:17px;
 	}
@@ -238,10 +242,6 @@
 		margin-bottom:0px;
 	}
 
-	#post-add-popup {
-		width:100%;
-	}
-
 	#post-add-popup > .x {
 		left:0px;
 		top:0px;
@@ -257,6 +257,16 @@
 		-webkit-border-bottom-left-radius:0px;			
 	}
 
+	#post-add-popup form {
+		float:none;
+		width:100%;
+	}
+
+	#post-add-popup #guidelines {
+		float:none;
+		width:100%;
+	}
+
 	#page-content form#account-edit {
 		width:100%;
 	}
@@ -270,6 +280,11 @@
 }
 
 @media (min-width:768px) and (max-width:991px) {
+
+	#post-add-popup > .x {
+		top:-8px;
+		left:-3px;
+	}
 
 	#page-content #home #top-cta h2 {
 		margin-top:26px;
@@ -291,10 +306,6 @@
 	#personalizeFeed .modal-header input#topic-search {
 		float:right;
 		width:200px;
-	}	
-
-	#post-add-popup {
-		width:60%;
 	}
 
 	#page-content > .container .toprow input,
