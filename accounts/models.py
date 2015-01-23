@@ -39,7 +39,8 @@ class Account(models.Model):
 		return feed_objs
 
 	def fav_topics_to_list(self):
-		return [t.strip() for t in self.fav_topics.split(',') if t]
+		if self.fav_topics:
+			return [t.strip() for t in self.fav_topics.split(',') if t]
 
 	newsletter_settings = (
 		('DAILY', 'Daily'),
