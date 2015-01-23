@@ -358,6 +358,12 @@ h6 {
 	width:50%;
 }
 
+#post-add-popup input,
+#post-add-popup select, 
+#post-add-popup textarea {
+	border:1px solid #C5C5C5 !important;
+}
+
 #post-add-popup form textarea {
 	max-height:100px;
 }
