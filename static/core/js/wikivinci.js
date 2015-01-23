@@ -378,9 +378,8 @@ $(document).ready(function(){
 			url: '/posts/add/',
 			data: {},
 			success: function(response, textStatus, xhr){
-				popup_node.height(getPageHeight() + 165);
+				popup_node.find("#guidelines").show();				
 				popup_node.show();
-				popup_node.animate({'right': '0px'});				
 				popup_node.append(response);
 				window.addPostFormHTML = true;
 			},
@@ -395,9 +394,7 @@ $(document).ready(function(){
 	// hide the add post form
 	$("#post-add-popup .x").on("click", function(){
 		var popup_node = $("#post-add-popup");
-		popup_node.animate({'right': '-3000px'}, function(){
-			popup_node.hide();
-		});
+		popup_node.hide();
 	});
 
 	// submit the add post form
@@ -415,6 +412,7 @@ $(document).ready(function(){
 			success: function(response){
 				// append new form w errors or success msg
 				popup_node.find("form").remove();
+				popup_node.find("#guidelines").hide();
 				popup_node.append(response);
 			}
 		});
