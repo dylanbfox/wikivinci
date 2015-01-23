@@ -412,8 +412,10 @@ $(document).ready(function(){
 			success: function(response){
 				// append new form w errors or success msg
 				popup_node.find("form").remove();
-				popup_node.find("#guidelines").hide();
 				popup_node.append(response);
+				if (response.indexOf("form") == -1){
+					popup_node.find("#guidelines").hide();
+				}
 			}
 		});
 	});

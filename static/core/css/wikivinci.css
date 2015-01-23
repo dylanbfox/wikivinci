@@ -329,6 +329,7 @@ h6 {
 #post-add-popup {
 	display:none;
 	position:fixed;
+	overflow:auto;
 	top:0;
 	bottom:0;
 	width:100%;
@@ -355,7 +356,6 @@ h6 {
 #post-add-popup form {
 	float:left;
 	width:50%;
-	min-width:300px;
 }
 
 #post-add-popup form textarea {
