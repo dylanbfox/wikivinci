@@ -195,23 +195,24 @@ h6 {
 }
 
 .btn-success {
-	border-bottom:2px solid #398439
+	border-color:#398439 !important;
+	border-bottom:2px solid #398439 !important;
 }
 
 .btn-danger {
-	border-bottom:2px solid #d43f3a;
+	border-bottom:2px solid #d43f3a !important;
 }
 
 .btn-primary {
 	background-color:#4A99E5;
-	border:1px solid #357ebd;
-	border-bottom:2px solid #357ebd;
+	border:1px solid #357ebd !important;
+	border-bottom:2px solid #357ebd !important;
 }
 
 .btn-clear {
 	background-color:transparent;
 	color:#3c3e43;
-	border:1px solid #3c3e43;
+	border:1px solid #3c3e43 !important;
 }
 
 .custom-share-btn {
@@ -361,7 +362,7 @@ h6 {
 #post-add-popup input,
 #post-add-popup select, 
 #post-add-popup textarea {
-	border:1px solid #C5C5C5 !important;
+	border:1px solid #C5C5C5;
 }
 
 #post-add-popup form textarea {
