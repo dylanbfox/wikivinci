@@ -2,6 +2,7 @@ from itertools import chain
 
 from django.db import models
 from django.conf import settings
+from django.core.validators import RegexValidator
 
 from image_cropping import ImageRatioField
 
@@ -10,8 +11,11 @@ class Account(models.Model):
 	def __unicode__(self):
 		return self.owner.username
 
-	# def save(self, *args, **kwargs):
-	# 	super(Account, self).save(*args, **kwargs)		
+	@staticmethod
+	def username_validator():
+		regex = r'^[0-9a-zA-Z]*$'
+		error_message = "Alphanumeric characters only!"
+		return RegexValidator(regex=regex, message=error_message)
 
 	def award_points(self, points=0):
 		self.points += points

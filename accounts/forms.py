@@ -57,6 +57,7 @@ class AccountRegisterForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(AccountRegisterForm, self).__init__(*args, **kwargs)
+		self.fields['username'].validators.append(Account.username_validator())
 		self.fields['username'].label = 'Username'
 		self.fields['password'].label = 'Password'
 		self.fields['email'].label = 'Email'
