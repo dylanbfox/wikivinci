@@ -5,18 +5,21 @@
 {% load markdown_filter %}
 
 {% block content %}
-<div id="home" class="container">
-
-	<div id="top-cta">
-		<h2>Help others learn.</h2>
-		<p class="super-light-font">We're building a database of top tutorials and resources for people to learn from, and we need your help.</p>
-		<a href="#" id="add-post" class="btn btn-success"><i class="fa fa-book"></i> submit a resource</a>
-		<span id="reputation" class="super-light-font">earn reputation with every resource approved</span>
+<div id="home" class="full-width-container-top">
+	<div class="container">
+		<div id="top-cta">
+			<h2>Help others learn</h2>
+			<p>We're building a database of top tutorials and learning resources. We need your help.</p>
+			<a href="#" id="add-post" class="btn btn-success">submit something</a>
+			<span id="reputation">earn <b><a href="#" style="color:#FFF;">IQ</a></b> with every resource approved</span>
+		</div>
 	</div>
+</div>
 
+<div id="home" class="container">
 	<div id="activity">
 		<div id="recent-posts">
-			<h2 class="super-light-font">Recently added resources</h2>
+			<h2>Recently submitted by the community</h2>
 			{% for post in posts %}
 			<div>
 				<p class="title"><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></p>
@@ -28,13 +31,12 @@
 	</div>
 
 	<div id="sign-up">
-		<h2 class="lighter-font">Be smarter. Sign up to get a personalized feed of high quality tutorials and resources to learn from.</h2>
+		<h2>Be smarter. Sign up to get a personalized feed of high quality tutorials and resources to learn from.</h2>
 		{% if user.is_authenticated %}
 		<a href="{% url 'accounts:feed' username=user.username %}" class="btn btn-warning">view your feed</a>
 		{% else %}
 		<a href="javascript:" data-toggle="modal" data-target="#authenticateModal" class="btn btn-warning">sign up</a>
 		{% endif %}
 	</div>
-	
 </div>
 {% endblock content %}
