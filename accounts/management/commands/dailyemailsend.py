@@ -23,16 +23,18 @@ class Command(BaseCommand):
 			return yest_datetime
 
 		yest_datetime = create_yest_datetime_aware()
-		subject, from_email = 'Learn something new tonight (plus personalize this email!)', settings.DEFAULT_FROM_EMAIL
+		subject, from_email = 'Learn something new this week', settings.DEFAULT_FROM_EMAIL
 		host_name = settings.HOST_NAME		
 		html = get_template('accounts/emails/daily-email.html')
 		custom_message = (
-			"You can now add personalization settings to your account! Once you do, "
-			"only the topics you select as being interested in will show up in your feed "
-			"and in these auto-emails.\n\nJust login, go to the \"My Feed\" page, and click "
-			"\"personalize feed\" in the top right.\n\nIf anyone has feedback "
-			"let me know!\n\nLastly, if you know of anyone who might have good resources/tutorials "
-			"to add to Wikivinci, definitely share the site with them!\n\n - Dylan"
+			"Thanks to everyone who signed up recently, and for all the feedback! "
+			"Until there's more content being submitted, I'm only going to send these emails once "
+			"per week. Hopefully we can start offering daily emails within the next couple weeks! "
+			"\n\nWith that, keep sharing Wikivinci with friends who might appreciate the resource, and/or "
+			"have good resources to submit :).\n\nLast week, I made some improvements to the search page, "
+			"and to the submission process. You can also email posts to friends now, right from the site. "
+			"Just click the \"email\" button next to the Facebook/Twitter buttons.\n\nThat's all for now! If "
+			"you have any feedback/ideas let me know!\n\n- Dylan"
 		)
 
 		_posts = Post.objects.filter().select_related()
@@ -42,7 +44,7 @@ class Command(BaseCommand):
 		if args:
 			accounts = Account.objects.filter(owner__email='dylanbfox@gmail.com')
 		else:
-			accounts = Account.objects.filter(newsletter_setting='DAILY')
+			accounts = Account.objects.exclude(newsletter_setting='NONE')
 
 		for account in accounts:
 			to = account.owner.email
