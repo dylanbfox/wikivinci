@@ -32,7 +32,7 @@
 		<div id="topics">
 			<h2>Popular topics</h2>
 			{% for k, v in topics.items|slice:":14" %}
-				<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }} <i class="fa fa-chevron-right"></i></a>
+				<a href="{% url 'posts:view_all' %}?topic={{ k }}&top=true">{{ k }} <i class="fa fa-chevron-right"></i></a>
 			{% endfor %}
 			<p><a href="{% url 'posts:topics' %}">plus {{ topics_count }} more topics...</a></p>
 		</div>					
