@@ -8,8 +8,8 @@
 <div id="home" class="full-width-container-top">
 	<div class="container">
 		<div id="top-cta">
-			<h2>Help others learn</h2>
-			<p>We're building a database of top tutorials and learning resources. We need your help.</p>
+			<h2>We're building a database of top tutorials and learning resources. We need your help.</h2>
+			<!-- <p>We're building a database of top tutorials and learning resources. We need your help.</p> -->
 			<a href="#" id="add-post" class="btn btn-warning-wv">submit something</a>
 			<span id="reputation">and earn <b><a href="#">IQ</a></b> with every submission</span>
 		</div>
@@ -27,7 +27,15 @@
 				<p class="descr super-super-light-font">{{ post.description|truncatechars:100 }}</p>
 			</div>
 			{% endfor %}
-		</div>			
+		</div>
+
+		<div id="topics">
+			<h2>Popular topics</h2>
+			{% for k, v in topics.items|slice:":14" %}
+				<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }} <i class="fa fa-chevron-right"></i></a>
+			{% endfor %}
+			<p><a href="{% url 'posts:topics' %}">plus {{ topics_count }} more topics...</a></p>
+		</div>					
 	</div>
 
 	<div id="sign-up">

@@ -35,7 +35,25 @@ function disableForm(form, fake){
 	}
 }
 
+function setHomePageTopicBackgroundColors(){
+	var colors = ['#3F98C8', '#4E5BD1', '#FFCD47', '#FFAB47', '#62AFD9', '#FF9A21'];
+	var topic_nodes = $("#home #activity #topics > a");
+
+	var i = 0;
+	topic_nodes.each(function(){
+		if (i == colors.length-1){
+			i = 0;
+		}
+
+		$(this).css('background-color', colors[i]);
+		i++;
+	});
+}
+
 $(document).ready(function(){
+
+	// set background colors on home page topics
+	setHomePageTopicBackgroundColors();
 
 	// show share post via email form again on modal close
 	$("#emailPostModal").on('hidden.bs.modal', function(){
