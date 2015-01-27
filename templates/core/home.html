@@ -10,8 +10,8 @@
 		<div id="top-cta">
 			<h2>Help others learn</h2>
 			<p>We're building a database of top tutorials and learning resources. We need your help.</p>
-			<a href="#" id="add-post" class="btn btn-success">submit something</a>
-			<span id="reputation">earn <b><a href="#" style="color:#FFF;">IQ</a></b> with every resource approved</span>
+			<a href="#" id="add-post" class="btn btn-warning-wv">submit something</a>
+			<span id="reputation">and earn <b><a href="#">IQ</a></b> with every submission</span>
 		</div>
 	</div>
 </div>
@@ -33,9 +33,9 @@
 	<div id="sign-up">
 		<h2>Be smarter. Sign up to get a personalized feed of high quality tutorials and resources to learn from.</h2>
 		{% if user.is_authenticated %}
-		<a href="{% url 'accounts:feed' username=user.username %}" class="btn btn-warning">view your feed</a>
+		<a href="{% url 'accounts:feed' username=user.username %}" class="btn btn-clear">view your feed</a>
 		{% else %}
-		<a href="javascript:" data-toggle="modal" data-target="#authenticateModal" class="btn btn-warning">sign up</a>
+		<a href="javascript:" data-toggle="modal" data-target="#authenticateModal" class="btn btn-clear">sign up</a>
 		{% endif %}
 	</div>
 </div>
