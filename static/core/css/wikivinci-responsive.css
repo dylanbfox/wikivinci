@@ -127,12 +127,9 @@
 	}
 
 	#page-content #home #top-cta h2 {
-		font-size:32px;
+		font-size:21px;
 		margin-top:26px;
-	}
-
-	#page-content #home #top-cta > p {
-		font-size:14px;
+		margin-bottom:45px;
 	}
 
 	#page-content #home #top-cta a#add-post {
@@ -145,7 +142,7 @@
 	}
 
 	#page-content #home #activity > div {
-		width:100%;
+		width:100% !important;
 	}
 
 	#page-content #home #sign-up > h2 {
@@ -279,6 +276,7 @@
 	}	
 }
 
+/*tablets*/
 @media (min-width:768px) and (max-width:991px) {
 
 	#post-add-popup > .x {
@@ -290,12 +288,8 @@
 		margin-top:26px;
 	}
 
-	#page-content #home #top-cta > p {
-		padding:0px 90px;
-	}
-
-	#page-content #home #activity > div {
-		width:80%;
+	#page-content #home #activity > div#recent-posts {
+		width:48%;
 	}
 
 	#personalizeFeed .modal-body {

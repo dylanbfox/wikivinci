@@ -654,20 +654,11 @@ h6 {
 }
 
 #page-content #home #top-cta h2 {
-	font-size:44px;
+	max-width:650px;
+	margin:0 auto;	
+	font-size:30px;
 	font-weight:500;
-}
-
-#page-content #home #top-cta h2 > span {
-	font-size:18px;
-	font-weight:400;
-}
-
-#page-content #home #top-cta > p {
-	width:80%;
-	margin:20px auto 75px auto;
-	font-size:18px;	
-	font-weight:500;
+	margin-bottom:75px;	
 }
 
 #page-content #home #top-cta a#add-post {
@@ -688,12 +679,42 @@ h6 {
 }
 
 #page-content #home #activity {
-	margin-top:100px;
+	margin-top:60px;
+	overflow:auto;
 }
 
-#page-content #home #activity > div {
-	width:60%;
-	margin:0 auto;
+#page-content #home #activity > div#recent-posts {
+	width:55%;
+	float:left;
+}
+
+#page-content #home #activity > div#topics {
+	width:35%;
+	float:right;
+}
+
+#page-content #home #activity > div#topics > a {
+	padding:13px;
+	margin-bottom:11px;	
+	margin-right:8px;
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	border-bottom:1px solid #242B30 !important;	
+	background-color:#076699;
+	text-decoration:none;
+	text-transform:uppercase;
+	display:inline-block;
+	color:#FFF;	
+	font-size:16px;
+	font-weight:500;
+	text-shadow:0px 1px 1px rgba(0,0,0,0.26);
+}
+
+#page-content #home #activity > div#topics > a > i.fa {
+	margin-left:4px;
+	font-size:0.8em;
+	opacity:0.5;
 }
 
 #page-content #home #activity > div > h2 {
