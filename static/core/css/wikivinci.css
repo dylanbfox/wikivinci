@@ -215,6 +215,19 @@ h6 {
 	border:1px solid #3c3e43 !important;
 }
 
+.btn-warning-wv {
+	color:#FFF;
+	background-color:#FFA922;
+	text-transform:uppercase;
+	text-shadow:0px 1px 1px rgba(0,0,0,0.26);
+	border:1px solid #C57F11 !important;
+	border-bottom:1px solid #242B30 !important;		
+}
+
+.btn-warning-wv:hover {
+	color:#FFF;
+}
+
 .custom-share-btn {
 	box-sizing:border-box;
 	height:20px;
@@ -629,22 +642,20 @@ h6 {
 }
 
 #page-content #home.full-width-container-top {
-	background-color:#0E68D4;
+	background-color:#F4F4F4;
 	padding-top:65px;
 	margin-top:-65px;
 	padding-bottom:65px;
-	color:#FFF !important;
 }
 
 #page-content #home #top-cta {
 	text-align:center;
 	overflow:auto;
-	text-shadow:0px 1px 1px rgba(0, 0, 0, 0.26);
 }
 
 #page-content #home #top-cta h2 {
 	font-size:44px;
-	font-weight:700;
+	font-weight:500;
 }
 
 #page-content #home #top-cta h2 > span {
@@ -655,19 +666,15 @@ h6 {
 #page-content #home #top-cta > p {
 	width:80%;
 	margin:20px auto 75px auto;
-	font-size:20px;	
-	font-weight:700;
+	font-size:18px;	
+	font-weight:500;
 }
 
 #page-content #home #top-cta a#add-post {
-	background-color:#FFA922;
 	width:70%;
 	max-width:334px;
 	padding:19px;
 	font-size:16px;
-	text-transform:uppercase;
-	text-shadow:0px 1px 1px rgba(0,0,0,0.26);
-	border-bottom:1px solid #242B30 !important;	
 }
 
 #page-content #home #top-cta a#add-post > i.fa {
@@ -685,7 +692,8 @@ h6 {
 }
 
 #page-content #home #activity > div {
-	width:50%;
+	width:60%;
+	margin:0 auto;
 }
 
 #page-content #home #activity > div > h2 {
@@ -704,7 +712,7 @@ h6 {
 	max-width:80%;
 	float:left;
 	font-weight:300;
-	font-size:19px;
+	font-size:18px;
 }
 
 #page-content #home #activity > div > div p.descr {
@@ -712,7 +720,7 @@ h6 {
 	max-width:80%;
 	float:left;
 	font-weight:300;
-	font-size:18px;
+	font-size:16px;
 }
 
 #page-content #home #activity > div > div > img {
