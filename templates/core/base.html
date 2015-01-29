@@ -34,14 +34,14 @@
 		<!--[if IE 8]><html class="ie8"><![endif]-->	
 	</head>
 
-	<div id="master-holder">
 	<body>
-
 	<!-- need to be oustside of content container -->		
 	{% include 'core/partials/authenticate-popup.html' %}
 	{% include 'core/partials/post-add-popup.html' %}
 	{% block extra_modals %}
 	{% endblock extra_modals %}
+
+	<div id="master-holder">
 
 	<!-- Header -->
 		{% block header %}
@@ -109,8 +109,8 @@
 
 		  ga('create', 'UA-58169981-1', 'auto');
 		  ga('send', 'pageview');
-		</script>			   
+		</script>
+	</div>				   
 	</body>
-	</div>
 
 </html>
