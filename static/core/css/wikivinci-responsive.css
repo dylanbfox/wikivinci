@@ -27,7 +27,11 @@
 
 	#header > .container #links {
 		display:none;
-		position:fixed;		
+		position:fixed;
+		-webkit-transform:translateZ(1px);
+	    -moz-transform:translateZ(1px);
+	    -o-transform:translateZ(1px);
+	    transform:translateZ(1px);				
 		right:0;
 		background-color:#FFF;
 		height:100%;
@@ -106,7 +110,10 @@
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
 	#page-content #all-posts-filters {
-		z-index:999;
+		-webkit-transform:translateZ(1px);
+	    -moz-transform:translateZ(1px);
+	    -o-transform:translateZ(1px);
+	    transform:translateZ(1px);
 		display:none;
 		float:none;
 		position:fixed;
