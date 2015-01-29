@@ -197,11 +197,11 @@ $(document).ready(function(){
 
 	// show filters on phones
 	$(".toprow h2 a#mobile-show-post-filters").on("click", function(){
-		$("#all-posts-filters").slideToggle("fast");
+		$("#all-posts-filters").show();
 	});
 
 	$("#all-posts-filters a#hide").on("click", function(){
-		$("#all-posts-filters").slideToggle("fast");
+		$("#all-posts-filters").hide();
 	});
 
 	// account settings page controls

@@ -202,7 +202,12 @@ h6 {
 }
 
 .btn-danger {
-	border-bottom:2px solid #d43f3a !important;
+	color:#FFF;
+	background-color:#d9534f;
+	text-transform:uppercase;
+	text-shadow:0px 1px 1px rgba(0,0,0,0.26);
+	border:1px solid #d43f3a !important;
+	border-bottom:1px solid #242B30 !important;		
 }
 
 .btn-primary {
