@@ -41,6 +41,7 @@ body {
 
 #master-holder {   /*All content sits in this so footer remains at bottom*/
 	overflow-x:hidden;	
+	-webkit-overflow-scrolling:touch;
 	height:100%;
 	position:absolute;
 	left:0;
@@ -50,7 +51,7 @@ body {
 
 #page-content {
 	overflow:auto;
-	-webkit-overflow-scrolling:touch;	
+	-webkit-overflow-scrolling:touch;
 	min-height:100%;
 	padding-top:65px;
 	padding-bottom:50px;	
