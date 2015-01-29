@@ -3,9 +3,11 @@
 {% load staticfiles %}
 {% load cropping %}
 
-{% block content %}
-{% include 'core/partials/feed-topic-personalization.html' %}
+{% block extra_modals %}
+	{% include 'core/partials/feed-topic-personalization.html' %}
+{% endblock extra_modals %}
 
+{% block content %}
 <div id="feed" class="container">
 	<div class="toprow">
 		<h2><i class="fa fa-bolt"></i> Your feed</h2>

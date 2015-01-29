@@ -4,12 +4,14 @@
 {% load cropping %}
 
 {% block extra_head %}
-{{ profile_pic_form.media }}
+	{{ profile_pic_form.media }}
 {% endblock extra_head %}
 
-{% block content %}
+{% block extra_modals %}
+	{% include 'core/partials/profile-pic-crop-popup.html' %}
+{% endblock extra_modals %}
 
-{% include 'core/partials/profile-pic-crop-popup.html' %}
+{% block content %}
 
 <div class="container">
 	<div class="toprow">

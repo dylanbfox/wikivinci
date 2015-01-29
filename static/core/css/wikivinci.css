@@ -329,7 +329,7 @@ h6 {
 }
 
 .modal {
-	z-index:9999px;
+	z-index:1050px;
 }
 
 .modal .modal-body .ajax-update {
