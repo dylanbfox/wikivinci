@@ -51,7 +51,6 @@ body {
 
 #page-content {
 	overflow:auto;
-	-webkit-overflow-scrolling: touch;
 	min-height:100%;
 	padding-top:65px;
 	padding-bottom:50px;	
@@ -971,6 +970,7 @@ h6 {
 }
 
 #page-content #all-posts-filters {
+	z-index:1;
 	padding-top:40px;
 	float:left;
 	width:20%;
