@@ -5,13 +5,16 @@
 {% load markdown_filter %}
 
 {% block meta %}
-<title>{{ post.title }}. Posted on Wikivinci.</title>
-<meta content="{{ post.title }}. Posted on Wikivinci." property="og:title">
+<title>{{ post.title }}</title>
+<meta content="{{ post.title }}" property="og:title">
 {% endblock %}
 
+{% block extra_modals %}
+	{% include 'core/partials/email-post-popup.html' %}
+	{% include 'core/partials/flag-post-popup.html' %}
+{% endblock extra_modals %}
+
 {% block content %}
-{% include 'core/partials/email-post-popup.html' %}
-{% include 'core/partials/flag-post-popup.html' %}
 <div id="single-post" class="container">
 	<div id="left-column">
 
