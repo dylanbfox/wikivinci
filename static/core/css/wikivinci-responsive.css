@@ -27,7 +27,8 @@
 
 	#header > .container #links {
 		display:none;
-		position:fixed;		
+		position:fixed;
+		-webkit-transform:translate3d(0,0,0);		
 		right:0;
 		background-color:#FFF;
 		height:100%;
@@ -108,6 +109,11 @@
 	#page-content #all-posts-filters {
 		z-index:999;
 		-webkit-transform:translate3d(0,0,0);
+		-webkit-transform: translateZ(999px);
+		-moz-transform: translateZ(1px);
+		-o-transform: translateZ(1px);
+		transform: translateZ(999px);
+		z-index: 999;		
 		display:none;
 		float:none;
 		position:fixed;
