@@ -106,7 +106,7 @@
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
 	#page-content #all-posts-filters {
-		z-index:99;
+		z-index:999;
 		display:none;
 		float:none;
 		position:fixed;
