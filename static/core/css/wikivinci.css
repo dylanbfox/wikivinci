@@ -537,6 +537,7 @@ h6 {
 
 #header {
 	position:relative;
+	z-index:9;
 	box-shadow:0px 0px 2px #919191;
 	padding-top:7px;
 	padding-bottom:7px;
