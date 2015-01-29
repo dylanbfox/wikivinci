@@ -106,19 +106,19 @@
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
 	#page-content #all-posts-filters {
+		z-index:99;
 		display:none;
 		float:none;
-		position:absolute;
-		width:100%;
-		background-color:#FFF;
+		position:fixed;
+		width:52%;
+		max-width:200px;
+		background-color:#ECE4E4;
 		padding:10px;
-		border:1px solid #ECE4E4;
 		max-width:85%;
-		left:0;
+		top:0;
+		bottom:0;
 		right:0;
-		margin:0 auto;
-		box-shadow:0px 1px 3px #423E3E;
-		border-radius:4px;
+		box-shadow:-1px 0px 2px #BABABA;
 	}
 
 	#page-content #all-posts.posts {
