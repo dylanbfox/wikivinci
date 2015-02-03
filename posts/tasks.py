@@ -26,7 +26,6 @@ def send_approved_email(account_pk, post_pk):
 
 @task()
 def send_share_email(post_pk, sender, recipient):
-	print "emailing " + recipient
 	post = Post.objects.get(pk=post_pk)
 
 	subject = "Check out \"{0}\" on Wikivinci".format(post.title)
