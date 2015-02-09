@@ -12,6 +12,10 @@
 {% block extra_modals %}
 	{% include 'core/partials/email-post-popup.html' %}
 	{% include 'core/partials/flag-post-popup.html' %}
+	<!-- include comment guidelines for newbie commenters -->
+	{% if user.is_authenticated and user.account.points < 150 %}
+		{% include 'core/partials/comment-guidelines-popup.html' %}
+	{% endif %}	
 {% endblock extra_modals %}
 
 {% block content %}

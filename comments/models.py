@@ -30,7 +30,12 @@ class Comment(models.Model):
 		url = reverse('posts:view', kwargs={'slug': self.post.slug})
 		# shave off trailing slash to add anchor
 		url_anchor = url + "#comment" + str(self.pk)
-		return url_anchor	
+		return url_anchor
+
+	COMMENT_TYPES = (
+		('1', 'comment'),
+		('2', 'reply'),
+	)
 
 	owner = models.ForeignKey(Account, related_name='comments')
 	post = models.ForeignKey(Post, related_name='comments')
@@ -43,3 +48,4 @@ class Comment(models.Model):
 	downvoters = models.ManyToManyField(Account, related_name='downvoted_comments', null=True, blank=True)
 	vote_count = models.IntegerField(default=0)	
 	text = models.TextField()
+	type = models.CharField(max_length=2, default='2', choices=COMMENT_TYPES)
