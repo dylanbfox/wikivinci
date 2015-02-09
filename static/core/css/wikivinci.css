@@ -837,8 +837,11 @@ h6 {
 }
 
 #page-content #about #wikivinci {
-	margin-top:50px;
-	font-size:16px;
+	font-size:24px;
+	font-weight:300;
+	text-align:center;
+	max-width:900px;
+	margin:0 auto;
 }
 
 #page-content #about #wikivinci h2 {
