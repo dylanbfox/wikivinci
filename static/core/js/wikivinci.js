@@ -409,10 +409,9 @@ $(document).ready(function(){
 		});		
 	});
 
-	// hide the add post form
-	$("#post-add-popup .x").on("click", function(){
-		var popup_node = $("#post-add-popup");
-		popup_node.hide();
+	// global close function for full screen popups
+	$(".full-screen-popup .x").on("click", function(){
+		$(this).closest(".full-screen-popup").hide();
 	});
 
 	// submit the add post form
@@ -494,6 +493,16 @@ $(document).ready(function(){
 	// hide suggestions on blur
 	$("#post-add-popup").on("click", "#suggested-topics #close", function(){
 		$("#post-add-popup #suggested-topics").hide();
+	});
+
+	// show comment guidelines on keypress
+	$("form#add-comment textarea").one("keypress", function(){
+		$("#comment-guidelines-popup").show();		
+	});
+
+	// hide comment guidelines on button click
+	$("#comment-guidelines-popup a#got-it").on("click", function(){
+		$("#comment-guidelines-popup").hide();
 	});
 
 	// submit comment

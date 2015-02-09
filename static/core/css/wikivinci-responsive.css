@@ -1,7 +1,7 @@
 /*phones and tablets*/
 @media (min-width:100px) and (max-width:991px) {
 
-	#post-add-popup {
+	.full-screen-popup {
 		padding:40px;
 	}	
 
@@ -106,6 +106,21 @@
 
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
+
+	#comment-guidelines-popup h2 {
+		font-size:22px;
+	}
+
+	#comment-guidelines-popup > p {
+		display:none;
+	}
+
+	#comment-guidelines-popup > ul {
+		font-size:12px;
+		padding-left:17px;
+		margin-top:10px;
+	}
+
 	#page-content #all-posts-filters {
 		z-index:999;
 		-webkit-transform:translate3d(0,0,0);
@@ -246,7 +261,7 @@
 		margin-bottom:0px;
 	}
 
-	#post-add-popup > .x {
+	.full-screen-popup > .x {
 		left:0px;
 		top:0px;
 		width:35px;
@@ -286,7 +301,7 @@
 /*tablets*/
 @media (min-width:768px) and (max-width:991px) {
 
-	#post-add-popup > .x {
+	.full-screen-popup > .x {
 		top:-8px;
 		left:-3px;
 	}
