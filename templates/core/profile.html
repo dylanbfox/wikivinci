@@ -18,7 +18,7 @@
 			{% if account.title %}
 			<p id="title" class="super-light-font"> {{ account.title }}</p>
 			{% endif %}			
-			<p id="points"><i class="fa fa-star"></i>{{ account.points }}</p>
+			<p id="points"><i class="fa fa-graduation-cap"></i>{{ account.points }} IQ</p>
 			<p id="user-number" class="super-light-font">Ranked #{{ rank }} on Wikivinci</p>
 		</div>
 	</div>
@@ -81,7 +81,7 @@
 				<div id="profilePopup{{ post.id }}" class="user-profile-tooltip">
 					<img class="owner" src="{% cropped_thumbnail post.owner 'cropping' %}" />
 					<p class="username">{{ post.owner.owner.username }}</p>
-					<p class="points"><i class="fa fa-star"></i>{{ post.owner.points }}</p>
+					<p class="points"><i class="fa fa-graduation-cap"></i>{{ post.owner.points }} IQ</p>
 					<br />
 					{% if post.owner.title %}			
 					<p class="title super-light-font">{{ post.owner.title }}</p>

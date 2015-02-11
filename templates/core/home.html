@@ -4,6 +4,10 @@
 {% load cropping %}
 {% load markdown_filter %}
 
+{% block extra_modals %}
+	{% include 'core/partials/IQ-popup.html' %}
+{% endblock extra_modals %}
+
 {% block content %}
 <div id="home" class="full-width-container-top">
 	<div class="container">
@@ -11,7 +15,7 @@
 			<h2>We're building a database of top tutorials and learning resources. We need your help.</h2>
 			<!-- <p>We're building a database of top tutorials and learning resources. We need your help.</p> -->
 			<a href="#" id="add-post" class="btn btn-warning-wv">submit something</a>
-			<span id="reputation">and earn <b><a href="#">IQ</a></b> with every submission</span>
+			<span id="reputation">and earn <b><a href="javascript:" data-toggle="modal" data-target="#explainIQ">IQ</a></b> with every submission</span>
 		</div>
 	</div>
 </div>

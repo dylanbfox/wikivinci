@@ -13,7 +13,7 @@
 	<input id="topic-search" name="search" placeholder="search for a topic" type="text" data-toggle="hideseek" data-list="#topics-list">
 	<div id="topics-list">
 	{% for k, v in topics.items %}
-		<a href="{% url 'posts:view_all' %}?topic={{ k }}">{{ k }} <span class="count super-light-font">x{{ v.count }} resources</span></a>
+		<a href="{% url 'posts:view_all' %}?topic={{ k }}&top=true">{{ k }} <span class="count super-light-font">x{{ v.count }} resources</span></a>
 	{% endfor %}
 	</div>
 

@@ -52,11 +52,11 @@
 
 		{% if groups %}
 			{% for group in groups %}
-				{% if group.date >= naturalday_limit %}
+<!-- 				{% if group.date >= naturalday_limit %}
 				<h2 id="day-group" class="super-super-light-font">{{ group.date|naturalday }} <span class="super-super-light-font">({{ group.date|date:"l, F d" }})</span></h2>				
 				{% else %}
-				<h2 id="day-group" class="super-super-light-font">{{ group.date|date:"l, F d" }}</h2>				
-				{% endif %}
+				<h2 id="day-group" class="super-super-light-font">{{ group.date|date:"l, F d" }}</h2>
+				{% endif %} -->
 
 				{% for post in group.posts %}
 					{% include 'core/partials/posts-view-single-post.html' %}				
