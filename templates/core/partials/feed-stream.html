@@ -51,7 +51,7 @@
 				<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">
 					<img class="owner" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
 					<p class="username">{{ obj.owner.owner.username }}</p>
-					<p class="points"><i class="fa fa-star"></i>{{ obj.owner.points }}</p>
+					<p class="points"><i class="fa fa-graduation-cap"></i> {{ obj.owner.points }} IQ</p>
 					<br />
 					{% if obj.owner.title %}			
 					<p class="title super-light-font">{{ obj.owner.title }}</p>
@@ -82,7 +82,7 @@
 				<div id="profilePopup{{ obj.id }}" class="user-profile-tooltip">
 					<img class="owner" src="{% cropped_thumbnail obj.owner 'cropping' %}" />
 					<p class="username">{{ obj.owner.owner.username }}</p>
-					<p class="points"><i class="fa fa-star"></i>{{ obj.owner.points }}</p>
+					<p class="points"><i class="fa fa-graduation-cap"></i> {{ obj.owner.points }} IQ</p>
 					<br />
 					{% if obj.owner.title %}			
 					<p class="title super-light-font">{{ obj.owner.title }}</p>
