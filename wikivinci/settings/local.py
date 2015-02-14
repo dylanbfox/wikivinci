@@ -48,4 +48,4 @@ DEFAULT_FROM_EMAIL = "Leonardo da Wikivinci <leo@wikivinci.com>"
 SERVER_EMAIL = '[PROD] error@wikivinci.com <error@wikivinci.com>'
 
 # Misc. settings
-HOST_NAME = 'http://127.0.0.1:8000'
+HOST_NAME = 'http://4cb45e0f.ngrok.com'

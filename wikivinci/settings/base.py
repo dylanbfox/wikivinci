@@ -87,3 +87,6 @@ THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
+# Twitter
+TWITTER_APP_KEY = "gJqPziKEjZmXRpYKDSizutTFF"
+TWITTER_APP_SECRET = "rIjASP988ndEji2W5c4Iu1ieHHiRwJK4bNZ4heKzgU7pCGNQg1"
