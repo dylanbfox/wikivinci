@@ -60,6 +60,9 @@ class TwitterAuthTest(TestCase):
 		self.assertEqual(self.client.session['oauth_token'], mock_auth['oauth_token'])
 		self.assertEqual(self.client.session['oauth_token_secret'], mock_auth['oauth_token_secret'])
 
+	def test_add_http_referer_as_next_parameter_to_callback_url(self, mock_Twython):
+		pass
+
 	def test_login_view_redirects_to_auth_url(self, mock_Twython):
 		mock_twitter = mock_Twython.return_value
 		mock_auth = mock_twitter.get_authentication_tokens.return_value
