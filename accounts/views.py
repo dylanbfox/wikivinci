@@ -15,7 +15,7 @@ from accounts.forms import (AccountRegisterForm, ProfilePicEditForm,
 							AccountEditForm)
 
 from posts.models import Post
-from posts.utils import unique_topic_counts
+from posts.utils import unique_tag_counts
 
 from comments.models import Comment
 
@@ -117,7 +117,7 @@ def feed(request, username):
 
 	account = request.user.account
 	if request.method == 'POST':
-		account.fav_topics = request.POST['favorite_topics']
+		account.fav_tags = request.POST['favorite_tags']
 		account.save()
 
 	context_dict = {}
@@ -129,10 +129,10 @@ def feed(request, username):
 	context_dict['naturalday_limit'] = date.today() - timedelta(days=1)	
 	context_dict['account'] = account
 	
-	topics = unique_topic_counts(_posts)
-	context_dict['topics'] = topics
+	tags = unique_tag_counts(_posts) # for personalization
+	context_dict['tags'] = tags
 	context_dict['account'] = account
-	context_dict['fav_topics'] = account.fav_topics_to_list()
+	context_dict['fav_tags'] = account.fav_tags_to_list()
 	return render(request, 'core/feed.html', context_dict)
 
 def twitter_login(request):

@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from accounts.models import Account
 from comments.models import Comment
 from posts.models import Post
-from posts.utils import unique_topic_counts
+from posts.utils import unique_tag_counts
 
 def home(request):
 	if request.user.is_authenticated() and not request.GET.get('true_home'):
@@ -13,9 +13,9 @@ def home(request):
 
 	context_dict = {}
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
-	topics = unique_topic_counts(posts)
-	context_dict['topics'] = topics
-	context_dict['topics_count'] = len(topics)
+	tags = unique_tag_counts(posts)
+	context_dict['tags'] = tags
+	context_dict['tags_count'] = len(tags)
 	context_dict['posts'] = posts[:7]
 	context_dict['comments'] = Comment.objects.select_related().order_by('-created')[:5]
 	return render(request, 'core/home.html', context_dict)

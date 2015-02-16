@@ -24,8 +24,8 @@
         </div>
 
         <div id="topic-list">
-        {% for k, v in topics.items %}
-          {% if k in fav_topics %}
+        {% for k, v in tags.items %}
+          {% if k in fav_tags %}
           <a href="javascript:" class="favorite" data-topic="{{ k }}">{{ k }}</a>
           {% else %}
           <a href="javascript:" data-topic="{{ k }}">{{ k }}</a>

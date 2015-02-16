@@ -35,10 +35,10 @@
 
 		<div id="topics">
 			<h2>Popular topics</h2>
-			{% for k, v in topics.items|slice:":14" %}
-				<a href="{% url 'posts:view_all' %}?topic={{ k }}&top=true">{{ k }} <i class="fa fa-chevron-right"></i></a>
+			{% for k, v in tags.items|slice:":14" %}
+				<a href="{% url 'posts:view_all' %}?tag={{ k }}&top=true">{{ k }} <i class="fa fa-chevron-right"></i></a>
 			{% endfor %}
-			<p><a href="{% url 'posts:topics' %}">plus {{ topics_count }} more topics...</a></p>
+			<p><a href="{% url 'posts:topics' %}">plus {{ tags_count }} more topics...</a></p>
 		</div>					
 	</div>
 
