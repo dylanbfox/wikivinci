@@ -10,10 +10,10 @@
 		<!-- <input class="large" name="postsearch" type="text" placeholder="search" /> -->		
 	</div>
 
-	<input id="topic-search" name="search" placeholder="search for a topic" type="text" data-toggle="hideseek" data-list="#topics-list">
+	<input id="topic-search" name="search" placeholder="search for a tag" type="text" data-toggle="hideseek" data-list="#topics-list">
 	<div id="topics-list">
-	{% for k, v in topics.items %}
-		<a href="{% url 'posts:view_all' %}?topic={{ k }}&top=true">{{ k }} <span class="count super-light-font">x{{ v.count }} resources</span></a>
+	{% for k, v in tags.items %}
+		<a href="{% url 'posts:view_all' %}?tag={{ k }}&top=true">{{ k }} <span class="count super-light-font">x{{ v.count }} resources</span></a>
 	{% endfor %}
 	</div>
 

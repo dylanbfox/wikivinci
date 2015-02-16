@@ -122,23 +122,22 @@ $(document).ready(function(){
 		var success_node = modal_node.find("#success")
 		var error_node = modal_node.find("#error");
 		
-		var topics_list_node = modal_node.find("#topic-list");
-		var selected_topics = topics_list_node.find("a.favorite");
-		var selected_topics_list = []
+		var tags_list_node = modal_node.find("#topic-list");
+		var selected_tags = tags_list_node.find("a.favorite");
+		var select_tags_list = []
 
-		selected_topics.each(function(){
-			selected_topics_list.push($(this).data("topic"));
+		selected_tags.each(function(){
+			select_tags_list.push($(this).data("topic"));
 		});
 
-		selected_topics_string = selected_topics_list.join(", ");
-		topics_list_node.hide();
+		selected_tags_string = select_tags_list.join(", ");
+		tags_list_node.hide();
 		saving_node.show();
-		console.log(selected_topics_string);
 		$.ajax({
 			// build out ajax call
 			type: 'POST',
 			url: url,
-			data: {'favorite_topics': selected_topics_string},
+			data: {'favorite_tags': selected_tags_string},
 			success: function(response){
 				saving_node.hide();
 				success_node.show();

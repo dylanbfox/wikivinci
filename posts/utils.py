@@ -21,26 +21,26 @@ def set_post_permissions(request, post=None, posts=None):
 			if upvoter or downvoter:
 				p.disallow_vote = True
 
-def unique_topic_counts(posts):
+def unique_tag_counts(posts):
 	"""
-	Forces every topic to lowercase.
+	Forces every tag to lowercase.
 	"""
-	topic_lists = [p.tags_to_list() for p in posts]
-	topics = list(itertools.chain(*topic_lists))
-	uo_unique_topics = defaultdict(lambda: {'count': 0})
-	for topic in topics:
-		uo_unique_topics[topic.lower()]['count'] += 1
+	tags_lists = [p.tags_to_list() for p in posts]
+	tags = list(itertools.chain(*tags_lists))
+	uo_unique_tags = defaultdict(lambda: {'count': 0})
+	for tag in tags:
+		uo_unique_tags[tag.lower()]['count'] += 1
 
-	unique_topics = OrderedDict(sorted(uo_unique_topics.items(),
+	unique_tags = OrderedDict(sorted(uo_unique_tags.items(),
 		key=itemgetter(1), reverse=True))
-	return unique_topics
+	return unique_tags
 
-def topic_suggestions(posts, chars):
+def tag_suggestions(posts, chars):
 	"""
-	Forces every topic to lowercase.
+	Forces every tag to lowercase.
 	"""
-	topic_lists = [p.tags_to_list() for p in posts]
-	topics = list(itertools.chain(*topic_lists))
-	matches = [t.lower() for t in topics if chars.lower() in t.lower()]
+	tag_lists = [p.tags_to_list() for p in posts]
+	tags = list(itertools.chain(*tag_lists))
+	matches = [t.lower() for t in tags if chars.lower() in t.lower()]
 	unique_matches = list(set(matches))
 	return unique_matches

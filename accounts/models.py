@@ -82,10 +82,10 @@ class Account(models.Model):
 			obj.obj_type = obj_type
 			return obj
 
-		if self.fav_topics:
-			topics_list = self.fav_topics_to_list()
-			posts = [obj_with_type(p, 'POST') for p in posts if any(p.tags_contain(topic) for topic in topics_list)]
-			comments = [obj_with_type(c, 'COMMENT') for c in comments if any(c.post.tags_contain(topic) for topic in topics_list)]
+		if self.fav_tags:
+			tags_list = self.fav_tags_to_list()
+			posts = [obj_with_type(p, 'POST') for p in posts if any(p.tags_contain(tag) for tag in tags_list)]
+			comments = [obj_with_type(c, 'COMMENT') for c in comments if any(c.post.tags_contain(tag) for tag in tags_list)]
 		else:
 			posts = [obj_with_type(p, 'POST') for p in posts]
 			comments = [obj_with_type(c, 'COMMENT') for c in comments]
@@ -94,9 +94,9 @@ class Account(models.Model):
 		feed_objs.sort(key=lambda x: x.created, reverse=True)				
 		return feed_objs
 
-	def fav_topics_to_list(self):
-		if self.fav_topics:
-			return [t.strip() for t in self.fav_topics.split(',') if t]
+	def fav_tags_to_list(self):
+		if self.fav_tags:
+			return [t.strip() for t in self.fav_tags.split(',') if t]
 
 	newsletter_settings = (
 		('DAILY', 'Daily'),
@@ -110,7 +110,7 @@ class Account(models.Model):
 	points = models.IntegerField(default=50)
 	title = models.CharField(max_length=59, blank=True, null=True)
 	twitter_handle = models.CharField(max_length=200, blank=True, null=True)
-	fav_topics = models.CharField(max_length=999, blank=True, null=True)
+	fav_tags = models.CharField(max_length=999, blank=True, null=True)
 	can_comment = models.BooleanField(default=False)
 	can_post = models.BooleanField(default=False)
 	newsletter_setting = models.CharField(max_length=50, default='DAILY', choices=newsletter_settings)

@@ -5,14 +5,14 @@
 {% load humanize %}
 
 {% block meta %}
-<title>Top{% if topic %}{{ topic }} {% endif %}Tutorials and Resources</title>
-<meta content="{% if topic %}{{ topic }} {% endif %}Tutorials and Resources on Wikivinci" property="og:title">
+<title>Top {% if tag %}{{ tag }} {% endif %}Tutorials and Resources</title>
+<meta content="{% if tag %}{{ tag }} {% endif %}Tutorials and Resources on Wikivinci" property="og:title">
 {% endblock %}
 
 {% block content %}
 <div class="container">
 	<div class="toprow">
-		<h2>{% if top %}Top{% else %}Recently Added{% endif %} {% if topic %}'{{ topic }}'{% endif %} Resources {% if contains %}on '{{ contains }}'{% endif %}
+		<h2>{% if top %}Top{% else %}Recently Added{% endif %} {% if tag %}'{{ tag }}'{% endif %} Resources {% if contains %}on '{{ contains }}'{% endif %}
 
 		<a id="mobile-show-post-filters" class="visible-xs" href="javascript:"><i class="fa fa-sliders"></i> filter results</a>
 		</h2>
@@ -22,9 +22,9 @@
 		<input id="search" name="search" placeholder="search results" type="text" data-toggle="hideseek" data-list="#all-posts">
 		<div class="filter">
 			<h3>Sort by</h3>
-			<a {% if not top %}class="active"{% endif %} href="{% url 'posts:view_all' %}{% if topic %}?topic={{ topic }}{% elif contains %}?contains={{ contains }}{% endif %}">Recently Added</a>
+			<a {% if not top %}class="active"{% endif %} href="{% url 'posts:view_all' %}{% if tag %}?tag={{ tag }}{% elif contains %}?contains={{ contains }}{% endif %}">Recently Added</a>
 			<br />
-			<a {% if top %}class="active"{% endif %} href="?top=true{% if topic %}&topic={{ topic }}{% elif contains %}&contains={{ contains }}{% endif %}">Highest Rated</a>
+			<a {% if top %}class="active"{% endif %} href="?top=true{% if tag %}&tag={{ tag }}{% elif contains %}&contains={{ contains }}{% endif %}">Highest Rated</a>
 		</div>
 
 		<div id="all-posts-skill-filter" class="filter">
@@ -46,7 +46,7 @@
 	<div id="all-posts" class="posts">
 		<div class="feed-alert">
 			<img class="wiki" src="{% static 'core/images/wikivinci-head-logo.png' %}" />
-			<p class="main">Wikivinci is new and needs your help! Know of a good tutorial or resource on <b>{% if topic %}{{ topic }}{% elif contains %}{{ contains }}{% endif %}</b>? <a id="add-post" class="action" href="#">Add it to Wikivinci, and earn reputation.</a></p>
+			<p class="main">Wikivinci is new and needs your help! Know of a good tutorial or resource on <b>{% if tag %}{{ tag }}{% elif contains %}{{ contains }}{% endif %}</b>? <a id="add-post" class="action" href="#">Add it to Wikivinci, and earn reputation.</a></p>
 			<a class="close" href="javascript:"><i class="fa fa-close"></i></a>
 		</div>
 

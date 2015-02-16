@@ -12,8 +12,8 @@ from wikivinci.utils.decorators import ajax_login_required
 
 from posts.models import Post, PostRevision
 from posts.forms import PostAddForm
-from posts.utils import (set_post_permissions, unique_topic_counts,
-						 topic_suggestions)
+from posts.utils import (set_post_permissions, unique_tag_counts,
+						 tag_suggestions)
 
 from comments.utils import set_comment_permissions
 
@@ -134,9 +134,9 @@ def view_all(request):
 	context_dict = {}
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 
-	if request.GET.get('topic'):
-		posts = [p for p in posts if p.tags_contain(contains=request.GET['topic'])]
-		context_dict['topic'] = request.GET['topic']
+	if request.GET.get('tag'):
+		posts = [p for p in posts if p.tags_contain(contains=request.GET['tag'])]
+		context_dict['tag'] = request.GET['tag']
 
 	if request.GET.get('contains'):
 		contains = request.GET['contains']
@@ -155,15 +155,17 @@ def view_all(request):
 	set_post_permissions(request, posts=posts)	
 	return render(request, 'core/posts.html', context_dict)	
 
+# move to topics app eventually
 def view_topics(request):
 	context_dict = {}
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
-	topics = unique_topic_counts(posts)
-	context_dict['topics'] = topics
+	tags = unique_tag_counts(posts)
+	context_dict['tags'] = tags
 	return render(request, 'core/topics.html', context_dict)
 
-def ajax_suggest_topics(request):
+# move to topics app eventually
+def ajax_suggest_tags(request):
 	chars = request.POST.get('chars')
 	posts = Post.objects.filter(flagged=False)
-	suggestions = topic_suggestions(posts, chars)
+	suggestions = tag_suggestions(posts, chars)
 	return JsonResponse(suggestions, safe=False)	
