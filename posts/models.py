@@ -1,4 +1,7 @@
 import re
+import urlparse
+
+import requests
 
 from itertools import groupby
 
@@ -23,12 +26,41 @@ class Post(models.Model):
 	def __unicode__(self):
 		return self.title
 
+	def extract_full_url(self):
+		try:
+			response = requests.get(self.url)
+			full_url = response.request.url
+			return full_url
+		except:
+			return self.url
+
+	def check_for_youtube_video(self):
+		result = urlparse.urlparse(self.url)
+		if result.netloc != "www.youtube.com":
+			return
+
+		params = urlparse.parse_qs(result.query)
+		video_ids = params.get('v', []) # returned as list
+		if not video_ids:
+			return
+		else:
+			video_id = video_ids[0]
+			embed_url = "//www.youtube.com/embed/"+video_id
+			return embed_url
+
 	def save(self, *args, **kwargs):
 		# executes on first save only
 		if not self.slug:
 			self.slug = self.create_slug()
+			self.url = self.extract_full_url()
+
+			embed_url = self.check_for_youtube_video()
+			if embed_url:
+				self.youtube_video = True
+				self.youtube_embed_url = embed_url
+
 			if self.owner.can_post:
-				self.approve(commit=False)
+				self.approve(commit=False) # don't send email
 		super(Post, self).save(*args, **kwargs)
 
 	def create_slug(self):
@@ -138,6 +170,8 @@ class Post(models.Model):
 	skill_level = models.CharField(max_length=12, choices=skill_levels)
 	description = models.TextField()
 	approved = models.BooleanField(default=False)
+	youtube_video = models.BooleanField(default=False)
+	youtube_embed_url = models.CharField(max_length=500, blank=True)
 
 	objects = ApprovedOnlyPostManager()
 	incl_pending_posts = IncludePendingPostManager()	

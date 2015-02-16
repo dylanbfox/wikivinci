@@ -14,7 +14,12 @@
 	</div>
 
 	<div class="title-contain">
-		<h2><a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a></h2>
+		<h2>
+			<a href="{% url 'posts:view' slug=post.slug %}">{{ post.title }}</a>
+			{% if post.youtube_video %}
+			<i class="fa fa-video-camera super-light-font"></i>
+			{% endif %}
+		</h2>
 		<p class="super-light-font">{{ post.description|truncatechars:99 }}</p>
 		<span class="timestamp super-super-light-font">submitted <b>{{ post.created|naturaltime }}</b> / </span>
 		<span class="skill-level super-super-light-font">skill level: <span class="{{ post.skill_level }}"><b>{{ post.skill_level }}</b></span></span>				

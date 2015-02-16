@@ -46,10 +46,20 @@
 				<i data-vote-direction="down" class="fa fa-caret-down"></i>
 			</div>			
 			
-			<h2><a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }} <i class="fa fa-external-link"></i></a></h2>
+			<h2>
+				{% if post.youtube_video %}				
+				{{ post.title }} <i class="fa fa-video-camera"></i>
+				{% else %}
+				<a target="_blank" href="{% url 'posts:go' slug=post.slug %}">{{ post.title }} <i class="fa fa-external-link"></i></a>
+				{% endif %}							
+			</h2>
 		</div>
 
 		<p class="lighter-font post-descr">{{ post.description|urlize|linebreaksbr }}</p>
+
+		{% if post.youtube_embed_url %}
+		<iframe id="youtube-video" width="560" height="315" src="{{ post.youtube_embed_url }}?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+		{% endif %}
 
 		<div class="addthis_toolbox addthis_default_style hidden-xs hidden-sm">
 			<!-- <a class="addthis_button_linkedin_counter" li:counter="none"></a> -->
