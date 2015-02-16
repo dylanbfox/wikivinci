@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from accounts.models import Account
 from accounts.forms import (AccountRegisterForm, ProfilePicEditForm,
@@ -80,7 +81,7 @@ def profile(request, username):
 	return render(request, 'core/profile.html', context_dict)
 
 @login_required
-def settings(request, username):
+def account_settings(request, username):
 	if request.user.username != username:
 		return HttpResponseForbidden()
 
@@ -136,34 +137,40 @@ def feed(request, username):
 
 def twitter_login(request):
 	## denied query param on GET request if denied/
-	from django.conf import settings
-
 	if request.GET.get('oauth_verifier'):
 		oauth_verifier = request.GET['oauth_verifier']
 		twitter = Twython(
 			settings.TWITTER_APP_KEY,
 			settings.TWITTER_APP_SECRET,
-			request.session['oauth_token_tmp'],
-			request.session['oauth_token_secret_tmp']			
+			request.session['oauth_token'],
+			request.session['oauth_token_secret']			
 		)
+		# exchange temp tokens for real ones; don't change		
 		final_auth = twitter.get_authorized_tokens(oauth_verifier)
-		print "Printing authenticated users OAuth Token and Secret..."
-		print final_auth['oauth_token']
-		print final_auth['oauth_token_secret']
-		request.session.flush()
-		return HttpResponse("done")
+		OAUTH_TOKEN = final_auth['oauth_token']
+		OAUTH_TOKEN_SECRET = final_auth['oauth_token_secret']
+		try:
+			account = Account.objects.get(
+				twitter_oauth_token=OAUTH_TOKEN
+			)
+		except:
+			account = Account.create_twitter_user_account(
+				OAUTH_TOKEN, OAUTH_TOKEN_SECRET
+			)
+		account.owner.backend = 'django.contrib.auth.backends.ModelBackend'
+		login(request, account.owner)
+		return redirect(request.GET.get('next') or 'posts:view_all')
 
-	CALLBACK_URL = settings.HOST_NAME + '/accounts/login/twitter/'
 	twitter = Twython(settings.TWITTER_APP_KEY,
 		settings.TWITTER_APP_SECRET
+	)
+	CALLBACK_URL = (settings.HOST_NAME +
+		'/accounts/login/twitter/' +
+		"?next="+request.META.get('HTTP_REFERER', '')
 	)
 	auth = twitter.get_authentication_tokens(
 		callback_url=CALLBACK_URL
 	)
-	# # user's oauth tokens
-	# print "Printing temporary OAuth Token and Secret..."
-	# print auth['oauth_token']
-	# print auth['oauth_token_secret']
 	request.session['oauth_token'] = auth['oauth_token']
 	request.session['oauth_token_secret'] = auth['oauth_token_secret']
 	return redirect(auth['auth_url'])

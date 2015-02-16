@@ -3,10 +3,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Sign in to Wikivinci!</h4>
+        <h4 class="modal-title" id="myModalLabel">sign in to Wikivinci</h4>
       </div>
       <div class="modal-body">
         <p id="alert" class="red-font"><b>You'll need to sign in/register first!</b></p>
+
+        <a href="{% url 'accounts:twitter_login' %}" class="sign-in" id="twitter">
+          <i class="fa fa-twitter"></i> sign in with twitter
+        </a>
+
+        <a href="javascript:" class="sign-in" id="email">
+          <i class="fa fa-envelope"></i>
+          sign in with email
+        </a>
+
         <form id="login" method="POST" action="{% url 'accounts:login' %}">
           {% csrf_token %}
           <div class="form-group">
@@ -20,9 +30,10 @@
           <input type="submit" class="btn btn-success" value="Login!" />
         </form>
       </div>
+
       <div class="modal-footer">
-        <a id="register" href="{% url 'accounts:register' %}">Don't have an account? Click here to sign up in 10 seconds.</a>
-        <a id="back-to-login" href="javascript:" style="display:none">I already have an account.</a>        
+        <a id="register" href="{% url 'accounts:register' %}">Don't have an account? Sign up in 10 seconds</a>
+        <a id="back-to-login" href="javascript:" style="display:none">I already have an email account</a>        
       </div>
     </div>
   </div>

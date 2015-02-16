@@ -598,7 +598,12 @@ h6 {
 /*authenticate modal*/
 
 #authenticateModal {
+	text-align:center !important;
+}
 
+#authenticateModal h4.modal-title {
+	font-size:22px;
+	font-weight:700;
 }
 
 #authenticateModal p#alert {
@@ -606,13 +611,50 @@ h6 {
 	margin-bottom:15px;
 }
 
-#authenticateModal form {
+#authenticateModal a.sign-in {
+	padding:20px;
+	font-size:18px;
+	font-weight:700;
+	width:100%;
 	max-width:400px;
+	display:block;
+	margin:0 auto;
+	margin-bottom:15px;	
+	text-decoration:none;
+}
+
+#authenticateModal a.sign-in > i.fa {
+	margin-right:5px;
+}
+
+#authenticateModal a.sign-in#twitter {
+	background-color:#55acee;
+	color:#FFF;
+}
+
+#authenticateModal a.sign-in#email {
+	background-color:#292f33;
+	color:#FFF;
+}
+
+#authenticateModal form {
+	padding-top:10px;
+	border-top:1px solid #D0D0D0;
+	max-width:400px;
+	margin:0 auto;
+}
+
+#authenticateModal form#login {
+	display:none;
 }
 
 #authenticateModal form .form-group input {
 	padding:10px;
 	font-weight:300;
+}
+
+#authenticateModal .modal-footer {
+	display:none;
 }
 
 #header {
