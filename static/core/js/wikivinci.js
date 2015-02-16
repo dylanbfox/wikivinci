@@ -238,6 +238,13 @@ $(document).ready(function(){
 		$("#header #account-dropdown").hide();
 	});
 
+	// authenticate popup - click sign in with email
+	$("#authenticateModal a.sign-in#email").on("click", function(){
+		$("form#login").show();
+		$("#authenticateModal").find(".modal-footer").show();
+		$(this).hide();
+	});
+
 	// authenticate popup - go back to login form
 	$("#authenticateModal a#back-to-login").on("click", function(){
 		var popup_modal = $("#authenticateModal");		
@@ -245,7 +252,7 @@ $(document).ready(function(){
 		popup_modal.find("form#login").show();
 		popup_modal.find(".modal-footer a#back-to-login").hide();		
 		popup_modal.find(".modal-footer a#register").show();
-		popup_modal.find(".modal-title").text("Sign in to Wikivinci!");				
+		popup_modal.find(".modal-title").text("Sign in to Wikivinci!");
 	});
 
 	// get register form
