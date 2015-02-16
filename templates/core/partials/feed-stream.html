@@ -22,11 +22,11 @@
 		</div>		
 		{% endif %}		
 
-		{% if group.date >= naturalday_limit %}
+<!-- 		{% if group.date >= naturalday_limit %}
 		<h2 id="day-group" class="super-light-font">{{ group.date|naturalday }} <span class="super-super-light-font">({{ group.date|date:"l, F d" }})</span></h2>				
 		{% else %}
 		<h2 id="day-group" class="super-light-font">{{ group.date|date:"l, F d" }}</h2>				
-		{% endif %}
+		{% endif %} -->
 
 		{% for obj in group.posts %}
 			{% if obj.obj_type == "POST" %}
@@ -42,7 +42,12 @@
 				</div>
 
 				<div class="title-contain">
-					<h2><a href="{% url 'posts:view' slug=obj.slug %}">{{ obj.title }}</a></h2>
+					<h2>
+						<a href="{% url 'posts:view' slug=obj.slug %}">{{ obj.title }}</a>
+						{% if obj.youtube_video %}
+						<i class="fa fa-video-camera super-light-font"></i>
+						{% endif %}						
+					</h2>
 					<p class="super-light-font">{{ obj.description|truncatechars:99 }}</p>
 					<span class="timestamp super-super-light-font">submitted <b>{{ obj.created|naturaltime }}</b> / </span>
 					<span class="skill-level super-super-light-font">skill level: <span class="{{ obj.skill_level }}"><b>{{ obj.skill_level }}</b></span></span>				
