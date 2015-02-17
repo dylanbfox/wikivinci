@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'accounts',
     'comments',
     'pages',
+    'topics',
 )
 
 MIDDLEWARE_CLASSES = (
