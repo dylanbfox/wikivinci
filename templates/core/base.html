@@ -35,7 +35,11 @@
 	</head>
 
 	<body>
-	<!-- need to be oustside of content container -->		
+	{% if user.is_authenticated and not user.email %}
+		{% include 'core/partials/twitter-add-email-popup.html' %}
+	{% endif %}
+
+	<!-- need to be oustside of content container -->
 	{% include 'core/partials/authenticate-popup.html' %}
 	{% include 'core/partials/post-add-popup.html' %}
 	{% block extra_modals %}
