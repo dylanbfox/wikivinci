@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.exceptions import ValidationError
 
 from model_mommy import mommy
 
@@ -6,8 +7,15 @@ from mock import patch, Mock, MagicMock
 
 from accounts.models import Account
 
-@patch('accounts.models.Twython')
 class AccountModelTest(TestCase):
+
+	def test_username_validator_raises_error(self):
+		validator = Account.username_validator()
+		with self.assertRaises(ValidationError):
+			validator("dylanbfox@gmail.com")
+
+@patch('accounts.models.Twython')
+class AccountModelTwitterAuthTest(TestCase):
 
 	def setUpMockTwitterResponses(self, mock_Twython):
 		mock_twitter = mock_Twython.return_value

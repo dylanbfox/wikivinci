@@ -52,6 +52,24 @@ function setHomePageTopicBackgroundColors(){
 
 $(document).ready(function(){
 
+	// Twitter add email ajax call
+	$("#twitterAddEmailPopup form").on("submit", function(){
+		var email_input = $(this).find("input[name=email]");
+		var email_val = email_input.val();
+		if (!($.trim(email_val))) {
+			email_input.addClass("error");
+			return false;
+		}
+		$.ajax({
+			type: 'POST',
+			url: '/accounts/twitter-add-email/',
+			data: {email: email_val},
+			success: function(response){
+				location.reload();
+			}
+		});
+	});
+
 	// submit topic moderator application ajax call
 	// $("#moderatorApplication button#submit").on("click", function(){
 	// 	$.ajax({

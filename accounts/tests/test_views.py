@@ -1,20 +1,30 @@
 from importlib import import_module
 
 from django.test import TestCase
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import resolve
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from mock import Mock, MagicMock, patch
 
 from model_mommy import mommy
 
 from accounts.models import Account
-from accounts.forms import AccountRegisterForm
+
+class TwitterAddEmailViewTest(TestCase):
+
+	def test_email_saved_on_POST(self):
+		user = User.objects.create_user(username="dylan", password="password")
+		self.client.login(username="dylan", password="password")
+		self.client.post(reverse('accounts:twitter_add_email'),
+			data={'email': "dylanbfox@gmail.com"}
+		)
+		user = User.objects.get(username="dylan") # update instance
+		self.assertEqual(user.email, "dylanbfox@gmail.com")
 
 @patch('accounts.views.Twython')
-class TwitterAuthTest(TestCase):
+class TwitterAuthViewTest(TestCase):
 
 	def create_session(self):
 		engine = import_module(settings.SESSION_ENGINE)
@@ -143,23 +153,3 @@ class TwitterAuthTest(TestCase):
 			'oauth_verifier': 'oauthverifierkey',
 		})				
 		self.assertRedirects(response, '/posts/')				
-
-class AccountRegisterFormTest(TestCase):
-
-	def test_alphanumeric_only_allowed_in_username(self):
-		data = {
-			'username': 'dylanbfox@gmail.com',
-			'password': 'password',
-			'email': 'dylanbfox@gmail.com'
-		}
-
-		form = AccountRegisterForm(data=data)
-		self.assertFalse(form.is_valid())
-		self.assertEqual(form.errors['username'], ['Alphanumeric characters only!'])
-
-class AccountModelTest(TestCase):
-
-	def test_username_validator_raises_error(self):
-		validator = Account.username_validator()
-		with self.assertRaises(ValidationError):
-			validator("dylanbfox@gmail.com")
