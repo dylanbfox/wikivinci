@@ -38,7 +38,7 @@
 			{% for k, v in tags.items|slice:":14" %}
 				<a href="{% url 'posts:view_all' %}?tag={{ k }}&top=true">{{ k }} <i class="fa fa-chevron-right"></i></a>
 			{% endfor %}
-			<p><a href="{% url 'posts:topics' %}">plus {{ tags_count }} more topics...</a></p>
+			<p><a href="{% url 'topics:view_all' %}">plus {{ tags_count }} more topics...</a></p>
 		</div>					
 	</div>
 

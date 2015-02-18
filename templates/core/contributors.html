@@ -15,7 +15,11 @@
 		<div class="contributor">
 			<img class="profile-pic" src="{% cropped_thumbnail account 'cropping' %}"/>
 			<div class="info">
-				<a href="{% url 'accounts:profile' username=account.owner.username %}">{{ account.owner.username }}</a>
+				{% if account.moderator %}
+				<a class="username moderator" href="{% url 'accounts:profile' username=account.owner.username %}">{{ account.owner.username }}</a>
+				{% else %}
+				<a class="username" href="{% url 'accounts:profile' username=account.owner.username %}">{{ account.owner.username }}</a>
+				{% endif %}
 				<p class="points"><b><i class="fa fa-graduation-cap"></i> {{ account.points }} IQ</b></p>
 				{% if account.title %}<p class="title super-light-font">{{ account.title }}</p>{% endif %}
 			</div>

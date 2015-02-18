@@ -15,6 +15,8 @@ from posts.forms import PostAddForm
 from posts.utils import (set_post_permissions, unique_tag_counts,
 						 tag_suggestions)
 
+from topics.models import Topic
+
 from comments.utils import set_comment_permissions
 
 from accounts.tasks import send_account_alert_email
@@ -132,18 +134,31 @@ def favorite(request, slug):
 
 def view_all(request):
 	context_dict = {}
+	params = request.GET.copy() # pass to template for future requests
+
+	# Get all the posts
 	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 
+	# and widdle down
 	if request.GET.get('tag'):
 		posts = [p for p in posts if p.tags_contain(contains=request.GET['tag'])]
 		context_dict['tag'] = request.GET['tag']
 
+	# and widdle down
+	if request.GET.get('topic'):
+		t = Topic.objects.get(name__iexact=request.GET['topic'])
+		context_dict['topic'] = t
+		posts = [p for p in posts if t in p.topics.all()]
+
+	# and widdle down
 	if request.GET.get('contains'):
 		contains = request.GET['contains']
 		context_dict['contains'] = contains		
 		posts = [p for p in posts if p.content_contains(contains=contains)]
 
+	# and widdle down
 	if request.GET.get('top'):
+		params.pop('top') # template handles re-setting
 		sorted_posts = sorted(posts, key=lambda k: k.vote_count, reverse=True)
 		context_dict['posts'] = sorted_posts[:50] # top 50 posts
 		context_dict['top'] = True
@@ -152,18 +167,10 @@ def view_all(request):
 		context_dict['groups'] = groups[:20] # past 20 days posts
 		context_dict['naturalday_limit'] = date.today() - timedelta(days=1)
 
+	context_dict['params'] = params.urlencode()
 	set_post_permissions(request, posts=posts)	
-	return render(request, 'core/posts.html', context_dict)	
+	return render(request, 'core/posts.html', context_dict)
 
-# move to topics app eventually
-def view_topics(request):
-	context_dict = {}
-	posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
-	tags = unique_tag_counts(posts)
-	context_dict['tags'] = tags
-	return render(request, 'core/topics.html', context_dict)
-
-# move to topics app eventually
 def ajax_suggest_tags(request):
 	chars = request.POST.get('chars')
 	posts = Post.objects.filter(flagged=False)

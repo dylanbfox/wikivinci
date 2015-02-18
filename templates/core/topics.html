@@ -6,12 +6,33 @@
 <div class="container" id="topics">
 	<div class="toprow">
 		<h2>Topics</h2>
-		<p class="sub-title super-light-font">Topics are tags that other community have assigned to the posts and resources they've added to Wikivinci. Click any topic to view the posts and resources community members have added for it.</p>
+		<p class="sub-title super-light-font">Once there are enough resources submitted for a certain topic, we'll manually create an official Topic for it. Moderators can then file, or un-file, resources into a Topic.
+		If you have suggestions for Topics we should add, please use the feedback form in the bottom right!</p>
 		<!-- <input class="large" name="postsearch" type="text" placeholder="search" /> -->		
 	</div>
 
-	<input id="topic-search" name="search" placeholder="search for a tag" type="text" data-toggle="hideseek" data-list="#topics-list">
-	<div id="topics-list">
+	<div id="topic-list">
+		{% for topic in topics %}
+		<div class="topic">
+			<div class="img-container">
+				<img src="{{ topic.image.url }}" />
+			</div>
+			<h4><a href="{% url 'posts:view_all' %}?topic={{ topic.name }}">{{ topic.name }}</a></h4>
+			<p>{{ topic.description|truncatechars:"150" }}</p>
+			<br />
+			<a href="{% url 'topics:view' slug=topic.slug %}">{{ topic.moderators.all.count }} moderators</a>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="toprow">
+		<h2>Tags</h2>
+		<p class="sub-title super-light-font">These are tags that community have assigned to their submissions. Once there are enough tags for a general topic, we'll create an official Topic for it.</p>
+		<!-- <input class="large" name="postsearch" type="text" placeholder="search" /> -->		
+	</div>
+
+	<input id="tag-search" name="search" placeholder="search for a tag" type="text" data-toggle="hideseek" data-list="#tag-list">
+	<div id="tag-list">
 	{% for k, v in tags.items %}
 		<a href="{% url 'posts:view_all' %}?tag={{ k }}&top=true">{{ k }} <span class="count super-light-font">x{{ v.count }} resources</span></a>
 	{% endfor %}

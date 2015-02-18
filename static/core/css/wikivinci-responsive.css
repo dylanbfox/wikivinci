@@ -107,6 +107,12 @@
 /*phones only*/
 @media (min-width:100px) and (max-width:767px) {
 
+	#page-content #topics #topic-list .topic {
+		width:100%;
+		float:none;
+		margin-right:0px;
+	}
+
 	#page-content #single-post #left-column iframe#youtube-video {
 		max-height:222px;
 	}	
@@ -304,6 +310,10 @@
 
 /*tablets*/
 @media (min-width:768px) and (max-width:991px) {
+
+	#page-content #topics #topic-list .topic {
+		width:28%;
+	}	
 
 	.full-screen-popup > .x {
 		top:-8px;
