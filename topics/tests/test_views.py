@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
 from mock import patch, Mock, MagicMock
 
@@ -24,24 +25,24 @@ class TopicViewTest(TestCase):
 	def test_moderator_can_edit_topic(self):
 		pass
 
-	# def test_logged_out_apply_responds_forbidden(self):
-	# 	topic = mommy.make('topics.Topic', name='Django', slug='django')
-	# 	response = self.client.post(
-	# 		reverse('topics:apply', kwargs={'slug': topic.slug})
-	# 	)
-	# 	self.assertEqual(response.status_code, 403)
-
 	@patch('topics.views.Topic.send_application_email_to_admin')
 	def test_apply_sends_email_to_admin(self,
 		mock_send_application_email_to_admin
 	):	
+		user = User.objects.create_user(
+			username="dylan",
+			email="dylanbfox@gmail.com",
+			password="password"
+		)
+		self.client.login(username="dylan", password="password")			
+
 		topic = mommy.make('topics.Topic', name='Django', slug='django')
 		response = self.client.post(
 			reverse('topics:apply', kwargs={'slug': topic.slug}),
-			data={'email': "dylanbfox@gmail.com", 'body': "My application"}
+			data={'body': "My application"}
 		)
+
 		mock_send_application_email_to_admin.assert_called_once_with(
 			"dylanbfox@gmail.com",
 			body="My application"
 		)
-

@@ -117,6 +117,7 @@ class Account(models.Model):
 	fav_tags = models.CharField(max_length=999, blank=True, null=True)
 	can_comment = models.BooleanField(default=False)
 	can_post = models.BooleanField(default=False)
+	moderator = models.BooleanField(default=False)
 	newsletter_setting = models.CharField(max_length=50, default='DAILY', choices=newsletter_settings)
 	favorites = models.ManyToManyField('posts.Post', blank=True, null=True)
 	twitter_oauth_token = models.CharField(max_length=199, blank=True, null=True)

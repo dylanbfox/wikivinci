@@ -394,6 +394,13 @@ h6 {
 	color:#F4351D;	
 }
 
+/*topic moderator application popup*/
+
+#moderatorApplication form input#submit {
+	margin-top:10px;
+	padding:12px;
+}
+
 /*twitter add email popup*/
 
 #twitterAddEmailPopup {

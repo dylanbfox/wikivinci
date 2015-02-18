@@ -10,11 +10,14 @@
           inappropriate resources. Let us know why you'd be
           a good person to help moderate this topic. The more IQ you have, the better your chances are, but that doesn't always matter.</p>
         <br />
-        <textarea name="body"></textarea>
+        <form method="POST" action="{% url 'topics:apply' slug=topic.slug %}">
+          {% csrf_token %}
+          <textarea name="body"></textarea>
+          <input id="submit" type="submit" class="btn btn-primary" value="Submit Application">
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="submit" type="button" class="btn btn-primary">Submit application</button>
       </div>
     </div>
   </div>

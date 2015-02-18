@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 
 from .models import Topic
@@ -28,4 +29,14 @@ def view(request, slug):
 # 
 
 def apply(request, slug):
-	return HttpResponse()
+	try:
+		topic = Topic.objects.get(slug__iexact=slug)
+	except:
+		raise Http404
+
+	topic.send_application_email_to_admin(
+		request.user.email,
+		body=request.POST.get('body')
+	)
+	return redirect('topics:view', slug=topic.slug)
+
