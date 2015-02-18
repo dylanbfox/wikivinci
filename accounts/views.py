@@ -174,3 +174,9 @@ def twitter_login(request):
 	request.session['oauth_token'] = auth['oauth_token']
 	request.session['oauth_token_secret'] = auth['oauth_token_secret']
 	return redirect(auth['auth_url'])
+
+def twitter_add_email(request):
+	email = request.POST['email']
+	request.user.email = email
+	request.user.save()
+	return HttpResponse()
