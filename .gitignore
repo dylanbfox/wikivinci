@@ -1,4 +1,6 @@
 *.pyc
 *.psd
+.coverage
+htmlcov/
 media/
 profile_pics/
