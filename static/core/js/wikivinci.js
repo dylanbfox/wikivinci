@@ -52,6 +52,27 @@ function setHomePageTopicBackgroundColors(){
 
 $(document).ready(function(){
 
+	// Topic add/file post ajax call
+	$("#topicAddPostPopup button#submit").on("click", function(){
+		var modal = $("#topicAddPostPopup");
+		var topic_slug = modal.find("select#topic").val();
+		$.ajax({
+			type: 'POST',
+			url: '/topics/'+topic_slug+'/add-post/',
+			data: {post_pk: modal.attr("data-post-pk")},
+			success: function(response){
+				modal.modal('toggle');
+				location.reload();
+			},
+		});
+	});
+
+	// Add Post PK to topicAddPostPopup on click
+	$("a.file-topic-link").on("click", function(){
+		var post_pk = $(this).data("post-pk")
+		$("#topicAddPostPopup").attr("data-post-pk", post_pk);
+	});
+
 	// Twitter add email ajax call
 	$("#twitterAddEmailPopup form").on("submit", function(){
 		var email_input = $(this).find("input[name=email]");
