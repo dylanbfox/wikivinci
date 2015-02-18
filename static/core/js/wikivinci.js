@@ -490,7 +490,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "/posts/topics/suggest/",
+			url: "/posts/tags/suggest/",
 			data: {chars: chars},
 			success: function(response){
 				if (response.length < 1){

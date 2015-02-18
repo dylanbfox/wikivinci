@@ -7,6 +7,9 @@ from django.conf import settings
 
 class Topic(models.Model):
 
+	def __unicode__(self):
+		return self.name
+
 	@property
 	def absolute_url(self):
 		return reverse('topics:view', kwargs={'slug': self.slug})	

@@ -4,10 +4,16 @@ from django.http import Http404, HttpResponse
 
 from .models import Topic
 
+from posts.models import Post
+from posts.utils import unique_tag_counts
+
 from wikivinci.utils.decorators import ajax_login_required
 
 def view_all(request):
-	pass
+	context_dict = {}
+	context_dict['tags'] = unique_tag_counts(Post.objects.all())
+	context_dict['topics'] = Topic.objects.all().prefetch_related('moderators')
+	return render(request, 'core/topics.html', context_dict)	
 
 def view(request, slug):
 	try:
@@ -15,18 +21,7 @@ def view(request, slug):
 	except:
 		raise Http404
 
-	return render(request, 'core/single-topic.html', {'topic': topic})
-
-# @ajax_login_required
-# def apply(request, slug):
-# 	try:
-# 		topic = Topic.objects.prefetch_related('moderators__owner').get(slug__iexact=slug)
-# 	except:
-# 		raise Http404
-
-# 	applicant = request.POST['email']
-# 	body = request.POST['body']
-# 
+	return render(request, 'core/single-topic.html', {'topic': topic}) 
 
 def apply(request, slug):
 	try:

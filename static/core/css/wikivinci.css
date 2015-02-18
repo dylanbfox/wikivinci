@@ -1110,13 +1110,13 @@ h6 {
 	font-weight:700;
 }
 
-#page-content #topics #topics-list {
+#page-content #topics #tag-list {
 	padding-top:15px;
 	border-top:1px solid #D7D5D5;
 	margin-top:15px;
 }
 
-#page-content #topics input#topic-search {
+#page-content #topics input#tag-search {
 	border-radius:13px;
 	width:100%;
 	max-width:300px;
@@ -1125,7 +1125,7 @@ h6 {
 	margin-top:15px;
 }
 
-#page-content #topics #topics-list > a {
+#page-content #topics #tag-list > a {
 	float:left;
 	padding:10px;
 	font-size:14px;
@@ -1139,14 +1139,54 @@ h6 {
 	text-decoration:none;	
 }
 
-#page-content #topics #topics-list > a:nth-child(4n+4) {
+#page-content #topics #tag-list > a:nth-child(4n+4) {
 	margin-right:0px;
 }
 
-#page-content #topics #topics-list > a > span.count {
+#page-content #topics #tag-list > a > span.count {
 	margin-left:2px;
 	font-weight:400;
 	font-size:11px;
+}
+
+#page-content #topics #topic-list {
+	overflow:auto;
+	padding-bottom:15px;
+	margin-bottom:75px;
+}
+
+#page-content #topics #topic-list .topic {
+	float:left;
+	width:20%;
+	margin-right:35px;
+	margin-bottom:35px;
+	text-align:center;
+	border:1px solid #F4F4F4;
+	background-color:#F4F4F4;
+	box-shadow:0px 1px 1px #BBB4B4;
+	padding:16px;
+}
+
+#page-content #topics #topic-list .topic .img-container {
+	height:100px;
+	margin-bottom:20px;
+	line-height:100px;
+}
+
+#page-content #topics #topic-list .topic .img-container > img {
+	max-width:100%;
+	max-height:100px;
+	vertical-align:middle;
+}
+
+#page-content #topics #topic-list .topic h4 {
+	font-size:22px;
+	font-weight:700;
+}
+
+#page-content #topics #topic-list .topic > p {
+	font-size:13px;
+	margin-top:12px;
 }
 
 #page-content #all-posts-filters {
@@ -1910,6 +1950,14 @@ h6 {
 #page-content #contributors .contributor .info {
 	float:left;
 	max-width:65%;
+}
+
+#page-content #contributors .contributor .info a.username {
+	font-size:17px;
+}
+
+#page-content #contributors .contributor .info a.username.moderator {
+	color:#00D022;
 }
 
 #page-content #contributors .contributor .info p.title {

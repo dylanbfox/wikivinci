@@ -6,6 +6,18 @@ from mock import patch, Mock, MagicMock
 
 from model_mommy import mommy
 
+class ViewAllTopicsViewTest(TestCase):
+
+	def test_tags_passed_to_view(self):
+		post = mommy.make('posts.Post', tags="django", approved=True)
+		response = self.client.get(reverse('topics:view_all'))
+		self.assertIn("django", response.context['tags'])
+
+	def test_topics_passed_to_view(self):
+		topic = mommy.make("topics.Topic", name="Django")
+		response = self.client.get(reverse('topics:view_all'))
+		self.assertIn(topic, response.context['topics'])
+
 class TopicViewTest(TestCase):
 
 	def test_topic_view_renders_topic_template(self):
