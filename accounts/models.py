@@ -69,6 +69,10 @@ class Account(models.Model):
 		error_message = "Alphanumeric characters only!"
 		return RegexValidator(regex=regex, message=error_message)
 
+	@property
+	def username(self):
+		return self.owner.username
+
 	def award_points(self, points=0):
 		self.points += points
 		self.save()

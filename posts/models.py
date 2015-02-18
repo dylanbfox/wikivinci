@@ -172,6 +172,7 @@ class Post(models.Model):
 	approved = models.BooleanField(default=False)
 	youtube_video = models.BooleanField(default=False)
 	youtube_embed_url = models.CharField(max_length=500, blank=True)
+	topics = models.ManyToManyField('topics.Topic', related_name='posts', blank=True, null=True)
 
 	objects = ApprovedOnlyPostManager()
 	incl_pending_posts = IncludePendingPostManager()	

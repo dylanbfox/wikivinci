@@ -52,6 +52,14 @@ function setHomePageTopicBackgroundColors(){
 
 $(document).ready(function(){
 
+	// submit topic moderator application ajax call
+	// $("#moderatorApplication button#submit").on("click", function(){
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: '/a'
+	// 	})
+	// });	
+
 	// set background colors on home page topics
 	setHomePageTopicBackgroundColors();
 

@@ -40,3 +40,16 @@ class PostModelTest(TestCase):
 			post.youtube_embed_url,
 			"//www.youtube.com/embed/123abc"
 		)
+
+	def test_topic_saved_to_post(self):
+		topic = mommy.make('topics.Topic')
+		post = mommy.make('posts.Post', topics=[topic])
+		self.assertTrue(post.topics.all().count(), 0)
+		self.assertEqual(post.topics.first(), topic)
+
+	def test_topic_added_to_post(self):
+		topic = mommy.make('topics.Topic')
+		post = mommy.make('posts.Post')
+		post.topics.add(topic)
+		self.assertTrue(post.topics.all().count(), 0)
+		self.assertEqual(post.topics.first(), topic)

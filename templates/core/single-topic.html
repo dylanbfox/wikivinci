@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+{% load staticfiles %}
+{% load cropping %}
+{% load markdown_filter %}
+
+{% block meta %}
+<title>{{ post.title }}</title>
+<meta content="{{ post.title }}" property="og:title">
+{% endblock %}
+
+{% block extra_modals %}
+	{% include 'core/partials/moderator-application-popup.html' %}
+{% endblock extra_modals %}
+
+{% block content %}
+<div id="single-topic" class="container">
+	<div id="topic">
+		<div id="image-contain">
+			<img src="{{ topic.image.url }}" />
+		</div>
+		<h1>{{ topic.name }}</h1>
+		<p class="description">{{ topic.description }}</p>
+		<div id="moderators">
+			<h3 class="super-light-font">moderators
+				{% if user.is_authenticated %}
+				(<a id="apply" href="javascript:" data-toggle="modal" data-target="#moderatorApplication">apply</a>)
+				{% else %}
+				(<a id="apply" href="javascript:" data-toggle="modal" data-target="#authenticateModal">apply</a>)
+				{% endif %}
+			</h3>
+			{% for moderator in topic.moderators.all %}
+			<a href="{% url 'accounts:profile' username=moderator.username %}"><img class="profile-pic account-circle-profile-pic-md" src="{% cropped_thumbnail moderator 'cropping' %}" /></a>
+			{% endfor %}
+		</div>		
+	</div>
+</div>
+{% endblock %}

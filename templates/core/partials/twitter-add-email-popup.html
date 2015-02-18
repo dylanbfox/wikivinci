@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+<div id="twitterAddEmailPopup" class="full-screen-popup">
+	<img id="head" src="{% static 'core/images/wikivinci-head-logo.png' %}" />
+	<h2>Huzzah! Almost there...</h2>
+	<p class="super-light-font">Just confirm your email to complete the sign up process</p>
+
+	<form>
+		<input type="email" name="email" placeholder="email" />
+		<input type="submit" class="btn btn-warning-wv" value="Submit">
+	</form>
+	<a id="logout" href="{% url 'accounts:logout' %}">meh, nevermind then...</a>
+</div>
