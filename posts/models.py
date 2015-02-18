@@ -26,6 +26,23 @@ class Post(models.Model):
 	def __unicode__(self):
 		return self.title
 
+
+	@staticmethod
+	def group_by_date(posts, order_by_vote=False):
+		groups = [{'date': t, 'posts': list(g)} for t, g in groupby(posts, key=lambda p: p.created.date())]
+		if order_by_vote:
+			groups = [{'date': group['date'], 'posts': sorted(group['posts'],
+				key=lambda p: p.vote_count, reverse=True)} for group in groups]
+		return groups
+
+	@property
+	def has_topics(self):
+		topics = self.topics.all()
+		if topics:
+			return True
+		else:
+			return False		
+
 	def extract_full_url(self):
 		try:
 			response = requests.get(self.url)
@@ -129,14 +146,6 @@ class Post(models.Model):
 
 		for recipient in recipients:
 			send_share_email.apply_async([self.pk, sender, recipient])
-
-	@staticmethod
-	def group_by_date(posts, order_by_vote=False):
-		groups = [{'date': t, 'posts': list(g)} for t, g in groupby(posts, key=lambda p: p.created.date())]
-		if order_by_vote:
-			groups = [{'date': group['date'], 'posts': sorted(group['posts'],
-				key=lambda p: p.vote_count, reverse=True)} for group in groups]
-		return groups
 
 	post_types = (
 		('LINK', 'link'),

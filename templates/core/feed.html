@@ -5,6 +5,10 @@
 
 {% block extra_modals %}
 	{% include 'core/partials/feed-topic-personalization.html' %}
+	
+	{% if user.is_authenticated and user.account.moderator %}
+		{% include 'core/partials/topic-add-post-popup.html' %}
+	{% endif %}	
 {% endblock extra_modals %}
 
 {% block content %}

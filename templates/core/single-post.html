@@ -15,7 +15,11 @@
 	<!-- include comment guidelines for newbie commenters -->
 	{% if user.is_authenticated and user.account.points < 150 %}
 		{% include 'core/partials/comment-guidelines-popup.html' %}
-	{% endif %}	
+	{% endif %}
+
+	{% if user.is_authenticated and user.account.moderator %}
+		{% include 'core/partials/topic-add-post-popup.html' %}
+	{% endif %}
 {% endblock extra_modals %}
 
 {% block content %}
@@ -31,7 +35,12 @@
 
 		<div id="post-ops">
 			{% if user.is_authenticated %}			
-			<a class="red-font" data-toggle="modal" data-target="#flagPostModal" href="#"><i class="fa fa-flag-o"></i></a>
+			<a class="red-font" data-toggle="modal" data-target="#flagPostModal" href="#" title="Flag for removal"><i class="fa fa-flag"></i></a>
+				{% if user.account.moderator %}
+				<a class="file-topic-link" href="javascript:" data-toggle="modal" data-target="#topicAddPostPopup" data-post-pk="{{ post.pk }}" title="File to Topic" >
+					<i class="fa fa-inbox"></i>
+				</a>
+				{% endif %}
 			{% endif %}			
 		</div>
 
@@ -69,7 +78,10 @@
 		</div>
 			
 		<div id="comments">
+			{% if comments %}
 			<h2 id="comments-title" class="super-light-font">{{ comments.count }} comments</h2>
+			{% endif %}
+			
 			{% for comment in comments %}
 			<div class="comment" id="comment{{ comment.pk }}">
 				{% if comment.disallow_vote %}
@@ -163,9 +175,21 @@
 			{% endif %}
 		</div>
 
+		{% if post.has_topics %}
+		<div id="topics">
+			<h2 class="super-super-light-font">Topics Covered</h2>
+			{% for topic in post.topics.all %}
+				<div class="topic">
+					<a href="{% url 'topics:view' slug=topic.slug %}">{{ topic.name }}</a>
+					<p class="descr">{{ topic.description|truncatechars:100 }}</p>
+				</div>
+			{% endfor %}
+		</div>			
+		{% endif %}
+
 		{% if related_posts %}
 		<div id="related-posts">
-			<h2 class="super-super-light-font">RELATED RESOURCES</h2>
+			<h2 class="super-super-light-font">Related Resources</h2>
 			{% for post in related_posts %}
 			<div class="related-post">
 				<a href="{{ post.absolute_url }}">{{ post.title }}</a>

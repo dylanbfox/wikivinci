@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .models import Topic
 
 from posts.models import Post
 from posts.utils import unique_tag_counts
-
-from wikivinci.utils.decorators import ajax_login_required
 
 def view_all(request):
 	context_dict = {}
@@ -35,3 +34,14 @@ def apply(request, slug):
 	)
 	return redirect('topics:view', slug=topic.slug)
 
+@login_required
+def add_post(request, slug):
+	try:
+		topic = Topic.objects.get(slug__iexact=slug)
+	except:
+		raise Http404
+
+	post = Post.objects.get(pk=request.POST['post_pk'])
+	post.topics.add(topic)
+	post.save()
+	return HttpResponse()

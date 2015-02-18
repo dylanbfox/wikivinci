@@ -43,10 +43,16 @@
 
 				<div class="title-contain">
 					<h2>
+						{% if user.account.moderator and not obj.has_topics %}
+						<a class="file-topic-link" href="javascript:" data-toggle="modal" data-target="#topicAddPostPopup" data-post-pk="{{ obj.pk }}" title="File to Topic">
+							<i class="fa fa-inbox"></i> |
+						</a>
+						{% endif %}
+
 						<a href="{% url 'posts:view' slug=obj.slug %}">{{ obj.title }}</a>
 						{% if obj.youtube_video %}
 						<i class="fa fa-video-camera super-light-font"></i>
-						{% endif %}						
+						{% endif %}
 					</h2>
 					<p class="super-light-font">{{ obj.description|truncatechars:99 }}</p>
 					<span class="timestamp super-super-light-font">submitted <b>{{ obj.created|naturaltime }}</b> / </span>

@@ -6,6 +6,8 @@ from mock import patch, Mock, MagicMock
 
 from model_mommy import mommy
 
+from posts.models import Post
+
 class ViewAllTopicsViewTest(TestCase):
 
 	def test_tags_passed_to_view(self):
@@ -58,3 +60,25 @@ class TopicViewTest(TestCase):
 			"dylanbfox@gmail.com",
 			body="My application"
 		)
+
+class TopicAddPostTest(TestCase):
+
+	def setUp(self):
+		self.user = User.objects.create_user(
+			username="dylan",
+			password="password"
+		)
+		self.client.login(username="dylan", password="password")
+
+	def test_view_adds_post_to_topic(self):
+		post = mommy.make('posts.Post', approved=True)
+		topic = mommy.make('topics.Topic')
+
+		url = reverse('topics:add_post', kwargs={'slug': topic.slug})
+		self.client.post(url, data={'post_pk': post.pk})
+
+		post = Post.objects.first() # refresh instance
+		self.assertTrue(topic in post.topics.all())
+
+	def test_non_moderator_permission_denied(self):
+		self.fail("finish me :(")

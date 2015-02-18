@@ -3,6 +3,9 @@ from model_mommy import mommy
 
 class ViewAllPostsView(TestCase):
 
+	def setUp(self):
+		pass
+
 	def test_posts_filtered_by_GET_params(self):
 		self.fail()
 
