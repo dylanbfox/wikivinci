@@ -4,6 +4,14 @@
 {% load markdown_filter %}
 
 <div class="posts">
+	{% if not groups %}
+	<div id="subscribe-to-topics">
+		<h1>Huzzah!!! <i class="fa fa-frown-o"></i></h1>
+		<p>You'll need to follow some Topics first.</p>
+		<a data-toggle="modal" data-target="#personalizeFeed" id="personalize" class="btn btn-alert"><i class="fa fa-child"></i> view Topics</a>
+	</div>	
+	{% endif %}
+
 	{% for group in groups %}
 
 		{% if forloop.counter == 2 %}

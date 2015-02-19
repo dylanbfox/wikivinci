@@ -120,15 +120,17 @@ def feed(request, username):
 	account = request.user.account
 	_posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	_comments = Comment.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
-	feed_objs = account.personalize_feed(_posts, _comments)
-
+	
 	context_dict = {}
+	if request.GET.get("personalize") == "0":
+		feed_objs = account.combine_recent_activity(_posts, _comments)
+	else:
+		feed_objs = account.personalize_feed(_posts, _comments)
+
 	context_dict['groups'] = Post.group_by_date(feed_objs[:30])
 	context_dict['naturalday_limit'] = date.today() - timedelta(days=1)	
 	context_dict['account'] = account
 	context_dict['topics'] = Topic.objects.all()
-	context_dict['account'] = account
-	context_dict['fav_tags'] = account.fav_tags_to_list()
 	return render(request, 'core/feed.html', context_dict)
 
 def twitter_login(request):

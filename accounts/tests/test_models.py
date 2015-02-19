@@ -24,6 +24,9 @@ class AccountModelTest(TestCase):
 		self.assertTrue(account_exciting.subscribed_to_topics)
 		self.assertFalse(account_boring.subscribed_to_topics)
 
+	def test_group_by_date_method_groups_objects_properly(self):
+		self.fail("add me :(!")
+
 	def test_personalize_feed_method_returns_only_subscribed_topics_activity(self):
 		topic_subscribed = mommy.make('topics.Topic', name='Django')
 		topic_unsubscribed = mommy.make('topics.Topic', name='Poopie')
@@ -45,7 +48,7 @@ class AccountModelTest(TestCase):
 		self.assertNotIn(post2, feed_objects)
 		self.assertNotIn(comment2, feed_objects)
 
-	def test_personalize_feed_adds_object_type_property_to_posts_and_comments(self):
+	def test_personalize_feed_adds_object_type_property(self):
 		topic = mommy.make('topics.Topic', name="Django")
 		account = mommy.make('accounts.Account', subscribed_topics=[topic])
 		post = mommy.make('posts.Post', topics=[topic], approved=True)
@@ -55,7 +58,7 @@ class AccountModelTest(TestCase):
 		_comments = Comment.objects.all()
 		feed_objects = account.personalize_feed(_posts, _comments)
 
-		self.assertTrue(hasattr(feed_objects[0], 'obj_type'))
+		self.assertTrue(hasattr(feed_objects[0], 'obj_type'))			
 
 	def test_personalize_feed_adds_correct_object_type_property(self):
 		topic = mommy.make('topics.Topic', name="Django")
@@ -72,6 +75,34 @@ class AccountModelTest(TestCase):
 
 		self.assertEqual(updated_post.obj_type, "POST")
 		self.assertEqual(updated_comment.obj_type, "COMMENT")
+
+	def test_combined_recent_activity_returns_all_objects_in_one_list(self):
+		topic = mommy.make('topics.Topic')
+		post = mommy.make('posts.Post', topics=[topic], approved=True)
+		comment = mommy.make('comments.Comment', post=post)
+		account = mommy.make('accounts.Account') # no subscribed_topics!
+
+		_posts = Post.objects.all()
+		_comments = Comment.objects.all()
+		feed_objects = account.combine_recent_activity(_posts, _comments)
+
+		self.assertIn(post, feed_objects)
+		self.assertIn(comment, feed_objects)		
+
+	def test_combined_recent_activity_adds_object_type_property(self):
+		topic = mommy.make('topics.Topic', name="Django")
+		post = mommy.make('posts.Post', topics=[topic], approved=True)
+		comment = mommy.make('comments.Comment', post=post)
+		account = mommy.make('accounts.Account')		
+
+		_posts = Post.objects.all()
+		_comments = Comment.objects.all()
+		feed_objects = account.combine_recent_activity(_posts, _comments)
+
+		self.assertTrue(hasattr(feed_objects[0], 'obj_type'))
+
+	def test_combined_recent_activity_adds_correct_object_type_property(self):
+		self.fail("finish me :(")
 
 @patch('accounts.models.Twython')
 class AccountModelTwitterAuthTest(TestCase):

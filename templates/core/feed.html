@@ -21,15 +21,7 @@
 		<p id="personalize"><a href="#" data-target="#personalizeFeed" data-toggle="modal"><i class="fa fa-sliders"></i>personalize</a></p>
 		{% endif %}
 	</div>
-	{% if not account.subscribed_to_topics %}
-		<div id="subscribe-to-topics">
-			<h1>Huzzah!!! <i class="fa fa-frown-o"></i></h1>
-			<p>You'll need to follow some Topics first.</p>
-			<a data-toggle="modal" data-target="#personalizeFeed" id="personalize" class="btn btn-alert"><i class="fa fa-child"></i> view Topics</a>
-		</div>
-	{% else %}
-		{% include 'core/partials/feed-stream.html' %}
-	{% endif %}
+	{% include 'core/partials/feed-stream.html' %}
 </div>
 {% endblock content %}
 

@@ -96,17 +96,28 @@ class Account(models.Model):
 			_object.obj_type = object_type
 			return _object
 
-		if self.subscribed_topics:
-			posts = [add_type_property(p, "POST") for p in posts if 
-				any(t in p.topics.all() for t in self.subscribed_topics.all())
-			]
-			comments = [add_type_property(c, "COMMENT") for c in comments if 
-				any(t in c.post.topics.all() for t in self.subscribed_topics.all())
-			]			
+		topics = self.subscribed_topics.all()
+		posts = [add_type_property(p, "POST") for p in posts if 
+			any(t in p.topics.all() for t in topics)
+		]
+		comments = [add_type_property(c, "COMMENT") for c in comments if 
+			any(t in c.post.topics.all() for t in topics)
+		]
 
 		feed_objects = list(chain(posts, comments))
 		feed_objects.sort(key=lambda x: x.created, reverse=True)
 		return feed_objects
+
+	def combine_recent_activity(self, posts, comments):
+		def add_type_property(_object, object_type):
+			_object.obj_type = object_type
+			return _object
+
+		posts = [add_type_property(p, "POST") for p in posts]
+		comments = [add_type_property(c, "COMMENT") for c in comments]
+		feed_objects = list(chain(posts, comments))
+		feed_objects.sort(key=lambda x: x.created, reverse=True)
+		return feed_objects		
 
 	def fav_tags_to_list(self):
 		if self.fav_tags:

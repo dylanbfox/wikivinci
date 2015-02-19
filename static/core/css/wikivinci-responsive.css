@@ -386,7 +386,11 @@
 	#page-content .user-profile-tooltip {
 		width:368px;
 	}
+}
 
+/*desktop and above*/
+
+@media (min-width:992px) {
 	#page-content #topics #topic-list .topic {
 		min-height:320px;
 	}	

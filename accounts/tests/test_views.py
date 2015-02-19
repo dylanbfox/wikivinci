@@ -162,8 +162,52 @@ class FeedViewTest(TestCase):
 		self.account = mommy.make('accounts.Account', owner=self.user)		
 
 	def test_topics_passed_to_template(self):
+		"""
+		For personalization.
+		"""
 		topic = mommy.make('topics.Topic')
 		response = self.client.get(reverse('accounts:feed',
 			kwargs={'username': self.user.username})
 		)
 		self.assertIn(topic, response.context['topics'])
+
+	def test_personalized_objects_passed_to_template(self):
+		"""
+		Model test checks for method functionality
+		"""
+		self.fail("just make sure function is called")
+
+	def test_objects_grouped_by_date(self):
+		"""
+		Model test checks for method functionality
+		"""
+		self.fail("just make sure function is called")
+
+	def test_personalized_objects_passed_to_template_by_default(self):
+		topic = mommy.make('topics.Topic', name="Django")
+		self.account.subscribed_topics.add(topic)
+
+		post = mommy.make('posts.Post', topics=[topic], title="A", approved=True)
+		post2 = mommy.make('posts.Post', title="B", approved=True)
+
+		response = self.client.get(reverse('accounts:feed',
+			kwargs={'username': self.user.username})
+		)
+
+		self.assertIn(post, response.context['groups'][0]['posts'])
+		self.assertNotIn(post2, response.context['groups'][0]['posts'])
+
+	def test_all_objects_passed_to_template_when_all_param_passed(self):
+		topic = mommy.make('topics.Topic', name="Django")
+		self.account.subscribed_topics.add(topic)
+
+		post = mommy.make('posts.Post', topics=[topic], title="A", approved=True)
+		post2 = mommy.make('posts.Post', title="B", approved=True)
+
+		response = self.client.get(reverse('accounts:feed',
+			kwargs={'username': self.user.username}),
+			data={'personalize': 0},
+		)
+		
+		self.assertIn(post, response.context['groups'][0]['posts'])
+		self.assertIn(post2, response.context['groups'][0]['posts'])
