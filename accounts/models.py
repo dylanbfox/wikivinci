@@ -73,6 +73,14 @@ class Account(models.Model):
 	def username(self):
 		return self.owner.username
 
+	@property
+	def subscribed_to_topics(self):
+		topics = self.subscribed_topics.all()
+		if topics:
+			return True
+		else:
+			return False
+
 	def award_points(self, points=0):
 		self.points += points
 		self.save()
@@ -81,22 +89,24 @@ class Account(models.Model):
 		return Account.objects.filter(points__gt=self.points).count() + 1
 
 	def personalize_feed(self, posts, comments):
-		
-		def obj_with_type(obj, obj_type):
-			obj.obj_type = obj_type
-			return obj
+		"""
+		Expects prefetch_rela...
+		"""
+		def add_type_property(_object, object_type):
+			_object.obj_type = object_type
+			return _object
 
-		if self.fav_tags:
-			tags_list = self.fav_tags_to_list()
-			posts = [obj_with_type(p, 'POST') for p in posts if any(p.tags_contain(tag) for tag in tags_list)]
-			comments = [obj_with_type(c, 'COMMENT') for c in comments if any(c.post.tags_contain(tag) for tag in tags_list)]
-		else:
-			posts = [obj_with_type(p, 'POST') for p in posts]
-			comments = [obj_with_type(c, 'COMMENT') for c in comments]
-			
-		feed_objs = list(chain(posts, comments))
-		feed_objs.sort(key=lambda x: x.created, reverse=True)				
-		return feed_objs
+		if self.subscribed_topics:
+			posts = [add_type_property(p, "POST") for p in posts if 
+				any(t in p.topics.all() for t in self.subscribed_topics.all())
+			]
+			comments = [add_type_property(c, "COMMENT") for c in comments if 
+				any(t in c.post.topics.all() for t in self.subscribed_topics.all())
+			]			
+
+		feed_objects = list(chain(posts, comments))
+		feed_objects.sort(key=lambda x: x.created, reverse=True)
+		return feed_objects
 
 	def fav_tags_to_list(self):
 		if self.fav_tags:
@@ -122,3 +132,4 @@ class Account(models.Model):
 	favorites = models.ManyToManyField('posts.Post', blank=True, null=True)
 	twitter_oauth_token = models.CharField(max_length=199, blank=True, null=True)
 	twitter_oauth_secret = models.CharField(max_length=199, blank=True, null=True)
+	subscribed_topics = models.ManyToManyField('topics.Topic', related_name="subscribers", blank=True, null=True)

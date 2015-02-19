@@ -6,7 +6,42 @@ from mock import patch, Mock, MagicMock
 
 from model_mommy import mommy
 
+from topics.models import Topic
+from accounts.models import Account
 from posts.models import Post
+
+class FollowViewTest(TestCase):
+
+	def setUp(self):
+		self.user = User.objects.create_user(
+			username="dylan",
+			password="password"
+		)
+		self.account = mommy.make('accounts.Account', owner=self.user)
+		self.topic = mommy.make('topics.Topic', name="Django")		
+		self.client.login(username="dylan", password="password")		
+
+	def test_follow_topic_adds_m2m_relationship_to_account(self):
+		self.client.post(reverse('topics:follow',
+			kwargs={'slug': self.topic.slug})
+		)
+
+		# refresh instances
+		self.topic = Topic.objects.first()
+		self.account = Account.objects.first()
+		self.assertIn(self.topic, self.account.subscribed_topics.all())
+
+	def test_follow_topic_removes_existing_m2m_relationship_with_account(self):
+		self.account.subscribed_topics.add(self.topic)
+		self.client.post(reverse('topics:follow',
+			kwargs={'slug': self.topic.slug})
+		)
+
+		# refresh instances
+		self.topic = Topic.objects.first()
+		self.account = Account.objects.first()
+		self.assertNotIn(self.topic, self.account.subscribed_topics.all())
+
 
 class ViewAllTopicsViewTest(TestCase):
 

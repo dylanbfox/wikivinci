@@ -22,7 +22,7 @@
 		<h1>{{ topic.name }}</h1>
 		<p class="description">{{ topic.description }}</p>
 
-		<a id="view-posts" href="{% url 'posts:view_all' %}?topic={{ topic.name }}">view resources on {{ topic }} <i class="fa fa-chevron-right"></i></a>
+		<a id="view-posts" href="{% url 'posts:view_all' %}?topic={{ topic.name }}&top=true">view resources on {{ topic }} <i class="fa fa-chevron-right"></i></a>
 
 		<div id="moderators">
 			<h3 class="super-light-font">moderators
