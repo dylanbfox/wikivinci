@@ -7,7 +7,6 @@
         <input id="topic-search" class="super-light-font" name="search" placeholder="search topics" type="text" data-toggle="hideseek" data-list="#topic-list">
       </div>
       <div class="modal-body">
-
         <div id="saving" class="ajax-update green-font">
           <p>saving your new settings...</p>
           <i class="fa fa-spin fa-spinner"></i>
@@ -24,17 +23,18 @@
         </div>
 
         <div id="topic-list">
-        {% for k, v in tags.items %}
-          {% if k in fav_tags %}
-          <a href="javascript:" class="favorite" data-topic="{{ k }}">{{ k }}</a>
-          {% else %}
-          <a href="javascript:" data-topic="{{ k }}">{{ k }}</a>
-          {% endif %}
+        {% for topic in topics %}
+          <div class="topic {% if topic in account.subscribed_topics.all %}subscribed{% endif %}" data-subscribe-url="{% url 'topics:follow' slug=topic.slug %}">
+            <h3>{{ topic.name }}</h3>
+            <p>{{ topic.description|truncatechars:100 }}</p>
+          </div>
         {% endfor %}
         </div>
+
+        <p class="explain">Don't see anything relevant to you? We manually create Topics once enough resources about it have been added to Wikivinci. Kick things off by <a href="#">submitting something</a>, or use the Feedback form in the bottom right to let us know about a Topic we should add.</p>
       </div>
       <div class="modal-footer">
-        <a id="submit" class="btn btn-primary" href="{% url 'accounts:feed' username=user.username %}"><i class="fa fa-magic"></i> save personalization</a>
+        <a id="submit" class="btn btn-primary" href="javascript:"><i class="fa fa-magic"></i> save personalization</a>
       </div>
     </div>
   </div>

@@ -618,6 +618,12 @@ h6 {
 
 /*feed personalization modal*/
 
+#personalizeFeed .modal-dialog {
+	width:92%;
+	max-width:800px;
+	min-width:290px;
+}
+
 #personalizeFeed .modal-header {
 	overflow:auto;	
 }
@@ -646,27 +652,30 @@ h6 {
 	overflow:auto;
 }
 
-#personalizeFeed .modal-body #topic-list > a {
-	float:left;
+#personalizeFeed .modal-body #topic-list .topic {
+	cursor:pointer;
 	width:30%;
+	margin-right:15px;
+	float:left;
+	margin-bottom:30px;
+	border:1px solid #F4F4F4;
+	box-shadow:0px 1px 1px #BBB4B4;
+	background-color:#F4F4F4;
+	padding:16px;
+}
+
+#personalizeFeed .modal-body #topic-list .topic.subscribed {
+	background-color:#FFA922;
+	border:1px solid #D89225;	
+}
+
+#personalizeFeed .modal-body #topic-list .topic > h3 {
+	margin-bottom:13px;
+}
+
+#personalizeFeed .modal-body #topic-list .topic > p {
 	font-size:13px;
-	font-weight:400;
-	margin-bottom:14px;
-	border:1px solid #D7D5D5;
-	margin-right:3%;
-	padding:10px;
-	max-height:40px;
-	overflow:auto;
-	border-radius:4px;
-	color:#3c3e43;
-	text-decoration:none;
 }
-
-#personalizeFeed .modal-body #topic-list > a.favorite {
-	background-color:#FFAB47;
-	border:1px solid #E5902A;
-}
-
 
 /*authenticate modal*/
 
@@ -1999,12 +2008,42 @@ h6 {
 
 /*FEED*/
 
-#page-content #feed .toprow p.sub-title {
-	display:inline-block;
-}
-
 #page-content #feed {
 	max-width:970px;
+}
+
+#page-content #feed #subscribe-to-topics {
+	width:100%;
+	text-align:center;
+	margin-top:50px;
+	background-color:#FF3232;
+	padding:50px;
+	color:#FFF;
+	border:6px dashed #FFF;
+}
+
+#page-content #feed #subscribe-to-topics > p {
+	font-size:18px;
+	margin-top:12px;
+}
+
+#page-content #feed #subscribe-to-topics > a#personalize {
+	display:inline-block;
+	margin-top:34px;
+	border:4px dashed #FFF;
+	background-color:#C0C0C0;
+	color:#3e3e3e;
+	padding:13px 39px;
+	box-shadow:0px 1px 3px #000;
+}
+
+#page-content #feed #subscribe-to-topics > a#personalize > i.fa {
+	margin-right:7px;
+	font-size:18px;
+}
+
+#page-content #feed .toprow p.sub-title {
+	display:inline-block;
 }
 
 #page-content #feed .posts {

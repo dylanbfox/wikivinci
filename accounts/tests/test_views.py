@@ -153,3 +153,17 @@ class TwitterAuthViewTest(TestCase):
 			'oauth_verifier': 'oauthverifierkey',
 		})				
 		self.assertRedirects(response, '/posts/')				
+
+class FeedViewTest(TestCase):
+
+	def setUp(self):
+		self.user = User.objects.create_user(username="dylan", password="password")
+		self.client.login(username="dylan", password="password")
+		self.account = mommy.make('accounts.Account', owner=self.user)		
+
+	def test_topics_passed_to_template(self):
+		topic = mommy.make('topics.Topic')
+		response = self.client.get(reverse('accounts:feed',
+			kwargs={'username': self.user.username})
+		)
+		self.assertIn(topic, response.context['topics'])
