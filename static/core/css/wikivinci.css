@@ -2045,6 +2045,18 @@ h6 {
 	display:inline-block;
 }
 
+#page-content #feed .toprow p.sub-title a.feed-toggle {
+	display:inline-block;
+	padding:4px 7px;
+	font-size:14px;
+	text-decoration:none;	
+}
+
+#page-content #feed .toprow p.sub-title a.feed-toggle.active {
+	color:#FFF;
+	background-color:#FFA922
+}
+
 #page-content #feed .posts {
 	padding-top:15px;
 }

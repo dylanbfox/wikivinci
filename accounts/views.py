@@ -123,8 +123,10 @@ def feed(request, username):
 	
 	context_dict = {}
 	if request.GET.get("personalize") == "0":
+		context_dict['personalize'] = False
 		feed_objs = account.combine_recent_activity(_posts, _comments)
 	else:
+		context_dict['personalize'] = True
 		feed_objs = account.personalize_feed(_posts, _comments)
 
 	context_dict['groups'] = Post.group_by_date(feed_objs[:30])

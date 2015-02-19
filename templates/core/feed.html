@@ -15,7 +15,11 @@
 <div id="feed" class="container">
 	<div class="toprow">
 		<h2><i class="fa fa-bolt"></i> Your feed</h2>
-		<p style="margin-left:10px;" class="sub-title super-light-font">the newest and most interesting stuff added to Wikivinci</p>
+		<p style="margin-left:10px;" class="sub-title super-light-font">
+			<a class="feed-toggle {% if personalize %}active{% endif %}" href="{% url 'accounts:feed' username=user.username %}">subscribed topics</a>
+			
+			<a class="feed-toggle {% if not personalize %}active{% endif %}" href="{% url 'accounts:feed' username=user.username %}?personalize=0">all activity</a>
+		</p>
 		
 		{% if account.subscribed_to_topics %}
 		<p id="personalize"><a href="#" data-target="#personalizeFeed" data-toggle="modal"><i class="fa fa-sliders"></i>personalize</a></p>
