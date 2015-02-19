@@ -18,7 +18,7 @@
 				<img src="{{ topic.image.url }}" />
 			</div>
 			<h4><a href="{% url 'posts:view_all' %}?topic={{ topic.name }}&top=true">{{ topic.name }}</a></h4>
-			<p>{{ topic.description|truncatechars:"150" }}</p>
+			<p>{{ topic.description|truncatechars:"120" }}</p>
 			<br />
 			<a href="{% url 'topics:view' slug=topic.slug %}">{{ topic.moderators.all.count }} moderators</a>
 		</div>
