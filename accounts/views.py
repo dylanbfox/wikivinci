@@ -17,6 +17,8 @@ from accounts.forms import (AccountRegisterForm, ProfilePicEditForm,
 from posts.models import Post
 from posts.utils import unique_tag_counts
 
+from topics.models import Topic
+
 from comments.models import Comment
 
 def account_register(request):
@@ -116,21 +118,15 @@ def feed(request, username):
 		return HttpResponseForbidden()
 
 	account = request.user.account
-	if request.method == 'POST':
-		account.fav_tags = request.POST['favorite_tags']
-		account.save()
-
-	context_dict = {}
 	_posts = Post.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	_comments = Comment.objects.select_related().all().prefetch_related('upvoters', 'downvoters')
 	feed_objs = account.personalize_feed(_posts, _comments)
 
+	context_dict = {}
 	context_dict['groups'] = Post.group_by_date(feed_objs[:30])
 	context_dict['naturalday_limit'] = date.today() - timedelta(days=1)	
 	context_dict['account'] = account
-	
-	tags = unique_tag_counts(_posts) # for personalization
-	context_dict['tags'] = tags
+	context_dict['topics'] = Topic.objects.all()
 	context_dict['account'] = account
 	context_dict['fav_tags'] = account.fav_tags_to_list()
 	return render(request, 'core/feed.html', context_dict)

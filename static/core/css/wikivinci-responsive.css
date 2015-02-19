@@ -9,10 +9,6 @@
 		font-size:17px;
 	}
 
-	#personalizeFeed .modal-body #topic-list > a {
-		width:auto;
-	}
-
 	#page-content #topics #tag-list > a {
 		width:auto;
 	}
@@ -186,10 +182,19 @@
 		padding:8px;
 	}
 
+	#personalizeFeed .modal-dialog {
+		width:initial;
+	}
+
 	#personalizeFeed .modal-body {
 		overflow:auto;
 		max-height:200px;
 	}
+
+	#personalizeFeed .modal-body #topic-list .topic {
+		width:100%;
+		float:none;
+	}	
 
 	#personalizeFeed .modal-header input#topic-search {
 		float:left;
@@ -362,6 +367,7 @@
 	}	
 }
 
+/*desktop only*/
 @media (min-width:992px) and (max-width:1199px) {
 	#header > .container #links > form#search {
 		width:130px;

@@ -155,58 +155,50 @@ $(document).ready(function(){
 	});
 
 	// save personalization settings
-	$("#personalizeFeed #topic-list > a").on("click", function(e){
-		$(this).toggleClass("favorite");
+	$("#personalizeFeed #topic-list > .topic").on("click", function(e){
+		$(this).toggleClass("subscribed");
+		var url = $(this).data("subscribe-url");
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data: {},
+			success: function(response){
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				window.PersonalizeFeedAjaxError = true;
+			}
+		});
 	});
 
 	$("#personalizeFeed .modal-footer a#submit").on("click", function(e){
 		e.preventDefault();
 		$(this).attr("disabled", true);
 
-		var url = $(this).attr("href");
 		var modal_node = $("#personalizeFeed");
 		var saving_node = modal_node.find("#saving");
 		var success_node = modal_node.find("#success")
 		var error_node = modal_node.find("#error");
-		
-		var tags_list_node = modal_node.find("#topic-list");
-		var selected_tags = tags_list_node.find("a.favorite");
-		var select_tags_list = []
+		var topics_node = modal_node.find("#topic-list");
 
-		selected_tags.each(function(){
-			select_tags_list.push($(this).data("topic"));
-		});
-
-		selected_tags_string = select_tags_list.join(", ");
-		tags_list_node.hide();
+		topics_node.hide();
 		saving_node.show();
-		$.ajax({
-			// build out ajax call
-			type: 'POST',
-			url: url,
-			data: {'favorite_tags': selected_tags_string},
-			success: function(response){
-				saving_node.hide();
-				success_node.show();
-				(function countdown(remaining) {
-				    success_node.find("span#countdown").text(remaining);					
-				    if(remaining == 0) {
-				        location.reload();
-				    } else if (remaining > 0) {
-					    setTimeout(function(){ countdown(remaining - 1); }, 1000);
-					}
-				})(3);
-			}, error: function(xhr, textStatus, errorThrown) {
-				saving_node.hide();
-				error_node.show();
+
+		if (window.PersonalizeFeedAjaxError) {
+			saving_node.hide();
+			error_node.show();
+			return;
+		}
+
+		saving_node.hide();
+		success_node.show();
+		(function countdown(remaining) {
+		    success_node.find("span#countdown").text(remaining);					
+		    if(remaining == 0) {
+		        location.reload();
+		    } else if (remaining > 0) {
+			    setTimeout(function(){ countdown(remaining - 1); }, 1000);
 			}
-			// also build out view
-				// POST should update favorite topics field for user
-				// and respond back with updated feed partial for us
-				// to replace current feed with
-				// then remove popup
-				// if error, show error message and prompt to refresh
-		});
+		})(3);
 	});
 
 	// show mobile menu

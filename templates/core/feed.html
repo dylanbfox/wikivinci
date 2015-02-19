@@ -4,7 +4,7 @@
 {% load cropping %}
 
 {% block extra_modals %}
-	{% include 'core/partials/feed-topic-personalization.html' %}
+	{% include 'core/partials/personalize-feed-popup.html' %}
 	
 	{% if user.is_authenticated and user.account.moderator %}
 		{% include 'core/partials/topic-add-post-popup.html' %}
@@ -16,12 +16,16 @@
 	<div class="toprow">
 		<h2><i class="fa fa-bolt"></i> Your feed</h2>
 		<p style="margin-left:10px;" class="sub-title super-light-font">the newest and most interesting stuff added to Wikivinci</p>
-		<!-- <p id="personalize"><a href="#" data-target="#personalizeFeed" data-toggle="modal"><i class="fa fa-sliders"></i>personalize</a></p> -->
+		
+		{% if account.subscribed_to_topics %}
+		<p id="personalize"><a href="#" data-target="#personalizeFeed" data-toggle="modal"><i class="fa fa-sliders"></i>personalize</a></p>
+		{% endif %}
 	</div>
 	{% if not account.subscribed_to_topics %}
 		<div id="subscribe-to-topics">
 			<h1>Huzzah!!! <i class="fa fa-frown-o"></i></h1>
 			<p>You'll need to follow some Topics first.</p>
+			<a data-toggle="modal" data-target="#personalizeFeed" id="personalize" class="btn btn-alert"><i class="fa fa-child"></i> view Topics</a>
 		</div>
 	{% else %}
 		{% include 'core/partials/feed-stream.html' %}
