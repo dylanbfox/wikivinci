@@ -16,9 +16,16 @@
 	<div class="toprow">
 		<h2><i class="fa fa-bolt"></i> Your feed</h2>
 		<p style="margin-left:10px;" class="sub-title super-light-font">the newest and most interesting stuff added to Wikivinci</p>
-		<p id="personalize"><a href="#" data-target="#personalizeFeed" data-toggle="modal"><i class="fa fa-sliders"></i>personalize</a></p>
+		<!-- <p id="personalize"><a href="#" data-target="#personalizeFeed" data-toggle="modal"><i class="fa fa-sliders"></i>personalize</a></p> -->
 	</div>
-	{% include 'core/partials/feed-stream.html' %}
+	{% if not account.subscribed_to_topics %}
+		<div id="subscribe-to-topics">
+			<h1>Huzzah!!! <i class="fa fa-frown-o"></i></h1>
+			<p>You'll need to follow some Topics first.</p>
+		</div>
+	{% else %}
+		{% include 'core/partials/feed-stream.html' %}
+	{% endif %}
 </div>
 {% endblock content %}
 

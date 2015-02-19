@@ -17,7 +17,7 @@
 			<div class="img-container">
 				<img src="{{ topic.image.url }}" />
 			</div>
-			<h4><a href="{% url 'posts:view_all' %}?topic={{ topic.name }}">{{ topic.name }}</a></h4>
+			<h4><a href="{% url 'posts:view_all' %}?topic={{ topic.name }}&top=true">{{ topic.name }}</a></h4>
 			<p>{{ topic.description|truncatechars:"150" }}</p>
 			<br />
 			<a href="{% url 'topics:view' slug=topic.slug %}">{{ topic.moderators.all.count }} moderators</a>
@@ -27,7 +27,7 @@
 
 	<div class="toprow">
 		<h2>Tags</h2>
-		<p class="sub-title super-light-font">These are tags that community have assigned to their submissions. Once there are enough tags for a general topic, we'll create an official Topic for it.</p>
+		<p class="sub-title super-light-font">These are tags that community have assigned to their submissions. Once there are enough tags for a general topic, we'll create an official Topic for it and assign moderators.</p>
 		<!-- <input class="large" name="postsearch" type="text" placeholder="search" /> -->		
 	</div>
 

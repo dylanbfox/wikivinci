@@ -9,6 +9,9 @@ class Comment(models.Model):
 	class Meta:
 		ordering = ['-vote_count']
 
+	def __unicode__(self):
+		return self.text[:100]
+
 	def save(self, *args, **kwargs):
 		if not self.created:
 			self.owner.award_points(5)

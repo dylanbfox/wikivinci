@@ -35,6 +35,21 @@ def apply(request, slug):
 	return redirect('topics:view', slug=topic.slug)
 
 @login_required
+def follow(request, slug):
+	try:
+		topic = Topic.objects.get(slug__iexact=slug)
+	except:
+		raise Http404
+
+	account = request.user.account
+	if topic in account.subscribed_topics.all():
+		account.subscribed_topics.remove(topic)
+	else:
+		account.subscribed_topics.add(topic)
+	account.save()
+	return HttpResponse()
+
+@login_required
 def add_post(request, slug):
 	try:
 		topic = Topic.objects.get(slug__iexact=slug)
