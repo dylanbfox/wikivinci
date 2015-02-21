@@ -5,8 +5,23 @@
 {% load humanize %}
 
 {% block meta %}
-<title>Top {% if tag %}{{ tag }} {% endif %}Tutorials and Resources</title>
-<meta content="{% if tag %}{{ tag }} {% endif %}Tutorials and Resources on Wikivinci" property="og:title">
+<title>
+	{% if topic %}
+	Learn {{ topic.name }} | Top Tutorials and Resources
+	{% elif tag %}
+	Top {{ tag }} Tutorials and Resources
+	{% else %}
+	Top Tutorials and Resources Online
+	{% endif %}
+</title>
+<meta content="
+	{% if topic %}
+	Top {{ topic.name }} Tutorials and Resources
+	{% elif tag %}
+	Top {{ tag }} Tutorials and Resources
+	{% else %}
+	Top Tutorials and Resources Online
+	{% endif %}" property="og:title">
 {% endblock %}
 
 {% block content %}
