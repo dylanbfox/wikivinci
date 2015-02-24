@@ -2,13 +2,13 @@
 
 <div id="success">
 	{% if post.approved %}
-	<i class="fa fa-check-circle"></i>		
+	<i class="fa fa-graduation-cap"></i>		
 	<p class="lighter-font">Thanks for your contribution! You've just been awarded <b>5 points!</b> Your link has just been added. Kick things off by upvoting it, adding a comment, or sharing it.</p>
 	<br />
 	<a href="{% url 'posts:view' slug=post.slug %}">click to view your link's page!</a>
 	{% else %}
-	<i class="fa fa-info-circle"></i>	
-	<p class="lighter-font">Thanks for submitting a new resource! In order to ensure a high quality on Wikivinci, all submissions are reviewed before being added to the site. You'll receive an email when your post is approved!
+	<i class="fa fa-graduation-cap"></i>	
+	<p class="lighter-font">Thanks for contributing, we all really appreciate it! You're helping to build the most reliable place for people to find good learning resources. You submission is in the queue, and you'll get an email as soon as it has been approved. Huzzah!
 	</p>
 	{% endif %}
 </div>

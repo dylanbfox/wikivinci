@@ -6,6 +6,12 @@ from model_mommy import mommy
 
 class PostModelTest(TestCase):
 
+	def test_fetch_meta_data_error_returns_blank_title_and_desr(self):
+		self.fail("finish me")
+
+	def test_fetch_meta_data_returns_title_and_descr(self):
+		self.fail("finish me")
+
 	@patch('posts.models.requests')
 	def test_full_url_extracted_on_save(self, mock_requests):
 		mock_response = mock_requests.get.return_value

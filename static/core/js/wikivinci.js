@@ -52,6 +52,11 @@ function setHomePageTopicBackgroundColors(){
 
 $(document).ready(function(){
 
+	// global close function for full screen popups
+	$(".full-screen-popup .x").on("click", function(){
+		$(this).closest(".full-screen-popup").hide();
+	});	
+
 	// Topic add/file post ajax call
 	$("#topicAddPostPopup button#submit").on("click", function(){
 		var modal = $("#topicAddPostPopup");
@@ -430,21 +435,21 @@ $(document).ready(function(){
 	// get the add post form
 	$("a#add-post").on("click", function(){
 		var popup_node = $("#post-add-popup");
+		var form_container = popup_node.find("#form-container");
 
-		if (window.addPostFormHTML) {
-			// remove everything and start from scratch
-			popup_node.find("form, #success").remove();
-		}		
+		// reset everything
+		form_container.find("form#fetchMetaData").show();
+		form_container.find("form#fetchMetaData input#post-url").val('');
+		form_container.find("form#addPostForm").remove();
+		form_container.find("#success").remove();	
 
 		$.ajax({
 			type: 'GET',
 			url: '/posts/add/',
 			data: {},
 			success: function(response, textStatus, xhr){
-				popup_node.find("#guidelines").show();				
 				popup_node.show();
-				popup_node.append(response);
-				window.addPostFormHTML = true;
+				popup_node.find("#form-container").append(response);
 			},
 			error: function(xhr, textStatus, errorThrown){
 				if (xhr.status == 403) {
@@ -454,13 +459,40 @@ $(document).ready(function(){
 		});		
 	});
 
-	// global close function for full screen popups
-	$(".full-screen-popup .x").on("click", function(){
-		$(this).closest(".full-screen-popup").hide();
+	// get meta data and populate add post form
+	$("#post-add-popup form#fetchMetaData").on("submit", function(event){
+
+		event.preventDefault();
+		var addPostForm = $("#post-add-popup form#addPostForm");
+		var form = $(this);
+		var input = form.find("input#post-url");
+		var url = $.trim(input.val());
+
+		if (!url) {
+			input.addClass("error");
+			return false;
+		}
+
+		form.find("button#submit").html("<i class='fa fa-spinner fa-spin'></i>");
+		form.find("button#submit").attr("disabled", true);		
+		$.ajax({
+			type: 'POST',
+			url: '/posts/add/fetch-meta-data/',
+			data: {url: url},
+			success: function(response){
+				form.hide();
+				form.find("button#submit").html("SUBMIT!");
+				form.find("button#submit").attr("disabled", false);				
+				addPostForm.show();
+				addPostForm.find("div#url.form-group input").val(url);
+				addPostForm.find("div#title.form-group input").val(response.title);
+				addPostForm.find("div#description.form-group textarea").val(response.description);
+			}
+		});
 	});
 
 	// submit the add post form
-	$("#post-add-popup").on("submit", "form", function(e){
+	$("#post-add-popup").on("submit", "form#addPostForm", function(e){
 		e.preventDefault();
 
 		var popup_node = $("#post-add-popup");
@@ -473,8 +505,9 @@ $(document).ready(function(){
 			data: form.serializeArray(),
 			success: function(response){
 				// append new form w errors or success msg
-				popup_node.find("form").remove();
-				popup_node.append(response);
+				popup_node.find("form#addPostForm").remove();
+				popup_node.find("#form-container").append(response);
+				popup_node.find("form#addPostForm").show();
 				if (response.indexOf("form") == -1){
 					popup_node.find("#guidelines").hide();
 				}
@@ -483,7 +516,7 @@ $(document).ready(function(){
 	});
 
 	// auto-fill tags in add post form
-	$("#post-add-popup").on("keyup", "form input[name='tags']", function(){
+	$("#post-add-popup").on("keyup", "form#addPostForm input[name='tags']", function(){
 		var all_chars = $(this).val();
 		var comma_pos = all_chars.lastIndexOf(",");
 		var suggested_topics_node = $("#post-add-popup #suggested-topics");

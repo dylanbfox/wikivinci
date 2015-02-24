@@ -2,6 +2,7 @@ import re
 import urlparse
 
 import requests
+from bs4 import BeautifulSoup
 
 from itertools import groupby
 
@@ -26,6 +27,26 @@ class Post(models.Model):
 	def __unicode__(self):
 		return self.title
 
+	def fetch_meta_data(self):
+		title = ""
+		description = ""
+
+		try:
+			r = requests.get(self.url)
+			html = r.text
+			soup = BeautifulSoup(html)
+			title_elem = soup.find('title')
+			if title_elem:
+				title = title_elem.string
+
+			meta_descr = soup.find('meta', attrs={'name':"description"})
+			if meta_descr:
+				description = meta_descr.get("content", "")
+		except Exception as e:
+			print "Error getting meta data from '%s': %s" % (self.url, e)
+			pass
+
+		return {'title': title, 'description': description}
 
 	@staticmethod
 	def group_by_date(posts, order_by_vote=False):
