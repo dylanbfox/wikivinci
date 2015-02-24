@@ -135,7 +135,7 @@ select.large {
 .form-group.error textarea,
 input.error,
 textarea.error {
-	border:1px solid #b94a48;
+	border:1px solid #b94a48 !important;
 }
 
 .form-group ul.errorlist {
@@ -494,50 +494,51 @@ h6 {
 }
 
 /*post add popup*/
-/*
-#post-add-popup {
-	display:none;
-	position:fixed;
-	overflow:auto;
-	top:0;
-	bottom:0;
-	width:100%;
-	z-index:99;
-	background-color:rgba(255, 255, 255, 0.95);
-	padding:50px 170px;
-}
-*/
-/*#post-add-popup > .x {
-	cursor:pointer;
-	position:absolute;
-	z-index:999;
-	top:-4px;
-	left:10px;
-	width:45px;
-	height:58px;
-	line-height:58px;
-	font-size:34px;
-	font-weight:700;
-	text-align:center;
-	color:#F4351D;
-}*/
 
-#post-add-popup form {
-	float:left;
-	width:50%;
+#post-add-popup #form-container {
+	max-width:700px;
+	margin:0 auto;
+	text-align:center;
+}
+
+#post-add-popup #form-container h2 {
+	font-size:29px;
+}
+
+#post-add-popup #form-container form#fetchMetaData input#post-url {
+	padding:20px 20px;
+	font-size:22px;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	margin-top:20px;
+	margin-bottom:13px;	
+}
+
+#post-add-popup #form-container form#fetchMetaData button#submit {
+	width:100%;
+	padding:20px;
+	font-size:22px;	
+}
+
+#post-add-popup form#addPostForm {
+	text-align:left;
+	display:none;
 }
 
 #post-add-popup input,
 #post-add-popup select, 
 #post-add-popup textarea {
 	border:1px solid #C5C5C5;
+	padding:10px;
 }
 
-#post-add-popup form textarea {
+#post-add-popup form#addPostForm textarea {
 	max-height:100px;
 }
 
 #post-add-popup #guidelines {
+	display:none;
 	float:right;
 	width:40%;
 }
@@ -564,7 +565,6 @@ h6 {
 
 #post-add-popup #success i.fa {
 	font-size:60px;
-	color:#076699;
 }
 
 #post-add-popup #success p {

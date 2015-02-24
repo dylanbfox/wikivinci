@@ -1,12 +1,11 @@
 from datetime import date, timedelta
 
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 from django.http import (Http404, HttpResponseRedirect, 
 						 HttpResponse, HttpResponseForbidden,
 						 JsonResponse)
-
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 
 from wikivinci.utils.decorators import ajax_login_required
 
@@ -16,9 +15,7 @@ from posts.utils import (set_post_permissions, unique_tag_counts,
 						 tag_suggestions)
 
 from topics.models import Topic
-
 from comments.utils import set_comment_permissions
-
 from accounts.tasks import send_account_alert_email
 
 @ajax_login_required
@@ -175,4 +172,10 @@ def ajax_suggest_tags(request):
 	chars = request.POST.get('chars')
 	posts = Post.objects.filter(flagged=False)
 	suggestions = tag_suggestions(posts, chars)
-	return JsonResponse(suggestions, safe=False)	
+	return JsonResponse(suggestions, safe=False)
+
+def fetch_meta_data(request):
+	from django.http import JsonResponse
+	p = Post(url=request.POST['url'])
+	meta_data = p.fetch_meta_data()
+	return JsonResponse(meta_data)
