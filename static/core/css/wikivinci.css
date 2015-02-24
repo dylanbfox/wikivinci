@@ -505,6 +505,14 @@ h6 {
 	font-size:29px;
 }
 
+#post-add-popup #form-container h2 > span {
+	display:block;
+	font-size:16px;
+	font-weight:500;
+	display:block;
+	margin-top:13px;
+}
+
 #post-add-popup #form-container form#fetchMetaData input#post-url {
 	padding:20px 20px;
 	font-size:22px;
