@@ -5,6 +5,7 @@ from image_cropping import ImageCroppingMixin
 from accounts.models import Account
 
 class AccountAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    pass
+    
+    list_display = ['owner', 'points', 'can_comment', 'can_post', 'moderator']
 
 admin.site.register(Account, AccountAdmin)

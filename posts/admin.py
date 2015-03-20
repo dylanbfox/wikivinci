@@ -18,7 +18,7 @@ class PostAdmin(admin.ModelAdmin):
 	approve.short_description = "Approve the selected posts"
 	actions = ['approve']
 
-	list_display = ['title', 'approved']
+	list_display = ['title', 'approved', 'owner', 'vote_count', 'clicks', 'tags']
 
 class PostRevisionAdmin(admin.ModelAdmin):
 
